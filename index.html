@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Carrossel Editorial</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="Carrossel">
+  <meta name="theme-color" content="#F4F1EB">
+
+  <!-- Fontes (Google Fonts). Ao adicionar uma fonte em js/data.js, inclua-a aqui também. -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Fraunces:ital,wght@0,100..900;1,100..900&family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&family=DM+Serif+Display:ital@0;1&family=Instrument+Serif:ital@0;1&family=Inter:ital,wght@0,100..900;1,100..900&family=DM+Sans:ital,wght@0,100..1000;1,100..1000&family=Source+Serif+4:ital,wght@0,200..900;1,200..900&family=Lora:ital,wght@0,400..700;1,400..700&family=Space+Grotesk:wght@300..700&display=swap">
+
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <span class="brand-mark" aria-hidden="true"></span>
+      <span>Carrossel Editorial</span>
+    </div>
+    <div class="topbar-actions">
+      <span class="status" id="status" aria-live="polite"></span>
+      <button class="btn" id="export-one">Exportar slide</button>
+      <button class="btn btn-primary" id="export-all">Exportar todos</button>
+    </div>
+  </header>
+
+  <main class="workspace">
+    <!-- Pré-visualização -->
+    <section class="stage" aria-label="Pré-visualização">
+      <div class="preview">
+        <button class="nav-btn" id="prev" aria-label="Slide anterior">‹</button>
+        <canvas id="preview-canvas" width="1080" height="1350" aria-label="Slide atual"></canvas>
+        <button class="nav-btn" id="next" aria-label="Próximo slide">›</button>
+      </div>
+      <p class="preview-meta" id="preview-meta"></p>
+      <div class="strip" id="strip"></div>
+    </section>
+
+    <!-- Painel de edição -->
+    <aside class="panel">
+      <div class="tabs" role="tablist">
+        <button class="tab is-active" role="tab" data-tab="slide" aria-selected="true">Slide</button>
+        <button class="tab" role="tab" data-tab="estilo" aria-selected="false">Estilo</button>
+      </div>
+
+      <!-- Aba: Slide -->
+      <div class="tab-panel" id="tab-slide">
+        <div class="field">
+          <span class="label">Layout</span>
+          <div class="segmented" id="layout-picker"></div>
+        </div>
+
+        <label class="field">
+          <span class="label" id="label-kicker">Chamada</span>
+          <input type="text" data-field="kicker" autocomplete="off">
+        </label>
+
+        <label class="field">
+          <span class="label" id="label-title">Título</span>
+          <textarea data-field="title" rows="3"></textarea>
+          <span class="hint">Use *asteriscos* para destacar palavras em itálico.</span>
+        </label>
+
+        <label class="field">
+          <span class="label" id="label-body">Texto</span>
+          <textarea data-field="body" rows="5"></textarea>
+        </label>
+
+        <div class="field" id="image-controls">
+          <span class="label">Imagem</span>
+          <div class="row">
+            <label class="btn btn-file">
+              <input type="file" id="image-input" accept="image/*">
+              <span id="image-btn-label">Escolher foto</span>
+            </label>
+            <button class="btn btn-ghost" id="image-remove">Remover</button>
+          </div>
+          <label class="range" id="range-pos">
+            <span>Enquadramento</span>
+            <input type="range" min="0" max="100" data-field="imagePos" data-number>
+          </label>
+          <label class="range" id="range-overlay">
+            <span>Escurecer foto</span>
+            <input type="range" min="0" max="95" data-field="overlay" data-number>
+          </label>
+        </div>
+
+        <div class="field">
+          <span class="label">Este slide</span>
+          <div class="row wrap">
+            <button class="btn" id="move-left">← Mover</button>
+            <button class="btn" id="move-right">Mover →</button>
+            <button class="btn" id="duplicate">Duplicar</button>
+            <button class="btn btn-danger" id="delete">Excluir</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Aba: Estilo -->
+      <div class="tab-panel" id="tab-estilo" hidden>
+        <div class="field">
+          <span class="label">Paleta</span>
+          <div class="palettes" id="palettes"></div>
+        </div>
+
+        <div class="field">
+          <span class="label">Cores</span>
+          <div class="colors">
+            <label class="color"><input type="color" data-color="bg"><span>Fundo</span></label>
+            <label class="color"><input type="color" data-color="text"><span>Texto</span></label>
+            <label class="color"><input type="color" data-color="muted"><span>Apoio</span></label>
+            <label class="color"><input type="color" data-color="accent"><span>Destaque</span></label>
+          </div>
+        </div>
+
+        <label class="field">
+          <span class="label">Fonte dos títulos</span>
+          <select id="title-font"></select>
+        </label>
+
+        <label class="field">
+          <span class="label">Fonte do texto</span>
+          <select id="body-font"></select>
+        </label>
+
+        <label class="field">
+          <span class="label">Seu @ no rodapé</span>
+          <input type="text" id="handle" autocomplete="off" autocapitalize="off" spellcheck="false">
+        </label>
+
+        <label class="check">
+          <input type="checkbox" id="show-numbers">
+          <span>Mostrar numeração (01 / 06)</span>
+        </label>
+
+        <div class="field">
+          <span class="label">Projeto</span>
+          <button class="btn btn-ghost" id="reset">Recomeçar com o exemplo</button>
+        </div>
+      </div>
+    </aside>
+  </main>
+
+  <!-- Janela de exportação -->
+  <dialog class="export-dialog" id="export-dialog">
+    <div class="dialog-head">
+      <h2>Imagens prontas</h2>
+      <button class="btn btn-ghost" id="dialog-close">Fechar</button>
+    </div>
+    <p class="dialog-note" id="dialog-note"></p>
+    <div class="dialog-actions">
+      <button class="btn btn-primary" id="share-files">Salvar no iPad / Compartilhar</button>
+      <button class="btn" id="download-all">Baixar arquivos</button>
+    </div>
+    <div class="export-grid" id="export-grid"></div>
+  </dialog>
+
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>
