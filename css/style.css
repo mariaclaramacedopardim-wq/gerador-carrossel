@@ -127,6 +127,14 @@ body {
 
 .stage { min-width: 0; }
 
+.stage-title {
+  margin: 0 0 12px;
+  text-align: center;
+  color: var(--ink-2);
+  font-size: 14px;
+}
+.stage-title strong { color: var(--ink); font-weight: 600; }
+
 .preview {
   display: flex;
   align-items: center;
@@ -228,7 +236,7 @@ body {
 
 .tabs {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(3, 1fr);
   padding: 6px;
   gap: 6px;
   border-bottom: 1px solid var(--line);
@@ -333,6 +341,47 @@ input:focus, textarea:focus, select:focus { outline: 2px solid var(--ink); outli
 }
 
 .check { display: flex; align-items: center; gap: 10px; min-height: 44px; }
+
+/* ---------- Estilos, marcas e carrosséis ---------- */
+
+.styles { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.style-option, .carousel-item {
+  display: grid;
+  gap: 2px;
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--surface);
+  color: var(--ink);
+  font: 14px var(--ui-font);
+  text-align: left;
+  cursor: pointer;
+}
+.style-option span, .carousel-item span { font-size: 12px; color: var(--ink-2); }
+.style-option.is-active, .carousel-item.is-active { border-color: var(--ink); box-shadow: inset 0 0 0 1px var(--ink); }
+
+.carousel-list {
+  display: grid;
+  gap: 6px;
+  max-height: 280px;
+  overflow-y: auto;
+}
+.carousel-item strong {
+  font-weight: 600;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.catalog-list { display: grid; gap: 8px; }
+.catalog-item {
+  display: grid;
+  grid-template-columns: 56px 1fr auto;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+}
+.catalog-item .palette-chips { height: 28px; }
 .check input { width: 22px; height: 22px; accent-color: var(--ink); }
 
 /* ---------- Janela de exportação ---------- */

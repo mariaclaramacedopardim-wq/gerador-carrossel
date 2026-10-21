@@ -29,15 +29,47 @@ export function loadFonts(theme) {
   return Promise.all(specs.map((s) => document.fonts.load(s).catch(() => [])));
 }
 
+// ---------- Cores ----------
+
+function luminance(hex) {
+  const n = parseInt(String(hex).replace('#', ''), 16);
+  const ch = [(n >> 16) & 255, (n >> 8) & 255, n & 255].map((v) => {
+    v /= 255;
+    return v <= 0.03928 ? v / 12.92 : ((v + 0.055) / 1.055) ** 2.4;
+  });
+  return 0.2126 * ch[0] + 0.7152 * ch[1] + 0.0722 * ch[2];
+}
+
+function contrast(a, b) {
+  const [x, y] = [luminance(a), luminance(b)].sort((m, n) => n - m);
+  return (x + 0.05) / (y + 0.05);
+}
+
+// Escolhe, entre as opções, a cor que mais aparece sobre o fundo.
+// Se nenhuma for legível, usa preto ou branco.
+function readableOn(bg, ...options) {
+  const best = (list) => list.reduce((a, b) => (contrast(bg, b) > contrast(bg, a) ? b : a));
+  const pick = best(options);
+  return contrast(bg, pick) >= 3 ? pick : best(['#111111', '#FFFFFF']);
+}
+
 // ---------- Texto ----------
 // Um "spec" descreve como o texto é desenhado. Trechos entre
-// *asteriscos* viram destaque (em = emphasis).
+// *asteriscos* viram destaque (em = emphasis). O jeito do
+// destaque vem do estilo da marca (ver STYLES em data.js).
 
 function titleSpec(theme, color, overrides = {}) {
   const f = theme.titleFont;
+  const c = theme.colors;
+  const e = theme.style.emphasis;
   return {
     family: f.family, weight: f.weight, style: 'normal', color,
-    emWeight: f.weight, emStyle: 'italic', emColor: theme.colors.accent,
+    upper: theme.style.upperTitles,
+    emWeight: f.weight,
+    emStyle: e === 'italic' ? 'italic' : 'normal',
+    emColor: e === 'marker' ? readableOn(c.accent, c.bg, c.text) : e === 'highlight' ? color : c.accent,
+    emBg: e === 'marker' ? c.accent : null,          // caixa atrás da palavra
+    emMark: e === 'highlight' ? c.accent : null,     // traço de marca-texto
     ...overrides,
   };
 }
@@ -77,6 +109,7 @@ function parse(text) {
 
 // Quebra o texto em linhas que cabem em maxWidth.
 function layoutText(ctx, text, spec, size, maxWidth, lh) {
+  if (spec.upper) text = String(text || '').toUpperCase();
   ctx.font = fontString(spec, false, size);
   const space = ctx.measureText(' ').width;
   const lines = [];
@@ -123,37 +156,82 @@ function drawText(ctx, block, x, y, maxWidth, align = 'left') {
   for (const line of lines) {
     if (line.gap) { y += size * lh * 0.5; continue; }
     let cx = align === 'center' ? x + (maxWidth - line.width) / 2 : x;
-    for (const word of line.words) {
-      for (const p of word.pieces) {
+    line.words.forEach((word, w) => {
+      word.pieces.forEach((p, i) => {
+        // Fundo do destaque. Se a palavra seguinte também é
+        // destaque, o fundo cobre o espaço entre as duas.
+        if (p.em && (spec.emBg || spec.emMark)) {
+          const next = line.words[w + 1];
+          const joins = i === word.pieces.length - 1 && next && next.pieces[0].em;
+          const extra = joins ? space : 0;
+          const top = y + pad;
+          // Mede as letras da fonte: a altura de "H" dá o topo e a
+          // base das maiúsculas; acentos (É, Ã) aumentam a caixa.
+          ctx.font = fontString(spec, true, size);
+          const cap = ctx.measureText('H');
+          const capTop = top - cap.actualBoundingBoxAscent;
+          const base = top + cap.actualBoundingBoxDescent;
+          if (spec.emBg) {
+            const glyphTop = top - ctx.measureText(p.text).actualBoundingBoxAscent;
+            const boxTop = Math.min(capTop - size * 0.1, glyphTop - size * 0.04);
+            const px = size * 0.1;
+            ctx.fillStyle = spec.emBg;
+            ctx.fillRect(cx - px, boxTop, p.width + extra + 2 * px, base + size * 0.1 - boxTop);
+          } else {
+            ctx.save();
+            ctx.globalAlpha = 0.45;
+            ctx.fillStyle = spec.emMark;
+            ctx.fillRect(cx - size * 0.04, base - size * 0.28, p.width + extra + size * 0.08, size * 0.36);
+            ctx.restore();
+          }
+        }
         ctx.font = fontString(spec, p.em, size);
         ctx.fillStyle = p.em ? spec.emColor : spec.color;
         ctx.fillText(p.text, cx, y + pad);
         cx += p.width;
-      }
+      });
       cx += space;
-    }
+    });
     y += size * lh;
   }
   return y;
 }
 
 // Texto com espaçamento entre letras (para chamadas em caixa-alta).
+function measureTracked(ctx, text, tracking) {
+  const chars = [...text];
+  return chars.reduce((w, c) => w + ctx.measureText(c).width, 0) + tracking * (chars.length - 1);
+}
+
 function drawTracked(ctx, text, x, y, tracking, align = 'left') {
   const chars = [...text];
-  const widths = chars.map((c) => ctx.measureText(c).width);
-  const total = widths.reduce((a, b) => a + b, 0) + tracking * (chars.length - 1);
+  const total = measureTracked(ctx, text, tracking);
   let cx = align === 'center' ? x - total / 2 : align === 'right' ? x - total : x;
   ctx.textAlign = 'left';
   ctx.textBaseline = 'top';
-  chars.forEach((c, i) => { ctx.fillText(c, cx, y); cx += widths[i] + tracking; });
+  chars.forEach((c) => { ctx.fillText(c, cx, y); cx += ctx.measureText(c).width + tracking; });
   return total;
 }
 
-function drawKicker(ctx, theme, text, x, y, color, align = 'left') {
+// Chamada: letras espaçadas ou, no estilo "pill", uma etiqueta
+// colorida. plain = true força as letras espaçadas (ex.: autor).
+function drawKicker(ctx, theme, text, x, y, color, align = 'left', plain = false) {
   if (!text) return;
+  const label = text.toUpperCase();
   ctx.font = `600 26px "${theme.bodyFont.family}", sans-serif`;
+  if (theme.style.kicker === 'pill' && !plain) {
+    const padX = 22;
+    const w = measureTracked(ctx, label, 4) + padX * 2;
+    const left = align === 'center' ? x - w / 2 : align === 'right' ? x - w : x;
+    roundRectPath(ctx, left, y - 12, w, 50, 25);
+    ctx.fillStyle = color;
+    ctx.fill();
+    ctx.fillStyle = readableOn(color, theme.colors.bg, theme.colors.text);
+    drawTracked(ctx, label, left + padX, y, 4);
+    return;
+  }
   ctx.fillStyle = color;
-  drawTracked(ctx, text.toUpperCase(), x, y, 4, align);
+  drawTracked(ctx, label, x, y, 4, align);
 }
 
 // ---------- Imagem ----------
@@ -185,9 +263,20 @@ function drawFooter(ctx, theme, index, total, color) {
   ctx.font = `600 ${FOOTER_SIZE}px "${theme.bodyFont.family}", sans-serif`;
   ctx.fillStyle = color;
   ctx.textBaseline = 'top';
+  let left = M;
+  if (theme.logo) {
+    // logo com até 56 px de altura e 220 px de largura
+    const iw = theme.logo.naturalWidth || theme.logo.width;
+    const ih = theme.logo.naturalHeight || theme.logo.height;
+    const scale = Math.min(56 / ih, 220 / iw);
+    const w = iw * scale;
+    const h = ih * scale;
+    ctx.drawImage(theme.logo, M, FOOTER_Y + FOOTER_SIZE / 2 - h / 2, w, h);
+    left += w + 20;
+  }
   if (theme.handle) {
     ctx.textAlign = 'left';
-    ctx.fillText(theme.handle, M, FOOTER_Y);
+    ctx.fillText(theme.handle, left, FOOTER_Y);
   }
   let right = SLIDE_W - M;
   const isLast = index === total - 1;
@@ -229,15 +318,19 @@ const layouts = {
       fg = LIGHT; sub = 'rgba(247,243,236,0.85)'; acc = LIGHT;
     }
 
-    ctx.fillStyle = acc;
-    ctx.fillRect(M, M, 72, 4);
-    drawKicker(ctx, theme, s.kicker, M, M + 32, acc);
+    if (theme.style.rules) {
+      ctx.fillStyle = acc;
+      ctx.fillRect(M, M, 72, 4);
+    }
+    drawKicker(ctx, theme, s.kicker, M, theme.style.rules ? M + 32 : M + 12, acc);
 
     const body = s.body
       ? fitText(ctx, s.body, bodySpec(theme, sub), { max: 36, min: 26, maxWidth: CONTENT_W - 80, maxHeight: 200, lh: 1.4 })
       : null;
     const bodyH = body ? body.height + 40 : 0;
-    const titleSp = titleSpec(theme, fg, img ? { emColor: fg } : {});
+    // Sobre a foto, destaques só de cor ficariam ilegíveis: usam o texto claro.
+    const plainEm = ['italic', 'color'].includes(theme.style.emphasis);
+    const titleSp = titleSpec(theme, fg, img && plainEm ? { emColor: fg } : {});
     const title = fitText(ctx, s.title, titleSp, {
       max: 140, min: 52, maxWidth: CONTENT_W, maxHeight: Math.min(760, BOTTOM - (M + 140) - bodyH), lh: 1.02,
     });
@@ -256,9 +349,11 @@ const layouts = {
     }
     const title = fitText(ctx, s.title, titleSpec(theme, c.text), { max: 92, min: 48, maxWidth: CONTENT_W, maxHeight: 420, lh: 1.06 });
     y = drawText(ctx, title, M, y, CONTENT_W) + 44;
-    ctx.fillStyle = c.accent;
-    ctx.fillRect(M, y, 64, 3);
-    y += 3 + 48;
+    if (theme.style.rules) {
+      ctx.fillStyle = c.accent;
+      ctx.fillRect(M, y, 64, 3);
+      y += 3 + 48;
+    }
     if (s.body) {
       const body = fitText(ctx, s.body, bodySpec(theme, c.text), { max: 40, min: 24, maxWidth: CONTENT_W, maxHeight: BOTTOM - y, lh: 1.5 });
       drawText(ctx, body, M, y, CONTENT_W);
@@ -278,7 +373,8 @@ const layouts = {
 
     const top = M + 280;
     const authorH = s.body ? 26 + 56 : 0;
-    const spec = titleSpec(theme, c.text, { style: 'italic', emStyle: 'normal' });
+    // No estilo editorial a citação vai em itálico (e o destaque, reto).
+    const spec = titleSpec(theme, c.text, theme.style.emphasis === 'italic' ? { style: 'italic', emStyle: 'normal' } : {});
     const quote = fitText(ctx, s.title, spec, { max: 88, min: 40, maxWidth: CONTENT_W, maxHeight: BOTTOM - top - authorH, lh: 1.15 });
     let y = Math.max(top, top + (BOTTOM - top - authorH - quote.height) / 2);
     y = drawText(ctx, quote, M, y, CONTENT_W);
@@ -286,7 +382,7 @@ const layouts = {
       y += 48;
       ctx.fillStyle = c.accent;
       ctx.fillRect(M, y + 12, 40, 2);
-      drawKicker(ctx, theme, s.body, M + 60, y, c.muted);
+      drawKicker(ctx, theme, s.body, M + 60, y, c.muted, 'left', true);
     }
     return c.muted;
   },
