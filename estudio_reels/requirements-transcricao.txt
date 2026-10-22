@@ -1,0 +1,2 @@
+# Opcional: transcrição da fala no próprio Codespace (baixa um modelo de ~500 MB no primeiro uso).
+faster-whisper>=1.0

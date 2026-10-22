@@ -1,0 +1,9 @@
+{
+  "name": "gerador-carrossel + Estúdio de Reels",
+  "image": "mcr.microsoft.com/devcontainers/universal:2",
+  "postCreateCommand": "bash estudio_reels/instalar.sh",
+  "forwardPorts": [8000],
+  "portsAttributes": {
+    "8000": { "label": "Estúdio de Reels", "onAutoForward": "notify" }
+  }
+}

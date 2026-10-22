@@ -11,3 +11,11 @@ Como usar: abra o Claude Code neste repositório e digite `/reels-creative-direc
 ```
 
 Ou peça normalmente ("cria um Reel sobre...") e o Claude carrega a skill sozinho.
+
+## Estúdio de Reels (pré-edição automática)
+
+Interface web para enviar clipes brutos pelo Safari do iPad, gerar um plano de edição em JSON, uma montagem preliminar em MP4
+(9:16) e um pacote para finalizar no CapCut. Fica em `estudio_reels/`.
+
+No Codespaces: **☰ > Terminal > Run Task... > Reels: abrir estúdio**, depois abra a porta 8000 na aba **PORTAS**.
+Passo a passo, limitações e opções em [estudio_reels/README.md](estudio_reels/README.md).

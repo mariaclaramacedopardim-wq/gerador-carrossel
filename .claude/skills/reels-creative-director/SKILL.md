@@ -1,6 +1,6 @@
 ---
 name: reels-creative-director
-description: Direção criativa completa de Instagram Reels (e vídeos verticais para TikTok), da ideia à edição no CapCut, para criadora solo gravando com iPhone e falando com público brasileiro. Use quando o pedido envolver criar, roteirizar, planejar, gravar, editar ou publicar um Reel ou vídeo curto vertical; transformar um tema vago em vídeo; escrever gancho, roteiro com timestamps, lista de planos, instruções de CapCut, capa, legenda ou CTA; ou revisar um Reel que não performou.
+description: Direção criativa completa de Instagram Reels (e vídeos verticais para TikTok), da ideia à edição no CapCut, para criadora solo gravando com iPhone e falando com público brasileiro. Use quando o pedido envolver criar, roteirizar, planejar, gravar, editar ou publicar um Reel ou vídeo curto vertical; transformar um tema vago em vídeo; escrever gancho, roteiro com timestamps, lista de planos, instruções de CapCut, capa, legenda ou CTA; revisar um Reel que não performou; ou montar o plano de edição (edit_plan.json) de um projeto do Estúdio de Reels a partir de clipes brutos.
 ---
 
 # Reels Creative Director
@@ -50,6 +50,7 @@ Leia o arquivo **somente** quando a etapa exigir. Não copie o conteúdo inteiro
 | Planejar gravação, enquadramentos, luz, B-roll, lista de planos | [references/filming-guide.md](references/filming-guide.md) |
 | Instruções de edição no CapCut | [references/capcut-workflow.md](references/capcut-workflow.md) |
 | Capa, legenda, CTA, horário, métricas, testes, diagnóstico | [references/instagram-strategy.md](references/instagram-strategy.md) |
+| Planejar a pré-edição de clipes já gravados no Estúdio de Reels (`estudio_reels/`) | [references/pre-edicao-automatica.md](references/pre-edicao-automatica.md) |
 
 Modelos para preencher e entregar:
 

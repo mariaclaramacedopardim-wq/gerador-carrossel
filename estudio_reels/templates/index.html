@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Estúdio de Reels</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<header class="topo">
+  <h1>Estúdio de Reels</h1>
+  <p class="sub">Pré-edição automática para finalizar no CapCut</p>
+  <div id="sistema" class="sistema"></div>
+</header>
+
+<main>
+  <section class="cartao">
+    <h2>Projeto</h2>
+    <div class="linha">
+      <select id="lista-projetos" aria-label="Escolher projeto"></select>
+      <button id="novo-projeto" class="secundario">Novo projeto</button>
+    </div>
+    <div class="linha">
+      <button id="projeto-exemplo" class="discreto">Criar exemplo com vídeos sintéticos</button>
+      <button id="apagar-projeto" class="discreto perigo">Apagar este projeto</button>
+    </div>
+  </section>
+
+  <div id="area-projeto" hidden>
+    <section class="cartao">
+      <h2><span class="num">1</span> Briefing</h2>
+      <label>Nome do projeto <input id="b-nome" type="text"></label>
+      <label>Objetivo do Reels <textarea id="b-objetivo" rows="2" placeholder="Ex.: mostrar como organizo meu treino de corrida da semana"></textarea></label>
+      <label>Estilo <input id="b-estilo" type="text" placeholder="Ex.: calmo, natural, didático"></label>
+      <label>História (o que acontece, em ordem) <textarea id="b-historia" rows="3" placeholder="Ex.: abro falando o problema, mostro a planilha, corro, fecho com o resultado"></textarea></label>
+      <div class="grade">
+        <label>Duração (segundos) <input id="b-duracao" type="number" min="3" max="180" step="1" inputmode="numeric"></label>
+        <label>Proporção
+          <select id="b-proporcao">
+            <option value="9:16">9:16 (Reels)</option>
+            <option value="4:5">4:5 (feed)</option>
+            <option value="1:1">1:1 (quadrado)</option>
+          </select>
+        </label>
+        <label>Clipes com outra orientação
+          <select id="b-orientacao">
+            <option value="encaixar_desfocado">Mostrar inteiro, fundo desfocado</option>
+            <option value="preencher">Cortar para preencher a tela</option>
+            <option value="encaixar_barras">Mostrar inteiro, faixas pretas</option>
+          </select>
+        </label>
+        <label>Ritmo
+          <select id="b-ritmo">
+            <option value="rapido">Rápido (cortes curtos)</option>
+            <option value="medio">Médio</option>
+            <option value="lento">Lento (planos longos)</option>
+          </select>
+        </label>
+        <label>Narração
+          <select id="b-narracao">
+            <option value="fala_dos_clipes">Minha fala nos próprios clipes</option>
+            <option value="narracao_off">Narração em off (gravo no CapCut)</option>
+            <option value="sem_fala">Sem fala (imagens e textos)</option>
+          </select>
+        </label>
+      </div>
+      <button id="salvar-briefing">Salvar briefing</button>
+    </section>
+
+    <section class="cartao">
+      <h2><span class="num">2</span> Vídeos</h2>
+      <label class="botao-arquivo">
+        <input id="arquivos" type="file" accept="video/*,.mov,.mp4,.m4v" multiple>
+        <span>Escolher vídeos</span>
+      </label>
+      <p class="dica">Envie os clipes na ordem da história (dá para reordenar depois). Os originais nunca são alterados.</p>
+      <ul id="envios" class="envios"></ul>
+      <ul id="clipes" class="clipes"></ul>
+    </section>
+
+    <section class="cartao">
+      <h2><span class="num">3</span> Análise dos clipes</h2>
+      <button id="analisar">Analisar clipes</button>
+      <div id="analise"></div>
+    </section>
+
+    <section class="cartao">
+      <h2><span class="num">4</span> Plano de edição</h2>
+      <div class="linha">
+        <button id="plano-demo">Plano demonstrativo (sem IA)</button>
+        <button id="plano-ia" class="secundario">Plano com IA (API paga)</button>
+        <button id="plano-recarregar" class="discreto">Recarregar plano</button>
+      </div>
+      <details class="dica-claude">
+        <summary>Usar o Claude Code para planejar (sem custo extra)</summary>
+        <p>No Codespaces, abra o Claude Code e escreva:</p>
+        <pre id="comando-claude"></pre>
+        <p>Quando ele terminar, toque em <b>Recarregar plano</b>.</p>
+      </details>
+      <div id="plano"></div>
+      <details id="editor-json">
+        <summary>Editar o plano em JSON (avançado)</summary>
+        <textarea id="json-plano" rows="14" spellcheck="false"></textarea>
+        <button id="salvar-json" class="secundario">Validar e salvar</button>
+        <div id="erros-json"></div>
+      </details>
+    </section>
+
+    <section class="cartao">
+      <h2><span class="num">5</span> Montagem e download</h2>
+      <button id="renderizar">Gerar montagem</button>
+      <div id="resultado"></div>
+    </section>
+  </div>
+
+  <div id="status" class="status" hidden></div>
+</main>
+<script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>
