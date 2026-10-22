@@ -115,3 +115,21 @@ tabela "Referências cadastradas" do índice.
 - **Uma cor forte sobre base neutra ou dessaturada:** rosa, laranja ou verde néon.
 - **Textura visível:** grão, meio-tom, papel.
 - Fontes exatas não identificadas.
+
+### I06 · Gravura anatômica com aquarela
+- **Arquivo / link:** sem arquivo (ilustração de terceiros; há uma assinatura no canto). Link: *a preencher*. Enviada em 22/10/2026.
+- **Por que salvei:** anatomia em traço de gravura antiga com manchas de aquarela por cima.
+- **Usar em:** animações e posts educativos de medicina. Aplicada no vídeo de câncer de próstata (22/10/2026).
+
+| Aspecto | O que observar | Marcação |
+| --- | --- | --- |
+| Estética geral | Gravura anatômica antiga + aquarela solta: científico e artístico ao mesmo tempo | [REPRODUZIR] |
+| Enquadramento | Órgãos isolados, centralizados, em fundo branco | [REPRODUZIR] |
+| Iluminação | Luz sugerida pelas linhas: traços mais densos nas bordas, centro marfim (claro) | [REPRODUZIR] |
+| Cores | Fundo branco; órgãos marfim (#FAF4DC); aquarela em coral (#D06959), framboesa (#D25563), ocre (#DDA668), laranja, petróleo (#366D71), verde (#47855D), azul (#3F638D) e ameixa (#5B294C) | [REPRODUZIR] |
+| Tipografia | Não tem texto (só assinatura) | — |
+| Composição | Cor concentrada nas bordas e reentrâncias; respingos de tinta nos cantos (rosa, laranja, verde) | [REPRODUZIR] |
+| Acabamento | Linhas de contorno paralelas seguindo a forma; manchas com borda irregular que vazam sobre as linhas | [REPRODUZIR] |
+| Animação (como apliquei) | Linhas de gravura se desenhando uma a uma; aquarela "florescendo" do centro da mancha; respingos fixos nos cantos | [REPRODUZIR] |
+
+- **Não copiar:** a ilustração e a assinatura.

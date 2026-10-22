@@ -100,3 +100,4 @@ copiar e com **[IGNORAR]** o que não interessa nessa referência.
 | 2026-10-22 | 01 | I03 · Página de revista dos anos 90 (link a preencher) | Posts de lista, capas com número | [I03](01_REFERENCIAS_VISUAIS/LEIA-ME.md#i03--página-de-revista-dos-anos-90) |
 | 2026-10-22 | 01 | I04 · Colagem zine com adesivos recortados (link a preencher) | Capas, opinião, humor | [I04](01_REFERENCIAS_VISUAIS/LEIA-ME.md#i04--colagem-zine-com-adesivos-recortados) |
 | 2026-10-22 | 01 | I05 · Interface de rastreamento sobre foto granulada (link a preencher) | Moda, lançamentos, contagem regressiva | [I05](01_REFERENCIAS_VISUAIS/LEIA-ME.md#i05--interface-de-rastreamento-sobre-foto-granulada) |
+| 2026-10-22 | 01 | I06 · Gravura anatômica com aquarela (link a preencher) | Animações e posts educativos de medicina | [I06](01_REFERENCIAS_VISUAIS/LEIA-ME.md#i06--gravura-anatômica-com-aquarela) |
