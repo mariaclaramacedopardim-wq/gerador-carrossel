@@ -19,3 +19,11 @@ Interface web para enviar clipes brutos pelo Safari do iPad, gerar um plano de e
 
 No Codespaces: **☰ > Terminal > Run Task... > Reels: abrir estúdio**, depois abra a porta 8000 na aba **PORTAS**.
 Passo a passo, limitações e opções em [estudio_reels/README.md](estudio_reels/README.md).
+
+## Fluxo autônomo pelo chat (Claude Code na nuvem)
+
+Para editar sem abrir o Codespace: numa sessão do Claude Code com este repositório, anexe os vídeos brutos e peça o Reels.
+O Claude pergunta só o essencial, monta com o Estúdio de Reels, devolve o MP4 no chat e gera uma nova versão a cada pedido
+de alteração. O briefing, os planos e o histórico ficam em `estudio_reels_memoria/` para retomar em outra sessão (os vídeos
+precisam ser anexados de novo). Detalhes em
+[`.claude/skills/reels-creative-director/references/fluxo-autonomo.md`](.claude/skills/reels-creative-director/references/fluxo-autonomo.md).

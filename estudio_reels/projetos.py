@@ -323,7 +323,8 @@ def renderizar(id_projeto):
         (base / "saida" / "pacote_capcut.zip").unlink(missing_ok=True)
         temp = base / "saida" / "_temp"
         try:
-            resumo = renderizador.renderizar(plano, base / "originais", saida, temp, progresso)
+            estilo = renderizador.ler_estilo(base / "estilo_textos.json")
+            resumo = renderizador.renderizar(plano, base / "originais", saida, temp, progresso, estilo)
             progresso("Montando o pacote para o CapCut")
             analise = carregar_analise(id_projeto) if (base / "analise" / "analise.json").exists() else {"clipes": []}
             pacote.gerar_pacote(plano, analise, resumo, p, saida)

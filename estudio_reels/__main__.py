@@ -8,6 +8,12 @@ python -m estudio_reels analisar ID          analisa os clipes de um projeto
 python -m estudio_reels planejar ID [api]    gera o plano (demonstrativo ou pela API)
 python -m estudio_reels validar ID|ARQUIVO   valida um edit_plan.json
 python -m estudio_reels renderizar ID        gera o MP4 e o pacote do CapCut
+
+Fluxo autônomo (vídeos que já estão no disco, por exemplo anexos do chat):
+python -m estudio_reels importar [--nome N] [--briefing B.json] VIDEO...   cria o projeto
+python -m estudio_reels auto ID [--replanejar] [--pedido TEXTO]            analisa, planeja se preciso, renderiza e guarda vN
+python -m estudio_reels versoes ID                                         lista as versões geradas
+python -m estudio_reels restaurar ID VIDEO...                              retoma um projeto da memória em outra sessão
 """
 
 import json
@@ -78,6 +84,8 @@ def main(argumentos):
         elif comando == "renderizar":
             projetos.renderizar(argumentos[1])
             return _mostrar_estado(argumentos[1])
+        elif comando in ("importar", "auto", "versoes", "restaurar"):
+            return _fluxo(comando, argumentos[1:])
         else:
             print(__doc__)
             return 1
@@ -87,6 +95,46 @@ def main(argumentos):
     except IndexError:
         print(__doc__)
         return 1
+    return 0
+
+
+def _opcao(argumentos, nome, com_valor=True):
+    """Tira --nome [valor] da lista e devolve o valor (ou True/None)."""
+    if nome not in argumentos:
+        return None
+    i = argumentos.index(nome)
+    if not com_valor:
+        del argumentos[i]
+        return True
+    valor = argumentos[i + 1]
+    del argumentos[i:i + 2]
+    return valor
+
+
+def _fluxo(comando, argumentos):
+    from . import fluxo
+
+    if comando == "importar":
+        nome = _opcao(argumentos, "--nome") or ""
+        arquivo_briefing = _opcao(argumentos, "--briefing")
+        briefing = json.loads(Path(arquivo_briefing).read_text(encoding="utf-8")) if arquivo_briefing else None
+        p = fluxo.importar(argumentos, nome, briefing)
+        print("Projeto criado:", p["id"])
+        for c in p["clipes"]:
+            m = c["metadados"]
+            print(f"  {c['arquivo']}: {m['duracao_s']} s, {m['largura']}x{m['altura']}, áudio: {'sim' if m['tem_audio'] else 'não'}")
+        print("Memória:", fluxo.pasta_memoria(p["id"]))
+    elif comando == "auto":
+        replanejar = bool(_opcao(argumentos, "--replanejar", com_valor=False))
+        pedido = _opcao(argumentos, "--pedido")
+        destino = fluxo.auto(argumentos[0], replanejar=replanejar, pedido=pedido)
+        print("Versão pronta:", destino)
+    elif comando == "versoes":
+        for v in fluxo.versoes(argumentos[0]):
+            print(v)
+    elif comando == "restaurar":
+        p, ultima = fluxo.restaurar(argumentos[0], argumentos[1:])
+        print("Projeto restaurado:", p["id"], "| último plano:", ultima or "nenhum")
     return 0
 
 

@@ -21,3 +21,11 @@ Regras da biblioteca:
 - O repositório é público: não adicione nada pessoal ou de terceiros sem a criadora pedir.
 - A biblioteca é só contexto. Não altere a aplicação (`estudio_reels/`), a skill ou as configurações por causa dela sem
   autorização explícita.
+
+## Fluxo autônomo de edição de Reels
+
+Quando a criadora enviar vídeos brutos pedindo um Reels editado, ou pedir alterações numa versão já entregue, siga
+`.claude/skills/reels-creative-director/references/fluxo-autonomo.md`: perguntar só o essencial, decidir o resto, montar
+com o Estúdio de Reels (`bash estudio_reels/rodar.sh importar | analisar | validar | auto`), entregar o MP4 no chat e
+gerar novas versões a cada pedido, sem repetir o briefing. Versione só `estudio_reels_memoria/` (texto), nunca vídeos,
+e só depois de a criadora autorizar publicar (o repositório é público).

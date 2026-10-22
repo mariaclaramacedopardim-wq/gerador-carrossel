@@ -51,6 +51,7 @@ Leia o arquivo **somente** quando a etapa exigir. Não copie o conteúdo inteiro
 | Instruções de edição no CapCut | [references/capcut-workflow.md](references/capcut-workflow.md) |
 | Capa, legenda, CTA, horário, métricas, testes, diagnóstico | [references/instagram-strategy.md](references/instagram-strategy.md) |
 | Planejar a pré-edição de clipes já gravados no Estúdio de Reels (`estudio_reels/`) | [references/pre-edicao-automatica.md](references/pre-edicao-automatica.md) |
+| Receber vídeos brutos no chat, editar de ponta a ponta, entregar o MP4 e aplicar pedidos de alteração (fluxo autônomo) | [references/fluxo-autonomo.md](references/fluxo-autonomo.md) |
 
 Modelos para preencher e entregar:
 

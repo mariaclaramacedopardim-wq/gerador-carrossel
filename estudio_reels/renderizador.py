@@ -142,24 +142,60 @@ def _escapar_caminho(caminho):
     return str(caminho).replace("\\", "\\\\").replace(":", "\\:").replace("'", "\\'")
 
 
-def _drawtext(arquivo_texto, inicio, fim, posicao, formato, fonte, tamanho, caixa=True):
+# Estilo dos textos na tela. O padrão é o de sempre (branco, caixa escura); um projeto pode trocar
+# com o arquivo estilo_textos.json na pasta dele (ex.: fonte da identidade, sem caixa, sem sombra).
+ESTILO_PADRAO = {"fonte": None, "cor": "white", "caixa": True, "contorno": True, "tamanho": 0.058, "entrelinha": 12, "maiusculas": False,
+                 "centralizar_linhas": False, "escurecer_fundo": 0.0}
+
+
+def ler_estilo(caminho):
+    """Junta o estilo_textos.json do projeto (se existir) ao padrão. Fontes podem ser o nome de um arquivo em estudio_reels/fontes/."""
+    estilo = dict(ESTILO_PADRAO)
+    if caminho and Path(caminho).exists():
+        dados = json.loads(Path(caminho).read_text(encoding="utf-8"))
+        desconhecidos = set(dados) - set(ESTILO_PADRAO)
+        if desconhecidos:
+            raise ErroEstudio(f"estilo_textos.json tem campos desconhecidos: {', '.join(sorted(desconhecidos))}")
+        estilo.update(dados)
+    if estilo["fonte"]:
+        fonte = Path(estilo["fonte"])
+        if not fonte.is_absolute():
+            fonte = Path(__file__).resolve().parent / "fontes" / fonte
+        if not fonte.exists():
+            raise ErroEstudio(f"A fonte do estilo de texto não existe: {fonte}")
+        estilo["fonte"] = str(fonte)
+    return estilo
+
+
+def _drawtext(arquivo_texto, inicio, fim, posicao, formato, fonte, tamanho, caixa=True, cor="white", contorno=True, entrelinha=12,
+              centralizar_linhas=False):
     altura = formato["altura"]
     y = {"topo": f"{int(altura * 0.12)}", "centro": "(h-text_h)/2", "inferior": f"{int(altura * 0.70)}-text_h"}[posicao]
     opcoes = [
         f"textfile='{_escapar_caminho(arquivo_texto)}'",
-        f"fontsize={tamanho}", "fontcolor=white", "line_spacing=12", "x=(w-text_w)/2", f"y={y}",
+        f"fontsize={tamanho}", f"fontcolor={cor}", f"line_spacing={entrelinha}", "x=(w-text_w)/2", f"y={y}",
         f"enable='between(t,{inicio:.3f},{fim:.3f})'",
     ]
     if fonte:
         opcoes.insert(0, f"fontfile='{_escapar_caminho(fonte)}'")
+    if centralizar_linhas and tem_filtro_opcao("drawtext", "text_align"):
+        opcoes.append("text_align=C")
     if caixa:
         opcoes += ["box=1", "boxcolor=black@0.55", f"boxborderw={int(tamanho * 0.4)}"]
-    else:
+    elif contorno:
         opcoes += ["borderw=4", "bordercolor=black"]
     return "drawtext=" + ":".join(opcoes)
 
 
-def desenhar_textos(base, plano, destino, pasta_temp):
+def tem_filtro_opcao(filtro, opcao):
+    """Confere se o FFmpeg instalado aceita uma opção do filtro (ex.: text_align do drawtext, FFmpeg 6.1+)."""
+    import subprocess
+
+    r = subprocess.run(["ffmpeg", "-hide_banner", "-h", f"filter={filtro}"], capture_output=True, text=True)
+    return f" {opcao} " in r.stdout
+
+
+def desenhar_textos(base, plano, destino, pasta_temp, estilo=None):
     textos = plano["textos_na_tela"]
     legendas = plano["legendas"]["itens"] if plano["legendas"]["queimar_no_preview"] else []
     if not textos and not legendas:
@@ -168,21 +204,27 @@ def desenhar_textos(base, plano, destino, pasta_temp):
     if not tem_filtro("drawtext"):
         shutil.copy2(base, destino)
         return ["Este FFmpeg não desenha textos (falta o filtro drawtext). O preview saiu sem textos; adicione-os no CapCut."]
-    formato, fonte = plano["formato_saida"], encontrar_fonte()
-    tamanho = max(24, int(formato["largura"] * 0.058))
+    estilo = estilo or ESTILO_PADRAO
+    formato, fonte = plano["formato_saida"], estilo["fonte"] or encontrar_fonte()
+    tamanho = max(24, int(formato["largura"] * estilo["tamanho"]))
+    estilo_texto = {k: estilo[k] for k in ("cor", "contorno", "entrelinha", "centralizar_linhas")}
     caracteres = max(12, int(formato["largura"] * 0.9 / (tamanho * 0.55)))
     filtros = []
     pasta = Path(pasta_temp) / "textos"
     pasta.mkdir(parents=True, exist_ok=True)
     for i, t in enumerate(textos):
         arquivo = pasta / f"texto_{i:02d}.txt"
-        arquivo.write_text("\n".join(textwrap.wrap(t["texto"], caracteres)), encoding="utf-8")
-        filtros.append(_drawtext(arquivo, t["inicio_s"], t["fim_s"], t["posicao"], formato, fonte, tamanho))
+        texto = t["texto"].upper() if estilo["maiusculas"] else t["texto"]
+        arquivo.write_text("\n".join(textwrap.wrap(texto, caracteres)), encoding="utf-8")
+        filtros.append(_drawtext(arquivo, t["inicio_s"], t["fim_s"], t["posicao"], formato, fonte, tamanho, estilo["caixa"], **estilo_texto))
     for i, leg in enumerate(legendas):
         arquivo = pasta / f"legenda_{i:03d}.txt"
         arquivo.write_text("\n".join(textwrap.wrap(leg["texto"], int(caracteres * 1.2))), encoding="utf-8")
-        filtros.append(_drawtext(arquivo, leg["inicio_s"], leg["fim_s"], "inferior", formato, fonte, int(tamanho * 0.75), caixa=False))
+        filtros.append(_drawtext(arquivo, leg["inicio_s"], leg["fim_s"], "inferior", formato, fonte, int(tamanho * 0.75), False, **estilo_texto))
     roteiro = Path(pasta_temp) / "filtro_textos.txt"
+    if estilo["escurecer_fundo"]:
+        # Escurece o vídeo inteiro antes de desenhar os textos (só no preview com textos).
+        filtros.insert(0, f"eq=brightness={-abs(float(estilo['escurecer_fundo'])):.3f}")
     roteiro.write_text(",\n".join(filtros), encoding="utf-8")
     rodar_ffmpeg(["-i", base, "-filter_script:v", roteiro, *CODIFICACAO_VIDEO, "-c:a", "copy", "-movflags", "+faststart", destino])
     return []
@@ -210,7 +252,7 @@ def verificar_saida(caminho, plano):
     }
 
 
-def renderizar(plano, pasta_originais, pasta_saida, pasta_temp, ao_progredir=lambda texto: None):
+def renderizar(plano, pasta_originais, pasta_saida, pasta_temp, ao_progredir=lambda texto: None, estilo=None):
     """Gera clips/, reels_base_sem_textos.mp4 e reels_preview.mp4. Retorna um resumo."""
     pasta_originais, pasta_saida, pasta_temp = Path(pasta_originais), Path(pasta_saida), Path(pasta_temp)
     metas = {}
@@ -246,7 +288,7 @@ def renderizar(plano, pasta_originais, pasta_saida, pasta_temp, ao_progredir=lam
     unir_segmentos(arquivos, plano, base, pasta_temp)
     ao_progredir("Desenhando textos na tela")
     preview = pasta_saida / "reels_preview.mp4"
-    avisos += desenhar_textos(base, plano, preview, pasta_temp)
+    avisos += desenhar_textos(base, plano, preview, pasta_temp, estilo)
 
     verificacao = [verificar_saida(preview, plano), verificar_saida(base, plano)]
     resumo = {"avisos_renderizacao": avisos, "verificacao": verificacao}

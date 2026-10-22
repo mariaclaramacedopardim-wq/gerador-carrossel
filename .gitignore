@@ -24,3 +24,17 @@ REFERENCIAS_CRIATIVAS/**/*.aac
 REFERENCIAS_CRIATIVAS/**/*.aif
 REFERENCIAS_CRIATIVAS/**/*.aiff
 REFERENCIAS_CRIATIVAS/**/*.flac
+
+# Memória dos projetos do fluxo autônomo: só texto (briefing, planos, histórico). Nenhuma mídia.
+estudio_reels_memoria/**/*.mp4
+estudio_reels_memoria/**/*.MP4
+estudio_reels_memoria/**/*.mov
+estudio_reels_memoria/**/*.MOV
+estudio_reels_memoria/**/*.m4v
+estudio_reels_memoria/**/*.webm
+estudio_reels_memoria/**/*.wav
+estudio_reels_memoria/**/*.mp3
+estudio_reels_memoria/**/*.m4a
+estudio_reels_memoria/**/*.jpg
+estudio_reels_memoria/**/*.png
+estudio_reels_memoria/**/*.zip
