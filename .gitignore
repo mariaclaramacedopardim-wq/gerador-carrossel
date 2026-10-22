@@ -6,3 +6,21 @@ __pycache__/
 .pytest_cache/
 .env
 .venv-reels/
+
+# Biblioteca de referências: vídeos e áudios ficam fora do GitHub (guarde link + prints na ficha)
+REFERENCIAS_CRIATIVAS/**/*.mp4
+REFERENCIAS_CRIATIVAS/**/*.MP4
+REFERENCIAS_CRIATIVAS/**/*.mov
+REFERENCIAS_CRIATIVAS/**/*.MOV
+REFERENCIAS_CRIATIVAS/**/*.m4v
+REFERENCIAS_CRIATIVAS/**/*.webm
+REFERENCIAS_CRIATIVAS/**/*.mkv
+REFERENCIAS_CRIATIVAS/**/*.avi
+REFERENCIAS_CRIATIVAS/**/*.mp3
+REFERENCIAS_CRIATIVAS/**/*.MP3
+REFERENCIAS_CRIATIVAS/**/*.wav
+REFERENCIAS_CRIATIVAS/**/*.m4a
+REFERENCIAS_CRIATIVAS/**/*.aac
+REFERENCIAS_CRIATIVAS/**/*.aif
+REFERENCIAS_CRIATIVAS/**/*.aiff
+REFERENCIAS_CRIATIVAS/**/*.flac
