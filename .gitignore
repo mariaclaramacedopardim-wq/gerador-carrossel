@@ -1,0 +1,8 @@
+# Estúdio de Reels: vídeos, análises e resultados ficam só no Codespace
+estudio_reels_dados/
+tests/_dados_teste/
+__pycache__/
+*.pyc
+.pytest_cache/
+.env
+.venv-reels/

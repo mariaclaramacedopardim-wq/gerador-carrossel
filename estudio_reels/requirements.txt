@@ -1,0 +1,5 @@
+# Dependências do Estúdio de Reels (o FFmpeg é instalado à parte pelo instalar.sh)
+flask>=3.0,<4
+jsonschema>=4.20,<5
+pillow>=10
+pytest>=8

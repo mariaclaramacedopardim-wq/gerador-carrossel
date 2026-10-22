@@ -1,0 +1,34 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Reels: abrir estúdio",
+      "type": "shell",
+      "command": "bash estudio_reels/iniciar.sh",
+      "isBackground": true,
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated"
+      }
+    },
+    {
+      "label": "Reels: instalar dependências",
+      "type": "shell",
+      "command": "bash estudio_reels/instalar.sh",
+      "problemMatcher": []
+    },
+    {
+      "label": "Reels: rodar testes",
+      "type": "shell",
+      "command": "bash estudio_reels/rodar.sh sistema >/dev/null && .venv-reels/bin/python -m pytest -q",
+      "problemMatcher": []
+    },
+    {
+      "label": "Reels: exemplo completo (vídeos sintéticos)",
+      "type": "shell",
+      "command": "bash estudio_reels/rodar.sh exemplo",
+      "problemMatcher": []
+    }
+  ]
+}

@@ -1,0 +1,2 @@
+# Opcional: só para o modo "Plano com IA (API paga)". Exige o secret ANTHROPIC_API_KEY.
+anthropic>=2.1
