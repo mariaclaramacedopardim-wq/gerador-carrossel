@@ -91,4 +91,7 @@ copiar e com **[IGNORAR]** o que não interessa nessa referência.
 
 | Data | Pasta | Arquivo / link | Usar para | Ficha |
 | --- | --- | --- | --- | --- |
-|  |  |  |  |  |
+| 2026-10-22 | 02 | V01 · Montagem rápida de rotina com texto fixo (link a preencher) | Reels de rotina e bastidores | [V01](02_REFERENCIAS_DE_VIDEO/LEIA-ME.md#v01--montagem-rápida-de-rotina-com-texto-fixo) |
+| 2026-10-22 | 02 | V02 · Ritual de skincare em closes (link a preencher) | Autocuidado, skincare, wellness | [V02](02_REFERENCIAS_DE_VIDEO/LEIA-ME.md#v02--ritual-de-skincare-em-closes) |
+| 2026-10-22 | 02 | V03 · Tipografia cinética com fala direta (link a preencher) | Reels educativos com fala | [V03](02_REFERENCIAS_DE_VIDEO/LEIA-ME.md#v03--tipografia-cinética-com-fala-direta) |
+| 2026-10-22 | 02 | V04 · Colagem que se monta + texto que digita (link a preencher) | Aberturas, capas animadas, moodboards | [V04](02_REFERENCIAS_DE_VIDEO/LEIA-ME.md#v04--colagem-que-se-monta--texto-que-digita) |
