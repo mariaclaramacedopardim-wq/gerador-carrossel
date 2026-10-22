@@ -24,6 +24,7 @@ Itens marcados com *(projeto ID, out/2026)* vêm das escolhas que você aprovou 
   - V02 ritual de skincare em closes
   - V03 tipografia cinética com fala direta
   - V04 colagem que se monta + texto que digita
+- **Estética de imagem (I01 a I05, 22/10/2026):** nostalgia e analógico (interface antiga, revista dos anos 90), colagem em camadas, mistura de fontes no mesmo layout, textura visível (grão, meio-tom, papel) e **uma cor forte sobre base neutra**.
 - **Perfis / criadores que admiro:** (cite só os que estão em `01` ou `02`, com link)
 - **Formatos que mais gosto de fazer:** rotina e bastidores (V01), autocuidado (V02), educativo com fala (V03), "coisas que eu queria saber" (V04)
 
@@ -34,8 +35,8 @@ Itens marcados com *(projeto ID, out/2026)* vêm das escolhas que você aprovou 
 | Uso | Cor (nome / HEX / RGB) |
 | --- | --- |
 | Texto principal na tela | Amarelo suave, RGB (238, 240, 156), HEX #EEF09C *(projeto ID, out/2026)* |
-| Cor de destaque |  |
-| Fundo / tons neutros |  |
+| Cor de destaque | Rosa e magenta (I01, I02); verde néon como contraste (I05); laranja e amarelo em colagens (I03, I04). Referências: confirmar a cada produção *(22/10/2026)* |
+| Fundo / tons neutros | Off-white com textura de papel (I02); cinza-esverdeado granulado e dessaturado (I05); branco liso (I01) *(22/10/2026)* |
 | Cores que não uso |  |
 
 ### Tipografia
@@ -43,7 +44,7 @@ Itens marcados com *(projeto ID, out/2026)* vêm das escolhas que você aprovou 
 | Uso | Fonte | Observações |
 | --- | --- | --- |
 | Texto na tela (Reels) | Gochi Hand *(projeto ID, out/2026)* | Manuscrita, caixa alta, sem contorno e sem sombra, centralizada um pouco acima do meio, entrelinha justa |
-| Títulos / capas |  |  |
+| Títulos / capas | Mistura em camadas: script de pincel grande + serif condensada de alto contraste + sans pequena em negrito (I02) | Referência de capas de carrossel; fontes exatas ainda não definidas *(22/10/2026)* |
 | Legendas de fala |  |  |
 | Carrossel |  |  |
 
@@ -51,11 +52,14 @@ Itens marcados com *(projeto ID, out/2026)* vêm das escolhas que você aprovou 
 
 - Closes de rosto e de produto para autocuidado (V02); planos de mão e detalhe para rotina (V01) *(22/10/2026)*
 - Pessoa em plano médio olhando para a câmera nos vídeos com fala (V03) *(22/10/2026)*
+- Composição em camadas: texto sobre foto, adesivos e recortes sobre texto, molduras ornamentadas (I02, I04) *(22/10/2026)*
+- Página dividida em duas metades, com foto de um lado e lista do outro (I03); interface sobreposta à foto, com caixas e etiquetas (I05) *(22/10/2026)*
 - Texto no centro do quadro (V01, V03) ou grande e alinhado à esquerda (V04) *(22/10/2026)*
 
 ### Iluminação e tratamento de cor
 
 - Fundo levemente escurecido (cerca de -18% de brilho) quando o texto precisa de leitura sobre cena clara *(projeto ID, out/2026)*
+- Acabamento com grão, meio-tom e textura de papel; foto em preto e branco ou dessaturada com uma cor forte por cima (I02, I04, I05) *(22/10/2026)*
 - Luz natural ou de ambiente, sem cara de estúdio; tons quentes e suaves no autocuidado (V02), azul/verde de uniforme na rotina (V01) *(22/10/2026)*
 
 ## 4. Ritmo, cortes e transições

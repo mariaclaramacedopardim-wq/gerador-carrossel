@@ -95,3 +95,8 @@ copiar e com **[IGNORAR]** o que não interessa nessa referência.
 | 2026-10-22 | 02 | V02 · Ritual de skincare em closes (link a preencher) | Autocuidado, skincare, wellness | [V02](02_REFERENCIAS_DE_VIDEO/LEIA-ME.md#v02--ritual-de-skincare-em-closes) |
 | 2026-10-22 | 02 | V03 · Tipografia cinética com fala direta (link a preencher) | Reels educativos com fala | [V03](02_REFERENCIAS_DE_VIDEO/LEIA-ME.md#v03--tipografia-cinética-com-fala-direta) |
 | 2026-10-22 | 02 | V04 · Colagem que se monta + texto que digita (link a preencher) | Aberturas, capas animadas, moodboards | [V04](02_REFERENCIAS_DE_VIDEO/LEIA-ME.md#v04--colagem-que-se-monta--texto-que-digita) |
+| 2026-10-22 | 01 | I01 · Janela do Paint com recorte de moda (link a preencher) | Capas, moda, nostalgia | [I01](01_REFERENCIAS_VISUAIS/LEIA-ME.md#i01--janela-do-paint-com-recorte-de-moda) |
+| 2026-10-22 | 01 | I02 · Capa de carrossel com tipografia em camadas (link a preencher) | Capas de carrossel e Reels | [I02](01_REFERENCIAS_VISUAIS/LEIA-ME.md#i02--capa-de-carrossel-com-tipografia-em-camadas) |
+| 2026-10-22 | 01 | I03 · Página de revista dos anos 90 (link a preencher) | Posts de lista, capas com número | [I03](01_REFERENCIAS_VISUAIS/LEIA-ME.md#i03--página-de-revista-dos-anos-90) |
+| 2026-10-22 | 01 | I04 · Colagem zine com adesivos recortados (link a preencher) | Capas, opinião, humor | [I04](01_REFERENCIAS_VISUAIS/LEIA-ME.md#i04--colagem-zine-com-adesivos-recortados) |
+| 2026-10-22 | 01 | I05 · Interface de rastreamento sobre foto granulada (link a preencher) | Moda, lançamentos, contagem regressiva | [I05](01_REFERENCIAS_VISUAIS/LEIA-ME.md#i05--interface-de-rastreamento-sobre-foto-granulada) |
