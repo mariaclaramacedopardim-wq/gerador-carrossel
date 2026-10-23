@@ -1,0 +1,7 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__Orshot__orshot_search_stock_media"
+    ]
+  }
+}
