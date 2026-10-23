@@ -1,6 +1,10 @@
 {
   "permissions": {
-    "allow": [
+    "allow": [Bash(npm ci:*)
+Bash(npx paper-remote-mcp:*)
+Bash(node /home/user/ext/paper-remote-mcp/src/cli.js:*)
+Bash(claude mcp add paper:*)
+
       "mcp__Orshot__orshot_search_stock_media"
     ]
   }
