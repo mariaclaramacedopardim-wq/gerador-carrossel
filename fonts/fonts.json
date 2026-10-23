@@ -1,0 +1,230 @@
+[
+  {
+    "family": "A Bebedera",
+    "file": "abebedera/ABebedera-900-latin.woff2",
+    "weight": "900",
+    "style": "normal",
+    "category": "display",
+    "note": "Só peso 900; woff2 em 3 subsets (latin, latin-ext, greek)",
+    "pt_br_accents": true,
+    "subset": "latin"
+  },
+  {
+    "family": "A Bebedera",
+    "file": "abebedera/ABebedera-900-latin-ext.woff2",
+    "weight": "900",
+    "style": "normal",
+    "category": "display",
+    "note": "Só peso 900; woff2 em 3 subsets (latin, latin-ext, greek)",
+    "pt_br_accents": true,
+    "subset": "latin-ext"
+  },
+  {
+    "family": "A Bebedera",
+    "file": "abebedera/ABebedera-900-greek.woff2",
+    "weight": "900",
+    "style": "normal",
+    "category": "display",
+    "note": "Só peso 900; woff2 em 3 subsets (latin, latin-ext, greek)",
+    "pt_br_accents": true,
+    "subset": "greek"
+  },
+  {
+    "family": "Brasswell Outline",
+    "file": "brasswell-outline/BrasswellOutline-Regular.ttf",
+    "weight": "400",
+    "style": "normal",
+    "category": "display / contorno",
+    "note": "Versão outline",
+    "pt_br_accents": true
+  },
+  {
+    "family": "Career",
+    "file": "career/Career.ttf",
+    "weight": "400",
+    "style": "normal",
+    "category": "display",
+    "note": "Sem travessão/reticências/¿",
+    "pt_br_accents": true
+  },
+  {
+    "family": "Career Path",
+    "file": "career/Career-Path.ttf",
+    "weight": "400",
+    "style": "normal",
+    "category": "display / contorno",
+    "note": "SEM acentos PT (ã, é, ç…), sem !, #, %, $, aspas curvas — só para letras/números simples",
+    "pt_br_accents": false
+  },
+  {
+    "family": "JFFF Earlysoft",
+    "file": "earlysoft/JFFFEarlysoft-Regular.ttf",
+    "weight": "400",
+    "style": "normal",
+    "category": "display",
+    "note": null,
+    "pt_br_accents": true
+  },
+  {
+    "family": "Eunomia",
+    "file": "eunomia/Eunomia-Light.otf",
+    "weight": "300",
+    "style": "normal",
+    "category": "serifada / texto",
+    "note": "SEM acentos PT — evitar em português",
+    "pt_br_accents": false
+  },
+  {
+    "family": "Eunomia",
+    "file": "eunomia/Eunomia-Regular.otf",
+    "weight": "400",
+    "style": "normal",
+    "category": "serifada / texto",
+    "note": "SEM acentos PT — evitar em português",
+    "pt_br_accents": false
+  },
+  {
+    "family": "Eunomia",
+    "file": "eunomia/Eunomia-Bold.otf",
+    "weight": "700",
+    "style": "normal",
+    "category": "serifada / texto",
+    "note": "SEM acentos PT — evitar em português",
+    "pt_br_accents": false
+  },
+  {
+    "family": "Exclusive Editorial",
+    "file": "exclusive-editorial/DR-Exclusive-Editorial.ttf",
+    "weight": "400",
+    "style": "normal",
+    "category": "editorial / título",
+    "note": "Pacote sem arquivo de licença — confirmar os termos antes de uso comercial",
+    "pt_br_accents": true
+  },
+  {
+    "family": "Fraunces",
+    "file": "fraunces/Fraunces-VF.ttf",
+    "weight": "100 900",
+    "style": "normal",
+    "category": "serifada variável",
+    "note": "Eixos: wght, opsz, SOFT, WONK",
+    "pt_br_accents": true
+  },
+  {
+    "family": "Fraunces",
+    "file": "fraunces/Fraunces-Italic-VF.ttf",
+    "weight": "100 900",
+    "style": "italic",
+    "category": "serifada variável",
+    "note": "Eixos: wght, opsz, SOFT, WONK",
+    "pt_br_accents": true
+  },
+  {
+    "family": "Penna",
+    "file": "penna/Penna-Regular.otf",
+    "weight": "400",
+    "style": "normal",
+    "category": "display",
+    "note": "SEM acentos PT. Domínio público (CC0)",
+    "pt_br_accents": false
+  },
+  {
+    "family": "Perandory",
+    "file": "perandory/Perandory-Regular.otf",
+    "weight": "400",
+    "style": "normal",
+    "category": "display / título",
+    "note": "Sem reticências (…)",
+    "pt_br_accents": true
+  },
+  {
+    "family": "Perandory Semi Condensed",
+    "file": "perandory/Perandory-Semi-Condensed.otf",
+    "weight": "400",
+    "style": "normal",
+    "category": "display / título",
+    "note": "Sem reticências (…)",
+    "pt_br_accents": true
+  },
+  {
+    "family": "Perandory Condensed",
+    "file": "perandory/Perandory-Condensed.otf",
+    "weight": "400",
+    "style": "normal",
+    "category": "display / título",
+    "note": "Sem reticências (…)",
+    "pt_br_accents": true
+  },
+  {
+    "family": "Pinyon Script",
+    "file": "pinyon-script/PinyonScript-Regular.ttf",
+    "weight": "400",
+    "style": "normal",
+    "category": "script / caligráfica",
+    "note": null,
+    "pt_br_accents": true
+  },
+  {
+    "family": "JFFF Puffora",
+    "file": "puffora/JFFFPuffora-Regular.ttf",
+    "weight": "400",
+    "style": "normal",
+    "category": "display",
+    "note": null,
+    "pt_br_accents": true
+  },
+  {
+    "family": "Quiet Folio",
+    "file": "quiet-folio/QuietFolio-Regular.ttf",
+    "weight": "400",
+    "style": "normal",
+    "category": "display / serifada",
+    "note": null,
+    "pt_br_accents": true
+  },
+  {
+    "family": "Silken",
+    "file": "silken/Silken-Regular.ttf",
+    "weight": "400",
+    "style": "normal",
+    "category": "display",
+    "note": null,
+    "pt_br_accents": true
+  },
+  {
+    "family": "Sunny Side",
+    "file": "sunny-side/SunnySide-Regular.ttf",
+    "weight": "400",
+    "style": "normal",
+    "category": "display",
+    "note": null,
+    "pt_br_accents": true
+  },
+  {
+    "family": "JFFF Thornrose",
+    "file": "thornrose/JFFFThornrose-Regular.ttf",
+    "weight": "400",
+    "style": "normal",
+    "category": "display",
+    "note": "Sem ¿",
+    "pt_br_accents": true
+  },
+  {
+    "family": "Valcrest",
+    "file": "valcrest/Valcrest-Regular.ttf",
+    "weight": "400",
+    "style": "normal",
+    "category": "display",
+    "note": null,
+    "pt_br_accents": true
+  },
+  {
+    "family": "Vellune",
+    "file": "vellune/Vellune-Black.ttf",
+    "weight": "900",
+    "style": "normal",
+    "category": "display",
+    "note": null,
+    "pt_br_accents": true
+  }
+]
