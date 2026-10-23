@@ -1,5 +1,5 @@
 {
-  "permissions": {
+  "permissions": {Bash(node /tmp/claude-0/pw/login1.js:*)
     "allow": [Bash(npm ci:*)
 Bash(npx paper-remote-mcp:*)
 Bash(node /home/user/ext/paper-remote-mcp/src/cli.js:*)
