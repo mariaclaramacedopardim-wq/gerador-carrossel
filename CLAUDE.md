@@ -13,3 +13,10 @@ Em toda tarefa de design de imagens ou edição de vídeo, antes de gastar token
 3. Só depois produza o resultado final (render completo, exportações, masterização). Se o usuário mudar a direção visual, gere novos quadros e peça aprovação de novo.
 
 Correções técnicas (bug, tipo, loudness) não exigem nova aprovação.
+
+## B-rolls do Pexels (obrigatório quando aplicável)
+
+Em edições de vídeo que usem imagens de apoio (b-roll), use como fonte preferencial o Pexels (vídeos, filtro vertical/portrait para Reels).
+1. Antes de buscar, teste se `pexels.com`/`api.pexels.com`/`videos.pexels.com` estão acessíveis. Se houver chave de API (`PEXELS_API_KEY`), use a API oficial de vídeos.
+2. Se o Pexels estiver bloqueado, avise o usuário logo, diga qual domínio precisa ser liberado e use Pixabay (via conector Orshot) como alternativa, dizendo que não é Pexels.
+3. Registre no relatório, para cada clipe: fonte, autor, ID e licença. Siga a regra de aprovação visual (quadros-chave antes da produção final).
