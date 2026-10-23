@@ -1,0 +1,75 @@
+name: TikTok - publicar vídeo aprovado
+
+# Roda a cada 30 min. O script decide se é hora de postar (horários sorteados por dia) e escolhe o
+# próximo vídeo da pasta "Aprovados" do Drive. Por padrão roda em SIMULAÇÃO: nada é enviado ao TikTok.
+#   Modo real:        Settings > Secrets and variables > Actions > Variables: TIKTOK_MODO = real
+#   Posts públicos:   Variables: TIKTOK_PUBLICO = 1  (só depois da auditoria do app no TikTok)
+#   Posts por dia:    Variables: TIKTOK_POSTS_POR_DIA = 1, 2 ou 3
+on:
+  schedule:
+    - cron: "7,37 * * * *"
+  workflow_dispatch:
+    inputs:
+      modo:
+        description: "simulacao não envia nada; real publica de verdade"
+        type: choice
+        options: [simulacao, real]
+        default: simulacao
+
+permissions:
+  contents: write   # só para gravar o estado na branch tiktok-estado
+
+concurrency:
+  group: tiktok-publicar
+  cancel-in-progress: false
+
+jobs:
+  publicar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    env:
+      TIKTOK_MODO: ${{ github.event_name == 'workflow_dispatch' && inputs.modo || vars.TIKTOK_MODO || 'simulacao' }}
+      TIKTOK_PUBLICO: ${{ vars.TIKTOK_PUBLICO || '0' }}
+      TIKTOK_POSTS_POR_DIA: ${{ vars.TIKTOK_POSTS_POR_DIA || '1' }}
+      GITHUB_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Baixar o estado (branch tiktok-estado)
+        run: |
+          mkdir _estado
+          git -C _estado init -q -b tiktok-estado
+          git -C _estado remote add origin "https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
+          if git -C _estado fetch -q --depth=1 origin tiktok-estado 2>/dev/null; then
+            git -C _estado reset -q --hard FETCH_HEAD
+          fi
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: publicador_tiktok/requirements.txt
+
+      - run: pip install -r publicador_tiktok/requirements.txt
+
+      - name: Publicar
+        env:
+          GDRIVE_SA_KEY: ${{ secrets.GDRIVE_SA_KEY }}
+          GDRIVE_FOLDER_ID: ${{ secrets.GDRIVE_FOLDER_ID }}
+          GDRIVE_PUBLICADOS_FOLDER_ID: ${{ secrets.GDRIVE_PUBLICADOS_FOLDER_ID }}
+          TIKTOK_CLIENT_KEY: ${{ secrets.TIKTOK_CLIENT_KEY }}
+          TIKTOK_CLIENT_SECRET: ${{ secrets.TIKTOK_CLIENT_SECRET }}
+          TIKTOK_REFRESH_TOKEN: ${{ secrets.TIKTOK_REFRESH_TOKEN }}
+          GH_SECRETS_PAT: ${{ secrets.GH_SECRETS_PAT }}
+        run: python -m publicador_tiktok publicar --estado _estado/estado.json
+
+      - name: Gravar o estado
+        if: always()
+        run: |
+          cd _estado
+          [ -f estado.json ] || exit 0
+          git add estado.json
+          if git diff --cached --quiet; then exit 0; fi
+          git -c user.name="publicador-tiktok" -c user.email="publicador-tiktok@users.noreply.github.com" \
+            commit -q -m "estado: $(date -u +%Y-%m-%dT%H:%M:%SZ)"
+          git push -q origin HEAD:tiktok-estado

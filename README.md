@@ -19,3 +19,9 @@ Interface web para enviar clipes brutos pelo Safari do iPad, gerar um plano de e
 
 No Codespaces: **☰ > Terminal > Run Task... > Reels: abrir estúdio**, depois abra a porta 8000 na aba **PORTAS**.
 Passo a passo, limitações e opções em [estudio_reels/README.md](estudio_reels/README.md).
+
+## Publicador do TikTok (automático)
+
+Publica de 1 a 3 vídeos por dia no TikTok a partir de uma pasta *Aprovados* do Google Drive, usando a API oficial e o GitHub
+Actions (não precisa do Codespace aberto). Fica em `publicador_tiktok/`. Detalhes e passo a passo em
+[publicador_tiktok/README.md](publicador_tiktok/README.md).

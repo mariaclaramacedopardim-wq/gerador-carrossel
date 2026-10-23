@@ -1,0 +1,5 @@
+# Dependências do publicador do TikTok (rodam no GitHub Actions, não no Estúdio de Reels)
+requests>=2.31
+google-auth>=2.29
+pynacl>=1.5
+tzdata

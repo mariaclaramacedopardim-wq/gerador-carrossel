@@ -6,3 +6,7 @@ __pycache__/
 .pytest_cache/
 .env
 .venv-reels/
+
+# Publicador do TikTok: estado local e token temporário
+_estado/
+.tiktok_refresh_token
