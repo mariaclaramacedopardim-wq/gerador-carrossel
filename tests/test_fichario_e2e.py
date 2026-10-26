@@ -8,6 +8,7 @@ import http.server
 import json
 import re
 import shutil
+from datetime import date, timedelta
 import threading
 from pathlib import Path
 
@@ -46,6 +47,13 @@ def servidor():
 def test_fluxo_completo(servidor, tmp_path):
     arquivo = tmp_path / "backup.json"
     arquivo.write_text(json.dumps(BACKUP), encoding="utf-8")
+    futuro = date.today() + timedelta(days=10)
+    rotina = tmp_path / "rotina.json"
+    rotina.write_text(json.dumps({
+        "app": "fichario", "tipo": "rotina", "versao": 1, "remover": ["rev"],
+        "itens": [{"id": "mr-sono", "days": [0, 1, 2, 3, 4, 5, 6], "time": "21:00", "kind": "event", "tag": "", "text": "dormir"}],
+        "eventos": {futuro.strftime("%Y-%m"): {str(futuro.day): "evento de teste"}},
+    }), encoding="utf-8")
     with playwright.sync_playwright() as p:
         nav = p.chromium.launch(executable_path=CHROMIUM, args=["--no-sandbox"])
         ctx = nav.new_context(viewport={"width": 430, "height": 900}, accept_downloads=True, locale="pt-BR", timezone_id="America/Belem")
@@ -102,8 +110,17 @@ def test_fluxo_completo(servidor, tmp_path):
         pg.click("[data-act=ritualDone]")
         assert pg.input_value("#wp0") == "prioridade teste"
 
-        # lembretes .ics: no máximo 5 alarmes por dia
+        # importar rotina (junta à atual, sem apagar o resto)
         pg.click("#dataBtn")
+        with pg.expect_file_chooser() as fc2:
+            pg.click("[data-act=routinePick]")
+        fc2.value.set_files(str(rotina))
+        pg.wait_for_function("JSON.stringify(localStorage).includes('mr-sono')")
+        assert pg.evaluate("localStorage.getItem('fichario:days/2026-10-13')") is not None
+        pg.evaluate("document.getElementById('panel').hidden=true; document.getElementById('panel').innerHTML=''")
+        pg.evaluate("document.querySelector('#dataBtn').click()")
+
+        # lembretes .ics: no máximo 5 alarmes por dia
         with pg.expect_download() as dl:
             pg.click("[data-act=icsExport]")
         ics = Path(dl.value.path()).read_bytes().decode("utf-8")
@@ -111,9 +128,12 @@ def test_fluxo_completo(servidor, tmp_path):
         assert all(len(l.encode()) <= 75 for l in ics.split("\r\n"))
         por_dia = {}
         for ev in re.sub(r"\r\n ", "", ics).split("BEGIN:VEVENT")[1:]:
-            dia = re.search(r"DTSTART:(\d{8})", ev).group(1)
+            dia = re.search(r"DTSTART(?:;VALUE=DATE)?:(\d{8})", ev).group(1)
             por_dia[dia] = por_dia.get(dia, 0) + ev.count("BEGIN:VALARM")
         assert max(por_dia.values()) <= 5
+        assert len(por_dia) >= 55  # 8 semanas
+        assert "hora de desacelerar: dormir às 21:00" in re.sub(r"\r\n ", "", ics)
+        assert "SUMMARY:evento de teste" in ics and "DTSTART;VALUE=DATE:" + futuro.strftime("%Y%m%d") in ics
 
         # backup exportado
         with pg.expect_download() as dl2:
