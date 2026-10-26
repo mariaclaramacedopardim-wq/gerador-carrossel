@@ -230,6 +230,7 @@ input::placeholder,textarea::placeholder{color:#BFA9A9}
 <div id="panel" class="sheet-panel" hidden></div>
 <input type="file" id="filePick" accept="image/*" hidden>
 <input type="file" id="restorePick" accept="application/json,.json" hidden>
+<input type="file" id="routinePick" accept="application/json,.json" hidden>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
 <script>
@@ -950,6 +951,7 @@ document.addEventListener("click",e=>{
   case "backupExport": exportAll();break;
   case "backupPick": $("#restorePick").click();break;
   case "icsExport": exportICS();break;
+  case "routinePick": $("#routinePick").click();break;
   case "vbDel": {const id=ds.id;mut("years/"+S.date.slice(0,4),b=>{b.images=b.images.filter(x=>x!==id)});if(assets)assets.delete(id).catch(()=>{});break}
   }
 });
@@ -1090,7 +1092,9 @@ function icsAlarms(d,ents,leve){
     else if(e.tag==="treino")cand.push({p:2,id:e.rid||e.id,before:15,msg:e.text+" em 15 minutos"});
     else if(e.tag==="estudo"||/^(estudo|cirurgia ·)/i.test(e.text))cand.push({p:3,id:e.rid||e.id,before:0,msg:"hora de estudar: "+e.text});
   });
-  const eve=!leve&&entriesFor(addDays(d,1)).find(e=>e.tag==="treino"&&e.time&&toMin(e.time)<7*60);
+  const sono=ents.find(e=>e.time&&(e.rid==="sono"||/^dormir/i.test(e.text)));
+  if(sono&&!leve)cand.push({p:4,id:sono.rid||sono.id,before:30,msg:"hora de desacelerar: dormir às "+sono.time});
+  const eve=!sono&&!leve&&entriesFor(addDays(d,1)).find(e=>e.tag==="treino"&&e.time&&toMin(e.time)<7*60);
   if(eve)cand.push({p:4,id:"eve",before:0,msg:"hora de desacelerar para dormir (treino amanhã às "+eve.time+")",synth:true});
   const keep=cand.sort((a,b)=>a.p-b.p||0).slice(0,5),map={};keep.forEach(k=>map[k.id]=k);return map;
 }
@@ -1099,7 +1103,9 @@ function buildICS(dias){
   const stamp=new Date().toISOString().replace(/[-:]/g,"").replace(/\.\d+Z$/,"Z"),start=TODAY();let n=0;
   const alarm=(a)=>["BEGIN:VALARM","ACTION:DISPLAY","DESCRIPTION:"+icsEsc(a.msg),"TRIGGER:"+(a.before?"-PT"+a.before+"M":"PT0S"),"END:VALARM"];
   for(let i=0;i<dias;i++){
-    const d=addDays(start,i);watch(dayPath(d));watch(dayPath(addDays(d,1)));
+    const d=addDays(start,i);watch(dayPath(d));watch(dayPath(addDays(d,1)));watch(monthPath(d));
+    const mev=get(monthPath(d)).events||{},nome=mev[String(+d.slice(8))];
+    if(nome){n++;L.push("BEGIN:VEVENT","UID:"+d+"-mes@fichario","DTSTAMP:"+stamp,"DTSTART;VALUE=DATE:"+d.replace(/-/g,""),"DTEND;VALUE=DATE:"+addDays(d,1).replace(/-/g,""),"SUMMARY:"+icsEsc(nome),"END:VEVENT")}
     const day=get(dayPath(d)),ents=entriesFor(d).filter(e=>e.time),al=icsAlarms(d,ents,!!day.leve);
     ents.forEach(e=>{const id=e.rid||e.id,a=al[id];n++;
       L.push("BEGIN:VEVENT","UID:"+d+"-"+id+"@fichario","DTSTAMP:"+stamp,"DTSTART:"+icsDT(d,e.time),"DTEND:"+icsDT(d,e.end||icsPlus(e.time,30)),"SUMMARY:"+icsEsc(e.text));
@@ -1110,7 +1116,20 @@ function buildICS(dias){
 }
 async function exportICS(){
   watch("settings/routine");watch("estudos/main");
-  const r=buildICS(28);await saveFile("fichario-lembretes.ics",r.text);toast(r.n+" compromissos na Agenda. Toque no arquivo para adicionar.");
+  const r=buildICS(56);await saveFile("fichario-lembretes.ics",r.text);metaSet({lastIcs:TODAY()});toast(r.n+" compromissos na Agenda. Toque no arquivo para adicionar.");if(S.panel==="data")openData();
+}
+
+/* importar rotina (arquivo .json): junta à rotina atual, sem mexer no resto dos dados */
+async function importRoutine(file){
+  let o;try{o=JSON.parse(await file.text())}catch(e){toast("Esse arquivo não é uma rotina do Fichário.");return}
+  const ok=it=>it&&typeof it.id==="string"&&typeof it.text==="string"&&Array.isArray(it.days)&&(!it.time||/^\d\d:\d\d$/.test(it.time));
+  if(!o||o.app!=="fichario"||o.tipo!=="rotina"||!Array.isArray(o.itens)||!o.itens.every(ok)){toast("Esse arquivo não é uma rotina do Fichário.");return}
+  const rem=Array.isArray(o.remover)?o.remover:[],ev=o.eventos&&typeof o.eventos==="object"?o.eventos:{};
+  for(const ym in ev){if(!/^\d{4}-\d{2}$/.test(ym)||typeof ev[ym]!=="object"||Object.entries(ev[ym]).some(([k,v])=>!/^\d{1,2}$/.test(k)||typeof v!=="string")){toast("Esse arquivo não é uma rotina do Fichário.");return}}
+  if(!confirm("Adicionar "+o.itens.length+" itens à sua rotina"+(rem.length?" e substituir "+rem.length+" antigos":"")+"? O resto dos seus dados não muda."))return;
+  mut("settings/routine",b=>{const ids=new Set(o.itens.map(i=>i.id));b.items=b.items.filter(i=>!rem.includes(i.id)&&!ids.has(i.id)).concat(o.itens.map(i=>({kind:"task",tag:"",...i})))});
+  Object.keys(ev).forEach(ym=>{watch("months/"+ym);mut("months/"+ym,b=>{b.events={...(b.events||{}),...ev[ym]}})});
+  toast("Rotina atualizada");if(S.panel==="data")openData();
 }
 
 /* painel "dados" */
@@ -1120,7 +1139,8 @@ function openData(){
    '<p style="margin:0;color:#5A4547;line-height:1.5">Seus dados ficam só neste aparelho. Não há conta, login nem nuvem. Por isso o <b>backup</b> é a sua segurança se o celular for trocado ou o Safari limpar os dados do site.</p>'+
    '<div class="card c-oat"><span class="lb">backup</span><p style="margin:6px 0 10px;font-size:13px">'+(m.lastBackup?"Último backup: "+parse(m.lastBackup).getDate()+" de "+MESES[parse(m.lastBackup).getMonth()]+".":"Você ainda não fez nenhum backup.")+' Salve o arquivo no iCloud Drive (app Arquivos).</p>'+
    '<div class="row" style="flex-wrap:wrap"><button class="btn b-wine" data-act="backupExport">salvar backup</button><button class="btn b-line" data-act="backupPick">restaurar backup</button></div></div>'+
-   '<div class="card c-rose"><span class="lb" style="color:#5a3a40">lembretes (máx. 5 por dia)</span><p style="margin:6px 0 10px;font-size:13px;line-height:1.5">Gera as próximas 4 semanas na Agenda do iPhone, com alarmes para medicação, treino, estudo, hora de desacelerar e revisão do dia. Crie antes um calendário chamado “Fichário”, para escolher ao adicionar. Refaça uma vez por mês: os compromissos já adicionados se atualizam sozinhos.</p><button class="btn b-wine" data-act="icsExport">gerar lembretes (.ics)</button></div>'+
+   '<div class="card c-rose"><span class="lb" style="color:#5a3a40">agenda do iPhone (máx. 5 alarmes por dia)</span><p style="margin:6px 0 10px;font-size:13px;line-height:1.5">Leva as próximas 8 semanas da sua rotina, dos compromissos e dos eventos do mês para a Agenda, com alarmes para medicação, treino, estudo, hora de dormir e revisão do dia. Crie antes um calendário chamado “Fichário”. O iPhone não lê o site sozinho: para atualizar, apague o calendário “Fichário”, crie outro e gere de novo.'+(m.lastIcs?" Última vez: "+parse(m.lastIcs).getDate()+" de "+MESES[parse(m.lastIcs).getMonth()]+".":"")+'</p><button class="btn b-wine" data-act="icsExport">gerar para a Agenda (.ics)</button></div>'+
+   '<div class="card c-white"><span class="lb">rotina</span><p style="margin:6px 0 10px;font-size:13px;line-height:1.5">Tem um arquivo de rotina (.json)? Ele entra na sua rotina sem apagar diário, treinos nem o resto.</p><button class="btn b-line" data-act="routinePick">importar rotina</button></div>'+
    '<div class="card c-white"><span class="lb">instalar no iPhone</span><p style="margin:6px 0 0;font-size:13px;line-height:1.5">'+(standalone?"Já está instalado. ":"Abra este endereço no Safari, toque em Compartilhar e em “Adicionar à Tela de Início”. ")+(m.persist?"O iPhone marcou os dados como protegidos.":"Instalado na tela inicial, o iPhone não apaga os dados por falta de uso.")+'</p></div>');
 }
 
@@ -1177,9 +1197,11 @@ function pwaInit(){
   if("serviceWorker" in navigator&&location.protocol!=="file:")navigator.serviceWorker.register("sw.js").catch(()=>{});
   if(navigator.storage&&navigator.storage.persist)navigator.storage.persist().then(ok=>metaSet({persist:!!ok})).catch(()=>{});
   setTimeout(()=>{const m=metaGet(),tem=Object.keys(localStorage).some(k=>k.startsWith(LS+"days/"));
-    if(tem&&(!m.lastBackup||diffDays(m.lastBackup,TODAY())>=14))toast("Faz tempo sem backup. Abra “dados” e salve um.")},3500);
+    if(tem&&(!m.lastBackup||diffDays(m.lastBackup,TODAY())>=14))toast("Faz tempo sem backup. Abra “dados” e salve um.");
+    else if(m.lastIcs&&diffDays(m.lastIcs,TODAY())>=42)toast("Sua Agenda está acabando. Abra “dados” e gere de novo.")},3500);
 }
 $("#dataBtn").onclick=openData;
+$("#routinePick").addEventListener("change",e=>{const f=e.target.files&&e.target.files[0];e.target.value="";if(f)importRoutine(f)});
 $("#restorePick").addEventListener("change",e=>{const f=e.target.files&&e.target.files[0];e.target.value="";if(f)importAll(f)});
 
 
