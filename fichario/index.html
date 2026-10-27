@@ -10,7 +10,7 @@
 <link rel="icon" type="image/png" href="icons/icon-192.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&family=Nothing+You+Could+Do&family=Pinyon+Script&family=Playfair+Display:ital,wght@0,400..700;1,400..700&family=Courier+Prime:wght@400;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&family=Pinyon+Script&family=Playfair+Display:ital,wght@0,400..700;1,400..700&family=Courier+Prime:wght@400;700&family=Inter:wght@300&display=swap">
 </head><body>
 <style>
 /* Layout: an open ring binder on a pink cover — two pages + gold mechanism on wide screens, one page + side tabs on phone */
@@ -22,7 +22,7 @@
   --f-script:'Pinyon Script','Snell Roundhand','Apple Chancery',cursive;
   --f-serif:'Playfair Display','Didot','Georgia',serif;
   --f-sans:'Instrument Sans',-apple-system,'Helvetica Neue',Arial,sans-serif;
-  --f-hand:'Nothing You Could Do','Bradley Hand','Segoe Print',cursive;
+  --f-hand:'Inter','Helvetica Neue',-apple-system,'Segoe UI',Arial,sans-serif;
   color-scheme:light;
 }
 *{box-sizing:border-box}
@@ -221,8 +221,8 @@ body,body.leve{background:var(--paper)}
 .tl{border-left:1.5px solid var(--wine);padding-left:14px}
 .tl-row{display:grid;grid-template-columns:54px 30px minmax(0,1fr) auto;align-items:center;gap:8px;padding:12px 0;border-bottom:1px solid var(--line);min-height:58px}
 .tl-row .tm{font-size:15px}
-.tl-row .sym{border:0;background:none;padding:0;width:30px;font-family:var(--f-hand);font-size:28px;line-height:1;color:var(--wine)}
-.tl-row .txt{font-family:var(--f-hand);font-size:25px;line-height:1.15;overflow-wrap:anywhere}
+.tl-row .sym{border:0;background:none;padding:0;width:30px;font-family:var(--f-hand);font-size:24px;line-height:1;color:var(--wine)}
+.tl-row .txt{font-family:var(--f-hand);font-size:19px;line-height:1.25;overflow-wrap:anywhere}
 .tl-row .x{opacity:.35}
 .tl-row.now{background:linear-gradient(90deg,rgba(249,203,214,.6),transparent);border-radius:8px;padding-left:6px;margin-left:-6px}
 .tl-row.done .txt{color:var(--done);text-decoration:line-through;text-decoration-color:var(--wine)}
@@ -246,6 +246,20 @@ body,body.leve{background:var(--paper)}
 .dock .dk i{width:46px;height:46px;border-radius:50%;background:var(--rose);display:flex;align-items:center;justify-content:center;font-style:normal;font-size:22px}
 .dock .dk.on i{box-shadow:0 0 0 2.5px var(--wine)}
 .dock .dk span{font-family:var(--f-type);font-size:11px;letter-spacing:.08em}
+
+/* letra simples e fina no lugar da manuscrita */
+:root{--f-hand:'Inter','Helvetica Neue',-apple-system,'Segoe UI',Arial,sans-serif}
+.hw,.item .txt,.tl-row .txt,.tl-row .sym,.log .sym,.fnote,.in,.add input,.sheet textarea,.cal .note,.lines input,.strip .t,.msg.me,.board textarea,.empty,.track .sq{font-weight:300}
+.item .txt{font-size:15.5px;line-height:1.4}
+.in,.add input:not([type=checkbox]){font-size:15px}
+.sheet textarea{font-size:15px}
+.cal .note{font-size:11px}
+.fnote{font-size:14px}
+.lines input{font-size:14px}
+.strip .t{font-size:11px}
+.msg.me{font-size:14px}
+.board textarea{font-size:13px}
+.empty{font-size:14px}
 </style>
 
 <div class="desk">
@@ -442,7 +456,7 @@ function viewHojeOld(){
 
 function ideasCard(){
   const ns=jNotes().filter(n=>n.today).sort((a,b)=>(b.created||"").localeCompare(a.created||"")).slice(0,6);
-  return '<div class="list">'+(ns.map(n=>'<div class="item"><span style="color:var(--wine)">✦</span><button class="txt" data-act="jGo" data-id="'+n.id+'" style="border:0;background:none;text-align:left;padding:0;cursor:pointer">'+esc(n.title)+'</button><button class="x" data-act="ideaHide" data-id="'+n.id+'" aria-label="tirar do Hoje (continua no jardim)">×</button></div>').join("")||'<p class="empty">Jogue aqui o que passar pela cabeça. Tudo vai para o Jardim de Ideias.</p>')+'</div><form class="add" data-add="idea"><input id="add-idea" name="t" placeholder="nova ideia…" autocomplete="off" aria-label="nova ideia"><button class="btn b-line" style="height:28px;padding:0 12px" aria-label="adicionar">+</button></form><button class="pill sm" data-act="view" data-v="jardim" style="margin-top:8px">abrir o jardim →</button>';
+  return '<div class="list">'+(ns.map(n=>'<div class="item"><span style="color:var(--wine)">✦</span><button class="txt" data-act="jGo" data-id="'+n.id+'" style="border:0;background:none;text-align:left;padding:0;cursor:pointer">'+esc(n.title)+'</button><button class="x" data-act="ideaHide" data-id="'+n.id+'" aria-label="tirar do Hoje (continua no jardim)">×</button></div>').join("")||'<p class="empty">Jogue aqui o que passar pela cabeça. Tudo vai para o Jardim de Ideias.</p>')+'</div><form class="add" data-add="idea"><input id="add-idea" name="t" placeholder="nova ideia…" autocomplete="off" aria-label="nova ideia"><button class="btn b-line" style="height:28px;padding:0 12px" aria-label="adicionar">+</button></form>';
 }
 /* ================= DIA LEVE ================= */
 function viewLeve(){
@@ -526,7 +540,7 @@ function dialSVG(m,ym){
   let s='<svg class="dial" viewBox="0 0 560 500" role="img" aria-label="rotina do mês">';
   H.forEach((name,hi)=>{const ri=r0+(H.length-1-hi)*rw, ro=ri+rw;
     for(let d=0;d<n;d++){const on=!!m.marks[hi+"-"+(d+1)];s+='<path class="seg" data-act="mark" data-k="'+hi+'-'+(d+1)+'" d="'+arc(cx,cy,ri,ro,d*seg,(d+1)*seg)+'" fill="'+(on?cols[hi%5]:"#FFFBF9")+'" stroke="#7A6A68" stroke-width=".7"><title>'+esc(name)+' · dia '+(d+1)+'</title></path>'}
-    s+='<line x1="40" y1="'+(cy-ro)+'" x2="'+cx+'" y2="'+(cy-ro)+'" stroke="#7A6A68" stroke-width=".7"/><text x="44" y="'+(cy-ri-rw/2+4)+'" font-family="Nothing You Could Do, cursive" font-size="13" fill="'+tcol[hi%5]+'">'+esc(name)+'</text>'});
+    s+='<line x1="40" y1="'+(cy-ro)+'" x2="'+cx+'" y2="'+(cy-ro)+'" stroke="#7A6A68" stroke-width=".7"/><text x="44" y="'+(cy-ri-rw/2+4)+'" font-family="Inter, sans-serif" font-weight="300" font-size="13" fill="'+tcol[hi%5]+'">'+esc(name)+'</text>'});
   s+='<line x1="40" y1="'+(cy-r0)+'" x2="'+cx+'" y2="'+(cy-r0)+'" stroke="#7A6A68" stroke-width=".7"/>';
   const pt=(r,a)=>{a=(a-90)*Math.PI/180;return[cx+r*Math.cos(a),cy+r*Math.sin(a)]};
   for(let d=0;d<n;d++){const a=(d+.5)*seg,[tx,ty]=pt(r0+H.length*rw+14,a);s+='<text x="'+tx.toFixed(1)+'" y="'+ty.toFixed(1)+'" text-anchor="middle" dominant-baseline="middle" font-family="Instrument Sans, sans-serif" font-size="10.5" font-weight="'+(d+1===tday?700:400)+'" fill="'+(d+1===tday?"#9E182B":"#3A2E2E")+'" transform="rotate('+a.toFixed(1)+' '+tx.toFixed(1)+' '+ty.toFixed(1)+')">'+(d+1)+'</text>'}
@@ -897,7 +911,7 @@ function render(){
   $("#L").innerHTML=pair[0]; $("#R").innerHTML=pair[1];
   const tabOn=(v==="revisao"||v==="extras")?"hoje":v==="corpoFull"?"corpo":v==="diario"?"eu":v;
   $("#tabs").innerHTML=TABS.map(t=>'<button class="tab t-'+t+(t===tabOn?" on":"")+'" data-act="view" data-v="'+t+'" aria-current="'+(t===tabOn)+'">'+t+'</button>').join("");
-  $("#subnav").innerHTML=v==="planner"?["semana","mes","ano"].map(s=>'<button class="pill'+(S.sub===s?" on":"")+'" data-act="sub" data-v="'+s+'">'+(s==="mes"?"mês":s)+'</button>').join(""):(v==="revisao"||v==="extras"?'<button class="pill" data-act="view" data-v="hoje">← hoje</button>':v==="corpoFull"?'<button class="pill" data-act="view" data-v="corpo">← corpo</button>':v==="diario"?'<button class="pill" data-act="view" data-v="eu">← eu</button>':'');
+  $("#subnav").innerHTML=v==="planner"?["semana","mes","ano"].map(s=>'<button class="pill'+(S.sub===s?" on":"")+'" data-act="sub" data-v="'+s+'">'+(s==="mes"?"mês":s)+'</button>').join(""):(v==="revisao"||v==="extras"?'<button class="pill" data-act="view" data-v="hoje">← hoje</button>':v==="corpoFull"?'<button class="pill" data-act="view" data-v="corpo">← corpo</button>':v==="diario"?'<button class="pill" data-act="view" data-v="revisao">← revisão</button>':'');
   const dt=parse(S.date);
   $("#datecap").textContent=v==="planner"&&S.sub==="ano"?String(dt.getFullYear()):v==="planner"&&S.sub==="mes"?MESES[dt.getMonth()]+" "+dt.getFullYear():DABR[dt.getDay()]+" · "+pad(dt.getDate())+"."+pad(dt.getMonth()+1)+"."+String(dt.getFullYear()).slice(2);
   $("#leveBtn").classList.toggle("on",!!get(dayPath(S.date)).leve);
@@ -1325,13 +1339,13 @@ function openMais(){
   S.panel="mais";const leve=get(dayPath(S.date)).leve;
   const b=(act,v,lab)=>'<button class="btn b-line" style="justify-content:center;height:auto;min-height:42px;padding:8px 12px;white-space:normal;text-align:center" data-act="'+act+'"'+(v?' data-v="'+v+'"':'')+'>'+lab+'</button>';
   panel('<div class="between"><span class="script" style="font-size:40px">mais</span><button class="pill" data-act="closePanel">fechar</button></div><div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">'+
-    b("maisGo","eu","eu · humor e cuidados")+b("maisGo","consumir","consumir")+b("maisGo","jardim","jardim de ideias")+b("maisGo","extras","a fazer · ideias")+
-    b("maisGo","revisao","revisão do dia")+b("maisLeve","",leve?"voltar ao dia normal":"dia leve")+b("maisRoutine","","rotina")+b("maisData","","dados · backup · agenda")+'</div>');
+    b("maisGo","extras","a fazer · ideias · amanhã")+b("maisGo","revisao","revisão do dia")+
+    b("maisLeve","",leve?"voltar ao dia normal":"dia leve")+b("maisRoutine","","rotina")+b("maisData","","dados · backup · agenda")+'</div>');
 }
 function renderDock(){
   const el=$("#dock"),v=S.view;
   if(v==="hoje"){el.hidden=true;el.innerHTML="";return}
-  const cur=v==="corpoFull"?"corpo":(v==="revisao"||v==="extras")?"hoje":v==="diario"?"eu":v;
+  const cur=v==="corpoFull"?"corpo":(v==="revisao"||v==="extras"||v==="diario")?"hoje":v;
   const b=(vv,emo,lab)=>'<button class="dk'+(cur===vv?" on":"")+'" data-act="view" data-v="'+vv+'" aria-label="'+lab+'"><i>'+emo+'</i><span>'+lab+'</span></button>';
   el.hidden=false;
   el.innerHTML=b("hoje","☀️","hoje")+b("planner","📆","planner")+b("estudos","📚","estudo")+b("corpo","🏃‍♀️","corpo")+'<button class="dk" data-act="mais" aria-label="mais"><i>⋯</i><span>mais</span></button>';

@@ -1,6 +1,6 @@
 /* Service worker do Fichário: deixa o app abrir sem internet.
    Os dados do usuário ficam no aparelho (localStorage e IndexedDB), nunca aqui. */
-const VERSAO = "fichario-v3";
+const VERSAO = "fichario-v4";
 const BASE = ["./", "index.html", "manifest.webmanifest", "icons/icon-192.png", "icons/icon-512.png", "icons/apple-touch-icon.png"];
 
 self.addEventListener("install", e => {
