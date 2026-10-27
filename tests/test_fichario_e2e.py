@@ -44,6 +44,11 @@ def servidor():
     srv.shutdown()
 
 
+def abrir_dados(pg):
+    pg.click("#maisBtn")
+    pg.click("[data-act=maisData]")
+
+
 def test_fluxo_completo(servidor, tmp_path):
     arquivo = tmp_path / "backup.json"
     arquivo.write_text(json.dumps(BACKUP), encoding="utf-8")
@@ -63,15 +68,15 @@ def test_fluxo_completo(servidor, tmp_path):
         pg.on("dialog", lambda d: d.accept())
         pg.route("**/fonts.g*/**", lambda r: r.abort())
         pg.goto(servidor)
-        pg.wait_for_selector(".logo")
+        pg.wait_for_selector("#maisBtn")
 
         # restaurar backup
-        pg.click("#dataBtn")
+        abrir_dados(pg)
         with pg.expect_file_chooser() as fc:
             pg.click("text=restaurar backup")
         fc.value.set_files(str(arquivo))
         pg.wait_for_load_state("load")
-        pg.wait_for_selector(".logo")
+        pg.wait_for_selector("#maisBtn")
         pg.wait_for_function("localStorage.getItem('fichario:days/2026-10-13')")
         pg.wait_for_function("document.querySelector('#L').innerText.includes('medicação')")
 
@@ -83,7 +88,11 @@ def test_fluxo_completo(servidor, tmp_path):
         assert "medicação de hoje" in pg.inner_text("#L")
 
         # corpo sem prova, marcar e remover
-        pg.click("button.tab.t-corpo")
+        pg.click("button.circ[data-v=corpo]")
+        pg.fill("#run-km", "7.5"); pg.fill("#run-time", "45:00"); pg.fill("#run-feel", "leve")
+        pg.click("form[data-add=run] button")
+        assert "7.5 km" in pg.inner_text("#L")
+        pg.click("[data-v=corpoFull]")
         assert "sem prova marcada" in pg.inner_text("#L")
         pg.fill("#race-name", "10 km"); pg.fill("#race-date", "2099-12-06"); pg.fill("#race-dist", "10 km")
         pg.click("form[data-add=race] button")
@@ -92,7 +101,7 @@ def test_fluxo_completo(servidor, tmp_path):
         assert "sem prova marcada" in pg.inner_text("#L")
 
         # ritual semanal
-        pg.click("button.tab.t-planner")
+        pg.click(".dk[data-v=planner]")
         pg.click("[data-act=ritual]")
         pg.fill("#rt-text", "compromisso teste"); pg.fill("#rt-time", "08:00")
         pg.press("#rt-text", "Enter")
@@ -111,14 +120,14 @@ def test_fluxo_completo(servidor, tmp_path):
         assert pg.input_value("#wp0") == "prioridade teste"
 
         # importar rotina (junta à atual, sem apagar o resto)
-        pg.click("#dataBtn")
+        abrir_dados(pg)
         with pg.expect_file_chooser() as fc2:
             pg.click("[data-act=routinePick]")
         fc2.value.set_files(str(rotina))
         pg.wait_for_function("JSON.stringify(localStorage).includes('mr-sono')")
         assert pg.evaluate("localStorage.getItem('fichario:days/2026-10-13')") is not None
         pg.evaluate("document.getElementById('panel').hidden=true; document.getElementById('panel').innerHTML=''")
-        pg.evaluate("document.querySelector('#dataBtn').click()")
+        abrir_dados(pg)
 
         # lembretes .ics: no máximo 5 alarmes por dia
         with pg.expect_download() as dl:
@@ -146,7 +155,7 @@ def test_fluxo_completo(servidor, tmp_path):
         pg.reload()
         ctx.set_offline(True)
         pg.reload()
-        pg.wait_for_selector(".logo", timeout=8000)
-        assert pg.inner_text(".logo") == "Fichário"
+        pg.wait_for_selector("#maisBtn", timeout=8000)
+        assert pg.title() == "Fichário" and pg.is_visible("#maisBtn")
         nav.close()
     assert not erros, erros
