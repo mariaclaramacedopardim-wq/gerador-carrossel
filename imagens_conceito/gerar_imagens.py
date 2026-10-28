@@ -27,7 +27,7 @@ CONCEITOS = {
     12: ("crescer dói, mas nenhuma planta se arrependeu de virar árvore", 0.42, 0.42),
     13: ("somos feitos de estrelas e mesmo assim eu me preocupo com o que ele pensa", 0.40, 0.42),
     14: ("ninguém avisa que crescer é se despedir de lugares que ainda moram em você", 0.45, 0.42),
-    15: ("flor que nasce no asfalto não pediu permissão", 0.42, 0.42),
+    15: ("flor nenhuma pediu permissão pra florescer em lugar nenhum", 0.42, 0.42),
     16: ("meu relacionamento mais estável é com o delivery", 0.50, 0.45),
     17: ("seja farol. não fique procurando navio", 0.45, 0.42),
     18: ("o que passou virou foto. foto a gente guarda, não mora", 0.45, 0.45),
