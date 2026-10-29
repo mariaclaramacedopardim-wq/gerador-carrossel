@@ -15,6 +15,11 @@ on:
         type: choice
         options: [simulacao, real]
         default: simulacao
+      agora:
+        description: "sim publica já o próximo vídeo da fila, sem esperar horário nem data"
+        type: choice
+        options: ["nao", "sim"]
+        default: "nao"
 
 permissions:
   contents: write   # só para gravar o estado na branch tiktok-estado
@@ -29,6 +34,7 @@ jobs:
     timeout-minutes: 25
     env:
       TIKTOK_MODO: ${{ github.event_name == 'workflow_dispatch' && inputs.modo || vars.TIKTOK_MODO || 'simulacao' }}
+      TIKTOK_AGORA: ${{ github.event_name == 'workflow_dispatch' && inputs.agora == 'sim' && '1' || '0' }}
       TIKTOK_PUBLICO: ${{ vars.TIKTOK_PUBLICO || '0' }}
       TIKTOK_POSTS_POR_DIA: ${{ vars.TIKTOK_POSTS_POR_DIA || '1' }}
       GITHUB_TOKEN: ${{ github.token }}

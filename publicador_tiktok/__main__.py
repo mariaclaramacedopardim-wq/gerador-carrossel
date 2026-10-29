@@ -54,15 +54,16 @@ def _guardar_refresh_token(novo):
 def cmd_publicar(args):
     simulacao = os.environ.get("TIKTOK_MODO", "simulacao") != "real"
     publico = os.environ.get("TIKTOK_PUBLICO", "0") == "1"
+    forcar = os.environ.get("TIKTOK_AGORA", "0") == "1"
     estado = Estado(args.estado)
     cliente = None if simulacao else _cliente_tiktok()
     agora = datetime.now(ZoneInfo(config.FUSO))
-    print(f"Modo: {'SIMULAÇÃO (nada é enviado)' if simulacao else 'REAL'} | publicação pública: {'sim' if publico else 'não (tudo privado)'}")
+    print(f"Modo: {'SIMULAÇÃO (nada é enviado)' if simulacao else 'REAL'} | publicação pública: {'sim' if publico else 'não (tudo privado)'}{' | PUBLICAR AGORA' if forcar else ''}")
     try:
         with tempfile.TemporaryDirectory() as pasta:
             resultado = executar(
                 estado=estado, drive=_drive(), tiktok=cliente, agora=agora,
-                simulacao=simulacao, publico=publico, pasta_tmp=Path(pasta),
+                simulacao=simulacao, publico=publico, pasta_tmp=Path(pasta), forcar=forcar,
             )
     except (tiktok.ErroTikTok, ErroDrive) as erro:
         estado.salvar()

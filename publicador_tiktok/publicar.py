@@ -5,6 +5,7 @@ import json
 import shutil
 import subprocess
 import time
+from datetime import timedelta
 
 from . import agenda, config, estado as est, metadados
 from .tiktok import ErroTikTok
@@ -114,7 +115,30 @@ def resolver_pendencias(estado, tiktok, log):
     return ainda_processando
 
 
-def executar(*, estado, drive, tiktok, agora, simulacao, publico, pasta_tmp, dormir=time.sleep, log=print, rng=None):
+def _escolher(prontos, agora, horario, forcar, log):
+    """Decide qual vídeo sai agora. Devolve (video, meta, horario_usado) ou None.
+
+    1. "publicar agora" (forcar): o próximo da fila, sem esperar horário nem data.
+    2. Vídeo agendado à mão (publicar_em) cuja hora já chegou: sai na primeira execução depois dela.
+    3. Horário sorteado do dia: o próximo vídeo sem publicar_em. Vídeos agendados para o futuro esperam.
+    """
+    if forcar and prontos:
+        video, meta = prontos[0]
+        return video, meta, None
+    vencidos = sorted(((m["publicar_em"], v, m) for v, m in prontos if m["publicar_em"] and m["publicar_em"] <= agora), key=lambda x: x[0])
+    if vencidos:
+        quando, video, meta = vencidos[0]
+        if agora - quando > timedelta(hours=config.TOLERANCIA_ATRASO_H):
+            log(f"::warning::Vídeo agendado para {quando:%d/%m %H:%M} está saindo com atraso.")
+        return video, meta, None
+    if horario:
+        for video, meta in prontos:
+            if not meta["publicar_em"]:
+                return video, meta, horario
+    return None
+
+
+def executar(*, estado, drive, tiktok, agora, simulacao, publico, pasta_tmp, dormir=time.sleep, log=print, rng=None, forcar=False):
     """Roda uma vez. Devolve um código curto (usado nos logs e nos testes)."""
     estado.podar_dias(agora.date())
     dia = agenda.garantir_plano_do_dia(estado, agora, rng=rng)
@@ -123,28 +147,40 @@ def executar(*, estado, drive, tiktok, agora, simulacao, publico, pasta_tmp, dor
 
     if tiktok and not simulacao and resolver_pendencias(estado, tiktok, log):
         return "aguardando"
-    if horario is None:
-        return "sem_horario"
     if dia["publicados"] >= config.LIMITE_DIARIO:
         return "limite"
 
-    fila = drive.fila()
-    candidatos = [v for v in fila if estado.pode_publicar(v["id"], v.get("md5Checksum"))]
+    candidatos = [v for v in drive.fila() if estado.pode_publicar(v["id"], v.get("md5Checksum"))]
     if not candidatos:
         log("Fila vazia: não há vídeos aprovados novos na pasta.")
         return "fila_vazia"
 
+    prontos = []
     for video in candidatos:
         try:
             meta = metadados.ler(drive.ler_texto(video["legenda_id"]) if video.get("legenda_id") else None)
         except metadados.ErroMetadados as erro:
             log(f"::warning::Vídeo pulado por problema na legenda: {erro}")
             continue
-        if simulacao:
-            log(f"[simulação] Publicaria o vídeo {video['id']} no horário {horario}; privacidade pedida: {meta['privacidade']}.")
-            return "simulado"
-        return _publicar_video(estado, drive, tiktok, video, meta, dia, horario, publico, pasta_tmp, dormir, log)
-    return "fila_vazia"
+        prontos.append((video, meta))
+
+    escolha = _escolher(prontos, agora, horario, forcar, log)
+    if escolha is None:
+        if horario is None:
+            return "sem_horario"
+        log("Fila sem vídeos para este horário (só há vídeos agendados para o futuro ou com legenda inválida).")
+        return "fila_vazia"
+    video, meta, usado = escolha
+    if simulacao:
+        quando = f" (agendado para {meta['publicar_em']:%d/%m %H:%M})" if meta["publicar_em"] else ""
+        log(f"[simulação] Publicaria o vídeo {video['id']}{quando}; privacidade pedida: {meta['privacidade']}.")
+        return "simulado"
+    return _publicar_video(estado, drive, tiktok, video, meta, dia, usado, publico, pasta_tmp, dormir, log)
+
+
+def _usar(dia, horario):
+    if horario:
+        dia["usados"].append(horario)
 
 
 def _publicar_video(estado, drive, tiktok, video, meta, dia, horario, publico, pasta_tmp, dormir, log):
@@ -170,7 +206,7 @@ def _publicar_video(estado, drive, tiktok, video, meta, dia, horario, publico, p
         status, motivo = aguardar_resultado(tiktok, publish_id, dormir)
     except ErroVideo as erro:
         estado.registrar(id_drive, md5, status=est.FALHOU, tentativas=tentativas + 1, erro="video_invalido")
-        dia["usados"].append(horario)
+        _usar(dia, horario)
         log(f"::error::Vídeo reprovado na validação: {erro}")
         return "falhou"
     except ErroTikTok as erro:
@@ -185,7 +221,7 @@ def _publicar_video(estado, drive, tiktok, video, meta, dia, horario, publico, p
             log(f"::warning::Falha transitória ({erro.codigo}); tentativa {tentativas}/{config.MAX_TENTATIVAS}.")
             return "falhou" if definitivo else "tentar_depois"
         estado.registrar(id_drive, md5, status=est.FALHOU, tentativas=tentativas + 1, erro=erro.codigo)
-        dia["usados"].append(horario)
+        _usar(dia, horario)
         log(f"::error::O TikTok recusou o vídeo ({erro.codigo}).")
         return "falhou"
     finally:
@@ -193,13 +229,13 @@ def _publicar_video(estado, drive, tiktok, video, meta, dia, horario, publico, p
 
     saiu_da_fila = _concluir(estado, id_drive, status, motivo)
     if status == "PUBLISH_COMPLETE":
-        dia["usados"].append(horario)
+        _usar(dia, horario)
         dia["publicados"] += 1
         drive.mover_para_publicados([i for i in (id_drive, video.get("legenda_id")) if i])
         log("Publicado.")
         return "publicado"
     if saiu_da_fila:
-        dia["usados"].append(horario)
+        _usar(dia, horario)
         log(f"::error::O TikTok não publicou o vídeo ({motivo or status}).")
         return "falhou"
     log(f"Status {status or 'desconhecido'}: o TikTok ainda processa; confiro na próxima execução.")

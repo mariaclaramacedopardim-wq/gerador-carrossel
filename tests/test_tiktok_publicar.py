@@ -202,3 +202,76 @@ def test_download_corrompido_nao_e_publicado(tmp_path):
     tiktok = TikTokFalso()
     resultado, estado = rodar(tmp_path, DriveFalso([video("1", md5="0" * 32)]), tiktok)
     assert resultado == "tentar_depois" and not tiktok.posts and estado.video("1")["status"] == "pendente"
+
+
+# --- agendamento à mão (publicar_em) e "publicar agora" ---------------------------------------
+def rodar_sem_horario(tmp_path, drive, tiktok, estado=None, forcar=False, agora=AGORA):
+    """Como `rodar`, mas sem nenhum horário sorteado para o dia."""
+    estado = estado or Estado(tmp_path / "e.json")
+    estado.dia(agora.date().isoformat())["horarios"] = ["23:59"]  # ainda não chegou
+    resultado = publicar.executar(
+        estado=estado, drive=drive, tiktok=tiktok, agora=agora, simulacao=False, publico=False,
+        pasta_tmp=tmp_path, dormir=lambda s: None, log=lambda *_: None, rng=random.Random(1), forcar=forcar,
+    )
+    return resultado, estado
+
+
+def legenda_em(quando):
+    return '{"publicar_em": "%s"}' % quando
+
+
+def test_video_agendado_sai_na_hora_marcada_sem_gastar_horario_sorteado(tmp_path):
+    drive = DriveFalso([video("1", legenda_id="l1", md5=None)], {"l1": legenda_em("2026-10-24 19:30")})
+    tiktok = TikTokFalso()
+    resultado, estado = rodar_sem_horario(tmp_path, drive, tiktok)
+    assert resultado == "publicado" and estado.video("1")["status"] == "publicado"
+    dia = estado.dia(AGORA.date().isoformat())
+    assert dia["usados"] == [] and dia["publicados"] == 1
+
+
+def test_video_agendado_para_o_futuro_espera_e_nao_e_pego_pelo_horario_sorteado(tmp_path):
+    drive = DriveFalso([video("1", legenda_id="l1", md5=None)], {"l1": legenda_em("2026-10-30 19:30")})
+    tiktok = TikTokFalso()
+    resultado, _ = rodar(tmp_path, drive, tiktok)  # há horário sorteado, mas o único vídeo é do futuro
+    assert resultado == "fila_vazia" and not tiktok.posts
+    resultado, _ = rodar_sem_horario(tmp_path, drive, tiktok)
+    assert resultado == "sem_horario" and not tiktok.posts
+
+
+def test_horario_sorteado_pula_o_agendado_e_usa_o_proximo_sem_data(tmp_path):
+    drive = DriveFalso(
+        [video("1", "a.mp4", legenda_id="l1", md5=None), video("2", "b.mp4", md5=None)], {"l1": legenda_em("2026-10-30 19:30")}
+    )
+    resultado, estado = rodar(tmp_path, drive, TikTokFalso())
+    assert resultado == "publicado" and estado.video("2")["status"] == "publicado" and estado.video("1") is None
+
+
+def test_agendado_vencido_tem_prioridade_sobre_o_horario_sorteado(tmp_path):
+    drive = DriveFalso(
+        [video("1", "a.mp4", md5=None), video("2", "b.mp4", legenda_id="l2", md5=None)], {"l2": legenda_em("2026-10-24 10:00")}
+    )
+    resultado, estado = rodar(tmp_path, drive, TikTokFalso())
+    assert resultado == "publicado" and estado.video("2")["status"] == "publicado"
+    assert estado.dia(AGORA.date().isoformat())["usados"] == []  # o horário sorteado continua livre
+
+
+def test_agendado_respeita_o_limite_diario(tmp_path):
+    estado = Estado(tmp_path / "e.json")
+    estado.dia(AGORA.date().isoformat())["publicados"] = 3
+    drive = DriveFalso([video("1", legenda_id="l1", md5=None)], {"l1": legenda_em("2026-10-24 10:00")})
+    resultado, _ = rodar_sem_horario(tmp_path, drive, TikTokFalso(), estado)
+    assert resultado == "limite"
+
+
+def test_publicar_agora_ignora_horario_e_data(tmp_path):
+    drive = DriveFalso([video("1", legenda_id="l1", md5=None)], {"l1": legenda_em("2026-12-31 10:00")})
+    tiktok = TikTokFalso()
+    resultado, estado = rodar_sem_horario(tmp_path, drive, tiktok, forcar=True)
+    assert resultado == "publicado" and len(tiktok.posts) == 1 and estado.video("1")["status"] == "publicado"
+
+
+def test_agendado_continua_privado_sem_auditoria(tmp_path):
+    legendas = {"l1": '{"publicar_em": "2026-10-24 10:00", "privacidade": "PUBLIC_TO_EVERYONE"}'}
+    tiktok = TikTokFalso()
+    rodar_sem_horario(tmp_path, DriveFalso([video("1", legenda_id="l1", md5=None)], legendas), tiktok)
+    assert tiktok.posts[0]["privacy_level"] == "SELF_ONLY"

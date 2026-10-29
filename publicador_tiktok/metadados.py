@@ -1,6 +1,8 @@
 """Legenda, hashtags e opções de cada vídeo, lidas de um .json ao lado do MP4 (mesmo nome base)."""
 
 import json
+from datetime import datetime
+from zoneinfo import ZoneInfo
 
 from . import config
 
@@ -22,6 +24,19 @@ def _normalizar_hashtags(valor):
         if item:
             resultado.append(item if item.startswith("#") else "#" + item)
     return resultado
+
+
+def _ler_data(valor):
+    """Data e hora do agendamento manual, no fuso configurado (Brasília por padrão)."""
+    if not valor:
+        return None
+    texto = str(valor).strip().replace("T", " ")
+    for formato in ("%Y-%m-%d %H:%M", "%Y-%m-%d %H:%M:%S", "%d/%m/%Y %H:%M"):
+        try:
+            return datetime.strptime(texto, formato).replace(tzinfo=ZoneInfo(config.FUSO))
+        except ValueError:
+            continue
+    raise ErroMetadados('"publicar_em" precisa ser data e hora, por exemplo "2026-10-30 19:30".')
 
 
 def ler(texto_json, padroes=None):
@@ -52,4 +67,5 @@ def ler(texto_json, padroes=None):
         "capa_ms": int(bruto.get("capa_ms", 1000)),
         "conteudo_de_marca": bool(bruto.get("conteudo_de_marca", False)),
         "promocao_propria": bool(bruto.get("promocao_propria", False)),
+        "publicar_em": _ler_data(bruto.get("publicar_em")),
     }

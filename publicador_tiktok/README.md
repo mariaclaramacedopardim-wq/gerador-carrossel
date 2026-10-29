@@ -27,12 +27,33 @@ Drive: pasta "Aprovados"  ->  GitHub Actions (a cada 30 min)  ->  TikTok
   }
   ```
   Todos os campos são opcionais. Sem `.json`, vale `padroes.json`. Outros campos: `duet`, `stitch`, `capa_ms`,
-  `conteudo_de_marca`, `promocao_propria`. Legenda inválida: o vídeo é pulado e aparece um aviso no log.
+  `conteudo_de_marca`, `promocao_propria` e `publicar_em` (veja "Agendar um post à mão"). Legenda inválida: o vídeo é pulado e aparece um aviso no log.
 - **Estado:** `estado.json` na branch `tiktok-estado` (pública). Guarda só IDs, checksums, datas e status. Nunca legendas,
   nomes de arquivo ou tokens.
 - **Falhas:** erro transitório (rede, instabilidade do TikTok) tenta de novo no próximo disparo, até 3 vezes. Recusa do TikTok
   (formato, duração, spam) marca o vídeo como `falhou`. Para tentar de novo, envie o arquivo outra vez. Erro de autorização ou
   de auditoria faz o workflow falhar, sem gastar o vídeo.
+
+## Agendar um post à mão
+
+Para um vídeo sair numa data e hora que você escolhe, coloque no `.json` dele (horário de Brasília):
+
+```json
+{ "legenda": "Texto do post", "publicar_em": "2026-10-30 19:30" }
+```
+
+Também vale `"30/10/2026 19:30"`. Como funciona:
+
+- O vídeo sai na **primeira execução depois** da hora marcada. Como o cron roda a cada 30 minutos e o Actions atrasa um pouco, pode sair alguns minutos depois.
+- Vídeo agendado **não gasta** os horários sorteados do dia e conta no limite de 3 posts por dia.
+- Se a hora já passou quando o vídeo chega à pasta (ou o Actions ficou parado), ele sai na próxima execução e o log avisa do atraso.
+- Vídeos **sem** `publicar_em` continuam saindo nos horários sorteados. Para postar só o que você agendou, deixe na pasta *Aprovados* apenas vídeos com `publicar_em`.
+- Um vídeo agendado para o futuro nunca é pego pelo horário sorteado.
+- Sem auditoria do app no TikTok, tudo sai privado, mesmo com data marcada.
+
+## Publicar agora
+
+*Actions > TikTok - publicar vídeo aprovado > Run workflow*, com **modo = real** e **agora = sim**: publica já o próximo vídeo da fila (ordem do nome do arquivo), sem esperar horário nem data. Respeita o limite de 3 por dia e a regra de privacidade.
 
 ## Modos
 
