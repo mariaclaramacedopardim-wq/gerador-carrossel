@@ -1,4 +1,4 @@
-<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#f4dde3"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Caderno"><link rel="icon" type="image/png" sizes="192x192" href="icon-192.png"><link rel="apple-touch-icon" href="apple-touch-icon.png"><link rel="manifest" href="manifest.webmanifest">
+<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#e6ccd4"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Caderno"><link rel="icon" type="image/png" sizes="192x192" href="icon-192.png"><link rel="apple-touch-icon" href="apple-touch-icon.png"><link rel="manifest" href="manifest.webmanifest">
 <title>Caderno da Maria</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -409,6 +409,28 @@ button.primary,.btn.primary{background:var(--accent);border-color:var(--accent);
 button.primary:hover,.btn.primary:hover{background:var(--ink);border-color:var(--ink);color:var(--sheet)}
 button.soft-btn,.btn.soft-btn{border-color:var(--accent-2);color:var(--accent)}
 input,select{border-bottom-color:var(--accent-2)}
+
+/* ajuste: rosa puxado para o vinho + papel milimetrado de volta */
+:root{
+  --desk:#e6ccd4; --sheet:#fdf8f9; --bg:#fdf8f9; --surface:#fdf8f9; --surface2:#f7ebef; --ink:#2b141c; --muted:#8a6874; --line:#ecd8de; --rule:#b9798d;
+  --accent:#7e2342; --accent-ink:#ffffff; --accent-2:#c98ea2;
+  --paper:#f6e6eb; --grid:rgba(126,35,66,.09);
+  --t1:#e3bcc8; --t2:#dcaebd; --t3:#d5a1b2; --t4:#cd93a7; --t5:#d5a1b2; --t6:#dcaebd; --t7:#e3bcc8; --t8:#ebcad4;
+  --bar-pink:#8e2b4c; --bar-lilac:#8c6a9c; --bar-peach:#c27f6b; --bar-mint:#6f9479; --bar-sky:#6c86a8; --bar-rose:#b0667e; --bar-grey:#d6bcc5;
+  --sheet-shadow:0 18px 44px -28px rgba(110,25,55,.45);
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --desk:#120a0d; --sheet:#1d1317; --bg:#1d1317; --surface:#1d1317; --surface2:#28191f; --ink:#f3e4e9; --muted:#b596a2; --line:#3a2730; --rule:#6e3549;
+  --accent:#e08aa6; --accent-ink:#1d0810; --accent-2:#9a4f69; --paper:#2a1820; --grid:rgba(224,138,166,.08);
+  --t1:#3d1f2a; --t2:#4a2332; --t3:#57273a; --t4:#642b42; --t5:#57273a; --t6:#4a2332; --t7:#3d1f2a; --t8:#331a23;
+  --bar-pink:#d6789a; --bar-rose:#c98095}}
+:root[data-theme="dark"]{
+  --desk:#120a0d; --sheet:#1d1317; --bg:#1d1317; --surface:#1d1317; --surface2:#28191f; --ink:#f3e4e9; --muted:#b596a2; --line:#3a2730; --rule:#6e3549;
+  --accent:#e08aa6; --accent-ink:#1d0810; --accent-2:#9a4f69; --paper:#2a1820; --grid:rgba(224,138,166,.08);
+  --t1:#3d1f2a; --t2:#4a2332; --t3:#57273a; --t4:#642b42; --t5:#57273a; --t6:#4a2332; --t7:#3d1f2a; --t8:#331a23;
+  --bar-pink:#d6789a; --bar-rose:#c98095}
+.banner{background-color:var(--paper);background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);background-size:14px 14px;background-position:-1px -1px}
+nav.tabs a:not([aria-current="page"]){color:var(--ink)}
 </style>
 </head><body>
 <div class="app">
