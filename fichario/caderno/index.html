@@ -1,0 +1,1437 @@
+<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#fbf4f7"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Caderno"><link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22%3E%3Crect width=%22100%22 height=%22100%22 rx=%2224%22 fill=%22%23e2457a%22/%3E%3Cpath d=%22M50 76S24 60 20 44a14 14 0 0 1 30-8 14 14 0 0 1 30 8C76 60 50 76 50 76z%22 fill=%22%23fff%22/%3E%3C/svg%3E">
+<title>Caderno da Maria</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Nunito:ital,wght@0,400;0,600;0,700;0,800;1,400&display=swap">
+<style>
+/* Layout: app de desktop com menu lateral fixo e painel de cartões em tons pastel; no celular o menu vira barra de pílulas no topo */
+:root{
+  --bg:#fbf4f7; --surface:#ffffff; --surface2:#fdf0f5; --ink:#3a2433; --muted:#94788a; --line:#f3dfe8;
+  --accent:#e2457a; --accent-ink:#ffffff; --accent-2:#f48fb1;
+  --pink:#fde3ee; --pink-ink:#c2336a; --lilac:#ede7fc; --lilac-ink:#7a5bd6; --peach:#fdebdc; --peach-ink:#c46a2b;
+  --mint:#e2f4e8; --mint-ink:#2f8a55; --sky:#e4edfc; --sky-ink:#3f6fc9;
+  --bar-pink:#f08bb0; --bar-lilac:#b8a2f2; --bar-peach:#f5b17f; --bar-mint:#73c995; --bar-sky:#8fb2ef; --bar-rose:#e88aa0; --bar-grey:#cdbfc8;
+  --hero1:#3b2a6b; --hero2:#5b3f8f; --hero-ink:#f6efff; --hero-sub:#c9b8f0;
+  --ok:#2f8a55; --ok-soft:#e2f4e8; --warn:#b06a12; --warn-soft:#fdf0dc; --bad:#d23a5a; --bad-soft:#fde3e8;
+  --shadow:0 1px 2px rgba(120,40,80,.05),0 6px 20px rgba(160,60,110,.07);
+  --display:'Poppins','Avenir Next','Segoe UI',system-ui,sans-serif;
+  --body:'Nunito','Segoe UI',system-ui,-apple-system,sans-serif;
+  --r:20px; --side:248px;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#171017; --surface:#221822; --surface2:#2b1f2b; --ink:#f8e9f1; --muted:#c29fb4; --line:#3a2a38;
+  --accent:#ff6f9f; --accent-ink:#2a0d1a; --accent-2:#ff9fc0;
+  --pink:#3b1f2d; --pink-ink:#ff9cc0; --lilac:#2c2448; --lilac-ink:#c3b0ff; --peach:#3a2a1d; --peach-ink:#f6b98a;
+  --mint:#1b3326; --mint-ink:#7fd9a2; --sky:#1e2a44; --sky-ink:#9dbcf5;
+  --bar-pink:#f07aa6; --bar-lilac:#a68ef0; --bar-peach:#e99a63; --bar-mint:#5fbf86; --bar-sky:#6f98e6; --bar-rose:#d77790; --bar-grey:#6c5a66;
+  --hero1:#2a1f52; --hero2:#3f2c70; --hero-ink:#f6efff; --hero-sub:#b9a6ea;
+  --ok:#7fd9a2; --ok-soft:#1b3326; --warn:#f1b65c; --warn-soft:#3a2a12; --bad:#ff7d95; --bad-soft:#3d1823;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 6px 20px rgba(0,0,0,.25); color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#171017; --surface:#221822; --surface2:#2b1f2b; --ink:#f8e9f1; --muted:#c29fb4; --line:#3a2a38;
+  --accent:#ff6f9f; --accent-ink:#2a0d1a; --accent-2:#ff9fc0;
+  --pink:#3b1f2d; --pink-ink:#ff9cc0; --lilac:#2c2448; --lilac-ink:#c3b0ff; --peach:#3a2a1d; --peach-ink:#f6b98a;
+  --mint:#1b3326; --mint-ink:#7fd9a2; --sky:#1e2a44; --sky-ink:#9dbcf5;
+  --bar-pink:#f07aa6; --bar-lilac:#a68ef0; --bar-peach:#e99a63; --bar-mint:#5fbf86; --bar-sky:#6f98e6; --bar-rose:#d77790; --bar-grey:#6c5a66;
+  --hero1:#2a1f52; --hero2:#3f2c70; --hero-ink:#f6efff; --hero-sub:#b9a6ea;
+  --ok:#7fd9a2; --ok-soft:#1b3326; --warn:#f1b65c; --warn-soft:#3a2a12; --bad:#ff7d95; --bad-soft:#3d1823;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 6px 20px rgba(0,0,0,.25); color-scheme:dark}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:15.5px;line-height:1.5}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+svg.i{width:20px;height:20px;flex:none;stroke:currentColor;fill:none;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+
+/* ---- Estrutura de app ---- */
+.app{display:grid;grid-template-columns:var(--side) minmax(0,1fr);min-height:100vh}
+aside.side{position:sticky;top:env(safe-area-inset-top,0px);height:100vh;padding:24px 16px 20px max(16px,env(safe-area-inset-left,0px));display:flex;flex-direction:column;gap:22px;border-right:1px solid var(--line);background:var(--surface)}
+.logo{display:flex;align-items:center;gap:10px;padding:0 8px}
+.logo .mark{width:38px;height:38px;border-radius:12px;background:var(--accent);color:var(--accent-ink);display:grid;place-items:center}
+.logo b{font-family:var(--display);font-weight:700;font-size:1.02rem;line-height:1.1;display:block}
+.logo span{font-size:.8rem;color:var(--muted)}
+nav.tabs{display:flex;flex-direction:column;gap:4px}
+nav.tabs a{display:flex;align-items:center;gap:12px;padding:10px 12px;border-radius:14px;color:var(--muted);text-decoration:none;font-weight:700;font-size:.95rem}
+nav.tabs a:hover{background:var(--surface2);color:var(--ink)}
+nav.tabs a[aria-current="page"]{background:var(--pink);color:var(--pink-ink)}
+.side-foot{margin-top:auto;display:grid;gap:10px}
+.side-card{background:var(--lilac);color:var(--ink);border-radius:16px;padding:14px;font-size:.85rem}
+.side-card b{display:block;font-family:var(--display);font-weight:600;color:var(--lilac-ink)}
+main{min-width:0;padding-block:26px 64px;padding-left:max(28px,env(safe-area-inset-left,0px));padding-right:max(28px,env(safe-area-inset-right,0px))}
+.main-inner{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:minmax(0,1fr);gap:22px}
+.topbar{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px}
+.topbar h1{font-family:var(--display);font-weight:700;font-size:1.65rem;margin:0;line-height:1.15;text-wrap:balance}
+.topbar p{margin:2px 0 0;color:var(--muted)}
+.datepill{display:inline-flex;align-items:center;gap:8px;background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:7px 14px;font-weight:700;font-size:.9rem;color:var(--pink-ink);box-shadow:var(--shadow)}
+@media (max-width:900px){
+  .app{grid-template-columns:minmax(0,1fr)}
+  aside.side{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;height:auto;flex-direction:column;gap:10px;padding:12px max(16px,env(safe-area-inset-right,0px)) 10px max(16px,env(safe-area-inset-left,0px));border-right:0;border-bottom:1px solid var(--line)}
+  .logo{display:none}.side-foot{display:none}
+  nav.tabs{flex-direction:row;overflow-x:auto;scrollbar-width:none;gap:6px}
+  nav.tabs a{flex:none;padding:8px 12px;font-size:.88rem;gap:8px}
+  main{padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:18px 56px}
+}
+a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid var(--accent-2);outline-offset:2px}
+
+/* ---- Tipografia e blocos ---- */
+section.view{display:grid;grid-template-columns:minmax(0,1fr);gap:20px}
+section.view>*{min-width:0}
+h2{font-family:var(--display);font-weight:700;font-size:1.4rem;margin:0;line-height:1.2;text-wrap:balance}
+h3{font-family:var(--display);font-weight:600;font-size:1.02rem;margin:0;line-height:1.3}
+.eyebrow{font-size:.72rem;font-weight:800;letter-spacing:.09em;text-transform:uppercase;color:var(--muted)}
+.muted{color:var(--muted)}
+.small{font-size:.86rem}
+.card{background:var(--surface);border-radius:var(--r);padding:20px;min-width:0;box-shadow:var(--shadow)}
+.soft{background:var(--surface2);border-radius:16px;padding:14px 16px;min-width:0}
+.card-head{display:flex;align-items:center;gap:10px;margin-bottom:12px}
+.card-head h3{flex:1;min-width:0}
+.ico{width:36px;height:36px;border-radius:12px;display:grid;place-items:center;flex:none}
+.t-pink{background:var(--pink);color:var(--pink-ink)}.t-lilac{background:var(--lilac);color:var(--lilac-ink)}.t-peach{background:var(--peach);color:var(--peach-ink)}.t-mint{background:var(--mint);color:var(--mint-ink)}.t-sky{background:var(--sky);color:var(--sky-ink)}
+.link{color:var(--accent);font-weight:700;text-decoration:none;font-size:.88rem;background:none;border:0;padding:0;cursor:pointer}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr));gap:18px}
+.grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,150px),1fr));gap:14px}
+.dash{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:18px;align-items:start}
+.stack>.pill{justify-self:start}
+.dash>*{min-width:0}
+.span4{grid-column:span 4}.span5{grid-column:span 5}.span6{grid-column:span 6}.span7{grid-column:span 7}.span8{grid-column:span 8}.span12{grid-column:span 12}
+@media (max-width:1100px){.span4,.span5,.span7{grid-column:span 6}.span8{grid-column:span 12}}
+@media (max-width:700px){.dash>*{grid-column:span 12!important}}
+.row{display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px}
+.row>*{min-width:0}
+.stack{display:grid;grid-template-columns:minmax(0,1fr);gap:10px}
+
+/* ---- Controles ---- */
+button,.btn{font:inherit;font-weight:700;font-size:.9rem;cursor:pointer;border-radius:14px;padding:9px 16px;border:1px solid var(--line);background:var(--surface);color:var(--ink);text-decoration:none;display:inline-flex;align-items:center;gap:8px}
+button:hover,.btn:hover{border-color:var(--accent-2)}
+button.primary,.btn.primary{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+button.soft-btn,.btn.soft-btn{background:var(--pink);color:var(--pink-ink);border-color:transparent}
+button.ghost{background:transparent;border-color:transparent;color:var(--accent);padding:6px 8px}
+button.danger{color:var(--bad)}
+button:disabled{opacity:.5;cursor:not-allowed}
+input,select,textarea{font:inherit;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:8px 11px;max-width:100%}
+select{text-overflow:ellipsis}
+input[type="file"]{width:100%}
+textarea{width:100%;min-height:90px;resize:vertical}
+input[type="number"]{width:5.5em}
+label.inline{display:inline-flex;align-items:center;gap:8px}
+.pill{display:inline-flex;align-items:center;font-size:.74rem;font-weight:800;padding:3px 10px;border-radius:999px;background:var(--pink);color:var(--pink-ink);white-space:nowrap}
+.pill.ok{background:var(--ok-soft);color:var(--ok)}.pill.warn{background:var(--warn-soft);color:var(--warn)}.pill.bad{background:var(--bad-soft);color:var(--bad)}
+.pill.lilac{background:var(--lilac);color:var(--lilac-ink)}.pill.peach{background:var(--peach);color:var(--peach-ink)}.pill.mint{background:var(--mint);color:var(--mint-ink)}.pill.sky{background:var(--sky);color:var(--sky-ink)}
+
+/* ---- Itens de lista (agenda, revisões) ---- */
+.list{display:grid;gap:8px}
+.item+.item{margin-top:8px}
+.list>.item+.item{margin-top:0}
+.item{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:10px 12px;align-items:start;padding:12px 14px;border-radius:16px;background:var(--surface2)}
+.item input[type="checkbox"]{width:22px;height:22px;accent-color:var(--accent);margin-top:2px}
+.item .t{font-weight:800;min-width:0;overflow-wrap:anywhere}
+.item .small{overflow-wrap:anywhere}
+.item.done .t{text-decoration:line-through;color:var(--muted)}
+.item .meta{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
+.item .act{display:flex;gap:2px;flex-wrap:wrap;justify-content:flex-end}
+@media (max-width:560px){.item{grid-template-columns:auto minmax(0,1fr)}.item .act{grid-column:2;justify-content:flex-start}}
+.day{display:grid;gap:10px}
+.dayhead{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:6px}
+.dayhead h3 span{color:var(--muted);font-weight:500}
+.day.is-today{outline:2px solid var(--accent-2)}
+.score{display:inline-flex;align-items:center;gap:6px;flex-wrap:wrap;margin-top:8px}
+.score input{width:6.2em;padding:5px 9px}
+
+/* ---- Dashboard ---- */
+.hero{background:linear-gradient(135deg,var(--hero1),var(--hero2));color:var(--hero-ink);border-radius:24px;padding:24px;display:flex;flex-wrap:wrap;align-items:center;gap:22px;box-shadow:var(--shadow)}
+.hero>div{min-width:0;flex:1 1 260px}
+.hero .eyebrow{color:var(--hero-sub)}
+.hero h2{color:var(--hero-ink);font-size:1.5rem}
+.hero p{margin:4px 0 0;color:var(--hero-sub)}
+.hero .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.hero .chip{background:rgba(255,255,255,.13);color:var(--hero-ink);border-radius:999px;padding:5px 12px;font-size:.82rem;font-weight:700}
+.hero .ring{flex:0 0 auto}
+.kpi{background:var(--surface);border-radius:var(--r);padding:16px 18px;box-shadow:var(--shadow);display:grid;gap:4px;align-content:start}
+.kpi .lab{display:flex;align-items:center;gap:8px;font-size:.72rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.kpi .lab .ico{width:28px;height:28px;border-radius:9px}
+.kpi .lab svg.i{width:16px;height:16px}
+.kpi b{font-family:var(--display);font-weight:700;font-size:1.7rem;line-height:1.15;font-variant-numeric:tabular-nums}
+.kpi .sub{font-size:.84rem;color:var(--muted)}
+.bars{display:grid;gap:14px}
+.bar{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:4px 12px;align-items:center}
+.bar .dot{width:32px;height:32px;border-radius:10px;display:grid;place-items:center;grid-row:span 2}
+.bar .dot svg.i{width:16px;height:16px}
+.bar .name{font-weight:700;font-size:.92rem;min-width:0}
+.bar .name small{color:var(--muted);font-weight:600}
+.bar .v{font-weight:800;font-variant-numeric:tabular-nums;text-align:right;grid-row:span 2;align-self:center}
+.bar .track{height:10px;border-radius:999px;background:var(--surface2);overflow:hidden}
+.bar .fill{height:100%;border-radius:999px}
+.donut-wrap{display:flex;flex-wrap:wrap;align-items:center;gap:20px}
+.legend{display:grid;gap:9px;flex:1 1 180px;min-width:0}
+.legend div{display:grid;grid-template-columns:12px minmax(0,1fr) auto;gap:10px;align-items:center;font-size:.9rem}
+.legend i{width:12px;height:12px;border-radius:50%}
+.legend b{font-variant-numeric:tabular-nums}
+.tablewrap{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:.9rem}
+th,td{text-align:left;padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
+
+/* ---- Simulado e flashcards ---- */
+.q-card{display:grid;gap:14px}
+.q-meta{font-size:.76rem;font-weight:800;letter-spacing:.09em;text-transform:uppercase;color:var(--pink-ink)}
+.q-text{font-weight:800;font-size:1.08rem}
+.opts{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:10px}
+.opt{justify-content:flex-start;text-align:left;font-weight:600;padding:13px 15px;background:var(--surface2);border-color:transparent;line-height:1.35}
+.opt.right{background:var(--ok-soft);border-color:var(--ok);color:var(--ok);font-weight:800}
+.opt.wrong{background:var(--bad-soft);border-color:var(--bad);color:var(--bad)}
+.feedback{border-radius:14px;padding:12px 14px;background:var(--lilac)}
+.progress{height:8px;background:var(--surface);border-radius:999px;overflow:hidden}
+.progress>i{display:block;height:100%;background:var(--accent);border-radius:999px}
+.fc{min-height:200px;display:grid;place-items:center;text-align:center;padding:30px;font-size:1.15rem}
+.fc .back{border-top:1px dashed var(--line);margin-top:16px;padding-top:16px;font-weight:800}
+.mn{display:grid;gap:6px}
+.mn p{margin:0}
+.toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(18px + env(safe-area-inset-bottom,0px));background:var(--ink);color:var(--bg);padding:10px 16px;border-radius:12px;font-weight:700;z-index:20;max-width:calc(100% - 32px)}
+details summary{cursor:pointer;font-weight:800;color:var(--accent)}
+.chk{display:flex;flex-wrap:wrap;gap:6px}
+.chk label{display:inline-flex;gap:6px;align-items:center;background:var(--surface2);padding:6px 11px;border-radius:999px;font-size:.86rem}
+.chk input{accent-color:var(--accent)}
+.empty{color:var(--muted);font-style:italic;margin:0}
+code{background:var(--surface2);padding:1px 5px;border-radius:6px;font-size:.88em}
+@media (prefers-reduced-motion:no-preference){.fill,.progress>i{transition:width .5s ease}}
+</style>
+</head><body>
+<div class="app">
+  <aside class="side">
+    <div class="logo"><span class="mark" id="logoMark"></span><div><b>Caderno da Maria</b><span>Medicina · 9º semestre</span></div></div>
+    <nav class="tabs" id="tabs" aria-label="Seções">
+      <a href="#hoje" data-ic="home">Início</a>
+      <a href="#flashcards" data-ic="cards">Flashcards</a>
+      <a href="#agenda" data-ic="calendar">Agenda</a>
+      <a href="#simulados" data-ic="quiz">Simulados</a>
+      <a href="#desempenho" data-ic="chart">Desempenho</a>
+      <a href="#mnemonicos" data-ic="bulb">Mnemônicos</a>
+      <a href="#provas" data-ic="book">Provas e tutor</a>
+      <a href="#backup" data-ic="save">Backup</a>
+    </nav>
+    <div class="side-foot">
+      <div class="side-card" id="sideCard"></div>
+    </div>
+  </aside>
+  <main>
+    <div class="main-inner">
+      <div class="topbar">
+        <div><h1 id="greet">Olá, Maria</h1><p id="greetSub">Você está fazendo um ótimo trabalho.</p></div>
+        <span class="datepill" id="todayPill"></span>
+      </div>
+      <section class="view" id="v-hoje"></section>
+      <section class="view" id="v-agenda" hidden></section>
+      <section class="view" id="v-simulados" hidden></section>
+      <section class="view" id="v-flashcards" hidden></section>
+      <section class="view" id="v-desempenho" hidden></section>
+      <section class="view" id="v-mnemonicos" hidden></section>
+      <section class="view" id="v-provas" hidden></section>
+      <section class="view" id="v-backup" hidden></section>
+    </div>
+  </main>
+</div>
+<div class="toast" id="toast" hidden></div>
+<script>
+// ===== Dados fixos: áreas, temas, plano, questões, mnemônicos, provas =====
+const AREAS = {
+  cm: 'Clínica Médica', cir: 'Cirurgia', ped: 'Pediatria', go: 'Ginecologia e Obstetrícia',
+  prev: 'Preventiva / MIAPS', psi: 'Psiquiatria', bas: 'Ciclo básico', geral: 'Simulados gerais'
+};
+
+// Temas e referências do Manual do 9º semestre (MD9 2026.2): módulos de Clínica Médica e MIAPS
+// [nome, área, bloco, referência indicada pela faculdade]
+const FIRST_TOPICS = {
+  'mi-sus':    ['Princípios da APS e do SUS; promoção e proteção da saúde', 'prev', 'MIAPS · APS', 'Gusso & Lopes, Tratado de Medicina de Família e Comunidade (2018); Duncan, Medicina Ambulatorial (2022)'],
+  'mi-prev':   ['Rastreamento de doenças, ações de prevenção e prevenção quaternária e quinquenária', 'prev', 'MIAPS · APS', 'Duncan, Medicina Ambulatorial (2022); Gusso & Lopes, Tratado de MFC (2018)'],
+  'mi-testes': ['Medicina baseada em evidências na APS: testes diagnósticos e epidemiologia', 'prev', 'MIAPS · APS', 'Duncan, Medicina Ambulatorial (2022)'],
+  'mi-sepse':  ['Sepse no paciente internado', 'cm', 'MIAPS · Medicina interna', 'Surviving Sepsis Campaign 2021 (Evans et al.)'],
+  'cm-has':    ['Hipertensão arterial sistêmica', 'cm', 'Cardiologia', 'Diretriz Brasileira de Hipertensão Arterial 2025 (Arq Bras Cardiol 122(9))'],
+  'cm-dlp':    ['Dislipidemia e prevenção da aterosclerose', 'cm', 'Cardiologia', 'Diretriz Brasileira de Dislipidemias e Prevenção da Aterosclerose 2025'],
+  'cm-ic':     ['Insuficiência cardíaca', 'cm', 'Cardiologia', 'Diretriz Brasileira de IC Crônica e Aguda 2018 + Atualização de Tópicos Emergentes 2021'],
+  'cm-fa':     ['Arritmias, ECG e fibrilação atrial', 'cm', 'Cardiologia', 'Diretriz Brasileira de Fibrilação Atrial 2025; Diretriz de laudos eletrocardiográficos SBC 2018'],
+  'bs-fisiocv':['Fisiologia cardiovascular: ciclo cardíaco e débito', 'bas', 'Fisiologia', 'Guyton & Hall, Tratado de Fisiologia Médica'],
+  'bs-farmaut':['Farmacologia do sistema nervoso autônomo', 'bas', 'Farmacologia', 'Katzung, Farmacologia Básica e Clínica'],
+  'bs-semio':  ['Semiologia cardiovascular: bulhas e sopros', 'bas', 'Semiologia', 'Porto, Semiologia Médica'],
+  'bs-renal':  ['Fisiologia renal: filtração glomerular', 'bas', 'Fisiologia', 'Guyton & Hall, Tratado de Fisiologia Médica'],
+  'bs-anat':   ['Anatomia do membro superior', 'bas', 'Anatomia', '']
+};
+
+const FIRST_DAYS = [
+  ['2026-10-30', ['mi-sus', 'cm-has', 'bs-fisiocv'], 'Hoje também tem o simulado diagnóstico (Dia 1) com o tutor.'],
+  ['2026-10-31', ['mi-prev', 'cm-dlp', 'bs-farmaut'], ''],
+  ['2026-11-01', ['mi-testes', 'cm-ic', 'bs-semio'], ''],
+  ['2026-11-02', ['mi-sepse', 'cm-fa', 'bs-renal'], '']
+];
+const SLOT_LABEL = ['MIAPS', 'Clínica médica', 'Faculdade (anterior)'];
+const PHASE2_START = '2026-11-03';
+
+// Conteúdo programático da faculdade a partir de 03/11 (intercalado: Clínica Médica e MIAPS)
+// [id, nome, área, bloco, referência]
+const FAC_CM = [
+  ['cm-dac','Doença arterial coronariana crônica','cm','Cardiologia','Diretriz de Síndrome Coronariana Crônica 2025 (SBC)'],
+  ['cm-valv','Valvopatias, febre reumática e endocardite','cm','Cardiologia','Diretriz Brasileira de Valvopatias 2020 (SBC)'],
+  ['cm-dm','Diabetes mellitus e pré-diabetes','cm','Endocrinologia','Diretriz da Sociedade Brasileira de Diabetes 2025 (diretriz.diabetes.org.br)'],
+  ['cm-obes','Obesidade','cm','Endocrinologia','Diretriz Brasileira 2025 de Obesidade e Prevenção CV (5 sociedades); Diretriz ABESO de tratamento farmacológico 2026'],
+  ['cm-tireo','Hipotireoidismo e hipertireoidismo','cm','Endocrinologia','ATA 2016 (hipertireoidismo); Consenso brasileiro de hipertireoidismo SBEM 2013; LATS 2013 (hipotireoidismo)'],
+  ['cm-nodtir','Investigação do nódulo de tireoide','cm','Endocrinologia','ATA 2015 (nódulos e câncer diferenciado); Consenso brasileiro 2013 (Rosario et al.)'],
+  ['cm-hasend','Triagem de hipertensão endócrina: Cushing, hiperaldosteronismo e feocromocitoma','cm','Endocrinologia','Vilar, Endocrinologia Clínica (2020)'],
+  ['cm-parat','Acromegalia, hipo e hiperparatireoidismo e deficiência de vitamina D','cm','Endocrinologia','Vilar, Endocrinologia Clínica (2020)'],
+  ['cm-drc','Doença renal crônica','cm','Nefrologia','KDIGO 2024 (DRC); KDIGO 2026 (anemia na DRC); KDIGO 2017 (DMO-DRC)'],
+  ['cm-lra','Injúria renal aguda e síndrome urêmica','cm','Nefrologia','KDIGO 2026 AKI/AKD (versão para consulta pública)'],
+  ['cm-itu','Infecção do trato urinário e nefrolitíase','cm','Nefrologia','Riella, Princípios de Nefrologia e Distúrbios Hidroeletrolíticos (2018)'],
+  ['cm-glom','Síndromes glomerulares','cm','Nefrologia','KDIGO 2021 (doenças glomerulares); KDIGO 2025 (nefropatia por IgA)'],
+  ['cm-eletro','Distúrbios hidroeletrolíticos','cm','Nefrologia','Riella, Princípios de Nefrologia e Distúrbios Hidroeletrolíticos (2018)'],
+  ['cm-acido','Distúrbios acidobásicos','cm','Nefrologia','Riella, Princípios de Nefrologia e Distúrbios Hidroeletrolíticos (2018)'],
+  ['cm-asma','Asma brônquica','cm','Pneumologia','GINA 2026'],
+  ['cm-dpoc','DPOC e espirometria','cm','Pneumologia','GOLD 2026; Manual SBPT de DPOC 2024; Recomendações SBPT de espirometria 2024'],
+  ['cm-tosse','Tosse aguda e crônica','cm','Pneumologia','ERS Guidelines on chronic cough (Morice et al., 2020)'],
+  ['cm-pnm','Pneumonia adquirida na comunidade','cm','Pneumologia','Recomendações SBPT para PAC 2018 (Corrêa et al.)'],
+  ['cm-tb','Tuberculose','cm','Pneumologia','Manual de Recomendações para o Controle da Tuberculose no Brasil, 2ª ed. (MS 2019)'],
+  ['cm-tabpulm','Tabagismo e câncer de pulmão','cm','Pneumologia','Araujo et al., Lung cancer in Brazil (JBP 2018); Rastreamento do câncer de pulmão no Brasil (JBP 2024)'],
+  ['cm-esof','Síndromes dispépticas: DRGE, disfagia, gastrite e úlcera','cm','Gastroenterologia','Diretriz FBG de DRGE 2023 (Moraes-Filho et al.); ACG 2022 (Katz et al.)'],
+  ['cm-hpylori','Infecção por H. pylori','cm','Gastroenterologia','IV Consenso Brasileiro de H. pylori (2018); Maastricht VI/Florence (2022)'],
+  ['cm-funcional','Doenças funcionais do TGI e intolerâncias alimentares','cm','Gastroenterologia','Zaterka, Tratado de Gastroenterologia (2023); Quilici, Manual do residente FBG (2019)'],
+  ['cm-diarreia','Diarreia aguda e crônica e parasitoses intestinais','cm','Gastroenterologia','Martins et al., Clínica Médica vol. 4 e 7 (2016); MS, Doenças infecciosas e parasitárias: guia de bolso'],
+  ['cm-dii','Doença inflamatória intestinal (RCUI e Crohn)','cm','Gastroenterologia','Cardozo & Sobrado, Doença Inflamatória Intestinal (2015)'],
+  ['cm-dor','Dor aguda e crônica e escada analgésica da OMS','cm','Dor e reumatologia','PCDT da Dor Crônica (MS 2024)'],
+  ['cm-musc','Dor musculoesquelética, cervicalgia e lombalgia','cm','Dor e reumatologia','Braz, Dores musculoesqueléticas (2022); Hall et al., BMJ 2021; Almeida & Kraychete, Rev Dor 2017'],
+  ['cm-dermbase','Lesões elementares, métodos diagnósticos e terapêutica tópica','cm','Dermatologia','Sampaio & Rivitti, Dermatologia (2018); Azulay, Dermatologia (2017)'],
+  ['cm-eritemato','Doenças eritematodescamativas: psoríase, dermatite atópica, eczemas e pitiríase rósea','cm','Dermatologia','Consenso brasileiro de psoríase (SBD); Consenso brasileiro de dermatite atópica 2023'],
+  ['cm-cancpele','Câncer de pele melanoma e não melanoma','cm','Dermatologia','Sampaio & Rivitti, Dermatologia (2018)'],
+  ['cm-hansen','Hanseníase','cm','Dermatologia','Sampaio & Rivitti (2018); Belda Jr., Tratado de Dermatologia (2018)'],
+  ['cm-dermainf','Dermatoviroses e dermatozoonoses','cm','Dermatologia','Sampaio & Rivitti, Dermatologia (2018)'],
+  ['cm-micoses','Micoses superficiais e infecções bacterianas da pele','cm','Dermatologia','Sampaio & Rivitti, Dermatologia (2018)']
+];
+const FAC_MIAPS = [
+  ['mi-riscos','Riscos assistenciais: queda, broncoaspiração, TEV e lesão por pressão','cm','MIAPS · Medicina interna','Washington Manual de Terapêutica Clínica; Goldman-Cecil (2022)'],
+  ['mi-saude-crianca','Saúde da criança na APS: crescimento, aleitamento, imunização','prev','MIAPS · APS','Duncan, Medicina Ambulatorial (2022)'],
+  ['mi-pnmhosp','Pneumonias no hospital: PAC internada e pneumonia hospitalar','cm','MIAPS · Medicina interna','Recomendações SBPT para PAC 2018; Harrison (2023)'],
+  ['mi-mccp','Método clínico centrado na pessoa','prev','MIAPS · APS','Stewart et al., Medicina Centrada na Pessoa (2017)'],
+  ['mi-ituhosp','ITU e infecção de partes moles no hospital','cm','MIAPS · Medicina interna','Washington Manual; Harrison (2023)'],
+  ['mi-familia','Abordagem familiar e comunitária: genograma e ecomapa','prev','MIAPS · APS','Gusso & Lopes, Tratado de MFC (2018); McWhinney, Manual de MFC (2010)'],
+  ['mi-atb','Antibioticoterapia na internação (escalonar e descalonar)','cm','MIAPS · Medicina interna','Washington Manual de Terapêutica Clínica'],
+  ['mi-mulher','Saúde da mulher na APS: pré-natal de baixo risco, planejamento familiar, rastreio de colo e mama, climatério','prev','MIAPS · APS','Duncan, Medicina Ambulatorial (2022)'],
+  ['mi-icaguda','Insuficiência cardíaca aguda (perfis hemodinâmicos)','cm','MIAPS · Medicina interna','Diretriz Brasileira de IC 2018 + Atualização 2021'],
+  ['mi-idoso','Saúde do idoso: avaliação geriátrica ampla e síndromes geriátricas','prev','MIAPS · APS','Duncan, Medicina Ambulatorial (2022)'],
+  ['mi-sca','Doença arterial coronariana no internado e manejo pós-SCA','cm','MIAPS · Medicina interna','Diretriz de Dor Torácica na Emergência 2025; Diretriz de Síndrome Coronariana Crônica 2025'],
+  ['mi-cronicas','HAS e diabetes na APS: cuidado da pessoa com doença crônica','prev','MIAPS · APS','Duncan, Medicina Ambulatorial (2022)'],
+  ['mi-transf','Transfusão de hemocomponentes e reações transfusionais','cm','MIAPS · Medicina interna','Harrison, Medicina Interna (2023)'],
+  ['mi-poli','Multimorbidade, polifarmácia e desprescrição','prev','MIAPS · APS','Duncan, Medicina Ambulatorial (2022)'],
+  ['mi-irahosp','Injúria renal aguda no hospital e diálise de urgência','cm','MIAPS · Medicina interna','KDIGO 2012 (AKI); Riella (2010)'],
+  ['mi-coord','Coordenação do cuidado, registro orientado por problemas (SOAP) e gestão da clínica','prev','MIAPS · APS','Gusso & Lopes, Tratado de MFC (2018)'],
+  ['mi-hidro','Distúrbios hidroeletrolíticos e acidobásicos no internado','cm','MIAPS · Medicina interna','Riella, Princípios de Nefrologia e Distúrbios Hidroeletrolíticos'],
+  ['mi-mental','Saúde mental na APS e Rede de Atenção Psicossocial','prev','MIAPS · APS','Gusso & Lopes, Tratado de MFC (2018)'],
+  ['mi-hiperglic','Controle da hiperglicemia no paciente internado','cm','MIAPS · Medicina interna','SBD 2025 (hiperglicemia hospitalar no paciente crítico); SBD 2024 (não crítico)'],
+  ['mi-drogas','Tabagismo, álcool e outras drogas na APS','prev','MIAPS · APS','Duncan, Medicina Ambulatorial (2022)'],
+  ['mi-consump','Síndrome consumptiva (perda de peso involuntária) e risco nutricional','cm','MIAPS · Medicina interna','Harrison, Medicina Interna (2023)'],
+  ['mi-paliat','Cuidados paliativos na APS','prev','MIAPS · APS','Gusso & Lopes, Tratado de MFC (2018)'],
+  ['mi-pele-aps','Infecções de partes moles mais frequentes na APS','prev','MIAPS · APS','Duncan, Medicina Ambulatorial (2022)'],
+  ['mi-demanda','Demanda espontânea e urgências na APS','prev','MIAPS · APS','Duncan, Medicina Ambulatorial (2022)'],
+  ['mi-sexual','Sexualidade, saúde sexual e abordagem da violência doméstica','prev','MIAPS · APS','Gusso & Lopes, Tratado de MFC (2018)'],
+  ['mi-nutri','Nutrição e atividade física no tratamento de doenças crônicas','prev','MIAPS · APS','Duncan, Medicina Ambulatorial (2022)']
+];
+
+// Planejamento de 120 dias: os temas que não estão no conteúdo da faculdade entram depois dela
+// [id, nome, área, bloco, tipo]  tipo: t = tema, r = revisão, s = simulado
+const PLAN = [
+  ['cm-valv','Valvopatias, endocardite, pericardite e miocardite','cm','Cardiologia','t',6],
+  ['rev-1','REVISÃO 1: Cardiologia (40 questões intercaladas)','cm','Cardiologia','r',7],
+  ['cm-asma','Asma','cm','Pneumologia','t',8],
+  ['cm-dpoc','DPOC e tabagismo','cm','Pneumologia','t',9],
+  ['cm-pnm','Pneumonias','cm','Pneumologia','t',10],
+  ['cm-tb','Tuberculose','cm','Pneumologia','t',11],
+  ['cm-tep','TEP e TVP','cm','Pneumologia','t',12],
+  ['rev-2','REVISÃO 2: Pneumologia + D+7 de Cardiologia','cm','Pneumologia','r',13],
+  ['cm-pulm','Nódulo e câncer de pulmão, derrame pleural, intersticiais e ventilação','cm','Pneumologia','t',14],
+  ['cm-eletro','Sódio, potássio, cálcio e magnésio','cm','Nefrologia','t',15],
+  ['cm-acido','Ácido-base e gasometria','cm','Nefrologia','t',16],
+  ['cm-lra','Lesão renal aguda','cm','Nefrologia','t',17],
+  ['cm-drc','Doença renal crônica','cm','Nefrologia','t',18],
+  ['rev-3','REVISÃO 3: Nefrologia + D+7 de Pneumologia','cm','Nefrologia','r',19],
+  ['cm-glom','Glomerulopatias, ITU e nefrolitíase','cm','Nefrologia','t',20],
+  ['cm-dm','Diabetes: diagnóstico e tratamento','cm','Endocrinologia','t',21],
+  ['cm-dmc','Complicações do diabetes','cm','Endocrinologia','t',22],
+  ['cm-tireo','Tireoide','cm','Endocrinologia','t',23],
+  ['rev-4','REVISÃO 4: Endócrino + D+7 Nefro + D+30 Cardio','cm','Endocrinologia','r',24],
+  ['cm-adrenal','Adrenal e hipófise','cm','Endocrinologia','t',25],
+  ['cm-osteo','Osteoporose, cálcio e obesidade','cm','Endocrinologia','t',26],
+  ['cm-esof','Esôfago e estômago (DRGE, H. pylori, úlcera)','cm','Gastroenterologia','t',27],
+  ['cm-hd','Hemorragia digestiva alta e baixa','cm','Gastroenterologia','t',28],
+  ['rev-5','REVISÃO 5: Dias 25–28 + D+7 Endócrino','cm','Gastroenterologia','r',29],
+  ['cm-hep','Hepatites virais','cm','Gastroenterologia','t',30],
+  ['cm-cirr','Cirrose e complicações','cm','Gastroenterologia','t',31],
+  ['cm-panc','Pancreatite e vias biliares','cm','Gastroenterologia','t',32],
+  ['cm-dii','DII, diarreias, celíaca e SII','cm','Gastroenterologia','t',33],
+  ['rev-6','REVISÃO 6: Gastroenterologia','cm','Gastroenterologia','r',34],
+  ['cm-pcr','PCR: SBV e SAV','cm','Emergência','t',35],
+  ['cm-choque','Choque e sepse','cm','Emergência','t',36],
+  ['cm-sca','Dor torácica e SCA','cm','Emergência','t',37],
+  ['cm-avc','AVC agudo e rebaixamento de consciência','cm','Emergência','t',38],
+  ['cm-via','Via aérea, anafilaxia e intoxicações','cm','Emergência','t',39],
+  ['rev-7','REVISÃO 7: Emergência + D+30 Pneumo e Nefro','cm','Emergência','r',40],
+  ['cm-atb','Antibioticoterapia e infecções hospitalares','cm','Infectologia','t',41],
+  ['cm-hiv','HIV/aids','cm','Infectologia','t',42],
+  ['cm-ist','IST','cm','Infectologia','t',43],
+  ['cm-menin','Meningites e encefalites','cm','Infectologia','t',44],
+  ['rev-8','REVISÃO 8: Infecto + D+30 Endócrino','cm','Infectologia','r',45],
+  ['cm-arbo','Arboviroses, febre no viajante e malária','cm','Infectologia','t',46],
+  ['cm-endem','Doenças endêmicas','cm','Infectologia','t',47],
+  ['cm-vacad','Vacinação do adulto e profilaxias','cm','Infectologia','t',48],
+  ['rev-9','REVISÃO 9: Dias 46–48','cm','Infectologia','r',49],
+  ['cm-anemia','Anemias','cm','Hematologia','t',50],
+  ['cm-hemost','Hemostasia, anticoagulação e transfusão','cm','Hematologia','t',51],
+  ['cm-leuc','Leucemias, linfomas e mieloma','cm','Hematologia','t',52],
+  ['cm-onco','Oncologia geral e rastreios oncológicos','cm','Hematologia','t',53],
+  ['rev-10','REVISÃO 10: Hemato e onco','cm','Hematologia','r',54],
+  ['cm-artr','Artrites','cm','Reumato e neuro','t',55],
+  ['cm-les','LES, vasculites, espondiloartrites e lombalgia','cm','Reumato e neuro','t',56],
+  ['cm-cefal','Cefaleias e epilepsia','cm','Reumato e neuro','t',57],
+  ['cm-demen','Demências, Parkinson e neuromuscular','cm','Reumato e neuro','t',58],
+  ['rev-11','REVISÃO 11: Reumato e neuro','cm','Reumato e neuro','r',59],
+  ['cm-geri','Geriatria e cuidados paliativos','cm','Transversais','t',60],
+  ['cm-derm','Dermatologia essencial','cm','Transversais','t',61],
+  ['cm-presc','Prescrição segura e farmacologia prática','cm','Transversais','t',62],
+  ['sim-1','SIMULADO 1: Clínica Médica (80 questões)','geral','Simulados','s',63],
+  ['rev-12','REVISÃO 12: erros do Simulado 1','cm','Transversais','r',64],
+  ['ci-trauma1','Trauma 1 (ATLS)','cir','Cirurgia','t',65],
+  ['ci-trauma2','Trauma 2 (TCE, tórax, abdome, queimados)','cir','Cirurgia','t',66],
+  ['ci-aai','Abdome agudo inflamatório','cir','Cirurgia','t',67],
+  ['ci-aao','Abdome agudo obstrutivo, perfurativo e vascular','cir','Cirurgia','t',68],
+  ['rev-13','REVISÃO 13: Cirurgia 1','cir','Cirurgia','r',69],
+  ['ci-hernia','Hérnias, proctologia e cirurgia oncológica do TGI','cir','Cirurgia','t',70],
+  ['ci-periop','Pré e pós-operatório','cir','Cirurgia','t',71],
+  ['ci-vasc','Vascular e urologia','cir','Cirurgia','t',72],
+  ['ci-orto','Ortopedia, otorrino e oftalmologia de urgência','cir','Cirurgia','t',73],
+  ['rev-14','REVISÃO 14: Cirurgia 2','cir','Cirurgia','r',74],
+  ['pe-neo1','Neonatologia 1','ped','Pediatria','t',75],
+  ['pe-neo2','Neonatologia 2','ped','Pediatria','t',76],
+  ['pe-cresc','Crescimento, desenvolvimento e aleitamento','ped','Pediatria','t',77],
+  ['pe-vac','Vacinação infantil (PNI × PNV)','ped','Pediatria','t',78],
+  ['rev-15','REVISÃO 15: Pediatria 1','ped','Pediatria','r',79],
+  ['pe-resp','Respiratório pediátrico','ped','Pediatria','t',80],
+  ['pe-diar','Diarreia, desidratação e parasitoses','ped','Pediatria','t',81],
+  ['pe-febre','Febre, ITU, exantemáticas e meningite pediátrica','ped','Pediatria','t',82],
+  ['pe-emerg','Emergências pediátricas e maus-tratos','ped','Pediatria','t',83],
+  ['rev-16','REVISÃO 16: Pediatria 2','ped','Pediatria','r',84],
+  ['pe-cardio','Cardiopatias congênitas, nefro e onco pediátricas','ped','Pediatria','t',85],
+  ['go-ciclo','Ciclo menstrual, amenorreias, SOP e SUA','go','Ginecologia e Obstetrícia','t',86],
+  ['go-contra','Contracepção e planejamento familiar','go','Ginecologia e Obstetrícia','t',87],
+  ['go-clim','Climatério, vulvovaginites, DIP e endometriose','go','Ginecologia e Obstetrícia','t',88],
+  ['rev-17','REVISÃO 17: GO 1','go','Ginecologia e Obstetrícia','r',89],
+  ['go-onco','Oncoginecologia, rastreios e mastologia','go','Ginecologia e Obstetrícia','t',90],
+  ['go-prenatal','Pré-natal','go','Ginecologia e Obstetrícia','t',91],
+  ['go-sang','Sangramentos da 1ª e 2ª metade','go','Ginecologia e Obstetrícia','t',92],
+  ['go-hiper','Síndromes hipertensivas e diabetes gestacional','go','Ginecologia e Obstetrícia','t',93],
+  ['rev-18','REVISÃO 18: GO 2','go','Ginecologia e Obstetrícia','r',94],
+  ['go-parto','Parto, puerpério e hemorragia pós-parto','go','Ginecologia e Obstetrícia','t',95],
+  ['go-infec','Infecções na gestação, isoimunização e prematuridade','go','Ginecologia e Obstetrícia','t',96],
+  ['ps-dep','Depressão e ansiedade','psi','Psiquiatria','t',97],
+  ['ps-bip','Bipolar, psicoses e psicofármacos','psi','Psiquiatria','t',98],
+  ['rev-19','REVISÃO 19: GO 3 + Psiquiatria','psi','Psiquiatria','r',99],
+  ['ps-suic','Suicídio, urgências, dependências e legislação','psi','Psiquiatria','t',100],
+  ['pr-sist','Sistemas de saúde e cuidados primários (SUS × SNS)','prev','Preventiva','t',101],
+  ['pr-epi','Epidemiologia (desenhos de estudo e vieses)','prev','Preventiva','t',102],
+  ['pr-bioest','Bioestatística e MBE','prev','Preventiva','t',103],
+  ['rev-20','REVISÃO 20: Preventiva + D+90 Cardiologia','prev','Preventiva','r',104],
+  ['pr-vig','Vigilância, notificação, rastreios e saúde do trabalhador','prev','Preventiva','t',105],
+  ['pr-etica','Ética, deontologia e medicina legal','prev','Preventiva','t',106],
+  ['sim-pna','Simulado estilo PNA (150 questões)','geral','Simulados','s',107],
+  ['rev-pna','Correção e reestudo dos erros (PNA)','geral','Simulados','r',108],
+  ['sim-rec','Simulado estilo reconhecimento PT (120 questões)','geral','Simulados','s',109],
+  ['rev-rec','Correção e reestudo dos erros (reconhecimento)','geral','Simulados','r',110],
+  ['sim-res','Simulado de residência BR (100–120 questões)','geral','Simulados','s',111],
+  ['rev-res','Correção, reestudo e a-revisar','geral','Simulados','r',112],
+  ['pp-med','Prova prática: Medicina','geral','Reta final','s',113],
+  ['pp-cir','Prova prática: Cirurgia + discussão oral','geral','Reta final','s',114],
+  ['rf-div','Quadro de divergências BR × PT e glossário','geral','Reta final','r',115],
+  ['rf-cm','Alto rendimento: Clínica Médica','cm','Reta final','r',116],
+  ['rf-cirped','Alto rendimento: Cirurgia e Pediatria','geral','Reta final','r',117],
+  ['rf-gopsi','Alto rendimento: GO, Psiquiatria e Preventiva','geral','Reta final','r',118],
+  ['sim-final','Simulado final misto (100 questões)','geral','Reta final','s',119],
+  ['rf-fim','Revisão leve dos flashcards e descanso','geral','Reta final','r',120]
+];
+
+// Sequência da agenda a partir de 03/11: conteúdo da faculdade intercalado (Clínica Médica e MIAPS),
+// com uma revisão intercalada a cada 8 temas; depois, o restante do planejamento de 120 dias.
+const PLAN_DROP = new Set(['cm-valv','rev-1','cm-asma','cm-dpoc','cm-pnm','cm-tb','rev-2','rev-3','rev-4','rev-5','rev-6','cm-eletro','cm-acido','cm-lra','cm-drc','cm-glom','cm-dm','cm-tireo','cm-esof','cm-dii','cm-choque','cm-derm','cm-geri','cm-atb']);
+const SEQ = (() => {
+  const out = []; let i = 0, j = 0, n = 0, k = 0;
+  while (i < FAC_CM.length || j < FAC_MIAPS.length) {
+    const pick = (n % 2 === 0 && i < FAC_CM.length) || j >= FAC_MIAPS.length ? FAC_CM[i++] : FAC_MIAPS[j++];
+    out.push([pick[0], pick[1], pick[2], pick[3], 't', pick[4]]); n++;
+    if (n % 8 === 0) { k++; out.push(['rev-f' + k, `Revisão intercalada ${k}: 40 questões dos últimos 8 temas`, 'cm', 'Revisões da faculdade', 'r', '']); }
+  }
+  if (n % 8) { k++; out.push(['rev-f' + k, `Revisão intercalada ${k}: temas finais da faculdade`, 'cm', 'Revisões da faculdade', 'r', '']); }
+  PLAN.filter(p => !PLAN_DROP.has(p[0])).forEach(p => out.push([p[0], p[1], p[2], p[3], p[4], '']));
+  return out;
+})();
+
+// ===== Banco de questões (escritas pelo tutor no formato das provas de residência e Revalida) =====
+// t: tema · q: enunciado · o: alternativas · a: índice da correta · c: comentário · f: [frente, verso] do flashcard
+const QUESTIONS = [
+// --- Hipertensão
+{id:'has1',t:'cm-has',q:'Homem de 45 anos, assintomático, tem PA de 148/94 mmHg e 146/92 mmHg em duas consultas. Exame físico e ECG normais. Qual a melhor conduta para confirmar o diagnóstico?',o:['Iniciar terapia dupla imediatamente','Solicitar MAPA ou MRPA','Solicitar ecocardiograma','Repetir a medida apenas em 1 ano','Dosar aldosterona e renina'],a:1,c:'PA de consultório no estágio 1 sem lesão de órgão-alvo: confirmar fora do consultório (MAPA ou MRPA) para afastar o efeito do avental branco antes de rotular como hipertenso.',f:['PA 140–159/90–99 no consultório, sem LOA: como confirmar HAS?','MAPA ou MRPA (afasta avental branco e identifica HAS mascarada).']},
+{id:'has2',t:'cm-has',q:'Mulher de 58 anos chega à UPA com PA de 210/120 mmHg e cefaleia leve. Sem dor torácica, déficit neurológico, dispneia ou alteração de função renal. Qual a conduta mais adequada?',o:['Nitroprussiato de sódio IV em UTI','Nifedipino sublingual para queda rápida','Anti-hipertensivo oral e redução gradual da PA em 24–48 h, com seguimento','Labetalol IV com meta de PA normal em 1 hora','Alta sem medicação, pois não há sintomas'],a:2,c:'Sem lesão aguda de órgão-alvo é urgência hipertensiva (ou pseudocrise): reduzir gradualmente com medicação oral. Nifedipino sublingual é contraindicado (queda abrupta e imprevisível, risco de isquemia).',f:['Urgência × emergência hipertensiva: o que diferencia?','Emergência tem lesão aguda de órgão-alvo (droga IV, UTI). Urgência não tem: VO e redução gradual em 24–48 h.']},
+{id:'has3',t:'cm-has',q:'Em hipertenso sem comorbidades, qual classe NÃO é preferencial como monoterapia inicial?',o:['Diurético tiazídico','Bloqueador dos canais de cálcio di-hidropiridínico','IECA','BRA','Betabloqueador'],a:4,c:'As classes preferenciais são tiazídico, BCC, IECA e BRA. O betabloqueador fica para indicações específicas (IC, pós-IAM, angina, controle de FC).',f:['4 classes preferenciais para iniciar tratamento da HAS','Tiazídico, BCC, IECA e BRA. Betabloqueador só com indicação específica.']},
+{id:'has4',t:'cm-has',q:'Homem de 42 anos com HAS resistente e potássio de 3,1 mEq/L sem uso de diurético. Qual o melhor exame de rastreio para a causa mais provável?',o:['Metanefrinas plasmáticas','Cortisol salivar noturno','Relação aldosterona/renina','Doppler de artérias renais','TSH'],a:2,c:'HAS resistente com hipocalemia espontânea sugere hiperaldosteronismo primário. O rastreio é a relação aldosterona/atividade de renina.',f:['HAS + hipocalemia espontânea: qual causa secundária e qual rastreio?','Hiperaldosteronismo primário; relação aldosterona/renina.']},
+{id:'has5',t:'cm-has',q:'Qual associação de anti-hipertensivos deve ser evitada por aumentar risco de hipercalemia e lesão renal sem benefício cardiovascular?',o:['IECA + tiazídico','BRA + anlodipino','IECA + BRA','Anlodipino + clortalidona','Tiazídico + espironolactona'],a:2,c:'O duplo bloqueio do SRAA (IECA + BRA, ou com alisquireno) aumenta hipercalemia e LRA sem reduzir eventos.',f:['Associação proibida no tratamento da HAS','IECA + BRA (duplo bloqueio do SRAA).']},
+// --- Dislipidemia
+{id:'dlp1',t:'cm-dlp',q:'Mulher de 35 anos, sem outras doenças, tem LDL-c de 210 mg/dL. O pai teve IAM aos 48 anos. Qual a conduta?',o:['Calcular escore de risco antes de decidir','Apenas mudança de estilo de vida por 6 meses','Estatina de alta intensidade','Fibrato','Ômega-3'],a:2,c:'LDL ≥ 190 mg/dL sugere hipercolesterolemia familiar e já classifica como alto risco: estatina de alta intensidade, sem precisar de escore.',f:['LDL ≥ 190 mg/dL: precisa calcular escore de risco?','Não. Já é alto risco (provável HF): estatina de alta intensidade.']},
+{id:'dlp2',t:'cm-dlp',q:'Paciente em uso de sinvastatina refere dor muscular intensa. CK de 12 vezes o limite superior. Conduta:',o:['Manter a dose e repetir CK em 3 meses','Suspender a estatina','Reduzir a dose pela metade','Associar fibrato','Trocar por outra estatina no mesmo dia'],a:1,c:'Mialgia com CK > 10× o LSN exige suspensão da estatina (risco de rabdomiólise). Reintroduzir depois, com outra estatina ou dose menor, se indicado.',f:['Estatina + mialgia com CK > 10× LSN','Suspender (risco de rabdomiólise).']},
+{id:'dlp3',t:'cm-dlp',q:'Paciente com triglicerídeos de 1.200 mg/dL. Qual a principal complicação a prevenir e o fármaco de escolha?',o:['IAM; estatina','Pancreatite aguda; fibrato','Esteatose; metformina','AVC; ezetimiba','Xantomas; resina'],a:1,c:'TG muito alto (acima de ~880–1.000 mg/dL) traz risco de pancreatite aguda: fibrato e dieta com restrição de gordura e álcool.',f:['TG > 1.000 mg/dL: risco e tratamento','Pancreatite aguda; fibrato + dieta.']},
+{id:'dlp4',t:'cm-dlp',q:'Qual o mecanismo de ação da ezetimiba?',o:['Inibe a HMG-CoA redutase','Inibe a PCSK9','Inibe a absorção intestinal de colesterol (NPC1L1)','Ativa o PPAR-alfa','Sequestra ácidos biliares'],a:2,c:'Ezetimiba bloqueia o transportador NPC1L1 no enterócito. Estatina inibe HMG-CoA redutase; fibrato ativa PPAR-alfa.',f:['Mecanismo da ezetimiba','Inibe a absorção intestinal de colesterol (NPC1L1).']},
+{id:'dlp5',t:'cm-dlp',q:'Colesterol total 240 mg/dL, HDL 40 mg/dL e TG 200 mg/dL. Pela fórmula de Friedewald, o LDL é:',o:['120 mg/dL','140 mg/dL','160 mg/dL','180 mg/dL','200 mg/dL'],a:2,c:'LDL = CT − HDL − TG/5 = 240 − 40 − 40 = 160 mg/dL. A fórmula perde validade com TG > 400 mg/dL.',f:['Fórmula de Friedewald','LDL = CT − HDL − TG/5 (não vale se TG > 400).']},
+// --- IC
+{id:'ic1',t:'cm-ic',q:'Na IC com fração de ejeção reduzida, qual fármaco alivia sintomas mas NÃO reduz mortalidade?',o:['Sacubitril-valsartana','Carvedilol','Espironolactona','Dapagliflozina','Furosemida'],a:4,c:'Os 4 pilares que reduzem mortalidade: IECA/BRA/INRA, betabloqueador, antagonista mineralocorticoide e iSGLT2. Diurético de alça só trata congestão.',f:['4 pilares da ICFEr','INRA (ou IECA/BRA) + betabloqueador + espironolactona + iSGLT2. Furosemida só alivia congestão.']},
+{id:'ic2',t:'cm-ic',q:'Paciente com IC descompensada: extremidades quentes, PA 140/90, estertores, edema e turgência jugular. Perfil e conduta:',o:['Frio e seco; volume','Quente e úmido; diurético IV e vasodilatador','Frio e úmido; inotrópico sem diurético','Quente e seco; ajustar medicação oral','Frio e seco; dobutamina'],a:1,c:'Bem perfundido (quente) e congesto (úmido) = perfil B, o mais comum. Tratamento: diurético de alça IV e vasodilatador.',f:['Perfil hemodinâmico mais comum da IC descompensada e conduta','Quente e úmido (B): diurético IV + vasodilatador.']},
+{id:'ic3',t:'cm-ic',q:'Paciente com IC e fração de ejeção de 45%. Como é classificado?',o:['IC com FE preservada','IC com FE levemente reduzida','IC com FE reduzida','IC com FE melhorada','Disfunção diastólica isolada'],a:1,c:'FE ≤ 40%: reduzida. 41–49%: levemente reduzida. ≥ 50%: preservada.',f:['Cortes de FE na IC','≤ 40 reduzida · 41–49 levemente reduzida · ≥ 50 preservada.']},
+{id:'ic4',t:'cm-ic',q:'Paciente com dispneia aguda na emergência tem NT-proBNP muito baixo. Isso:',o:['Confirma IC aguda','Torna IC aguda improvável','Indica IC com FE preservada','Indica necessidade de ecocardiograma de urgência','Não tem valor diagnóstico'],a:1,c:'Peptídeos natriuréticos têm alto valor preditivo negativo: um valor baixo praticamente exclui IC como causa da dispneia.',f:['Para que serve um BNP/NT-proBNP baixo na dispneia aguda?','Exclui IC (alto valor preditivo negativo).']},
+{id:'ic5',t:'cm-ic',q:'Após iniciar espironolactona em paciente com ICFEr, o que deve ser monitorado?',o:['Glicemia','Potássio e creatinina','TSH','Enzimas hepáticas','Hemograma'],a:1,c:'Antagonista mineralocorticoide pode causar hipercalemia e piora da função renal. Checar K e creatinina em poucos dias e periodicamente.',f:['O que monitorar com espironolactona na IC?','Potássio e creatinina (risco de hipercalemia).']},
+// --- FA
+{id:'fa1',t:'cm-fa',q:'Paciente com FA de alta resposta (FC 160), PA 70/40 mmHg e rebaixamento do nível de consciência. Conduta imediata:',o:['Amiodarona IV lenta','Metoprolol IV','Cardioversão elétrica sincronizada','Anticoagular por 3 semanas antes de reverter','Desfibrilação não sincronizada'],a:2,c:'Taquiarritmia com instabilidade (hipotensão, rebaixamento, dor torácica, congestão) = cardioversão elétrica sincronizada imediata.',f:['FA com instabilidade hemodinâmica: conduta','Cardioversão elétrica sincronizada imediata.']},
+{id:'fa2',t:'cm-fa',q:'Mulher de 70 anos com FA, hipertensa e diabética, sem outras doenças. Qual o CHA₂DS₂-VASc?',o:['2','3','4','5','6'],a:2,c:'Sexo feminino 1 + idade 65–74 1 + HAS 1 + DM 1 = 4. Indica anticoagulação.',f:['Componentes do CHA₂DS₂-VASc','IC 1, HAS 1, Idade ≥ 75 2, DM 1, AVC/AIT 2, Vascular 1, Idade 65–74 1, Sexo feminino 1.']},
+{id:'fa3',t:'cm-fa',q:'Paciente com FA e prótese valvar mecânica. Qual anticoagulante?',o:['Apixabana','Rivaroxabana','Dabigatrana','Varfarina','AAS isolado'],a:3,c:'Prótese mecânica e estenose mitral moderada a grave: varfarina. Os DOACs são contraindicados nesses casos.',f:['FA com prótese mecânica ou estenose mitral moderada/grave: qual anticoagulante?','Varfarina (DOAC contraindicado).']},
+{id:'fa4',t:'cm-fa',q:'Qual achado de ECG define fibrilação atrial?',o:['Ondas F em dente de serra','Intervalos RR irregularmente irregulares sem onda P','PR progressivamente maior até bloqueio','QRS largo com dissociação AV','Onda delta'],a:1,c:'FA: ausência de onda P, linha de base com ondas f e RR irregularmente irregular. Dente de serra é flutter.',f:['ECG da FA','Sem onda P + RR irregularmente irregular.']},
+{id:'fa5',t:'cm-fa',q:'ECG com ondas em dente de serra em DII, DIII e aVF e FC ventricular regular de 150 bpm. Diagnóstico:',o:['Taquicardia sinusal','Fibrilação atrial','Flutter atrial típico com condução 2:1','Taquicardia ventricular','TRN'],a:2,c:'Flutter típico: frequência atrial ~300 bpm com bloqueio 2:1, dando FC ventricular ~150 bpm, regular.',f:['FC regular de 150 bpm com dente de serra em parede inferior','Flutter atrial típico com condução 2:1.']},
+// --- Fisiologia CV
+{id:'fcv1',t:'bs-fisiocv',q:'FC de 70 bpm, volume diastólico final de 120 mL e volume sistólico final de 50 mL. O débito cardíaco é de aproximadamente:',o:['3,5 L/min','4,9 L/min','5,6 L/min','8,4 L/min','2,1 L/min'],a:1,c:'Volume sistólico = 120 − 50 = 70 mL. DC = 70 mL × 70 bpm = 4.900 mL/min ≈ 4,9 L/min. Fração de ejeção = 70/120 ≈ 58%.',f:['Como calcular débito cardíaco e fração de ejeção','DC = FC × VS (VS = VDF − VSF). FE = VS/VDF.']},
+{id:'fcv2',t:'bs-fisiocv',q:'Segundo a lei de Frank-Starling, o aumento do retorno venoso leva a:',o:['Queda do volume sistólico','Aumento da força de contração até um limite','Aumento da pós-carga como efeito principal','Redução da pré-carga','Bradicardia reflexa'],a:1,c:'Maior estiramento das fibras (pré-carga) aumenta a força de contração e o volume sistólico, até um limite.',f:['Lei de Frank-Starling','↑ pré-carga (estiramento) → ↑ força de contração e volume sistólico, até um limite.']},
+{id:'fcv3',t:'bs-fisiocv',q:'A primeira bulha (B1) corresponde a:',o:['Fechamento das valvas aórtica e pulmonar','Abertura das valvas mitral e tricúspide','Fechamento das valvas mitral e tricúspide','Enchimento ventricular rápido','Contração atrial'],a:2,c:'B1 = fechamento das AV (início da sístole). B2 = fechamento das semilunares. B3 = enchimento rápido. B4 = contração atrial contra ventrículo rígido.',f:['O que gera B1 e B2?','B1: fechamento mitral e tricúspide. B2: fechamento aórtica e pulmonar.']},
+{id:'fcv4',t:'bs-fisiocv',q:'Durante a contração isovolumétrica:',o:['Valva aórtica aberta e pressão ventricular caindo','Todas as valvas fechadas e pressão ventricular subindo','Valva mitral aberta e volume ventricular aumentando','Ejeção rápida de sangue','Relaxamento ventricular'],a:1,c:'Entre o fechamento da mitral e a abertura da aórtica, todas as valvas estão fechadas: a pressão sobe sem mudar o volume.',f:['O que acontece na contração isovolumétrica?','Todas as valvas fechadas; pressão ventricular sobe, volume constante.']},
+{id:'fcv5',t:'bs-fisiocv',q:'Uma queda súbita da PA ao levantar provoca, pelo barorreflexo:',o:['Aumento dos disparos dos barorreceptores e bradicardia','Redução dos disparos dos barorreceptores, aumento do tônus simpático e taquicardia','Vasodilatação periférica','Aumento do tônus vagal','Nenhuma resposta autonômica'],a:1,c:'Menos estiramento no seio carotídeo e no arco aórtico → menos disparos → menos vago, mais simpático → ↑ FC, contratilidade e resistência.',f:['Barorreflexo na queda da PA','↓ disparos dos barorreceptores → ↑ simpático → ↑ FC e vasoconstrição.']},
+// --- Farmaco autonômico
+{id:'fa-a1',t:'bs-farmaut',q:'Agricultor com miose, sialorreia, broncorreia, bradicardia e diarreia após aplicar pesticida. Antídoto inicial:',o:['Fisostigmina','Atropina','Naloxona','Flumazenil','Adrenalina'],a:1,c:'Síndrome colinérgica por organofosforado (inibidor da acetilcolinesterase): atropina até secar as secreções, mais pralidoxima quando disponível.',f:['Intoxicação por organofosforado: quadro e antídoto','Síndrome colinérgica (DUMBELS); atropina (+ pralidoxima).']},
+{id:'fa-a2',t:'bs-farmaut',q:'Em qual paciente o propranolol deve ser evitado?',o:['Portador de enxaqueca','Paciente com tremor essencial','Paciente com asma','Paciente com hipertireoidismo sintomático','Paciente com varizes esofágicas'],a:2,c:'Propranolol é betabloqueador não seletivo: o bloqueio β2 pode desencadear broncoespasmo grave em asmáticos.',f:['Por que evitar propranolol na asma?','Bloqueio β2 (não seletivo) causa broncoespasmo.']},
+{id:'fa-a3',t:'bs-farmaut',q:'Adulto com anafilaxia (urticária, sibilância e hipotensão). Qual a dose e a via iniciais da adrenalina?',o:['1 mg IV em bolus','0,5 mg IM na face anterolateral da coxa (solução 1 mg/mL)','0,1 mg subcutânea','5 mg inalatória','0,05 mg IV em bolus repetido'],a:1,c:'Adrenalina IM 0,01 mg/kg (máximo 0,5 mg no adulto) no vasto lateral, repetível a cada 5–15 min. IV em bolus fica para PCR.',f:['Adrenalina na anafilaxia do adulto','0,5 mg IM (1 mg/mL) na coxa, repetir a cada 5–15 min.']},
+{id:'fa-a4',t:'bs-farmaut',q:'A pilocarpina, usada no glaucoma, é:',o:['Antagonista muscarínico que causa midríase','Agonista muscarínico que causa miose','Agonista β1','Antagonista α1','Inibidor da anidrase carbônica'],a:1,c:'Agonista muscarínico: contrai o esfíncter da pupila (miose) e o músculo ciliar, facilitando a drenagem do humor aquoso.',f:['Pilocarpina: classe e efeito na pupila','Agonista muscarínico → miose.']},
+{id:'fa-a5',t:'bs-farmaut',q:'No preparo cirúrgico do feocromocitoma, qual a sequência correta?',o:['Betabloqueador antes do alfabloqueador','Alfabloqueador antes do betabloqueador','Somente betabloqueador','Somente diurético','IECA isolado'],a:1,c:'Betabloquear primeiro deixa o estímulo α sem oposição e pode causar crise hipertensiva. Primeiro alfa (ex.: doxazosina), depois beta.',f:['Feocromocitoma: ordem do bloqueio','Primeiro alfa, depois beta.']},
+// --- Semiologia
+{id:'se1',t:'bs-semio',q:'Idoso com síncope ao esforço, sopro sistólico ejetivo em foco aórtico irradiado para carótidas e pulso parvus et tardus. Diagnóstico:',o:['Insuficiência aórtica','Estenose aórtica','Estenose mitral','Insuficiência mitral','Comunicação interventricular'],a:1,c:'Estenose aórtica: sopro sistólico em diamante no foco aórtico irradiando para o pescoço, pulso fraco e tardio. Sintomas: angina, síncope e dispneia.',f:['Sopro sistólico aórtico + pulso parvus et tardus','Estenose aórtica (sintomas: angina, síncope, dispneia).']},
+{id:'se2',t:'bs-semio',q:'Sopro diastólico em ruflar no foco mitral, com estalido de abertura e hiperfonese de B1. Diagnóstico:',o:['Estenose mitral','Insuficiência aórtica','Estenose aórtica','Prolapso de valva mitral','Insuficiência tricúspide'],a:0,c:'Estenose mitral: ruflar diastólico com reforço pré-sistólico, estalido de abertura e B1 hiperfonética. Associada a febre reumática.',f:['Ruflar diastólico + estalido de abertura','Estenose mitral.']},
+{id:'se3',t:'bs-semio',q:'Qual bulha NÃO ocorre em paciente com fibrilação atrial?',o:['B1','B2','B3','B4','Nenhuma das anteriores'],a:3,c:'B4 depende da contração atrial efetiva contra um ventrículo rígido. Na FA não há contração atrial organizada, então não há B4.',f:['Qual bulha some na FA e por quê?','B4: depende da contração atrial.']},
+{id:'se4',t:'bs-semio',q:'Qual sopro aumenta com a manobra de Valsalva?',o:['Estenose aórtica','Cardiomiopatia hipertrófica obstrutiva','Insuficiência mitral','Estenose mitral','Comunicação interventricular'],a:1,c:'Valsalva reduz o retorno venoso e o tamanho do VE, aumentando a obstrução na via de saída da CMH. A maioria dos outros sopros diminui.',f:['Sopros que aumentam com Valsalva','CMH obstrutiva (e prolapso mitral, que fica mais precoce).']},
+{id:'se5',t:'bs-semio',q:'Sopro holossistólico em foco mitral com irradiação para a axila. Diagnóstico mais provável:',o:['Estenose aórtica','Insuficiência mitral','Estenose mitral','Insuficiência aórtica','Estenose pulmonar'],a:1,c:'Insuficiência mitral: sopro holossistólico em ponta irradiando para axila; pode ter B3 por sobrecarga de volume.',f:['Holossistólico em ponta irradiando para axila','Insuficiência mitral.']},
+// --- SUS / APS
+{id:'sus1',t:'mi-sus',q:'Qual dos itens é um princípio organizativo, e não doutrinário, do SUS?',o:['Universalidade','Integralidade','Equidade','Descentralização','Nenhuma das anteriores'],a:3,c:'Doutrinários: universalidade, integralidade e equidade. Organizativos: descentralização, regionalização, hierarquização e participação da comunidade.',f:['Princípios doutrinários × organizativos do SUS','Doutrinários: universalidade, integralidade, equidade. Organizativos: descentralização, regionalização, hierarquização, participação popular.']},
+{id:'sus2',t:'mi-sus',q:'Segundo Starfield, qual é um atributo DERIVADO da Atenção Primária?',o:['Acesso de primeiro contato','Longitudinalidade','Integralidade','Coordenação do cuidado','Orientação familiar'],a:4,c:'Essenciais: primeiro contato, longitudinalidade, integralidade e coordenação. Derivados: orientação familiar, orientação comunitária e competência cultural.',f:['Atributos essenciais e derivados da APS (Starfield)','Essenciais: primeiro contato, longitudinalidade, integralidade, coordenação. Derivados: familiar, comunitária, cultural.']},
+{id:'sus3',t:'mi-sus',q:'A paciente é acompanhada pela mesma equipe da USF há 10 anos, que conhece sua história e seu contexto. Qual atributo da APS isso representa?',o:['Coordenação','Longitudinalidade','Primeiro contato','Integralidade','Competência cultural'],a:1,c:'Longitudinalidade é o acompanhamento ao longo do tempo, com vínculo, pela mesma equipe, independentemente da presença de doença.',f:['O que é longitudinalidade?','Acompanhamento ao longo do tempo pela mesma equipe, com vínculo.']},
+{id:'sus4',t:'mi-sus',q:'Qual lei dispõe sobre a participação da comunidade na gestão do SUS (conselhos e conferências de saúde)?',o:['Lei 8.080/1990','Lei 8.142/1990','Constituição de 1988, art. 196','Lei 10.216/2001','Lei 9.656/1998'],a:1,c:'Lei 8.142/90: participação da comunidade (conselhos e conferências) e transferências financeiras. A 8.080/90 é a Lei Orgânica da Saúde.',f:['Lei 8.080 × Lei 8.142','8.080: Lei Orgânica (organização e funcionamento). 8.142: participação popular e financiamento.']},
+{id:'sus5',t:'mi-sus',q:'A gestão municipal destina mais equipes de saúde para o bairro com maior vulnerabilidade social. Qual princípio está sendo aplicado?',o:['Universalidade','Equidade','Hierarquização','Integralidade','Regionalização'],a:1,c:'Equidade é oferecer mais a quem precisa mais: tratar desigualmente os desiguais para reduzir desigualdades.',f:['Equidade no SUS','Dar mais a quem precisa mais (tratar desigualmente os desiguais).']},
+// --- Prevenção
+{id:'pv1',t:'mi-prev',q:'Paciente assintomático e ansioso pede check-up com vários exames. O médico explica riscos de sobrediagnóstico e solicita apenas os rastreios indicados. Esta atitude é prevenção:',o:['Primária','Secundária','Terciária','Quaternária','Primordial'],a:3,c:'Prevenção quaternária: proteger o paciente de intervenções desnecessárias e da iatrogenia (sobremedicalização).',f:['O que é prevenção quaternária?','Evitar intervenções desnecessárias e iatrogenia.']},
+{id:'pv2',t:'mi-prev',q:'O rastreamento de uma doença em pessoas assintomáticas é um exemplo de prevenção:',o:['Primária','Secundária','Terciária','Quaternária','Primordial'],a:1,c:'Secundária = diagnóstico precoce na fase pré-clínica. Primária evita que a doença surja (vacina). Terciária reduz sequelas (reabilitação).',f:['Rastreamento é prevenção de qual nível?','Secundária (detecção precoce na fase pré-clínica).']},
+{id:'pv3',t:'mi-prev',q:'Programa de fisioterapia para recuperar a marcha após AVC é prevenção:',o:['Primária','Secundária','Terciária','Quaternária','Primordial'],a:2,c:'Terciária: limitar incapacidades e reabilitar depois que a doença já se manifestou.',f:['Reabilitação pós-AVC é prevenção de qual nível?','Terciária.']},
+{id:'pv4',t:'mi-prev',q:'Qual NÃO é critério de Wilson e Jungner para implantar um programa de rastreamento?',o:['A doença deve ser um problema de saúde importante','Deve haver uma fase latente ou pré-clínica detectável','Deve existir tratamento eficaz na fase precoce','O teste deve ser aceitável pela população','A doença deve ser rara na população'],a:4,c:'Rastrear doença rara tem baixo valor preditivo positivo e gera muitos falsos positivos. O critério é ser um problema de saúde importante.',f:['Critérios de Wilson-Jungner (essência)','Doença importante, fase pré-clínica detectável, tratamento precoce eficaz, teste aceitável, custo-benefício.']},
+{id:'pv5',t:'mi-prev',q:'Um rastreamento antecipa o diagnóstico em 3 anos, mas a data da morte não muda. A sobrevida parece maior por causa do viés de:',o:['Seleção','Tempo de antecipação (lead time)','Duração (length time)','Memória','Aferição'],a:1,c:'Lead time: a sobrevida medida a partir do diagnóstico aumenta só porque o diagnóstico veio antes. Length time favorece detectar doenças de evolução lenta.',f:['Viés de tempo de antecipação (lead time)','Sobrevida parece maior porque o diagnóstico foi antecipado, sem mudar a data da morte.']},
+// --- Epidemiologia
+{id:'ep1',t:'mi-testes',q:'Um novo tratamento prolonga a sobrevida de uma doença crônica sem curá-la. O que acontece com incidência e prevalência?',o:['Incidência aumenta e prevalência diminui','Incidência não muda e prevalência aumenta','Ambas diminuem','Incidência diminui e prevalência não muda','Ambas aumentam'],a:1,c:'Prevalência ≈ incidência × duração. Aumentar a duração (sobrevida sem cura) aumenta a prevalência; a incidência (casos novos) não muda.',f:['Relação entre prevalência, incidência e duração','P ≈ I × D. Tratamento que prolonga sem curar ↑ prevalência.']},
+{id:'ep2',t:'mi-testes',q:'O coeficiente de mortalidade infantil é calculado como:',o:['Óbitos < 1 ano / população total × 1.000','Óbitos < 1 ano / nascidos vivos × 1.000','Óbitos < 5 anos / nascidos vivos × 1.000','Óbitos < 28 dias / nascidos vivos × 1.000','Óbitos fetais / nascidos vivos × 1.000'],a:1,c:'CMI = óbitos de menores de 1 ano / nascidos vivos no mesmo local e período × 1.000. Neonatal usa óbitos < 28 dias.',f:['Fórmula do coeficiente de mortalidade infantil','Óbitos < 1 ano / nascidos vivos × 1.000.']},
+{id:'ep3',t:'mi-testes',q:'Num surto, 200 pessoas adoeceram e 10 morreram pela doença. A letalidade foi de:',o:['0,5%','2%','5%','10%','20%'],a:2,c:'Letalidade = óbitos pela doença / doentes = 10/200 = 5%. Mortalidade usa a população total no denominador.',f:['Letalidade × mortalidade','Letalidade: óbitos/doentes. Mortalidade: óbitos/população.']},
+{id:'ep4',t:'mi-testes',q:'Qual desenho de estudo permite calcular diretamente a incidência e o risco relativo?',o:['Caso-controle','Transversal','Coorte','Ecológico','Série de casos'],a:2,c:'Na coorte, expostos e não expostos são acompanhados no tempo, permitindo medir incidência e risco relativo.',f:['Coorte mede o quê?','Incidência e risco relativo (segue expostos e não expostos no tempo).']},
+{id:'ep5',t:'mi-testes',q:'Para estudar fatores de risco de uma doença rara, o desenho mais eficiente é ___, e a medida de associação é ___.',o:['Coorte; risco relativo','Caso-controle; odds ratio','Transversal; prevalência','Ensaio clínico; NNT','Ecológico; correlação'],a:1,c:'Caso-controle parte de doentes e não doentes e olha para trás: eficiente em doenças raras, e a medida é a odds ratio.',f:['Caso-controle: quando usar e qual medida?','Doenças raras; odds ratio.']},
+// --- Testes diagnósticos
+{id:'td1',t:'mi-testes',q:'Um teste foi aplicado a 100 doentes (90 positivos) e 200 sadios (180 negativos). Qual o VPP?',o:['90%','82%','75%','67%','95%'],a:1,c:'VP = 90, FP = 20. VPP = 90/(90+20) ≈ 82%. Sensibilidade = 90/100 = 90% e especificidade = 180/200 = 90%.',f:['Fórmulas de S, E, VPP e VPN','S = VP/(VP+FN) · E = VN/(VN+FP) · VPP = VP/(VP+FP) · VPN = VN/(VN+FN).']},
+{id:'td2',t:'mi-testes',q:'Para triagem de doença grave em que não se pode perder nenhum caso, prefere-se um teste com alta:',o:['Especificidade','Sensibilidade','Acurácia apenas','Razão de verossimilhança negativa','Prevalência'],a:1,c:'Teste muito sensível, quando negativo, exclui a doença (SnNout). Ideal para triagem. Teste específico, quando positivo, confirma (SpPin).',f:['SnNout e SpPin','Sensível + Negativo exclui (triagem). Específico + Positivo confirma.']},
+{id:'td3',t:'mi-testes',q:'O mesmo teste é aplicado numa população com prevalência maior da doença. O que acontece?',o:['Sensibilidade aumenta','Especificidade diminui','VPP aumenta e VPN diminui','VPP diminui e VPN aumenta','Nada muda'],a:2,c:'Sensibilidade e especificidade são do teste. Valores preditivos dependem da prevalência: mais prevalência, maior VPP e menor VPN.',f:['Efeito da prevalência nos valores preditivos','↑ prevalência → ↑ VPP e ↓ VPN. S e E não mudam.']},
+{id:'td4',t:'mi-testes',q:'Ao reduzir o ponto de corte da glicemia para diagnosticar diabetes, espera-se:',o:['Aumento da sensibilidade e queda da especificidade','Aumento das duas','Queda da sensibilidade e aumento da especificidade','Queda das duas','Nenhuma mudança'],a:0,c:'Corte mais baixo classifica mais pessoas como positivas: menos falsos negativos (↑ sensibilidade) e mais falsos positivos (↓ especificidade).',f:['Baixar o ponto de corte de um teste','↑ sensibilidade e ↓ especificidade.']},
+{id:'td5',t:'mi-testes',q:'Teste com sensibilidade de 80% e especificidade de 90%. A razão de verossimilhança positiva é:',o:['0,22','0,8','2','8','9'],a:3,c:'RV+ = S/(1 − E) = 0,8/0,1 = 8. RV− = (1 − S)/E = 0,2/0,9 ≈ 0,22.',f:['Fórmulas da razão de verossimilhança','RV+ = S/(1−E) · RV− = (1−S)/E.']},
+// --- Renal
+{id:'rn1',t:'bs-renal',q:'Paciente com estenose bilateral de artéria renal inicia IECA e tem queda importante da TFG. Por quê?',o:['O IECA contrai a arteríola aferente','O IECA dilata a arteríola eferente, que dependia da angiotensina II para manter a pressão glomerular','O IECA aumenta a reabsorção de sódio','O IECA causa necrose tubular direta','O IECA obstrui o ureter'],a:1,c:'Com pouco fluxo na aferente, a TFG depende da constrição eferente pela angiotensina II. O IECA tira essa constrição e a pressão glomerular cai.',f:['IECA e AINE na TFG','IECA dilata a eferente; AINE contrai a aferente. Os dois derrubam a TFG em quem depende deles.']},
+{id:'rn2',t:'bs-renal',q:'Qual substância tem depuração igual à TFG por ser filtrada livremente e não ser reabsorvida nem secretada?',o:['Creatinina','Ureia','Inulina','PAH','Glicose'],a:2,c:'Inulina é o padrão-ouro. A creatinina é um pouco secretada e superestima levemente a TFG. O PAH estima o fluxo plasmático renal.',f:['Padrão-ouro para medir TFG','Clearance de inulina. PAH mede fluxo plasmático renal.']},
+{id:'rn3',t:'bs-renal',q:'Idoso desidratado usa ibuprofeno e evolui com lesão renal aguda. Mecanismo:',o:['Vasodilatação eferente','Inibição das prostaglandinas que dilatam a arteríola aferente','Obstrução tubular por cristais','Aumento do fluxo plasmático renal','Ativação da ECA'],a:1,c:'Na hipovolemia, prostaglandinas mantêm a aferente dilatada. O AINE as bloqueia, a aferente contrai e a TFG cai.',f:['Por que AINE causa LRA na hipovolemia?','Bloqueia prostaglandinas que dilatam a aferente.']},
+{id:'rn4',t:'bs-renal',q:'O feedback tubuloglomerular é mediado pela:',o:['Cápsula de Bowman','Mácula densa, que detecta NaCl no túbulo distal','Alça de Henle descendente','Célula intercalada','Papila renal'],a:1,c:'Mais NaCl chegando à mácula densa sinaliza constrição da aferente, reduzindo a TFG. É, com o mecanismo miogênico, a base da autorregulação.',f:['Os dois mecanismos de autorregulação da TFG','Miogênico e feedback tubuloglomerular (mácula densa sente NaCl).']},
+{id:'rn5',t:'bs-renal',q:'A fração de filtração (TFG / fluxo plasmático renal) em condições normais é de cerca de:',o:['5%','20%','50%','75%','90%'],a:1,c:'TFG ~125 mL/min e FPR ~625 mL/min: fração de filtração ≈ 20%. Constrição eferente aumenta a fração de filtração.',f:['Fração de filtração normal','≈ 20% (TFG/FPR).']},
+// --- Sepse
+{id:'sp1',t:'mi-sepse',q:'Segundo o Sepsis-3, sepse é definida como:',o:['SIRS com foco infeccioso suspeito','Disfunção orgânica ameaçadora à vida causada por resposta desregulada do hospedeiro à infecção','Hemocultura positiva com febre','Lactato acima de 4 mmol/L','Infecção com leucocitose'],a:1,c:'Sepsis-3: infecção + disfunção orgânica, operacionalizada por aumento de 2 ou mais pontos no SOFA. Os critérios de SIRS saíram da definição.',f:['Definição de sepse (Sepsis-3)','Disfunção orgânica ameaçadora à vida por resposta desregulada à infecção (↑ SOFA ≥ 2).']},
+{id:'sp2',t:'mi-sepse',q:'Paciente séptico que, após reposição volêmica adequada, precisa de vasopressor para PAM ≥ 65 mmHg e tem lactato de 3 mmol/L. Classificação:',o:['Sepse sem choque','Choque séptico','SIRS','Choque cardiogênico','Bacteremia'],a:1,c:'Choque séptico: vasopressor para manter PAM ≥ 65 mmHg e lactato > 2 mmol/L apesar de volume adequado.',f:['Critérios de choque séptico','Vasopressor para PAM ≥ 65 + lactato > 2 apesar de volume.']},
+{id:'sp3',t:'mi-sepse',q:'No paciente com sepse e hipotensão ou lactato ≥ 4 mmol/L, a reposição volêmica inicial sugerida é:',o:['10 mL/kg de coloide','30 mL/kg de cristaloide nas primeiras 3 horas','Albumina 20% como primeira escolha','Restrição hídrica','500 mL de soro glicosado'],a:1,c:'O pacote da 1ª hora inclui lactato, hemoculturas antes do antibiótico, antibiótico de amplo espectro, 30 mL/kg de cristaloide se hipotensão ou lactato ≥ 4, e vasopressor se PAM < 65.',f:['Itens do pacote da 1ª hora na sepse','Lactato, hemoculturas, antibiótico amplo, 30 mL/kg de cristaloide, vasopressor se PAM < 65.']},
+{id:'sp4',t:'mi-sepse',q:'Vasopressor de primeira escolha no choque séptico:',o:['Dopamina','Noradrenalina','Dobutamina','Adrenalina','Vasopressina isolada'],a:1,c:'Noradrenalina é a primeira escolha. Vasopressina entra como segunda droga; dobutamina se houver disfunção miocárdica com baixo débito.',f:['Vasopressor de 1ª escolha no choque séptico','Noradrenalina.']},
+{id:'sp5',t:'mi-sepse',q:'Sobre o qSOFA, segundo a Surviving Sepsis Campaign 2021:',o:['É o melhor teste isolado de triagem de sepse','Não deve ser usado isoladamente como ferramenta de triagem, comparado a SIRS, NEWS ou MEWS','Substitui o SOFA no diagnóstico','Inclui lactato','Só vale em UTI'],a:1,c:'qSOFA (FR ≥ 22, alteração mental, PAS ≤ 100) prediz mau prognóstico, mas é pouco sensível. A SSC 2021 recomenda não usá-lo sozinho como triagem.',f:['Componentes do qSOFA e seu papel','FR ≥ 22, alteração mental, PAS ≤ 100. Não usar isolado para triagem (SSC 2021).']},
+// --- Próximos temas do plano
+{id:'va1',t:'cm-valv',q:'Paciente usuário de drogas IV com febre, hemoculturas positivas para S. aureus em 2 amostras e vegetação tricúspide no ecocardiograma. Pelos critérios de Duke:',o:['1 critério maior','2 critérios maiores: endocardite definida','Endocardite possível','Endocardite rejeitada','Precisa de biópsia valvar'],a:1,c:'Hemoculturas típicas persistentes e evidência de envolvimento endocárdico (vegetação) são os 2 critérios maiores. Dois maiores = endocardite definida.',f:['Critérios maiores de Duke','Hemoculturas positivas típicas + evidência de envolvimento endocárdico (eco).']},
+{id:'va2',t:'cm-valv',q:'Dor torácica que piora deitado e melhora sentado inclinado para frente, com supra de ST difuso e infra de PR. Diagnóstico:',o:['IAM com supra','Pericardite aguda','Dissecção de aorta','TEP','Repolarização precoce'],a:1,c:'Pericardite aguda: dor pleurítica posicional, atrito pericárdico, supra de ST difuso côncavo e infra de PR. Tratamento: AINE + colchicina.',f:['ECG da pericardite aguda','Supra de ST difuso côncavo + infra de PR.']},
+{id:'va3',t:'cm-valv',q:'Hipotensão, turgência jugular e bulhas abafadas compõem:',o:['Tríade de Charcot','Tríade de Beck (tamponamento cardíaco)','Tríade de Cushing','Tríade de Virchow','Pêntade de Reynolds'],a:1,c:'Tríade de Beck = tamponamento. Pode haver pulso paradoxal. Tratamento: pericardiocentese.',f:['Tríade de Beck','Hipotensão + turgência jugular + bulhas abafadas = tamponamento.']},
+{id:'as1',t:'cm-asma',q:'Segundo a GINA atual, para asma leve em adulto, qual tratamento preferencial?',o:['Salbutamol isolado quando necessário','Budesonida-formoterol quando necessário','Montelucaste isolado','Teofilina','Corticoide oral em ciclos'],a:1,c:'SABA isolado não é mais recomendado. Nos passos 1–2, a via preferida é ICS-formoterol (ex.: budesonida-formoterol) conforme necessidade.',f:['Asma leve: tratamento preferencial (GINA)','ICS-formoterol conforme necessidade. Nunca SABA isolado.']},
+{id:'as2',t:'cm-asma',q:'Qual achado indica crise asmática com risco de vida?',o:['Sibilos difusos','FR de 24 irpm','Tórax silencioso','Uso de musculatura acessória leve','Tosse seca'],a:2,c:'Tórax silencioso, cianose, confusão, bradicardia e hipercapnia indicam crise ameaçadora à vida.',f:['Sinais de crise asmática ameaçadora à vida','Tórax silencioso, cianose, confusão, bradicardia, hipercapnia.']},
+{id:'as3',t:'cm-asma',q:'Na espirometria, resposta significativa ao broncodilatador é:',o:['Aumento do VEF1 ≥ 12% e ≥ 200 mL','Aumento da CVF de 5%','VEF1/CVF > 0,70','Queda do VEF1 de 20%','Aumento do pico de fluxo de 5%'],a:0,c:'Variação do VEF1 ≥ 12% e ≥ 200 mL após broncodilatador sustenta o diagnóstico de asma.',f:['Prova broncodilatadora positiva','↑ VEF1 ≥ 12% e ≥ 200 mL.']},
+{id:'dp1',t:'cm-dpoc',q:'O diagnóstico de DPOC exige, na espirometria:',o:['VEF1/CVF pré-broncodilatador < 0,80','VEF1/CVF pós-broncodilatador < 0,70','VEF1 < 50%','CVF < 80%','Resposta ao broncodilatador'],a:1,c:'DPOC: sintomas + exposição + VEF1/CVF pós-BD < 0,70 (obstrução persistente).',f:['Critério espirométrico de DPOC','VEF1/CVF pós-broncodilatador < 0,70.']},
+{id:'dp2',t:'cm-dpoc',q:'Indicação de oxigenoterapia domiciliar prolongada na DPOC estável:',o:['SpO2 ≤ 92% em repouso','PaO2 ≤ 55 mmHg ou SpO2 ≤ 88% em repouso','Qualquer dispneia aos esforços','PaCO2 > 45 mmHg','VEF1 < 30%'],a:1,c:'PaO2 ≤ 55 mmHg ou SpO2 ≤ 88%, ou PaO2 56–59 com cor pulmonale ou policitemia. Uso ≥ 15 h/dia reduz mortalidade.',f:['Indicação de O2 domiciliar na DPOC','PaO2 ≤ 55 ou SpO2 ≤ 88% (ou 56–59 com cor pulmonale/policitemia).']},
+{id:'dp3',t:'cm-dpoc',q:'Quais intervenções reduzem a mortalidade na DPOC?',o:['Corticoide inalatório isolado','Cessação do tabagismo e O2 domiciliar em hipoxêmicos','Teofilina','Mucolíticos','Antibiótico profilático contínuo'],a:1,c:'Cessar o tabagismo e a oxigenoterapia prolongada em hipoxêmicos crônicos reduzem mortalidade. Broncodilatadores melhoram sintomas e exacerbações.',f:['O que reduz mortalidade na DPOC?','Parar de fumar e O2 domiciliar (quando indicado).']},
+{id:'pn1',t:'cm-pnm',q:'Homem de 40 anos, sem comorbidades, com PAC. Lúcido, FR 22, PA 120/80, ureia normal. CURB-65 e conduta:',o:['0; tratamento ambulatorial','2; internação em enfermaria','3; UTI','1; internação obrigatória','4; UTI'],a:0,c:'CURB-65 = 0: tratamento ambulatorial (ex.: amoxicilina ou macrolídeo). 2: considerar internação. ≥ 3: internação, avaliar UTI.',f:['Componentes do CURB-65','Confusão, Ureia > 50 mg/dL, FR ≥ 30, PAS < 90 ou PAD ≤ 60, idade ≥ 65.']},
+{id:'pn2',t:'cm-pnm',q:'Agente etiológico mais comum da pneumonia adquirida na comunidade:',o:['Haemophilus influenzae','Streptococcus pneumoniae','Mycoplasma pneumoniae','Staphylococcus aureus','Klebsiella pneumoniae'],a:1,c:'Pneumococo é o principal agente da PAC em todas as faixas de gravidade.',f:['Principal agente da PAC','Streptococcus pneumoniae.']},
+{id:'pn3',t:'cm-pnm',q:'Idosa de 80 anos, confusa, FR 32 e PA 85/50. CURB-65 mínimo e conduta:',o:['2; ambulatorial','4; internação com avaliação de UTI','1; ambulatorial','3; ambulatorial com retorno em 48 h','0; alta'],a:1,c:'Confusão 1 + FR ≥ 30 1 + PA baixa 1 + idade ≥ 65 1 = 4 (sem contar ureia). Internação e avaliação de UTI.',f:['CURB-65 ≥ 3: conduta','Internação, considerar UTI.']}
+];
+
+// ===== Mnemônicos =====
+const MNEMOS = [
+  {t:'mi-sus',title:'Princípios do SUS',m:'"UIE" doutrinários: Universalidade, Integralidade, Equidade. "DRHP" organizativos: Descentraliza, Regionaliza, Hierarquiza e o Povo participa.'},
+  {t:'mi-sus',title:'Atributos da APS (Starfield)',m:'Essenciais = "PLIC": Primeiro contato, Longitudinalidade, Integralidade, Coordenação. Derivados = "FaCoCu": Familiar, Comunitária, Cultural.'},
+  {t:'mi-sus',title:'Leis do SUS',m:'"80 organiza, 42 participa": Lei 8.080 organiza o sistema; Lei 8.142 traz conselhos, conferências e repasses.'},
+  {t:'mi-prev',title:'Níveis de prevenção',m:'P1 impede que aconteça (vacina). P2 pega cedo (rastreio). P3 limita a sequela (reabilitação). P4 protege o paciente do excesso de medicina.'},
+  {t:'mi-testes',title:'Prevalência',m:'"P = I × D": a prevalência é a torneira (incidência) vezes o tempo que a água fica na banheira (duração).'},
+  {t:'mi-testes',title:'Desenhos de estudo',m:'"Coorte vai para a frente e dá Risco; caso-controle olha para trás e dá Odds."'},
+  {t:'mi-testes',title:'Sensibilidade e especificidade',m:'"SnNout / SpPin": Sensível com resultado Negativo exclui (out); Específico com resultado Positivo confirma (in).'},
+  {t:'mi-testes',title:'Prevalência e valores preditivos',m:'"Prevalência Puxa o VPP": mais doença na população, mais confiável o positivo e menos o negativo.'},
+  {t:'cm-has',title:'Primeira linha na HAS',m:'"A, C, D": A de IECA/BRA (Angiotensina), C de Cálcio (BCC), D de Diurético tiazídico. O B (betabloqueador) só entra com indicação.'},
+  {t:'cm-dlp',title:'Friedewald',m:'"LDL = CT − HDL − TG/5": o TG divide por 5, como os 5 dedos da mão. Não vale com TG > 400.'},
+  {t:'cm-ic',title:'4 pilares da ICFEr',m:'"BASS": Betabloqueador, ARNI (ou IECA/BRA), Spironolactona (ARM) e SGLT2. Furosemida tira água, não tira morte.'},
+  {t:'cm-ic',title:'Perfis de Stevenson',m:'Quente ou frio = perfusão. Seco ou úmido = congestão. "Quente e úmido" (B) é o mais comum: diurético + vasodilatador.'},
+  {t:'cm-fa',title:'CHA₂DS₂-VASc',m:'C (IC) H (HAS) A₂ (idade ≥ 75, vale 2) D (diabetes) S₂ (AVC/AIT, vale 2) V (vascular) A (65–74) Sc (sexo feminino).'},
+  {t:'cm-fa',title:'FA × flutter',m:'"FA é bagunça, flutter é serrote": FA sem P e RR irregular; flutter com dente de serra e FC ~150 (2:1).'},
+  {t:'bs-semio',title:'Sopros sistólicos e diastólicos',m:'"MRS. ASS e MS. ARD": Mitral Regurg e Aortic Stenosis são Sistólicos; Mitral Stenosis e Aortic Regurg são Diastólicos.'},
+  {t:'bs-semio',title:'Estenose aórtica',m:'"SAD": Síncope, Angina, Dispneia. Pulso parvus et tardus.'},
+  {t:'bs-semio',title:'B3 e B4',m:'B3 soa como "Ken-tu-cky" (volume demais, IC). B4 soa como "Te-nne-ssee" (ventrículo duro, HAS). Sem contração atrial (FA), sem B4.'},
+  {t:'bs-farmaut',title:'Síndrome colinérgica (organofosforado)',m:'"DUMBELS": Diarreia, Urina, Miose, Broncorreia e Bradicardia, Emese, Lacrimejamento, Salivação.'},
+  {t:'bs-farmaut',title:'Síndrome anticolinérgica (atropina)',m:'"Seco como um osso, vermelho como beterraba, quente como o inferno, cego como um morcego, louco como um chapeleiro."'},
+  {t:'bs-farmaut',title:'Feocromocitoma',m:'"A antes de B": alfa antes de beta, como no alfabeto.'},
+  {t:'bs-fisiocv',title:'Débito cardíaco',m:'"DC = FC × VS" e "VS = VDF − VSF": o que entrou menos o que sobrou.'},
+  {t:'bs-renal',title:'Arteríolas e TFG',m:'"AINE Aperta a Aferente; IECA Instala folga na Eferente": os dois derrubam a TFG de quem depende deles.'},
+  {t:'bs-anat',title:'Ramos da artéria axilar',m:'"Sempre Tem Lanche Sem Açúcar Por aí" (em inglês: "Screw The Lawyer, Save A Patient"):Superior torácica (1ª parte); Toracoacromial e Lateral torácica (2ª parte); Subescapular, circunflexa umeral Anterior e circunflexa umeral Posterior (3ª parte). Regra 1-2-3: a parte 1 tem 1 ramo, a 2 tem 2 e a 3 tem 3.'},
+  {t:'cm-valv',title:'Tríade de Beck',m:'"Pressão cai, jugular sobe, coração some": hipotensão, turgência jugular e bulhas abafadas = tamponamento.'},
+  {t:'cm-pnm',title:'CURB-65',m:'Confusão, Ureia > 50, Respiração ≥ 30, Baixa pressão, 65 anos. 0–1 casa, 2 enfermaria, ≥ 3 pensar em UTI.'},
+  {t:'cm-dpoc',title:'O2 domiciliar na DPOC',m:'"55 ou 88": PaO2 ≤ 55 mmHg ou SatO2 ≤ 88% em repouso.'},
+  {t:'mi-sepse',title:'qSOFA',m:'"22, 100 e confusão": FR ≥ 22, PAS ≤ 100 e alteração do estado mental. Prediz gravidade, mas não serve sozinho para triagem.'},
+  {t:'mi-sepse',title:'Pacote da 1ª hora',m:'"Lá Vem o ATB com 30 e Nora": Lactato, hemocultura antes do Antibiótico, 30 mL/kg de cristaloide e Noradrenalina se PAM < 65.'},
+  {t:'cm-pcr',title:'Causas reversíveis da PCR',m:'5H: Hipovolemia, Hipóxia, H+ (acidose), Hipo/hipercalemia, Hipotermia. 5T: Tensão no tórax (pneumotórax), Tamponamento, Toxinas, Trombose pulmonar, Trombose coronária.'}
+];
+
+// ===== Provas reais disponíveis na internet =====
+const EXAM_LINKS = [
+  {n:'Revalida (INEP): provas e gabaritos oficiais',u:'https://www.gov.br/inep/pt-br/areas-de-atuacao/avaliacao-e-exames-educacionais/revalida/provas-e-gabaritos',d:'Cadernos de todas as edições, publicados pelo próprio INEP.'},
+  {n:'Revalida 2025.1: etapas e gabaritos (Medway)',u:'https://www.medway.com.br/conteudos/revalida-inep-2025-1-confira-o-resultado-da-prova-objetiva/',d:'Resumo da edição e gabarito oficial.'},
+  {n:'ENARE 2023/2024: caderno e gabarito (Estratégia MED)',u:'https://med.estrategia.com/portal/noticias/gabarito-recursos-enare-2023-2024/',d:'Caderno de questões, gabarito preliminar e recursos.'},
+  {n:'ENARE 2026: prova e gabarito (Medway)',u:'https://www.medway.com.br/conteudos/prova-de-residencia-medica-e-gabarito-do-enare-2026/',d:'Edição mais recente.'},
+  {n:'SUS-SP 2024: gabarito e correção (Estratégia MED)',u:'https://med.estrategia.com/portal/noticias/gabarito-recursos-residencia-medica-sus-sp-2024/',d:'Correção comentada e recursos.'},
+  {n:'SUS-SP 2025: gabarito definitivo (Estratégia MED)',u:'https://med.estrategia.com/portal/noticias/sus-sp-2025-confira-o-gabarito-definitivo-e-resultado-preliminar-da-prova-objetiva-de-residencia-medica/',d:'Gabarito definitivo.'},
+  {n:'USP-SP 2024: correção e gabarito (Estratégia MED)',u:'https://med.estrategia.com/portal/noticias/usp-sp-residencia-medica-2023-correcao-da-prova-gabarito-e-recursos',d:'Correção da prova, recursos e gabarito definitivo.'},
+  {n:'SMS-SP 2024: prova e gabarito (Medway)',u:'https://www.medway.com.br/conteudos/prova-de-residencia-medica-e-gabarito-da-sms-sp-2024/',d:'Prova e gabarito.'},
+  {n:'SES-SP 2024, pré-requisito em Clínica Médica (PDF)',u:'https://arquivos.qconcursos.com/prova/arquivo_prova/125002/quadrix-2024-ses-sp-residente-medico-especialidades-com-pre-requisito-em-clinica-medica-prova.pdf',d:'Boa para Cardio: ECG, IC, diuréticos, FA, pericardite.'},
+  {n:'PNA Portugal: relatório da prova 2019 (Ordem dos Médicos)',u:'https://ordemdosmedicos.pt/wp-content/uploads/2020/07/Relatório_GPNA_2019_publico.pdf',d:'Como a PNA é construída e o que cobra.'}
+];
+// ===== Utilidades =====
+const $ = (s, el = document) => el.querySelector(s);
+const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const pad = n => String(n).padStart(2, '0');
+const ds = d => `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`;
+const pd = s => { const [y, m, d] = s.split('-').map(Number); return new Date(y, m - 1, d); };
+const addDays = (s, n) => { const d = pd(s); d.setDate(d.getDate() + n); return ds(d); };
+const today = () => ds(new Date());
+const WD = ['dom', 'seg', 'ter', 'qua', 'qui', 'sex', 'sáb'];
+const WDL = ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'];
+const MON = ['janeiro','fevereiro','março','abril','maio','junho','julho','agosto','setembro','outubro','novembro','dezembro'];
+const fmtShort = s => { const d = pd(s); return `${WD[d.getDay()]}, ${pad(d.getDate())}/${pad(d.getMonth() + 1)}`; };
+const fmtLong = s => { const d = pd(s); return `${WDL[d.getDay()]}, ${d.getDate()} de ${MON[d.getMonth()]}`; };
+const isWeekend = s => { const w = pd(s).getDay(); return w === 0 || w === 6; };
+const uid = () => Math.random().toString(36).slice(2, 9);
+const pct = (h, t) => t ? Math.round(100 * h / t) : null;
+const shuffle = a => { for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
+function toast(msg) { const t = $('#toast'); t.textContent = msg; t.hidden = false; clearTimeout(toast.h); toast.h = setTimeout(() => t.hidden = true, 2600); }
+function statusOf(p) { if (p == null) return ['sem dados', '']; if (p >= 80) return ['forte', 'ok']; if (p >= 70) return ['atenção', 'warn']; return ['ponto fraco', 'bad']; }
+
+// ===== Estado salvo no navegador =====
+const KEY = 'caderno-maria-v1';
+let S;
+function blank() {
+  return { v: 1, created: today(), sched: [], topics: {}, reviews: [], attempts: [], manual: [], cards: [], notes: {}, time: {}, sims: [], qimp: [], mnemos: [], lastBackup: null };
+}
+const SCHED_V = 2; // 2 = temas do manual da faculdade (MD9 2026.2)
+function load() {
+  try { const raw = localStorage.getItem(KEY); if (raw) { S = Object.assign(blank(), JSON.parse(raw)); if (S.schedV !== SCHED_V) migrateSchedule(); return; } } catch (e) {}
+  S = blank(); buildInitialSchedule(); S.schedV = SCHED_V; save();
+}
+// Refaz a agenda com os temas novos sem perder o que já foi marcado, as notas e as revisões
+function migrateSchedule() {
+  const old = S.sched;
+  S.sched = []; buildInitialSchedule();
+  old.forEach(o => { if (o.topic === 'mi-epi') o.topic = 'mi-testes'; });
+  S.reviews.forEach(r => { if (r.topic === 'mi-epi') r.topic = 'mi-testes'; });
+  S.attempts.forEach(a => { if (a.t === 'mi-epi') a.t = 'mi-testes'; });
+  S.cards.forEach(c => { if (c.t === 'mi-epi') c.t = 'mi-testes'; });
+  old.forEach(o => {
+    const n = S.sched.find(x => x.topic === o.topic);
+    if (n) { ['done', 'doneAt', 'hits', 'total'].forEach(k => { if (o[k] !== undefined) n[k] = o[k]; }); S.reviews.forEach(r => { if (r.sid === o.id) r.sid = n.id; }); }
+    else if (o.done || String(o.topic).startsWith('u-')) S.sched.push(o);
+  });
+  S.schedV = SCHED_V; save();
+}
+function save() { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) {} }
+
+const PLAN_MAP = Object.fromEntries(SEQ.map((p, i) => [p[0], { name: p[1], area: p[2], sub: p[3], kind: p[4], ref: p[5], ord: i }]));
+function topic(id) {
+  if (S.topics[id]) return S.topics[id];
+  if (FIRST_TOPICS[id]) { const [name, area, sub, ref] = FIRST_TOPICS[id]; return { name, area, sub, ref, kind: 't' }; }
+  if (PLAN_MAP[id]) return PLAN_MAP[id];
+  return { name: id, area: 'geral', sub: '', kind: 't' };
+}
+function allTopicIds() {
+  const ids = new Set([...Object.keys(FIRST_TOPICS), ...SEQ.filter(p => p[4] === 't').map(p => p[0]), ...Object.keys(S.topics)]);
+  return [...ids].filter(id => topic(id).kind === 't');
+}
+function cap(date) { return isWeekend(date) ? 2 : 1; }
+
+function buildInitialSchedule() {
+  FIRST_DAYS.forEach(([date, ids]) => ids.forEach((t, i) => S.sched.push({ id: uid(), date, topic: t, slot: SLOT_LABEL[i], kind: 't', done: false })));
+  let date = PHASE2_START, used = 0;
+  SEQ.forEach((p, i) => {
+    while (used >= cap(date)) { date = addDays(date, 1); used = 0; }
+    S.sched.push({ id: uid(), date, topic: p[0], kind: p[4], plan: true, ord: i, done: false });
+    used++;
+  });
+}
+function replan() {
+  const start = today() > PHASE2_START ? today() : PHASE2_START;
+  const usedBy = {};
+  S.sched.filter(s => s.plan && s.done && s.date >= start).forEach(s => usedBy[s.date] = (usedBy[s.date] || 0) + 1);
+  const pending = S.sched.filter(s => s.plan && !s.done).sort((a, b) => a.ord - b.ord);
+  let date = start;
+  pending.forEach(s => {
+    while ((usedBy[date] || 0) >= cap(date)) date = addDays(date, 1);
+    s.date = date; usedBy[date] = (usedBy[date] || 0) + 1;
+  });
+  save();
+}
+
+// ===== Revisões espaçadas =====
+const STEPS = [[1, 'D+1', 'flashcards do tema (10 min)'], [7, 'D+7', '10 questões'], [30, 'D+30', '10 questões'], [90, 'D+90', '10 questões intercaladas']];
+function markStudied(item, on) {
+  item.done = on; item.doneAt = on ? today() : null;
+  if (item.kind !== 't') return;
+  if (on) {
+    STEPS.forEach(([n, k, what]) => S.reviews.push({ id: uid(), sid: item.id, topic: item.topic, kind: k, what, date: addDays(item.doneAt, n), done: false }));
+  } else {
+    S.reviews = S.reviews.filter(r => r.sid !== item.id || r.done);
+  }
+}
+function studiedTopics() {
+  const s = new Set(S.sched.filter(i => i.done && i.kind === 't').map(i => i.topic));
+  S.manual.forEach(m => s.add(m.t));
+  return [...s];
+}
+
+// ===== Desempenho =====
+function perfByTopic() {
+  const P = {};
+  const add = (t, total, hits, d) => { if (!t || !total) return; const p = P[t] || (P[t] = { total: 0, hits: 0, last: '' }); p.total += +total; p.hits += +hits; if (d > p.last) p.last = d; };
+  S.attempts.forEach(a => add(a.t, 1, a.r === 'ok' ? 1 : 0, a.d));
+  S.sched.forEach(s => add(s.topic, s.total, s.hits, s.doneAt || s.date));
+  S.reviews.forEach(r => r.done && add(r.topic, r.total, r.hits, r.doneAt || r.date));
+  S.manual.forEach(m => add(m.t, m.total, m.hits, m.d));
+  return P;
+}
+function weakTopics() {
+  const P = perfByTopic();
+  return Object.keys(P).filter(t => pct(P[t].hits, P[t].total) < 70);
+}
+
+// ===== Banco de questões =====
+const bank = () => QUESTIONS.concat(S.qimp);
+function lastResult(qid) { for (let i = S.attempts.length - 1; i >= 0; i--) if (S.attempts[i].qid === qid) return S.attempts[i].r; return null; }
+function pickQuestions(topics, n) {
+  const set = new Set(topics);
+  const pool = bank().filter(q => set.has(q.t)).map(q => {
+    const r = lastResult(q.id);
+    const w = r == null ? 2 : r === 'ok' ? 0.5 : 3;
+    return { q, w: w * (0.5 + Math.random()) };
+  }).sort((a, b) => b.w - a.w);
+  // intercalar por tema (round-robin) para treinar o reconhecimento do assunto
+  const byT = {};
+  pool.forEach(({ q }) => (byT[q.t] = byT[q.t] || []).push(q));
+  const keys = shuffle(Object.keys(byT)), out = [];
+  while (out.length < n && keys.some(k => byT[k].length)) keys.forEach(k => { if (out.length < n && byT[k].length) out.push(byT[k].shift()); });
+  return out;
+}
+
+// ===== Flashcards =====
+function cardFromQuestion(q) {
+  const ex = S.cards.find(c => c.src === q.id);
+  if (ex) { ex.due = today(); ex.lapses = (ex.lapses || 0) + 1; ex.ivl = 0; return false; }
+  const [f, b] = q.f || [q.q, q.o[q.a] + '. ' + (q.c || '')];
+  S.cards.push({ id: uid(), f, b, t: q.t, due: today(), ivl: 0, ease: 2.5, reps: 0, lapses: 1, src: q.id, created: today() });
+  return true;
+}
+function dueCards(d = today()) { return S.cards.filter(c => c.due <= d); }
+function gradeCard(c, g) {
+  if (g === 0) { c.reps = 0; c.ivl = 0; c.lapses = (c.lapses || 0) + 1; c.ease = Math.max(1.3, c.ease - 0.2); c.due = today(); return; }
+  if (g === 1) { c.ivl = Math.max(1, Math.round((c.ivl || 1) * 1.2)); c.ease = Math.max(1.3, c.ease - 0.15); }
+  if (g === 2) { c.ivl = c.reps === 0 ? 1 : c.reps === 1 ? 3 : Math.round(c.ivl * c.ease); }
+  if (g === 3) { c.ivl = c.reps === 0 ? 3 : Math.round(Math.max(c.ivl, 2) * c.ease * 1.3); c.ease += 0.15; }
+  c.reps++; c.due = addDays(today(), c.ivl);
+}
+
+// ===== Ícones (traço simples) =====
+const ICONS = {
+  home: '<path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/><path d="M10 20v-6h4v6"/>',
+  calendar: '<rect x="3" y="5" width="18" height="16" rx="3"/><path d="M3 10h18M8 3v4M16 3v4"/>',
+  quiz: '<rect x="4" y="3" width="16" height="18" rx="3"/><path d="M8 8h8M8 12h8M8 16h5"/>',
+  cards: '<rect x="3" y="7" width="14" height="14" rx="3"/><path d="M7 3h11a3 3 0 0 1 3 3v11"/>',
+  chart: '<path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/>',
+  bulb: '<path d="M9 18h6M10 21h4"/><path d="M12 3a6 6 0 0 0-4 10.5c.8.8 1 1.5 1 2.5h6c0-1 .2-1.7 1-2.5A6 6 0 0 0 12 3z"/>',
+  book: '<path d="M4 4h6a3 3 0 0 1 3 3v14a2 2 0 0 0-2-2H4z"/><path d="M20 4h-6a3 3 0 0 0-3 3"/><path d="M20 4v15h-7"/>',
+  save: '<path d="M12 3v12M7 10l5 5 5-5"/><path d="M4 17v3h16v-3"/>',
+  heart: '<path d="M12 20s-7-4.4-9-9a5 5 0 0 1 9-3 5 5 0 0 1 9 3c-2 4.6-9 9-9 9z"/>',
+  pulse: '<path d="M3 12h4l2-5 4 10 2-5h6"/>',
+  clock: '<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
+  flame: '<path d="M12 3c1 3 5 5 5 10a5 5 0 0 1-10 0c0-2 1-3 2-4 0 2 1 3 2 3 0-3-1-5 1-9z"/>',
+  target: '<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/>',
+  check: '<rect x="3" y="3" width="18" height="18" rx="5"/><path d="M8 12l3 3 5-6"/>',
+  repeat: '<path d="M17 2l3 3-3 3"/><path d="M4 11V9a4 4 0 0 1 4-4h12"/><path d="M7 22l-3-3 3-3"/><path d="M20 13v2a4 4 0 0 1-4 4H4"/>',
+  users: '<circle cx="9" cy="8" r="3"/><path d="M3 20a6 6 0 0 1 12 0"/><path d="M16 4a3 3 0 0 1 0 6M21 20a6 6 0 0 0-4-5.6"/>',
+  flask: '<path d="M9 3h6M10 3v6l-5 9a2 2 0 0 0 2 3h10a2 2 0 0 0 2-3l-5-9V3"/>',
+  scissors: '<circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M8 8l12 12M8 16L20 4"/>',
+  smile: '<circle cx="12" cy="12" r="9"/><path d="M8.5 14a4 4 0 0 0 7 0M9 9.5h.01M15 9.5h.01"/>',
+  flower: '<circle cx="12" cy="12" r="2.5"/><path d="M12 9.5a3.5 3.5 0 1 1 0-7 3.5 3.5 0 1 1 0 7zM12 21.5a3.5 3.5 0 1 1 0-7 3.5 3.5 0 1 1 0 7zM9.5 12a3.5 3.5 0 1 1-7 0 3.5 3.5 0 1 1 7 0zM21.5 12a3.5 3.5 0 1 1-7 0 3.5 3.5 0 1 1 7 0z"/>',
+  cloud: '<path d="M7 18a4 4 0 0 1-.5-8 6 6 0 0 1 11.5 1.5A3.5 3.5 0 0 1 17.5 18z"/>',
+  sparkle: '<path d="M12 3l2 6 6 2-6 2-2 6-2-6-6-2 6-2z"/>'
+};
+const ic = (n, cls = '') => `<svg class="i ${cls}" viewBox="0 0 24 24" aria-hidden="true">${ICONS[n] || ''}</svg>`;
+const AREA_STYLE = {
+  cm: ['pink', 'var(--bar-pink)', 'pulse'], prev: ['lilac', 'var(--bar-lilac)', 'users'], bas: ['peach', 'var(--bar-peach)', 'flask'],
+  cir: ['sky', 'var(--bar-sky)', 'scissors'], ped: ['mint', 'var(--bar-mint)', 'smile'], go: ['pink', 'var(--bar-rose)', 'flower'],
+  psi: ['lilac', 'var(--bar-lilac)', 'cloud'], geral: ['peach', 'var(--bar-grey)', 'quiz']
+};
+const VIEW_META = {
+  hoje: [null, 'Você está fazendo um ótimo trabalho.'],
+  agenda: ['Agenda', 'Temas do manual do 9º semestre e do planejamento de 120 dias.'],
+  simulados: ['Simulados', 'Questões no formato de prova. Errou ou marcou "não sei"? Vira flashcard.'],
+  flashcards: ['Flashcards', 'Montados sozinhos a partir dos seus erros e dificuldades.'],
+  desempenho: ['Desempenho', 'Como você está indo em cada grande área.'],
+  mnemonicos: ['Mnemônicos', 'Para o que não entra na cabeça de jeito nenhum.'],
+  provas: ['Provas e tutor', 'Provas reais na internet e pedidos prontos para o tutor.'],
+  backup: ['Backup', 'Seu progresso fica só neste navegador.']
+};
+function greeting() { const h = new Date().getHours(); return h < 12 ? 'Bom dia, Maria!' : h < 18 ? 'Boa tarde, Maria!' : 'Boa noite, Maria!'; }
+function cardHead(icon, tint, title, extra = '') { return `<div class="card-head"><span class="ico t-${tint}">${ic(icon)}</span><h3>${title}</h3>${extra}</div>`; }
+function ringSVG(p, size, stroke, color, track, center, sub, ink = 'var(--ink)', subInk = 'var(--muted)') {
+  const r = (size - stroke) / 2, c = 2 * Math.PI * r, v = Math.max(0, Math.min(100, p || 0));
+  return `<svg class="ring" width="${size}" height="${size}" viewBox="0 0 ${size} ${size}" role="img" aria-label="${center} ${sub || ''}">
+    <circle cx="${size / 2}" cy="${size / 2}" r="${r}" fill="none" stroke="${track}" stroke-width="${stroke}"/>
+    <circle cx="${size / 2}" cy="${size / 2}" r="${r}" fill="none" stroke="${color}" stroke-width="${stroke}" stroke-linecap="round" stroke-dasharray="${c * v / 100} ${c}" transform="rotate(-90 ${size / 2} ${size / 2})"/>
+    <text x="50%" y="${sub ? '47%' : '53%'}" text-anchor="middle" dominant-baseline="middle" font-family="Poppins, sans-serif" font-weight="700" font-size="${size / 5.2}" fill="${ink}">${center}</text>
+    ${sub ? `<text x="50%" y="66%" text-anchor="middle" font-size="${size / 12}" font-weight="700" fill="${subInk}">${sub}</text>` : ''}</svg>`;
+}
+function donutSVG(parts, size = 170) {
+  const stroke = 24, r = (size - stroke) / 2, c = 2 * Math.PI * r, tot = parts.reduce((s, p) => s + p.v, 0);
+  let off = 0;
+  const segs = tot ? parts.map(p => { const len = c * p.v / tot; const s = `<circle cx="${size / 2}" cy="${size / 2}" r="${r}" fill="none" stroke="${p.color}" stroke-width="${stroke}" stroke-dasharray="${Math.max(0, len - 2)} ${c}" stroke-dashoffset="${-off}" transform="rotate(-90 ${size / 2} ${size / 2})"/>`; off += len; return s; }).join('')
+    : `<circle cx="${size / 2}" cy="${size / 2}" r="${r}" fill="none" stroke="var(--surface2)" stroke-width="${stroke}"/>`;
+  return `<svg width="${size}" height="${size}" viewBox="0 0 ${size} ${size}" role="img" aria-label="Questões por área">${segs}<text x="50%" y="46%" text-anchor="middle" dominant-baseline="middle" font-family="Poppins, sans-serif" font-weight="700" font-size="26" fill="var(--ink)">${tot}</text><text x="50%" y="62%" text-anchor="middle" font-size="12" font-weight="700" fill="var(--muted)">questões</text></svg>`;
+}
+
+// ===== Navegação =====
+const VIEWS = ['hoje', 'flashcards', 'agenda', 'simulados', 'desempenho', 'mnemonicos', 'provas', 'backup'];
+let viewDate = today();
+function route() {
+  const v = VIEWS.includes(location.hash.slice(1)) ? location.hash.slice(1) : 'hoje';
+  VIEWS.forEach(n => $('#v-' + n).hidden = n !== v);
+  if (route.last && route.last !== v) window.scrollTo(0, 0);
+  const [t, sub] = VIEW_META[v]; $('#greet').textContent = t || greeting(); $('#greetSub').textContent = sub;
+  renderSide();
+  route.last = v;
+  document.querySelectorAll('#tabs a').forEach(a => { if (a.getAttribute('href') === '#' + v) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current'); });
+  render(v);
+}
+function render(v) { ({ hoje: rHoje, agenda: rAgenda, simulados: rSim, flashcards: rFc, desempenho: rPerf, mnemonicos: rMn, provas: rProvas, backup: rBackup })[v](); }
+function rerender() { route(); }
+
+// ===== Componentes =====
+function areaPill(t) { const tp = topic(t); return `<span class="pill">${esc(tp.sub || AREAS[tp.area])}</span>`; }
+function schedItemHTML(s, opts = {}) {
+  const tp = topic(s.topic);
+  const kindLabel = s.kind === 'r' ? 'Revisão' : s.kind === 's' ? 'Simulado' : (s.slot || 'Tema do plano');
+  const late = !s.done && s.date < today();
+  return `<div class="item ${s.done ? 'done' : ''}">
+    <input type="checkbox" data-act="toggle" data-id="${s.id}" ${s.done ? 'checked' : ''} aria-label="Marcar como estudado">
+    <div style="min-width:0">
+      <div class="t">${esc(tp.name)}</div>
+      ${tp.ref ? `<div class="small muted">Referência: ${esc(tp.ref)}</div>` : ''}
+      <div class="meta"><span class="pill">${esc(kindLabel)}</span>${(tp.sub || AREAS[tp.area]) !== kindLabel ? areaPill(s.topic) : ''}${late ? '<span class="pill bad">atrasado</span>' : ''}${opts.showDate ? `<span class="pill">${fmtShort(s.date)}</span>` : ''}${s.done && s.kind === 't' ? '<span class="pill ok">revisões D+1, 7, 30 e 90 agendadas</span>' : ''}</div>
+      <div class="score small muted" style="margin-top:6px">${s.kind === 't' ? 'Pós-teste:' : 'Resultado:'}
+        <input type="number" min="0" data-act="score" data-f="hits" data-id="${s.id}" value="${s.hits ?? ''}" placeholder="acertos" aria-label="acertos"> de
+        <input type="number" min="0" data-act="score" data-f="total" data-id="${s.id}" value="${s.total ?? ''}" placeholder="total" aria-label="total">
+        ${s.total ? `<b>${pct(s.hits || 0, s.total)}%</b>` : ''}</div>
+    </div>
+    <div class="act"><button class="ghost" data-act="rename" data-id="${s.id}" title="Trocar o assunto">Editar</button><button class="ghost" data-act="search" data-t="${esc(s.topic)}" title="Buscar provas sobre o tema">Provas</button></div>
+  </div>`;
+}
+function reviewItemHTML(r) {
+  const tp = topic(r.topic);
+  const late = !r.done && r.date < today();
+  return `<div class="item ${r.done ? 'done' : ''}">
+    <input type="checkbox" data-act="rev" data-id="${r.id}" ${r.done ? 'checked' : ''} aria-label="Marcar revisão feita">
+    <div style="min-width:0">
+      <div class="t">${esc(r.kind)} · ${esc(tp.name)}</div>
+      <div class="meta"><span class="pill">${esc(r.what)}</span>${areaPill(r.topic)}${late ? `<span class="pill bad">venceu ${fmtShort(r.date)}</span>` : ''}</div>
+      ${r.kind !== 'D+1' ? `<div class="score small muted" style="margin-top:6px">Acertos:
+        <input type="number" min="0" data-act="rscore" data-f="hits" data-id="${r.id}" value="${r.hits ?? ''}" aria-label="acertos"> de
+        <input type="number" min="0" data-act="rscore" data-f="total" data-id="${r.id}" value="${r.total ?? 10}" aria-label="total">
+        ${r.done && r.total ? `<b>${pct(r.hits || 0, r.total)}%</b>` : ''}</div>` : ''}
+    </div>
+    <div class="act">${r.kind !== 'D+1' ? `<button class="ghost" data-act="quicksim" data-t="${esc(r.topic)}">Fazer 10 questões</button>` : `<a class="btn ghost" href="#flashcards">Abrir flashcards</a>`}</div>
+  </div>`;
+}
+
+// ===== HOJE =====
+function renderSide() {
+  const late = S.reviews.filter(r => !r.done && r.date < today()).length;
+  const due = dueCards().length;
+  $('#sideCard').innerHTML = `<b>Hoje</b>${due} flashcard${due === 1 ? '' : 's'} para revisar${late ? `, ${late} revisão(ões) atrasada(s)` : ''}.<br><span class="muted">${S.lastBackup ? 'Último backup: ' + fmtShort(S.lastBackup) : 'Faça seu primeiro backup.'}</span>`;
+}
+function rHoje() {
+  const d = viewDate, isToday = d === today();
+  const items = S.sched.filter(s => s.date === d);
+  const overdue = isToday ? S.sched.filter(s => !s.done && s.date < d && s.date >= '2026-10-30') : [];
+  const revs = S.reviews.filter(r => isToday ? (!r.done && r.date <= d) || (r.done && r.doneAt === d) : r.date === d).sort((a, b) => a.date.localeCompare(b.date));
+  const pendRev = revs.filter(r => !r.done).length;
+  const due = dueCards(d).length;
+  const mins = S.time[d] ?? '';
+  const note = FIRST_DAYS.find(x => x[0] === d)?.[2];
+  const topicsToday = items.map(i => i.topic);
+  const mn = MNEMOS.concat(S.mnemos).filter(m => topicsToday.includes(m.t));
+  const doneN = items.filter(i => i.done).length;
+  const P = perfByTopic(); let tot = 0, hit = 0; Object.values(P).forEach(p => { tot += p.total; hit += p.hits; });
+  const quick = [['flashcards', 'cards', 'peach', 'Flashcards'], ['agenda', 'calendar', 'pink', 'Agenda'], ['simulados', 'quiz', 'lilac', 'Simulados'], ['desempenho', 'chart', 'mint', 'Desempenho'], ['mnemonicos', 'bulb', 'sky', 'Mnemônicos']];
+  $('#v-hoje').innerHTML = `
+  <div class="card">
+    ${cardHead('clock', 'lilac', 'Quanto tempo você tem hoje?')}
+    <div style="display:flex;flex-wrap:wrap;gap:12px 28px;align-items:flex-start">
+      <div class="row"><label class="inline" for="minIn">Minutos disponíveis</label><input id="minIn" type="number" min="0" step="15" value="${mins}" data-act="mins" placeholder="ex.: 120"></div>
+      <div id="timePlan" style="flex:1 1 320px;min-width:0">${timePlanHTML(d, +mins || 0, items, revs, due)}</div>
+    </div>
+  </div>
+  <div class="card tint-pink" style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:14px">
+    <div style="min-width:0"><div class="eyebrow">${isToday ? 'Hoje' : (d < today() ? 'Dia passado' : 'Próximo dia')}</div><h2>${fmtLong(d)}</h2>
+      <p class="small muted" style="margin:2px 0 0">${note ? esc(note) : (d < PHASE2_START ? '3 assuntos por dia até segunda' : (isWeekend(d) ? 'Fim de semana: 2 assuntos' : 'Dia útil: 1 assunto'))}</p></div>
+    <div class="row"><button data-act="day" data-n="-1" aria-label="Dia anterior">‹</button>${isToday ? '' : '<button data-act="day" data-n="0">Hoje</button>'}<button data-act="day" data-n="1" aria-label="Próximo dia">›</button></div>
+  </div>
+  <div class="grid3" style="grid-template-columns:repeat(auto-fit,minmax(min(100%,150px),1fr))">
+    ${quick.map(([h, i, t, l]) => `<a class="card" href="#${h}" style="text-decoration:none;color:inherit;display:flex;align-items:center;gap:10px;padding:14px"><span class="ico t-${t}">${ic(i)}</span><b>${l}</b></a>`).join('')}
+  </div>
+  <div class="dash">
+    <div class="card span7">
+      ${cardHead('calendar', 'pink', 'Minha agenda de hoje', `<span class="pill">${doneN}/${items.length} feitos</span>`)}
+      <div class="list">${items.length ? items.map(s => schedItemHTML(s)).join('') : '<p class="empty">Nada agendado para este dia.</p>'}</div>
+      ${overdue.length ? `<h3 style="margin:16px 0 8px">Ficou para trás</h3><div class="list">${overdue.map(s => schedItemHTML(s, { showDate: true })).join('')}</div>` : ''}
+    </div>
+    <div class="span5" style="display:grid;gap:18px;align-content:start">
+      <div class="card">
+        ${cardHead('cards', 'peach', 'Revisões e flashcards')}
+        <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap">
+          ${ringSVG(tot ? pct(hit, tot) : 0, 104, 11, 'var(--bar-mint)', 'var(--surface2)', tot ? pct(hit, tot) + '%' : '—', 'acerto geral')}
+          <div class="stack" style="flex:1 1 150px">
+            <span class="pill ${due ? 'warn' : 'ok'}">${due} flashcard${due === 1 ? '' : 's'} para hoje</span>
+            <span class="pill ${pendRev ? 'warn' : 'ok'}">${pendRev} revisão(ões) pendente(s)</span>
+          </div>
+        </div>
+        <div class="row" style="margin-top:14px"><a class="btn soft-btn" href="#flashcards">Estudar flashcards</a><button class="primary" data-act="minisim">Mini-simulado do dia</button></div>
+      </div>
+    </div>
+    <div class="card span7">
+      ${cardHead('repeat', 'mint', `Revisões espaçadas ${isToday ? 'para fazer' : 'neste dia'}`)}
+      <div class="list">${revs.length ? revs.map(reviewItemHTML).join('') : '<p class="empty">Nenhuma revisão. Elas aparecem aqui quando você marca um tema como estudado (D+1, D+7, D+30 e D+90).</p>'}</div>
+    </div>
+    <div class="card span5">
+      ${cardHead('bulb', 'sky', 'Mnemônicos de hoje', '<a class="link" href="#mnemonicos">Ver todos ›</a>')}
+      <div class="list">${mn.length ? mn.map(m => `<div class="soft mn"><b>${esc(m.title)}</b><p class="small">${esc(m.m)}</p></div>`).join('') : '<p class="empty">Sem mnemônicos para os temas deste dia.</p>'}</div>
+    </div>
+    <div class="card span12">
+      ${cardHead('heart', 'pink', '<label for="noteIn">Como estou indo</label>')}
+      <textarea id="noteIn" data-act="note" placeholder="Como foi o estudo, o que travou, o que quero rever...">${esc(S.notes[d] || '')}</textarea>
+    </div>
+  </div>`;
+}
+function timePlanHTML(d, m, items, revs, due) {
+  if (!m) return '<p class="small muted" style="margin:0">Diga quantos minutos você tem e eu divido o tempo entre flashcards, revisões e o tema novo.</p>';
+  const fc = due ? Math.min(20, Math.max(5, Math.ceil(due * 0.75))) : 0;
+  const pend = revs.filter(r => !r.done && r.kind !== 'D+1').length;
+  let rev = Math.min(pend * 30, Math.max(0, m - fc));
+  let rest = Math.max(0, m - fc - rev);
+  const nTopics = items.filter(i => !i.done).length;
+  const study = nTopics ? Math.round(rest * 0.75) : 0;
+  const q = rest - study;
+  const nq = Math.max(0, Math.floor((q + rev) / 3));
+  const lines = [];
+  if (fc) lines.push(`<li><b>${fc} min</b> de flashcards vencidos (${due})</li>`);
+  if (rev) lines.push(`<li><b>${rev} min</b> de revisões espaçadas (${pend} × 10 questões)</li>`);
+  if (study) lines.push(`<li><b>${study} min</b> de estudo do${nTopics > 1 ? 's' : ''} tema${nTopics > 1 ? 's' : ''} novo${nTopics > 1 ? 's' : ''} (${nTopics > 1 ? `~${Math.round(study / nTopics)} min cada` : 'pré-teste → erros → recuperação ativa'})</li>`);
+  if (q) lines.push(`<li><b>${q} min</b> de questões de pós-teste</li>`);
+  const warn = m < 45 ? '<p class="small" style="margin:6px 0 0;color:var(--warn)">Tempo curto: faça os flashcards e as revisões vencidas primeiro, e deixe o tema novo para amanhã.</p>' : '';
+  return `<ul style="margin:0;padding-left:20px">${lines.join('')}</ul><p class="small muted" style="margin:6px 0 0">Mini-simulado sugerido: <b>${nq} questões</b> (~3 min cada com a correção).</p>${warn}`;
+}
+
+// ===== AGENDA =====
+let agendaAll = false;
+function rAgenda() {
+  const from = '2026-10-30';
+  const last = S.sched.reduce((m, s) => s.date > m ? s.date : m, from);
+  const until = agendaAll ? last : addDays(today() > from ? today() : from, 20);
+  const days = [];
+  for (let d = from; d <= until; d = addDays(d, 1)) days.push(d);
+  const visible = agendaAll ? days : days.filter(d => d >= addDays(today(), -3) || S.sched.some(s => s.date === d && !s.done));
+  const done = S.sched.filter(s => s.done).length;
+  $('#v-agenda').innerHTML = `
+  <div class="row" style="justify-content:space-between">
+    <div class="row"><span class="ico t-pink">${ic('calendar')}</span><h2>Seu cronograma</h2></div>
+    <div class="row"><button data-act="agendaAll">${agendaAll ? 'Mostrar só as próximas 3 semanas' : 'Ver a agenda inteira'}</button><button data-act="replan" title="Puxa os temas atrasados para a frente, a partir de hoje">Replanejar atrasados</button></div>
+  </div>
+  <div class="soft small">Temas e referências do manual do 9º semestre (Clínica Médica e MIAPS). Até segunda (02/11): 1 assunto de MIAPS + 1 de clínica médica + 1 de matéria anterior da faculdade. A partir de 03/11: 1 assunto por dia útil e 2 no sábado e no domingo, intercalando Clínica Médica e MIAPS, com uma revisão a cada 8 temas. Depois entram as outras áreas do planejamento de 120 dias. Use <b>Editar</b> para trocar o assunto pelo da sua grade. ${done} de ${S.sched.length} itens concluídos.</div>
+  <details class="card"><summary>Adicionar um assunto em qualquer dia</summary>
+    <form class="row" style="margin-top:12px" data-form="addItem">
+      <input id="addDate" type="date" required value="${today()}" aria-label="Data">
+      <input id="addName" required placeholder="Assunto (ex.: Histologia: pele e anexos)" style="flex:1;min-width:200px" aria-label="Assunto">
+      <select id="addArea" aria-label="Grande área">${Object.entries(AREAS).map(([k, v]) => `<option value="${k}">${v}</option>`).join('')}</select>
+      <button class="primary">Adicionar</button>
+    </form></details>
+  ${visible.map(d => {
+    const its = S.sched.filter(s => s.date === d);
+    const rv = S.reviews.filter(r => r.date === d);
+    if (!its.length && !rv.length) return '';
+    return `<div class="card day ${d === today() ? 'is-today' : ''}">
+      <div class="dayhead"><h3>${fmtLong(d)} ${d === today() ? '<span>· hoje</span>' : ''}</h3><span class="small muted">${its.filter(s => s.done).length}/${its.length} feitos</span></div>
+      <div class="list">${its.map(s => schedItemHTML(s)).join('')}</div>
+      ${rv.length ? `<div class="row small" style="margin-top:6px"><span class="muted">Revisões:</span>${rv.map(r => `<span class="pill ${r.done ? 'ok' : (r.date < today() ? 'bad' : '')}">${esc(r.kind)} ${esc(topic(r.topic).name)}</span>`).join('')}</div>` : ''}
+    </div>`;
+  }).join('')}`;
+}
+
+// ===== SIMULADOS =====
+let SIM = null, simTimer = null;
+function rSim() {
+  if (SIM) return renderSimRun();
+  const studied = studiedTopics();
+  const all = allTopicIds();
+  const withQ = new Set(bank().map(q => q.t));
+  $('#v-simulados').innerHTML = `
+  
+  <form class="card stack" data-form="simStart">
+    <fieldset style="border:0;padding:0;margin:0" class="stack"><legend class="eyebrow" style="margin-bottom:6px">Quais temas</legend>
+      <label class="inline"><input type="radio" name="mode" value="estudados" checked> Temas que já estudei (${studied.length})</label>
+      <label class="inline"><input type="radio" name="mode" value="fracos"> Meus pontos fracos (${weakTopics().length})</label>
+      <label class="inline"><input type="radio" name="mode" value="todos"> Tudo o que tem questão, misturado</label>
+      <label class="inline"><input type="radio" name="mode" value="escolher"> Escolher os temas</label>
+    </fieldset>
+    <div class="chk" id="simTopics">${all.filter(t => withQ.has(t)).map(t => `<label><input type="checkbox" value="${t}" ${studied.includes(t) ? 'checked' : ''}> ${esc(topic(t).name)}</label>`).join('')}</div>
+    <div class="row">
+      <label class="inline" for="simN">Nº de questões</label>
+      <select id="simN">${[5, 10, 15, 20, 30].map(n => `<option ${n === 10 ? 'selected' : ''}>${n}</option>`).join('')}</select>
+      <label class="inline"><input type="checkbox" id="simClock" checked> Cronômetro</label>
+    </div>
+    <div class="row"><button class="primary">Começar simulado</button><span class="small muted">${bank().length} questões no banco, em ${withQ.size} temas. Errou ou marcou "não sei"? Vira flashcard.</span></div>
+  </form>
+  <div class="card">
+    <h3>Simulados anteriores</h3>
+    ${S.sims.length ? `<div class="tablewrap"><table><thead><tr><th>Data</th><th class="num">Questões</th><th class="num">Acertos</th><th class="num">Não sei</th><th class="num">%</th><th>Temas</th></tr></thead><tbody>
+      ${S.sims.slice().reverse().map(s => `<tr><td>${fmtShort(s.d)}</td><td class="num">${s.n}</td><td class="num">${s.ok}</td><td class="num">${s.ns}</td><td class="num">${pct(s.ok, s.n)}%</td><td>${esc(s.topics.map(t => topic(t).name).join(', '))}</td></tr>`).join('')}
+    </tbody></table></div>` : '<p class="empty">Nenhum simulado feito ainda.</p>'}
+  </div>`;
+}
+function startSim(topics, n, clock, label) {
+  const qs = pickQuestions(topics, n);
+  if (!qs.length) { toast('Ainda não há questões desses temas. Importe questões na aba Provas e tutor.'); return; }
+  SIM = { qs, i: 0, res: [], answered: false, start: Date.now(), clock, label, newCards: 0 };
+  location.hash = '#simulados'; rerender();
+  if (clock) { clearInterval(simTimer); simTimer = setInterval(() => { const el = $('#simClockOut'); if (el) el.textContent = elapsed(); }, 1000); }
+}
+const elapsed = () => { const s = Math.floor((Date.now() - SIM.start) / 1000); return `${pad(Math.floor(s / 60))}:${pad(s % 60)}`; };
+function renderSimRun() {
+  const v = $('#v-simulados');
+  if (SIM.i >= SIM.qs.length) return renderSimEnd();
+  const q = SIM.qs[SIM.i], r = SIM.res[SIM.i];
+  const L = 'ABCDE';
+  v.innerHTML = `
+  <div class="row" style="justify-content:space-between"><div><div class="eyebrow">${esc(SIM.label || 'Simulado')}</div><h2>Questão ${SIM.i + 1} de ${SIM.qs.length}</h2></div>
+    <div class="row">${SIM.clock ? `<span class="pill" id="simClockOut">${elapsed()}</span>` : ''}<button data-act="simQuit">Encerrar</button></div></div>
+  <div class="progress"><i style="width:${100 * SIM.i / SIM.qs.length}%"></i></div>
+  <div class="card q-card">
+    <div class="q-meta">${esc(topic(q.t).name)}${q.fonte ? ' · ' + esc(q.fonte) : ''}</div>
+    <div class="q-text">${esc(q.q)}</div>
+    <div class="opts">${q.o.map((o, i) => {
+      let cls = '';
+      if (r) { if (i === q.a) cls = 'right'; else if (r.pick === i) cls = 'wrong'; }
+      return `<button class="opt ${cls}" data-act="simPick" data-i="${i}" ${r ? 'disabled' : ''}>${L[i]}) ${esc(o)}${r && i === q.a ? ' ✓' : ''}</button>`;
+    }).join('')}</div>
+    ${r ? `<div class="feedback"><b>${r.r === 'ok' ? 'Acertou.' : r.r === 'ns' ? 'Marcada como "não sei".' : 'Errou.'}</b> ${r.r !== 'ok' ? 'Virou flashcard. ' : ''}<b>Comentário:</b> ${esc(q.c)}</div>
+      <div class="row"><button class="primary" data-act="simNext">${SIM.i + 1 < SIM.qs.length ? 'Próxima questão' : 'Ver resultado'}</button></div>`
+      : `<div class="row"><button data-act="simNS">Não sei</button></div>`}
+  </div>`;
+}
+function simAnswer(pick) {
+  const q = SIM.qs[SIM.i];
+  const r = pick === null ? 'ns' : pick === q.a ? 'ok' : 'err';
+  SIM.res[SIM.i] = { pick, r };
+  S.attempts.push({ qid: q.id, t: q.t, d: today(), r });
+  if (r !== 'ok' && cardFromQuestion(q)) SIM.newCards++;
+  save(); renderSimRun();
+}
+function renderSimEnd() {
+  clearInterval(simTimer);
+  const n = SIM.res.length, ok = SIM.res.filter(r => r && r.r === 'ok').length, ns = SIM.res.filter(r => r && r.r === 'ns').length;
+  if (!SIM.saved && n) { S.sims.push({ d: today(), n, ok, ns, topics: [...new Set(SIM.qs.slice(0, n).map(q => q.t))], time: elapsed() }); SIM.saved = true; save(); }
+  const byT = {};
+  SIM.qs.slice(0, n).forEach((q, i) => { const b = byT[q.t] || (byT[q.t] = { n: 0, ok: 0 }); b.n++; if (SIM.res[i]?.r === 'ok') b.ok++; });
+  const p = pct(ok, n);
+  $('#v-simulados').innerHTML = `
+  <div><div class="eyebrow">Resultado</div><h2>${ok} de ${n} (${p ?? 0}%)</h2></div>
+  <div class="grid3">
+    <div class="kpi"><span class="small muted">Acertos</span><b>${ok}</b></div>
+    <div class="kpi"><span class="small muted">Erros</span><b>${n - ok - ns}</b></div>
+    <div class="kpi"><span class="small muted">Não sei</span><b>${ns}</b></div>
+    <div class="kpi"><span class="small muted">Flashcards novos</span><b>${SIM.newCards}</b></div>
+  </div>
+  <div class="card"><h3>Por tema</h3><div class="bars" style="margin-top:12px">${Object.entries(byT).map(([t, b]) => barHTML(topic(t).name, pct(b.ok, b.n), `${b.ok}/${b.n}`)).join('')}</div></div>
+  <div class="card"><h3>Revisar</h3>${SIM.qs.slice(0, n).map((q, i) => SIM.res[i]?.r === 'ok' ? '' : `<div class="item"><span class="pill ${SIM.res[i]?.r === 'ns' ? 'warn' : 'bad'}">${SIM.res[i]?.r === 'ns' ? 'não sei' : 'errei'}</span><div style="min-width:0"><div class="t">${esc(q.q)}</div><p class="small" style="margin:4px 0 0"><b>Resposta:</b> ${esc(q.o[q.a])}. ${esc(q.c)}</p></div><span></span></div>`).join('') || '<p class="empty">Gabaritou. Nada para revisar.</p>'}</div>
+  <div class="row"><button class="primary" data-act="simNew">Novo simulado</button><a class="btn" href="#flashcards">Ir para os flashcards</a></div>`;
+}
+
+// ===== FLASHCARDS =====
+let FCQ = null, fcShow = false, fcFilter = '';
+function rFc() {
+  const due = dueCards();
+  const v = $('#v-flashcards');
+  if (FCQ && FCQ.length) {
+    const c = S.cards.find(x => x.id === FCQ[0]);
+    v.innerHTML = `
+    <div class="row" style="justify-content:space-between"><div><div class="eyebrow">${esc(topic(c.t).name)}</div><h2>Revisando: faltam ${FCQ.length}</h2></div><button data-act="fcStop">Parar</button></div>
+    <div class="card fc"><div><div>${esc(c.f)}</div>${fcShow ? `<div class="back">${esc(c.b)}</div>` : ''}</div></div>
+    <div class="row" style="justify-content:center">${fcShow
+      ? `<button class="danger" data-act="fcGrade" data-g="0">Errei</button><button data-act="fcGrade" data-g="1">Difícil</button><button class="primary" data-act="fcGrade" data-g="2">Bom</button><button data-act="fcGrade" data-g="3">Fácil</button>`
+      : `<button class="primary" data-act="fcFlip">Mostrar resposta</button>`}</div>`;
+    return;
+  }
+  const list = S.cards.filter(c => !fcFilter || c.t === fcFilter).sort((a, b) => a.due.localeCompare(b.due));
+  const tset = [...new Set(S.cards.map(c => c.t))];
+  v.innerHTML = `
+  
+  <div class="grid3">
+    <div class="kpi"><span class="small muted">Para hoje</span><b>${due.length}</b></div>
+    <div class="kpi"><span class="small muted">No baralho</span><b>${S.cards.length}</b></div>
+    <div class="kpi"><span class="small muted">Vindos de erros</span><b>${S.cards.filter(c => c.src).length}</b></div>
+    <div class="kpi"><span class="small muted">Mais difíceis (≥ 2 lapsos)</span><b>${S.cards.filter(c => (c.lapses || 0) >= 2).length}</b></div>
+  </div>
+  <div class="row"><button class="primary" data-act="fcStart" ${due.length ? '' : 'disabled'}>Revisar ${due.length} cartão(ões) de hoje</button><button data-act="fcAll" ${S.cards.length ? '' : 'disabled'}>Treinar todos agora</button></div>
+  <details class="card"><summary>Criar um cartão</summary>
+    <form class="stack" style="margin-top:12px" data-form="addCard">
+      <select id="cardT" aria-label="Tema">${allTopicIds().map(t => `<option value="${t}">${esc(topic(t).name)}</option>`).join('')}</select>
+      <textarea id="cardF" required placeholder="Frente (pergunta)" style="min-height:60px" aria-label="Frente"></textarea>
+      <textarea id="cardB" required placeholder="Verso (resposta)" style="min-height:60px" aria-label="Verso"></textarea>
+      <div><button class="primary">Salvar cartão</button></div>
+    </form></details>
+  <div class="card">
+    <div class="dayhead"><h3>Baralho</h3><select data-act="fcFilter" aria-label="Filtrar por tema"><option value="">Todos os temas</option>${tset.map(t => `<option value="${t}" ${t === fcFilter ? 'selected' : ''}>${esc(topic(t).name)}</option>`).join('')}</select></div>
+    ${list.length ? list.map(c => `<div class="item"><span class="pill ${c.due <= today() ? 'warn' : ''}">${c.due <= today() ? 'hoje' : fmtShort(c.due)}</span><div style="min-width:0"><div class="t">${esc(c.f)}</div><div class="small muted">${esc(c.b)}</div><div class="meta">${areaPill(c.t)}${c.lapses ? `<span class="pill bad">${c.lapses} erro(s)</span>` : ''}</div></div><div class="act"><button class="ghost danger" data-act="fcDel" data-id="${c.id}">Apagar</button></div></div>`).join('')
+      : '<p class="empty">O baralho começa vazio. Cada questão que você errar ou marcar como "não sei" nos simulados vira um cartão aqui, com revisão espaçada.</p>'}
+  </div>`;
+}
+
+// ===== DESEMPENHO =====
+function barHTML(label, p, sub, area) {
+  const [, cls] = statusOf(p);
+  const st = AREA_STYLE[area];
+  const color = st ? st[1] : (cls === 'ok' ? 'var(--ok)' : cls === 'warn' ? 'var(--warn)' : cls === 'bad' ? 'var(--bad)' : 'var(--accent)');
+  return `<div class="bar">${st ? `<span class="dot t-${st[0]}">${ic(st[2])}</span>` : '<span></span>'}<span class="name">${esc(label)}${sub ? ` <small>· ${sub}</small>` : ''}</span><span class="v" style="color:${p == null ? 'var(--muted)' : 'inherit'}">${p == null ? '—' : p + '%'}</span><div class="track"><div class="fill" style="width:${p ?? 0}%;background:${color}"></div></div></div>`;
+}
+function dayTotals() {
+  const daily = {};
+  const add = (d, n, h) => { if (!d || !n) return; const x = daily[d] || (daily[d] = [0, 0]); x[0] += +n; x[1] += +(h || 0); };
+  S.attempts.forEach(a => add(a.d, 1, a.r === 'ok' ? 1 : 0));
+  S.reviews.forEach(r => r.done && add(r.doneAt, r.total, r.hits));
+  S.sched.forEach(s => s.total && add(s.doneAt || s.date, s.total, s.hits));
+  S.manual.forEach(m => add(m.d, m.total, m.hits));
+  return daily;
+}
+function weekHTML() {
+  const daily = dayTotals();
+  const days = []; for (let i = 6; i >= 0; i--) days.push(addDays(today(), -i));
+  const W = 560, H = 200, B = 34, T = 26, slot = W / 7, bw = Math.min(46, slot * .55), y = v => T + (H - T - B) * (1 - v / 100);
+  const bars = days.map((d, i) => {
+    const x = i * slot + (slot - bw) / 2, v = daily[d] ? pct(daily[d][1], daily[d][0]) : null;
+    const top = v == null ? H - B - 6 : y(v);
+    return `<rect x="${x}" y="${top}" width="${bw}" height="${H - B - top}" rx="10" fill="${v == null ? 'var(--surface2)' : 'var(--bar-lilac)'}"/>
+      ${v != null ? `<text x="${x + bw / 2}" y="${top - 7}" text-anchor="middle" font-size="12" font-weight="800" fill="var(--ink)">${v}%</text>` : ''}
+      <text x="${x + bw / 2}" y="${H - 12}" text-anchor="middle" font-size="12" font-weight="700" fill="var(--muted)">${WD[pd(d).getDay()]}</text>`;
+  }).join('');
+  return `<div class="tablewrap"><svg viewBox="0 0 ${W} ${H}" width="100%" role="img" aria-label="Acerto por dia na última semana">
+    <line x1="0" x2="${W}" y1="${y(80)}" y2="${y(80)}" stroke="var(--bar-lilac)" stroke-dasharray="5 5"/>
+    <text x="${W}" y="${y(80) - 6}" text-anchor="end" font-size="11" font-weight="800" fill="var(--lilac-ink)">meta 80%</text>${bars}</svg></div>`;
+}
+function rPerf() {
+  const P = perfByTopic();
+  let tot = 0, hit = 0; Object.values(P).forEach(p => { tot += p.total; hit += p.hits; });
+  const byArea = {};
+  Object.entries(P).forEach(([t, p]) => { const a = topic(t).area; const b = byArea[a] || (byArea[a] = { total: 0, hits: 0 }); b.total += p.total; b.hits += p.hits; });
+  const tTopics = S.sched.filter(s => s.kind === 't');
+  const studied = tTopics.filter(s => s.done).length;
+  const late = S.reviews.filter(r => !r.done && r.date < today()).length;
+  const revDone = S.reviews.filter(r => r.done).length;
+  const daily = dayTotals();
+  const days = new Set([...Object.keys(daily), ...S.sched.filter(s => s.done).map(s => s.doneAt)]);
+  let streak = 0; for (let d = today(); days.has(d); d = addDays(d, -1)) streak++;
+  const g = tot ? pct(hit, tot) : null;
+  const rows = Object.entries(P).sort((a, b) => pct(a[1].hits, a[1].total) - pct(b[1].hits, b[1].total));
+  const weak = rows.filter(([, p]) => pct(p.hits, p.total) < 70).slice(0, 6);
+  const areaKeys = Object.keys(AREAS).filter(a => a !== 'geral' || byArea.geral);
+  const parts = areaKeys.filter(a => byArea[a]).map(a => ({ a, v: byArea[a].total, color: AREA_STYLE[a][1] }));
+  $('#v-desempenho').innerHTML = `
+  <div class="hero">
+    ${ringSVG(g ?? 0, 132, 12, 'var(--bar-pink)', 'rgba(255,255,255,.15)', g == null ? '—' : g + '%', 'da meta: 80%', 'var(--hero-ink)', 'var(--hero-sub)')}
+    <div>
+      <div class="eyebrow">Acerto geral</div>
+      <h2>${g == null ? 'Comece pelo primeiro simulado' : g >= 80 ? 'Acima da meta. Continue assim!' : g >= 70 ? 'Quase na meta de 80%' : 'Abaixo da meta, foco nos pontos fracos'}</h2>
+      <p>${hit} acertos em ${tot} questões, somando simulados, revisões, pós-testes e questões de fora.</p>
+      <div class="chips"><span class="chip">${studied}/${tTopics.length} temas estudados</span><span class="chip">${revDone} revisões feitas</span><span class="chip">${S.cards.length} flashcards</span></div>
+    </div>
+  </div>
+  <div class="grid3">
+    <div class="kpi"><span class="lab"><span class="ico t-pink">${ic('check')}</span>Temas estudados</span><b>${studied}</b><span class="sub">de ${tTopics.length} na agenda</span></div>
+    <div class="kpi"><span class="lab"><span class="ico t-${late ? 'peach' : 'mint'}">${ic('repeat')}</span>Revisões atrasadas</span><b style="color:${late ? 'var(--bad)' : 'var(--ok)'}">${late ? late : 'zerada'}</b><span class="sub">${revDone} feitas até agora</span></div>
+    <div class="kpi"><span class="lab"><span class="ico t-peach">${ic('flame')}</span>Dias seguidos</span><b>${streak}</b><span class="sub">${days.size} dias de estudo no total</span></div>
+    <div class="kpi"><span class="lab"><span class="ico t-lilac">${ic('cards')}</span>Flashcards hoje</span><b>${dueCards().length}</b><span class="sub">${S.cards.filter(c => (c.lapses || 0) >= 2).length} difíceis (2+ erros)</span></div>
+  </div>
+  <div class="dash">
+    <div class="card span7">
+      ${cardHead('chart', 'pink', 'Por grande área', '<span class="small muted">meta 80%</span>')}
+      <div class="bars">${areaKeys.map(a => { const b = byArea[a]; return barHTML(AREAS[a], b ? pct(b.hits, b.total) : null, b ? `${b.total} questões` : 'sem dados', a); }).join('')}</div>
+    </div>
+    <div class="card span5">
+      ${cardHead('target', 'lilac', 'Questões por área')}
+      <div class="donut-wrap">${donutSVG(parts)}
+        <div class="legend">${parts.length ? parts.map(p => `<div><i style="background:${p.color}"></i><span>${AREAS[p.a]}</span><b>${p.v}</b></div>`).join('') : '<p class="empty">Ainda sem questões registradas.</p>'}</div>
+      </div>
+    </div>
+    <div class="card span7">
+      ${cardHead('calendar', 'lilac', 'Sua semana', '<span class="small muted">% de acerto por dia</span>')}
+      ${weekHTML()}
+    </div>
+    <div class="card span5">
+      ${cardHead('flame', 'peach', 'Pontos fracos', '<a class="link" href="#simulados">Treinar ›</a>')}
+      <div class="bars">${weak.length ? weak.map(([t, p]) => barHTML(topic(t).name, pct(p.hits, p.total), `${p.total} q.`, null)).join('') : '<p class="empty">Nenhum tema abaixo de 70%.</p>'}</div>
+    </div>
+    <div class="card span12">
+      ${cardHead('book', 'sky', 'Por tema')}
+      ${rows.length ? `<div class="tablewrap"><table><thead><tr><th>Tema</th><th>Bloco</th><th class="num">Questões</th><th class="num">%</th><th>Situação</th><th>Última vez</th></tr></thead><tbody>
+      ${rows.map(([t, p]) => { const v = pct(p.hits, p.total); const [lab, cls] = statusOf(v); return `<tr><td>${esc(topic(t).name)}</td><td>${esc(topic(t).sub || AREAS[topic(t).area])}</td><td class="num">${p.total}</td><td class="num">${v}%</td><td><span class="pill ${cls}">${lab}</span></td><td>${p.last ? fmtShort(p.last) : ''}</td></tr>`; }).join('')}
+      </tbody></table></div>` : '<p class="empty">Os resultados chegam dos simulados, das revisões com nota, dos pós-testes da agenda e do registro abaixo.</p>'}
+    </div>
+    <form class="card span12" data-form="manual">
+      ${cardHead('quiz', 'mint', 'Registrar questões feitas fora daqui')}
+      <p class="small muted" style="margin:0 0 10px">Questões da faculdade, do banco do cursinho ou do tutor.</p>
+      <div class="row">
+        <select id="manT" aria-label="Tema">${allTopicIds().map(t => `<option value="${t}">${esc(topic(t).name)}</option>`).join('')}</select>
+        <input id="manH" type="number" min="0" required placeholder="acertos" aria-label="acertos"> de <input id="manN" type="number" min="1" required placeholder="total" aria-label="total">
+        <input id="manD" type="date" value="${today()}" aria-label="Data">
+        <button class="primary">Registrar</button>
+      </div>
+    </form>
+  </div>`;
+}
+
+// ===== MNEMÔNICOS =====
+let mnMode = 'estudados';
+function rMn() {
+  const all = MNEMOS.concat(S.mnemos);
+  const todayT = S.sched.filter(s => s.date === today()).map(s => s.topic);
+  const st = studiedTopics().concat(todayT);
+  const list = mnMode === 'todos' ? all : all.filter(m => (mnMode === 'hoje' ? todayT : st).includes(m.t));
+  const groups = {};
+  list.forEach(m => (groups[m.t] = groups[m.t] || []).push(m));
+  $('#v-mnemonicos').innerHTML = `
+  
+  <div class="row"><label class="inline" for="mnMode">Mostrar</label><select id="mnMode" data-act="mnMode">
+    <option value="hoje" ${mnMode === 'hoje' ? 'selected' : ''}>Temas de hoje</option>
+    <option value="estudados" ${mnMode === 'estudados' ? 'selected' : ''}>Temas que já estudei e os de hoje</option>
+    <option value="todos" ${mnMode === 'todos' ? 'selected' : ''}>Todos (${all.length})</option></select></div>
+  ${Object.keys(groups).length ? `<div class="grid2">${Object.entries(groups).map(([t, ms]) => `<div class="card stack"><div class="eyebrow">${esc(topic(t).name)}</div>${ms.map(m => `<div class="mn"><b>${esc(m.title)}</b><p>${esc(m.m)}</p>${m.mine ? `<div><button class="ghost danger" data-act="mnDel" data-id="${m.id}">Apagar</button></div>` : ''}</div>`).join('<hr style="border:0;border-top:1px solid var(--line);margin:4px 0">')}</div>`).join('')}</div>`
+    : '<p class="empty">Nenhum mnemônico para este filtro. Troque para "Todos" ou crie o seu abaixo.</p>'}
+  <details class="card"><summary>Criar o meu</summary>
+    <form class="stack" style="margin-top:12px" data-form="addMn">
+      <select id="mnT" aria-label="Tema">${allTopicIds().map(t => `<option value="${t}">${esc(topic(t).name)}</option>`).join('')}</select>
+      <input id="mnTitle" required placeholder="Do que se trata (ex.: ramos da artéria axilar)" aria-label="Título">
+      <textarea id="mnText" required placeholder="O mnemônico" aria-label="Mnemônico"></textarea>
+      <div><button class="primary">Salvar</button></div>
+    </form></details>`;
+}
+
+// ===== PROVAS E TUTOR =====
+function rProvas() {
+  const ids = allTopicIds();
+  $('#v-provas').innerHTML = `
+  
+  <div class="card stack"><h3>Procurar provas na internet</h3>
+    <p class="small muted" style="margin:0">Abre a busca já filtrada para PDFs de provas e gabaritos do tema.</p>
+    <form class="row" data-form="search"><input id="srch" placeholder="Tema (ex.: insuficiência cardíaca)" style="flex:1;min-width:200px" value="${esc(searchTerm)}" aria-label="Tema"><button class="primary">Buscar</button></form>
+    <div class="row" id="srchLinks">${searchLinks(searchTerm)}</div>
+  </div>
+  <div class="card"><h3>Onde estão as provas anteriores</h3>
+    ${EXAM_LINKS.map(l => `<div class="item"><span class="pill">prova</span><div style="min-width:0"><a class="t" href="${l.u}" target="_blank" rel="noopener" style="color:var(--accent)">${esc(l.n)}</a><div class="small muted">${esc(l.d)}</div></div><span></span></div>`).join('')}
+  </div>
+  <div class="card stack"><h3>Pedir ao tutor</h3>
+    <p class="small muted" style="margin:0">Escolha o tema e o tipo de pedido, copie e cole no seu tutor de medicina aqui no projeto.</p>
+    <div class="row"><select id="tutT" aria-label="Tema">${ids.map(t => `<option value="${t}">${esc(topic(t).name)}</option>`).join('')}</select></div>
+    <div class="row">
+      <button data-act="tut" data-k="prof">Professor particular</button>
+      <button data-act="tut" data-k="corrige">Eu explico, ele corrige</button>
+      <button data-act="tut" data-k="caso">Caso clínico</button>
+      <button data-act="tut" data-k="questoes">Questões de provas reais</button>
+      <button data-act="tut" data-k="mnemo">Mnemônico</button>
+    </div>
+    <textarea id="tutMine" placeholder="Para 'Eu explico, ele corrige': escreva aqui o que você entendeu do tema." aria-label="Minha explicação"></textarea>
+    <textarea id="tutOut" readonly placeholder="O pedido aparece aqui." aria-label="Pedido pronto"></textarea>
+    <div><button class="primary" data-act="copy" data-src="tutOut">Copiar pedido</button></div>
+  </div>
+  <div class="card stack"><h3>Importar questões</h3>
+    <p class="small muted" style="margin:0">Cole a lista que o tutor devolver (formato abaixo). As questões entram no banco e nos simulados. Já importadas: ${S.qimp.length}.</p>
+    <textarea id="impQ" placeholder='[{"t":"cm-ic","q":"Enunciado...","o":["A","B","C","D","E"],"a":2,"c":"Comentário","f":["Frente","Verso"],"fonte":"ENARE 2024"}]' aria-label="Questões em JSON"></textarea>
+    <div class="row"><button class="primary" data-act="impQ">Importar</button>${S.qimp.length ? '<button class="danger" data-act="clearQ">Apagar as importadas</button>' : ''}</div>
+    <details><summary>Códigos dos temas</summary><div class="tablewrap"><table><tbody>${ids.map(t => `<tr><td><code>${t}</code></td><td>${esc(topic(t).name)}</td></tr>`).join('')}</tbody></table></div></details>
+  </div>`;
+}
+let searchTerm = '';
+function searchLinks(term) {
+  if (!term) return '';
+  const g = q => 'https://www.google.com/search?q=' + encodeURIComponent(q);
+  return [
+    ['PDF de provas de residência', `"${term}" prova residência médica gabarito filetype:pdf`],
+    ['Revalida', `"${term}" Revalida INEP questão`],
+    ['ENARE e SUS-SP', `"${term}" ENARE OR "SUS-SP" questão comentada`],
+    ['Banco de questões', `site:qconcursos.com "${term}" residência médica`],
+    ['Portugal (PNA)', `"${term}" Prova Nacional de Acesso pergunta`]
+  ].map(([l, q]) => `<a class="btn" href="${g(q)}" target="_blank" rel="noopener">${l}</a>`).join('');
+}
+function tutorPrompt(k, t) {
+  const n = topic(t).name;
+  const ref = topic(t).ref ? ` Use como base a referência indicada pela minha faculdade: ${topic(t).ref}.` : '';
+  const mine = $('#tutMine').value.trim();
+  return ({
+    prof: `Me explica ${n} como se eu tivesse 12 anos. Depois repete no nível de prova de residência, com os 5 pontos que mais caem e as divergências Brasil × Portugal, se houver.`,
+    corrige: `Eu vou explicar ${n} com as minhas palavras. Aponte o que está errado, o que está faltando e o que está certo, sem reescrever tudo por mim. Termine com 3 perguntas para testar se entendi.\n\nMinha explicação:\n${mine || '(escreva sua explicação aqui)'}`,
+    caso: `Monte um caso clínico sobre ${n} que ligue anatomia e fisiologia à prática. Apresente em etapas (história, exame, exames, conduta), com uma pergunta em cada etapa, e só mostre a resposta depois que eu responder.`,
+    questoes: `Procure na internet provas reais (Revalida/INEP, ENARE, SUS-SP, USP, SES e PNA de Portugal) com questões sobre ${n}. Com base nelas, crie 10 questões no mesmo estilo e devolva só uma lista JSON neste formato, para eu importar no meu site:\n[{"t":"${t}","q":"enunciado","o":["alternativa A","B","C","D","E"],"a":0,"c":"comentário curto","f":["frente do flashcard","verso"],"fonte":"prova e ano que inspirou"}]\nO campo "a" é o índice da correta, começando em 0.`,
+    mnemo: `Crie 3 mnemônicos em português para ${n}, focados no que mais cai em prova. Explique cada letra.`
+  })[k] + (k === 'questoes' ? '' : ref);
+}
+
+// ===== BACKUP =====
+let restoreArmed = false, resetArmed = false;
+function rBackup() {
+  const json = JSON.stringify(S);
+  $('#v-backup').innerHTML = `
+  
+  <div class="soft small">Se limpar os dados do navegador ou trocar de aparelho, o progresso não vai junto. Faça backup toda semana. ${S.lastBackup ? `Último backup: <b>${fmtShort(S.lastBackup)}</b>.` : '<b>Você ainda não fez nenhum backup.</b>'}</div>
+  <div class="card stack"><h3>Salvar backup</h3>
+    <div class="row"><button class="primary" data-act="download">Baixar arquivo de backup</button><button data-act="copy" data-src="bkOut" data-bk="1">Copiar backup</button></div>
+    <p class="small muted" style="margin:0">Se o download não abrir aqui, use "Copiar backup" e cole num e-mail ou nas suas notas.</p>
+    <textarea id="bkOut" readonly style="min-height:80px;font-size:.8rem" aria-label="Backup">${esc(json)}</textarea>
+  </div>
+  <div class="card stack"><h3>Restaurar</h3>
+    <div class="row"><label class="inline" for="bkFile">Arquivo</label><input id="bkFile" type="file" accept=".json,application/json"></div>
+    <textarea id="bkIn" placeholder="...ou cole o texto do backup aqui" aria-label="Colar backup"></textarea>
+    <div class="row"><button class="primary" data-act="restore">${restoreArmed ? 'Confirmar: substituir tudo pelo backup' : 'Restaurar backup'}</button>${restoreArmed ? '<button data-act="restoreCancel">Cancelar</button>' : ''}</div>
+  </div>
+  <div class="card stack"><h3>Começar do zero</h3>
+    <p class="small muted" style="margin:0">Apaga agenda, revisões, simulados e flashcards deste navegador.</p>
+    <div class="row"><button class="danger" data-act="reset">${resetArmed ? 'Confirmar: apagar tudo' : 'Apagar meu progresso'}</button>${resetArmed ? '<button data-act="resetCancel">Cancelar</button>' : ''}</div>
+  </div>`;
+}
+
+// ===== Eventos =====
+document.addEventListener('click', e => {
+  const b = e.target.closest('[data-act]'); if (!b || b.tagName === 'INPUT' && b.type !== 'checkbox' || b.tagName === 'SELECT' || b.tagName === 'TEXTAREA') return;
+  const a = b.dataset.act, id = b.dataset.id;
+  if (a === 'toggle') { const s = S.sched.find(x => x.id === id); markStudied(s, b.checked); save(); toast(b.checked ? (s.kind === 't' ? 'Estudado. Revisões D+1, D+7, D+30 e D+90 agendadas.' : 'Concluído.') : 'Desmarcado.'); return rerender(); }
+  if (a === 'rev') { const r = S.reviews.find(x => x.id === id); r.done = b.checked; r.doneAt = b.checked ? today() : null; save(); toast(b.checked ? 'Revisão registrada.' : 'Desmarcada.'); return rerender(); }
+  if (a === 'rename') { const s = S.sched.find(x => x.id === id); const el = b.closest('.item').querySelector('.t'); const tp = topic(s.topic);
+    el.innerHTML = `<form class="row" data-form="rename" data-id="${id}"><input id="rn-${id}" value="${esc(tp.name)}" style="flex:1;min-width:180px" aria-label="Novo assunto"><select id="ra-${id}" aria-label="Área">${Object.entries(AREAS).map(([k, v]) => `<option value="${k}" ${k === tp.area ? 'selected' : ''}>${v}</option>`).join('')}</select><button class="primary">Salvar</button></form>`;
+    $(`#rn-${id}`).focus(); return; }
+  if (a === 'search') { searchTerm = topic(b.dataset.t).name.split(':')[0]; location.hash = '#provas'; return; }
+  if (a === 'day') { viewDate = b.dataset.n === '0' ? today() : addDays(viewDate, +b.dataset.n); return rHoje(); }
+  if (a === 'minisim') {
+    const d = today();
+    const revT = S.reviews.filter(r => !r.done && r.date <= d && r.kind !== 'D+1').map(r => r.topic);
+    let ts = [...new Set([...revT, ...weakTopics(), ...S.sched.filter(s => s.date === d).map(s => s.topic)])];
+    if (!ts.length) ts = studiedTopics();
+    const m = +S.time[d] || 30; const n = Math.max(5, Math.min(30, Math.floor(m * 0.4 / 3)));
+    return startSim(ts, n, true, 'Mini-simulado do dia');
+  }
+  if (a === 'quicksim') return startSim([b.dataset.t], 10, true, 'Revisão: ' + topic(b.dataset.t).name);
+  if (a === 'agendaAll') { agendaAll = !agendaAll; return rAgenda(); }
+  if (a === 'replan') { replan(); toast('Temas pendentes redistribuídos a partir de hoje.'); return rAgenda(); }
+  if (a === 'simPick') return simAnswer(+b.dataset.i);
+  if (a === 'simNS') return simAnswer(null);
+  if (a === 'simNext') { SIM.i++; return renderSimRun(); }
+  if (a === 'simQuit') { SIM.qs = SIM.qs.slice(0, SIM.res.filter(Boolean).length); SIM.i = SIM.qs.length; return renderSimRun(); }
+  if (a === 'simNew') { SIM = null; return rSim(); }
+  if (a === 'fcStart') { FCQ = shuffle(dueCards().map(c => c.id)); fcShow = false; return rFc(); }
+  if (a === 'fcAll') { FCQ = shuffle(S.cards.map(c => c.id)); fcShow = false; return rFc(); }
+  if (a === 'fcStop') { FCQ = null; return rFc(); }
+  if (a === 'fcFlip') { fcShow = true; return rFc(); }
+  if (a === 'fcGrade') { const c = S.cards.find(x => x.id === FCQ[0]); const g = +b.dataset.g; gradeCard(c, g); FCQ.shift(); if (g === 0) FCQ.push(c.id); fcShow = false; save(); if (!FCQ.length) { FCQ = null; toast('Revisão de flashcards concluída.'); } return rFc(); }
+  if (a === 'fcDel') { S.cards = S.cards.filter(c => c.id !== id); save(); return rFc(); }
+  if (a === 'mnDel') { S.mnemos = S.mnemos.filter(m => m.id !== id); save(); return rMn(); }
+  if (a === 'tut') { $('#tutOut').value = tutorPrompt(b.dataset.k, $('#tutT').value); return; }
+  if (a === 'copy') { const el = $('#' + b.dataset.src); const txt = el.value; if (!txt) return toast('Nada para copiar ainda.');
+    const done = () => { toast('Copiado.'); if (b.dataset.bk) { S.lastBackup = today(); save(); } };
+    navigator.clipboard?.writeText(txt).then(done).catch(() => { el.focus(); el.select(); toast('Texto selecionado. Use Copiar do sistema.'); }) ?? (el.select(), toast('Texto selecionado. Use Copiar do sistema.')); return; }
+  if (a === 'impQ') return importQuestions();
+  if (a === 'clearQ') { S.qimp = []; save(); toast('Questões importadas apagadas.'); return rProvas(); }
+  if (a === 'download') { try { const blob = new Blob([JSON.stringify(S, null, 1)], { type: 'application/json' }); const u = URL.createObjectURL(blob); const l = document.createElement('a'); l.href = u; l.download = `backup-caderno-maria-${today()}.json`; document.body.appendChild(l); l.click(); l.remove(); setTimeout(() => URL.revokeObjectURL(u), 2000); S.lastBackup = today(); save(); toast('Backup gerado. Se nada baixou, use Copiar backup.'); } catch (err) { toast('Não deu para baixar aqui. Use Copiar backup.'); } return; }
+  if (a === 'restore') return doRestore();
+  if (a === 'restoreCancel') { restoreArmed = false; return rBackup(); }
+  if (a === 'reset') { if (!resetArmed) { resetArmed = true; return rBackup(); } S = blank(); buildInitialSchedule(); S.schedV = SCHED_V; save(); resetArmed = false; toast('Progresso apagado.'); return rBackup(); }
+  if (a === 'resetCancel') { resetArmed = false; return rBackup(); }
+});
+document.addEventListener('change', e => {
+  const el = e.target, a = el.dataset.act;
+  if (a === 'score' || a === 'rscore') {
+    const arr = a === 'score' ? S.sched : S.reviews; const o = arr.find(x => x.id === el.dataset.id);
+    o[el.dataset.f] = el.value === '' ? undefined : +el.value;
+    if (a === 'rscore' && o.hits != null && !o.done) { o.done = true; o.doneAt = today(); o.total = o.total ?? 10; }
+    save(); return rerender();
+  }
+  if (a === 'mins') { S.time[viewDate] = el.value === '' ? undefined : +el.value; save(); return rHoje(); }
+  if (a === 'fcFilter') { fcFilter = el.value; return rFc(); }
+  if (a === 'mnMode') { mnMode = el.value; return rMn(); }
+  if (el.name === 'mode') { if (el.value === 'escolher') $('#simTopics').scrollIntoView({ block: 'nearest' }); }
+});
+document.addEventListener('input', e => { if (e.target.dataset.act === 'note') { S.notes[viewDate] = e.target.value; save(); } });
+document.addEventListener('submit', e => {
+  e.preventDefault();
+  const f = e.target.dataset.form;
+  if (f === 'rename') { const id = e.target.dataset.id; const s = S.sched.find(x => x.id === id); const name = $(`#rn-${id}`).value.trim(); if (!name) return;
+    const old = topic(s.topic); const nid = 'u-' + uid(); S.topics[nid] = { name, area: $(`#ra-${id}`).value, sub: name === old.name ? old.sub : '', kind: s.kind };
+    S.reviews.filter(r => r.sid === id).forEach(r => r.topic = nid); s.topic = nid; save(); toast('Assunto atualizado.'); return rerender(); }
+  if (f === 'addItem') { const nid = 'u-' + uid(); S.topics[nid] = { name: $('#addName').value.trim(), area: $('#addArea').value, sub: '', kind: 't' };
+    S.sched.push({ id: uid(), date: $('#addDate').value, topic: nid, kind: 't', slot: 'Extra', done: false }); save(); toast('Assunto adicionado.'); return rAgenda(); }
+  if (f === 'simStart') {
+    const mode = e.target.querySelector('input[name="mode"]:checked').value;
+    let ts = mode === 'estudados' ? studiedTopics() : mode === 'fracos' ? weakTopics() : mode === 'todos' ? [...new Set(bank().map(q => q.t))] : [...document.querySelectorAll('#simTopics input:checked')].map(i => i.value);
+    if (!ts.length) return toast(mode === 'estudados' ? 'Marque temas como estudados na agenda, ou escolha os temas.' : mode === 'fracos' ? 'Ainda não há pontos fracos registrados.' : 'Escolha pelo menos um tema.');
+    return startSim(ts, +$('#simN').value, $('#simClock').checked, { estudados: 'Temas que já estudei', fracos: 'Pontos fracos', todos: 'Misturado', escolher: 'Temas escolhidos' }[mode]);
+  }
+  if (f === 'addCard') { S.cards.push({ id: uid(), f: $('#cardF').value.trim(), b: $('#cardB').value.trim(), t: $('#cardT').value, due: today(), ivl: 0, ease: 2.5, reps: 0, lapses: 0, created: today() }); save(); toast('Cartão criado.'); return rFc(); }
+  if (f === 'manual') { S.manual.push({ t: $('#manT').value, d: $('#manD').value || today(), total: +$('#manN').value, hits: Math.min(+$('#manH').value, +$('#manN').value) }); save(); toast('Registrado.'); return rPerf(); }
+  if (f === 'addMn') { S.mnemos.push({ id: uid(), t: $('#mnT').value, title: $('#mnTitle').value.trim(), m: $('#mnText').value.trim(), mine: true }); save(); toast('Mnemônico salvo.'); return rMn(); }
+  if (f === 'search') { searchTerm = $('#srch').value.trim(); $('#srchLinks').innerHTML = searchLinks(searchTerm); }
+});
+function importQuestions() {
+  let arr;
+  try { const raw = $('#impQ').value.trim(); arr = JSON.parse(raw.slice(raw.indexOf('['), raw.lastIndexOf(']') + 1)); } catch (e) { return toast('Não consegui ler. Confira se é uma lista JSON começando com [ e terminando com ].'); }
+  let ok = 0;
+  arr.forEach(q => { if (q && q.q && Array.isArray(q.o) && Number.isInteger(+q.a) && +q.a < q.o.length) { S.qimp.push({ id: 'imp-' + uid(), t: q.t && topic(q.t).name !== q.t ? q.t : (q.t || 'geral'), q: q.q, o: q.o, a: +q.a, c: q.c || '', f: q.f, fonte: q.fonte || '' }); ok++; } });
+  save(); toast(`${ok} questão(ões) importada(s).`); rProvas();
+}
+async function doRestore() {
+  if (!restoreArmed) { restoreArmed = true; return rBackup(); }
+  let txt = $('#bkIn').value.trim();
+  const file = $('#bkFile').files[0];
+  if (file) txt = await file.text();
+  try { const o = JSON.parse(txt); if (!o || !Array.isArray(o.sched)) throw 0; S = Object.assign(blank(), o); if (S.schedV !== SCHED_V) migrateSchedule(); save(); restoreArmed = false; toast('Backup restaurado.'); rBackup(); }
+  catch (e) { restoreArmed = false; toast('Esse texto não parece um backup do caderno.'); rBackup(); }
+}
+
+// ===== Início =====
+load();
+document.querySelectorAll('#tabs a').forEach(a => a.insertAdjacentHTML('afterbegin', ic(a.dataset.ic)));
+$('#logoMark').innerHTML = ic('heart');
+$('#todayPill').innerHTML = ic('calendar') + ' ' + fmtLong(today());
+window.addEventListener('hashchange', route);
+route();
+</script></body></html>
