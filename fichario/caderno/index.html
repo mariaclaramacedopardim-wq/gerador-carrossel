@@ -524,7 +524,7 @@ a.card:hover .ico svg.i{transform:rotate(4deg)}
   <main>
     <div class="main-inner">
       <div class="topbar">
-        <div><h1 id="greet">Olá, Maria</h1><p id="greetSub">Você está fazendo um ótimo trabalho.</p></div>
+        <div><h1 id="greet">Olá, Maria</h1><p id="greetSub" hidden></p></div>
         <span class="datepill" id="todayPill"></span>
       </div>
       <section class="view" id="v-hoje"></section>
@@ -1141,7 +1141,7 @@ function route() {
   const v = VIEWS.includes(location.hash.slice(1)) ? location.hash.slice(1) : 'hoje';
   VIEWS.forEach(n => $('#v-' + n).hidden = n !== v);
   if (route.last && route.last !== v) window.scrollTo(0, 0);
-  const [t, sub] = VIEW_META[v]; $('#greet').textContent = t || greeting(); $('#greetSub').textContent = sub || quoteOfDay();
+  const [t, sub] = VIEW_META[v]; $('#greet').textContent = t || greeting(); $('#greetSub').textContent = '';
   renderSide();
   route.last = v;
   document.querySelectorAll('#tabs a').forEach(a => { if (a.getAttribute('href') === '#' + v) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current'); });
@@ -1160,7 +1160,6 @@ function schedItemHTML(s, opts = {}) {
     <input type="checkbox" data-act="toggle" data-id="${s.id}" ${s.done ? 'checked' : ''} aria-label="Marcar como estudado">
     <div style="min-width:0">
       <div class="t">${esc(tp.name)}</div>
-      ${tp.ref ? `<div class="small muted">Referência: ${esc(tp.ref)}</div>` : ''}
       <div class="meta"><span class="pill">${esc(kindLabel)}</span>${(tp.sub || AREAS[tp.area]) !== kindLabel ? areaPill(s.topic) : ''}${late ? '<span class="pill bad">atrasado</span>' : ''}${opts.showDate ? `<span class="pill">${fmtShort(s.date)}</span>` : ''}${s.done && s.kind === 't' ? '<span class="pill ok">revisões D+1, 7, 30 e 90 agendadas</span>' : ''}</div>
       <div class="score small muted" style="margin-top:6px">${s.kind === 't' ? 'Pós-teste:' : 'Resultado:'}
         <input type="number" min="0" data-act="score" data-f="hits" data-id="${s.id}" value="${s.hits ?? ''}" placeholder="acertos" aria-label="acertos"> de
