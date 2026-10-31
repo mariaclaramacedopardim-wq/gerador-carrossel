@@ -431,6 +431,53 @@ input,select{border-bottom-color:var(--accent-2)}
   --bar-pink:#d6789a; --bar-rose:#c98095}
 .banner{background-color:var(--paper);background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);background-size:14px 14px;background-position:-1px -1px}
 nav.tabs a:not([aria-current="page"]){color:var(--ink)}
+
+/* ===== mais elementos: ícones próprios, furos de fichário, margem, selo, post-it, contadores ===== */
+:root{--blob:#f2c9d5; --seal-bg:#7e2342; --seal-ink:#fbe9ef; --postit:#f1c4d1; --tape:rgba(255,255,255,.55)}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--blob:#5a2638; --seal-bg:#e08aa6; --seal-ink:#2a0f19; --postit:#4b2433; --tape:rgba(255,255,255,.12)}}
+:root[data-theme="dark"]{--blob:#5a2638; --seal-bg:#e08aa6; --seal-ink:#2a0f19; --postit:#4b2433; --tape:rgba(255,255,255,.12)}
+
+/* ícones: traço fino com uma mancha rosa deslocada atrás (efeito de impressão) */
+svg.i{stroke-width:1.35;background:radial-gradient(circle at 34% 36%,var(--blob) 0 40%,transparent 41%)}
+nav.tabs a::before{display:none}
+nav.tabs a>svg.i{display:block;width:22px;height:22px;color:var(--accent)}
+.card-head .ico{display:grid;width:30px;height:30px;color:var(--accent);background:none}
+.card-head .ico svg.i{width:24px;height:24px}
+.ico{background:none!important;color:var(--accent)}
+a.card .ico{width:38px;height:38px}
+a.card .ico svg.i{width:34px;height:34px}
+.kpi .lab .ico{display:grid;width:22px;height:22px}
+.kpi .lab .ico svg.i{width:20px;height:20px}
+.bar .dot svg.i{background:none}
+button svg.i,.datepill svg.i{background:none}
+
+/* atalhos com contador */
+a.card .qsub{font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:700}
+
+/* folha: furos de fichário + linha de margem */
+.main-inner{position:relative;padding-left:84px}
+.main-inner::before{content:"";position:absolute;top:0;bottom:0;left:58px;width:1px;background:var(--accent-2);opacity:.7}
+.main-inner::after{content:"";position:absolute;top:70px;bottom:70px;left:18px;width:18px;background:radial-gradient(circle,var(--desk) 0 7px,var(--line) 7.5px 8.5px,transparent 9px) center top/18px 120px repeat-y}
+@media (max-width:900px){.main-inner{padding-left:18px}.main-inner::before,.main-inner::after{display:none}}
+
+/* selo giratório no canto da folha */
+.seal{position:absolute;top:-30px;right:38px;width:104px;height:104px;transform:rotate(-8deg);z-index:3;filter:drop-shadow(0 6px 10px rgba(80,15,40,.18))}
+.seal-rot{transform-origin:60px 60px}
+@media (prefers-reduced-motion:no-preference){.seal-rot{animation:spin 40s linear infinite}}
+@keyframes spin{to{transform:rotate(360deg)}}
+.topbar{padding-right:120px}
+@media (max-width:900px){.seal{width:64px;height:64px;top:12px;right:10px}.topbar{padding-right:70px}}
+
+/* faixa do dia com número grande */
+.banner .daynum{margin-left:auto;display:grid;justify-items:end;line-height:1}
+.daynum b{font-family:var(--display);font-weight:400;font-size:4.4rem;color:transparent;-webkit-text-stroke:1px var(--accent);line-height:.85}
+.daynum small{font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;font-weight:700;color:var(--accent)}
+@media (max-width:560px){.daynum b{font-size:3rem}}
+
+/* lembrete lateral como post-it com fita */
+.side-card{position:relative;background:var(--postit);border:0;padding:22px 16px 16px;transform:rotate(-2.5deg);box-shadow:0 10px 18px -12px rgba(80,15,40,.5);margin:0 10px 0 4px}
+.side-card::before{content:"";position:absolute;top:-10px;left:50%;width:70px;height:20px;margin-left:-35px;background:var(--tape);transform:rotate(3deg);box-shadow:0 1px 2px rgba(0,0,0,.06)}
+.side-card b{color:var(--accent);font-size:1.35rem}
 </style>
 </head><body>
 <div class="app">
@@ -997,14 +1044,14 @@ function gradeCard(c, g) {
 
 // ===== Ícones (traço simples) =====
 const ICONS = {
-  home: '<path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/><path d="M10 20v-6h4v6"/>',
-  calendar: '<rect x="3" y="5" width="18" height="16" rx="3"/><path d="M3 10h18M8 3v4M16 3v4"/>',
-  quiz: '<rect x="4" y="3" width="16" height="18" rx="3"/><path d="M8 8h8M8 12h8M8 16h5"/>',
-  cards: '<rect x="3" y="7" width="14" height="14" rx="3"/><path d="M7 3h11a3 3 0 0 1 3 3v11"/>',
-  chart: '<path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/>',
-  bulb: '<path d="M9 18h6M10 21h4"/><path d="M12 3a6 6 0 0 0-4 10.5c.8.8 1 1.5 1 2.5h6c0-1 .2-1.7 1-2.5A6 6 0 0 0 12 3z"/>',
-  book: '<path d="M4 4h6a3 3 0 0 1 3 3v14a2 2 0 0 0-2-2H4z"/><path d="M20 4h-6a3 3 0 0 0-3 3"/><path d="M20 4v15h-7"/>',
-  save: '<path d="M12 3v12M7 10l5 5 5-5"/><path d="M4 17v3h16v-3"/>',
+  home: '<rect x="6.5" y="3" width="13.5" height="18" rx="1.2"/><path d="M3.5 7h4.5M3.5 12h4.5M3.5 17h4.5"/><path d="M10.5 8h6M10.5 11.5h4"/>',
+  calendar: '<rect x="3.5" y="5" width="17" height="15.5" rx="1"/><path d="M3.5 9.5h17M8 3v4M16 3v4"/><rect x="13" y="13" width="4" height="4" fill="currentColor" stroke="none"/>',
+  quiz: '<path d="M6 3h9l4 4v14H6z"/><path d="M15 3v4h4"/><path d="M9 11.5l1.6 1.6L13.5 10M9 17h7"/>',
+  cards: '<rect x="3" y="8" width="13" height="10" rx="1" transform="rotate(-7 9.5 13)"/><path d="M8.5 5.5l11 1.4a1 1 0 0 1 .9 1.1l-1 8"/><path d="M6.5 13h6"/>',
+  chart: '<path d="M3 20.5h18"/><path d="M6.5 20.5v-5M12 20.5V9M17.5 20.5v-8"/><circle cx="12" cy="5" r="1.4" fill="currentColor" stroke="none"/>',
+  bulb: '<path d="M9.5 18h5M10.5 21h3"/><path d="M12 6a5 5 0 0 0-3 9c.6.5 1 1.2 1 2h4c0-.8.4-1.5 1-2a5 5 0 0 0-3-9z"/><path d="M12 2v1.6M4.8 4.8l1.1 1.1M19.2 4.8l-1.1 1.1"/>',
+  book: '<path d="M12 6.5C10 5 7 4.5 3.5 5v14c3.5-.5 6.5 0 8.5 1.5 2-1.5 5-2 8.5-1.5V5c-3.5-.5-6.5 0-8.5 1.5z"/><path d="M12 6.5v14"/>',
+  save: '<rect x="3" y="6" width="18" height="13" rx="1"/><path d="M3.5 6.5L12 13l8.5-6.5"/><circle cx="12" cy="15.6" r="1.7" fill="currentColor" stroke="none"/>',
   heart: '<path d="M12 20s-7-4.4-9-9a5 5 0 0 1 9-3 5 5 0 0 1 9 3c-2 4.6-9 9-9 9z"/>',
   pulse: '<path d="M3 12h4l2-5 4 10 2-5h6"/>',
   clock: '<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
@@ -1022,7 +1069,7 @@ const ICONS = {
 };
 const ic = (n, cls = '') => `<svg class="i ${cls}" data-n="${n}" viewBox="0 0 24 24" aria-hidden="true">${ICONS[n] || ''}</svg>`;
 // gravuras anatômicas que substituem os ícones de linha nos menus e cartões
-const ANA = { home: 'luminaria', cards: 'fichas', calendar: 'agenda', quiz: 'prova', chart: 'compasso', bulb: 'lampada', book: 'livros', save: 'envelope' };
+const ANA = {};
 function applyAna(root = document) {
   root.querySelectorAll('.ico>svg[data-n]').forEach(sv => { const a = ANA[sv.dataset.n]; if (a) { sv.parentElement.classList.add('ana'); sv.parentElement.style.setProperty('--ana', `var(--a-${a})`); } });
 }
@@ -1135,6 +1182,9 @@ function rHoje() {
   const mn = MNEMOS.concat(S.mnemos).filter(m => topicsToday.includes(m.t));
   const doneN = items.filter(i => i.done).length;
   const P = perfByTopic(); let tot = 0, hit = 0; Object.values(P).forEach(p => { tot += p.total; hit += p.hits; });
+  const qsub = [`${due} para hoje`, `${items.length} tema${items.length === 1 ? '' : 's'} no dia`, `${bank().length} questões`, tot ? `${pct(hit, tot)}% de acerto` : 'sem dados ainda', `${MNEMOS.length + S.mnemos.length} guardados`];
+  const allDates = S.sched.map(x => x.date).sort(), d0 = allDates[0], dN = allDates[allDates.length - 1];
+  const dayN = Math.max(1, Math.round((pd(d) - pd(d0)) / 864e5) + 1), dayT = Math.round((pd(dN) - pd(d0)) / 864e5) + 1;
   const quick = [['flashcards', 'cards', 'peach', 'Flashcards'], ['agenda', 'calendar', 'pink', 'Agenda'], ['simulados', 'quiz', 'lilac', 'Simulados'], ['desempenho', 'chart', 'mint', 'Desempenho'], ['mnemonicos', 'bulb', 'sky', 'Mnemônicos']];
   $('#v-hoje').innerHTML = `
   <div class="card">
@@ -1147,10 +1197,10 @@ function rHoje() {
   <div class="card banner" style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:14px">
     <div style="min-width:0"><div class="eyebrow">${isToday ? 'Hoje' : (d < today() ? 'Dia passado' : 'Próximo dia')}</div><h2>${fmtLong(d)}</h2>
       <p class="small muted" style="margin:2px 0 0">${note ? esc(note) : (d < PHASE2_START ? '3 assuntos por dia até segunda' : (isWeekend(d) ? 'Fim de semana: 2 assuntos' : 'Dia útil: 1 assunto'))}</p></div>
-    <div class="row"><button data-act="day" data-n="-1" aria-label="Dia anterior">‹</button>${isToday ? '' : '<button data-act="day" data-n="0">Hoje</button>'}<button data-act="day" data-n="1" aria-label="Próximo dia">›</button></div>
+    <div class="daynum" aria-label="Dia ${dayN} de ${dayT} do plano"><b>${String(dayN).padStart(2, '0')}</b><small>dia de ${dayT}</small></div><div class="row"><button data-act="day" data-n="-1" aria-label="Dia anterior">‹</button>${isToday ? '' : '<button data-act="day" data-n="0">Hoje</button>'}<button data-act="day" data-n="1" aria-label="Próximo dia">›</button></div>
   </div>
   <div class="grid3" style="grid-template-columns:repeat(auto-fit,minmax(min(100%,150px),1fr))">
-    ${quick.map(([h, i, t, l]) => `<a class="card" href="#${h}" style="text-decoration:none;color:inherit;display:flex;align-items:center;gap:10px;padding:14px"><span class="ico t-${t}">${ic(i)}</span><b>${l}</b></a>`).join('')}
+    ${quick.map(([h, i, t, l], k) => `<a class="card" href="#${h}" style="text-decoration:none;color:inherit;display:flex;align-items:center;gap:10px;padding:14px"><span class="ico t-${t}">${ic(i)}</span><b>${l}</b><small class="qsub">${qsub[k]}</small></a>`).join('')}
   </div>
   <div class="dash">
     <div class="card span7">
@@ -1677,6 +1727,7 @@ async function doRestore() {
 load();
 document.querySelectorAll('#tabs a').forEach(a => { a.insertAdjacentHTML('afterbegin', ic(a.dataset.ic)); if (ANA[a.dataset.ic]) a.style.setProperty('--ana', `var(--a-${ANA[a.dataset.ic]})`); });
 $('#logoMark').innerHTML = ic('heart');
+document.querySelector('.main-inner').insertAdjacentHTML('afterbegin', `<svg class="seal" viewBox="0 0 120 120" aria-hidden="true"><defs><path id="sealP" d="M60 60m-44 0a44 44 0 1 1 88 0a44 44 0 1 1-88 0"/></defs><circle cx="60" cy="60" r="57" fill="var(--seal-bg)"/><circle cx="60" cy="60" r="31" fill="none" stroke="var(--seal-ink)" stroke-width=".8"/><g class="seal-rot"><text font-size="9.6" letter-spacing="2.2" fill="var(--seal-ink)" font-family="Schibsted Grotesk, sans-serif" font-weight="700"><textPath href="#sealP">CADERNO DA MARIA · MEDICINA · 2026 ·</textPath></text></g><text x="60" y="70" text-anchor="middle" font-family="Instrument Serif, Georgia, serif" font-style="italic" font-size="30" fill="var(--seal-ink)">M</text></svg>`);
 $('#todayPill').innerHTML = ic('calendar') + ' ' + fmtLong(today());
 window.addEventListener('hashchange', route);
 route();
