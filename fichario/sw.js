@@ -1,6 +1,6 @@
 /* Service worker do Fichário: deixa o app abrir sem internet.
    Os dados do usuário ficam no aparelho (localStorage e IndexedDB), nunca aqui. */
-const VERSAO = "fichario-v2";
+const VERSAO = "fichario-v3";
 const BASE = ["./", "index.html", "manifest.webmanifest", "icons/icon-192.png", "icons/icon-512.png", "icons/apple-touch-icon.png"];
 
 self.addEventListener("install", e => {
@@ -24,6 +24,8 @@ self.addEventListener("fetch", e => {
   const req = e.request;
   if (req.method !== "GET") return;
   const url = new URL(req.url);
+  // o Caderno de estudos (pasta caderno/) é outro site: o Fichário não mexe nele
+  if (url.origin === location.origin && url.pathname.includes("/caderno/")) return;
   if (req.mode === "navigate") {
     // página: tenta a rede (pega atualizações) e cai no cache se estiver offline
     e.respondWith(fetch(req).then(r => { const cp = r.clone(); caches.open(VERSAO).then(c => c.put("index.html", cp)); return r; })
