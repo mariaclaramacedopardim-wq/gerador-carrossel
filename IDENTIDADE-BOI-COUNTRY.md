@@ -32,5 +32,9 @@ A pousada é amarela por fora: o azul sobre as fotos dá contraste natural. Use 
 
 ## Regras
 
-- Foto ocupa o slide inteiro; escurecer com azul noite onde houver texto.
+- Usar sempre as fotos da pasta do Drive da pousada:
+  https://drive.google.com/drive/folders/1ONJkBzGsbpiyKTobIeYpBZ4Apzjo0omo
+- A foto é o destaque: ocupa o slide inteiro; escurecer com azul noite só na faixa do texto.
+- Pouco texto por slide, específico ao que aparece na foto. Nada de frase genérica de
+  turismo; revisar os textos com o skill humanizer.
 - Sempre mostrar wireframe antes da arte final (ver `CLAUDE.md`).
