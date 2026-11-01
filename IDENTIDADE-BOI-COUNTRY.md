@@ -23,7 +23,8 @@ A pousada é amarela por fora: o azul sobre as fotos dá contraste natural. Use 
 
 ## Elementos
 
-- Logo em círculo, pequeno (topo central ou canto).
+- Logo oficial horizontal (bota + "Pousada BOI COUNTRY · SALINAS - PA"), em `marcas/boi-country/`:
+  branco sobre fotos, azul ou azul noite sobre fundos claros.
 - "Dunas" amarelas do logo como forma de fundo em slides de reserva/oferta.
 - Caixa tracejada, sol desenhado, polaroid com fita (toque artesanal).
 - Elementos de interface: botão em pílula, barra de busca, seta "arraste".
