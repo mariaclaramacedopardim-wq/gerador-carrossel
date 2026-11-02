@@ -1,5 +1,9 @@
 # gerador-carrossel
 
+## Fontes
+
+Biblioteca de fontes para design e vídeo em [fonts/](fonts/README.md).
+
 ## Skill `reels-creative-director`
 
 Skill do Claude Code para criar Instagram Reels da ideia à edição no CapCut. Fica em `.claude/skills/reels-creative-director/`.

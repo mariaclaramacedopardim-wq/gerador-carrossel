@@ -1,0 +1,27 @@
+/* Gerado a partir de fonts.json. Uso: <link rel="stylesheet" href="fonts/fonts.css"> */
+
+@font-face{font-family:'A Bebedera';font-weight:900;font-style:normal;font-display:swap;src:url('abebedera/ABebedera-900-latin.woff2') format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+20AC,U+2122,U+2212;}
+@font-face{font-family:'A Bebedera';font-weight:900;font-style:normal;font-display:swap;src:url('abebedera/ABebedera-900-latin-ext.woff2') format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;}
+@font-face{font-family:'A Bebedera';font-weight:900;font-style:normal;font-display:swap;src:url('abebedera/ABebedera-900-greek.woff2') format('woff2');unicode-range:U+0370-0377,U+037A-037F,U+0384-038A,U+038C,U+038E-03A1,U+03A3-03FF;}
+@font-face{font-family:'Brasswell Outline';font-weight:400;font-style:normal;font-display:swap;src:url('brasswell-outline/BrasswellOutline-Regular.ttf') format('truetype');}
+@font-face{font-family:'Career';font-weight:400;font-style:normal;font-display:swap;src:url('career/Career.woff2') format('woff2'),url('career/Career.ttf') format('truetype');}
+@font-face{font-family:'Career Path';font-weight:400;font-style:normal;font-display:swap;src:url('career/Career-Path.ttf') format('truetype');}
+@font-face{font-family:'JFFF Earlysoft';font-weight:400;font-style:normal;font-display:swap;src:url('earlysoft/JFFFEarlysoft-Regular.ttf') format('truetype');}
+@font-face{font-family:'Eunomia';font-weight:300;font-style:normal;font-display:swap;src:url('eunomia/Eunomia-Light.otf') format('opentype');}
+@font-face{font-family:'Eunomia';font-weight:400;font-style:normal;font-display:swap;src:url('eunomia/Eunomia-Regular.otf') format('opentype');}
+@font-face{font-family:'Eunomia';font-weight:700;font-style:normal;font-display:swap;src:url('eunomia/Eunomia-Bold.otf') format('opentype');}
+@font-face{font-family:'Exclusive Editorial';font-weight:400;font-style:normal;font-display:swap;src:url('exclusive-editorial/DR-Exclusive-Editorial.ttf') format('truetype');}
+@font-face{font-family:'Fraunces';font-weight:100 900;font-style:normal;font-display:swap;src:url('fraunces/Fraunces-VF.woff2') format('woff2'),url('fraunces/Fraunces-VF.ttf') format('truetype');}
+@font-face{font-family:'Fraunces';font-weight:100 900;font-style:italic;font-display:swap;src:url('fraunces/Fraunces-Italic-VF.woff2') format('woff2'),url('fraunces/Fraunces-Italic-VF.ttf') format('truetype');}
+@font-face{font-family:'Penna';font-weight:400;font-style:normal;font-display:swap;src:url('penna/Penna-Regular.otf') format('opentype');}
+@font-face{font-family:'Perandory';font-weight:400;font-style:normal;font-display:swap;src:url('perandory/Perandory-Regular.woff2') format('woff2'),url('perandory/Perandory-Regular.otf') format('opentype');}
+@font-face{font-family:'Perandory Semi Condensed';font-weight:400;font-style:normal;font-display:swap;src:url('perandory/Perandory-Semi-Condensed.woff2') format('woff2'),url('perandory/Perandory-Semi-Condensed.otf') format('opentype');}
+@font-face{font-family:'Perandory Condensed';font-weight:400;font-style:normal;font-display:swap;src:url('perandory/Perandory-Condensed.woff2') format('woff2'),url('perandory/Perandory-Condensed.otf') format('opentype');}
+@font-face{font-family:'Pinyon Script';font-weight:400;font-style:normal;font-display:swap;src:url('pinyon-script/PinyonScript-Regular.woff2') format('woff2'),url('pinyon-script/PinyonScript-Regular.ttf') format('truetype');}
+@font-face{font-family:'JFFF Puffora';font-weight:400;font-style:normal;font-display:swap;src:url('puffora/JFFFPuffora-Regular.woff2') format('woff2'),url('puffora/JFFFPuffora-Regular.ttf') format('truetype');}
+@font-face{font-family:'Quiet Folio';font-weight:400;font-style:normal;font-display:swap;src:url('quiet-folio/QuietFolio-Regular.ttf') format('truetype');}
+@font-face{font-family:'Silken';font-weight:400;font-style:normal;font-display:swap;src:url('silken/Silken-Regular.ttf') format('truetype');}
+@font-face{font-family:'Sunny Side';font-weight:400;font-style:normal;font-display:swap;src:url('sunny-side/SunnySide-Regular.ttf') format('truetype');}
+@font-face{font-family:'JFFF Thornrose';font-weight:400;font-style:normal;font-display:swap;src:url('thornrose/JFFFThornrose-Regular.woff2') format('woff2'),url('thornrose/JFFFThornrose-Regular.ttf') format('truetype');}
+@font-face{font-family:'Valcrest';font-weight:400;font-style:normal;font-display:swap;src:url('valcrest/Valcrest-Regular.ttf') format('truetype');}
+@font-face{font-family:'Vellune';font-weight:900;font-style:normal;font-display:swap;src:url('vellune/Vellune-Black.woff2') format('woff2'),url('vellune/Vellune-Black.ttf') format('truetype');}
