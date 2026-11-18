@@ -549,6 +549,51 @@ a.card:hover .ico svg.i{transform:rotate(4deg)}
 .ac-exams b{font-family:var(--display);font-weight:400;font-size:2rem;line-height:1;color:var(--accent)}
 .ac-exams small{font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;font-weight:700;color:var(--muted)}
 .ac-mods h4 .pill{font-family:var(--body,inherit);font-style:normal;margin-left:6px;vertical-align:middle}
+/* ===== OSCE e prova ===== */
+.flag{display:inline-block;font-size:.58rem;letter-spacing:.14em;text-transform:uppercase;font-weight:800;padding:3px 7px;border:1px solid currentColor;border-radius:2px;line-height:1.2;white-space:nowrap;vertical-align:middle}
+.flag.erro{color:#fff;background:var(--accent);border-color:var(--accent)}
+.flag.desatualizado{color:var(--accent)}
+.flag.diverge{color:var(--muted)}
+.flag.chk{color:var(--accent);border-style:dashed;padding:1px 5px;font-size:.55rem}
+.flag.mat-oficial{color:#fff;background:var(--accent);border-color:var(--accent)}
+.flag.mat-aula{color:var(--accent)}
+.flag.mat-nao{color:var(--muted);border-style:dashed}
+.errata{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr));gap:0 28px}
+.err{padding:14px 0 16px;border-top:1px solid var(--line);display:grid;gap:8px;align-content:start}
+.err header{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px}
+.err h4{margin:0;font-size:.98rem;font-weight:600}
+.err h4 b{font-weight:700}
+.err p{margin:0;font-size:.88rem}
+.err p small{display:block;margin-bottom:2px;font-size:.58rem;letter-spacing:.14em;text-transform:uppercase;font-weight:700;color:var(--muted)}
+.err .old s{display:block;color:var(--muted);text-decoration-color:var(--accent);text-decoration-thickness:1px}
+.err .new{padding-left:10px;border-left:2px solid var(--accent)}
+.err-card{background:var(--sheet);box-shadow:inset 0 3px 0 var(--accent)}
+.err.erro .new{border-left-width:3px}
+.sub-h{margin:20px 0 8px;font-family:var(--display);font-weight:400;font-style:italic;font-size:1.3rem;color:var(--accent)}
+ul.plain{margin:0;padding-left:1.1em;display:grid;gap:8px;font-size:.9rem}
+ul.plain li::marker{color:var(--accent)}
+.st-list{display:grid;gap:0}
+.st{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:12px;align-items:start;padding:11px 0;border-bottom:1px solid var(--line);cursor:pointer}
+.st input{width:20px;height:20px;accent-color:var(--accent);margin-top:2px}
+.st-t{display:grid;gap:2px}.st-t b{font-weight:600;font-size:.94rem}.st-t small{font-size:.8rem;color:var(--muted)}
+.st-f{display:grid;justify-items:end;line-height:1}.st-f b{font-family:var(--display);font-weight:400;font-size:1.9rem;color:var(--accent)}
+.st-f small{font-size:.55rem;letter-spacing:.12em;text-transform:uppercase;font-weight:700;color:var(--muted)}
+.st.done .st-t b{text-decoration:line-through;text-decoration-color:var(--accent)}
+.areas{display:grid;gap:14px}
+.area{display:grid;gap:4px}
+.area-h{display:flex;justify-content:space-between;gap:10px;align-items:baseline}
+.area-h b{font-weight:600;font-size:.94rem}.area-h span{font-family:var(--display);font-size:1.6rem;color:var(--accent);line-height:1}
+.area .rule{display:block;height:2px;background:var(--line);position:relative}
+.area .rule i{position:absolute;inset:0 auto 0 0;background:var(--accent)}
+.area small{font-size:.8rem;color:var(--muted)}
+.kw{display:flex;flex-wrap:wrap;gap:6px}
+.kw span{font-size:.8rem;padding:4px 9px;border:1px solid var(--rule);border-radius:2px;background:var(--paper)}
+.item.mat{grid-template-columns:auto minmax(0,1fr)!important;align-items:center;background:none;border-bottom:1px solid var(--line);border-radius:0;padding:10px 0}
+.item.mat .t{display:grid}
+.pt-wrap{overflow-x:auto;margin-top:8px}
+table.pt{width:100%;border-collapse:collapse;font-size:.85rem;min-width:520px}
+table.pt th{text-align:left;font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);padding:6px 8px;border-bottom:1px solid var(--rule)}
+table.pt td{padding:8px;border-bottom:1px solid var(--line);vertical-align:top}
 </style>
 </head><body>
 <div class="app">
@@ -557,6 +602,7 @@ a.card:hover .ico svg.i{transform:rotate(4deg)}
     <nav class="tabs" id="tabs" aria-label="Seções">
       <a href="#hoje" data-ic="home">Início</a>
       <a href="#acao" data-ic="target">Modo ação</a>
+      <a href="#osce" data-ic="stetho">OSCE e prova</a>
       <a href="#flashcards" data-ic="cards">Flashcards</a>
       <a href="#agenda" data-ic="calendar">Agenda</a>
       <a href="#simulados" data-ic="quiz">Simulados</a>
@@ -577,6 +623,7 @@ a.card:hover .ico svg.i{transform:rotate(4deg)}
       </div>
       <section class="view" id="v-hoje"></section>
       <section class="view" id="v-acao" hidden></section>
+      <section class="view" id="v-osce" hidden></section>
       <section class="view" id="v-agenda" hidden></section>
       <section class="view" id="v-simulados" hidden></section>
       <section class="view" id="v-flashcards" hidden></section>
@@ -965,6 +1012,403 @@ const EXAM_LINKS = [
   {n:'SES-SP 2024, pré-requisito em Clínica Médica (PDF)',u:'https://arquivos.qconcursos.com/prova/arquivo_prova/125002/quadrix-2024-ses-sp-residente-medico-especialidades-com-pre-requisito-em-clinica-medica-prova.pdf',d:'Boa para Cardio: ECG, IC, diuréticos, FA, pericardite.'},
   {n:'PNA Portugal: relatório da prova 2019 (Ordem dos Médicos)',u:'https://ordemdosmedicos.pt/wp-content/uploads/2020/07/Relatório_GPNA_2019_publico.pdf',d:'Como a PNA é construída e o que cobra.'}
 ];
+// Gerado de tutor-medicina/faculdade/ANALISE-OSCE-E-PROVA-MIAPS.md (18/11/2026)
+const OSCE = {
+"material": [
+"8 guias de OSCE de outro aluno (2024.1 a 2025.2, manhã e tarde, mais uma revisão), com cerca de 95 estações. São <b>fonte não oficial</b>.",
+"A devolutiva oficial da prova MIAPS 2026.1 (caderno 003, 50 questões). É <b>oficial</b>, com gabarito comentado pelos professores.",
+"3 aulas do MIAPS: IRA, distúrbios ácido-base (DAB parte 1) e hiperglicemia hospitalar (SBD). São resumos de aula."
+],
+"hier": "Manual MD9 e as diretrizes que ele cita, depois a devolutiva oficial, depois as aulas, por último os guias de OSCE.",
+"stations": [
+{
+"n": "1",
+"name": "<b>Ferida + sutura</b> (corto-contusa, perfurocortante, classificação)",
+"freq": "<b>6</b> (todo OSCE desde 2024.2)",
+"ask": "definição da ferida, 2 objetos causadores, ponto sorteado, verbalizar a técnica"
+},
+{
+"n": "2",
+"name": "<b>Pediatria de puericultura</b> (vacinas aos 15 meses, IMC/estatura na curva, antitérmico, vitamina D, varicela)",
+"freq": "<b>7</b>",
+"ask": "ler a caderneta, plotar na curva OMS, dose de antitérmico por kg, \"qual antitérmico NÃO dar\""
+},
+{
+"n": "3",
+"name": "<b>Sepse</b> (urosepse, pulmonar, IPPM com qSOFA, acidose na sepse)",
+"freq": "5",
+"ask": "diagnóstico escrito exato, hora 1, prescrição de fluido e ATB"
+},
+{
+"n": "4",
+"name": "<b>IOT</b> (SALOMA, sequência rápida, confirmação)",
+"freq": "4",
+"ask": "material, drogas com dose, como confirmar (capnografia)"
+},
+{
+"n": "5",
+"name": "<b>Apendicite / abdome agudo inflamatório</b>",
+"freq": "4",
+"ask": "Blumberg na prática, leucocitose e desvio, exame de imagem, cirurgia e ATB"
+},
+{
+"n": "6",
+"name": "<b>Pneumotórax</b> (toracocentese de alívio ou curativo de 3 lados)",
+"freq": "4",
+"ask": "local, calibre, \"tampa aberta\", dreno definitivo"
+},
+{
+"n": "7",
+"name": "<b>Insulina</b> (técnica de aplicação, receita, hiperglicemia hospitalar, CAD euglicêmica)",
+"freq": "4",
+"ask": "receita, técnica falada, descarte, corrigir esquema errado"
+},
+{
+"n": "8",
+"name": "<b>IC</b> (RX, ECG, classificação por FE, receita dos 4 pilares)",
+"freq": "3",
+"ask": "receita com dose, via e intervalo"
+},
+{
+"n": "9",
+"name": "<b>PAC</b> (RX, CRB-65, prescrição)",
+"freq": "3",
+"ask": "descrever o RX, pontuar o escore, prescrever"
+},
+{
+"n": "10",
+"name": "<b>Litíase</b> (Giordano, TC, cálculo &gt;1,5 cm)",
+"freq": "3",
+"ask": "manobra, exame de escolha, analgesia"
+},
+{
+"n": "11",
+"name": "<b>Espirometria</b> (asma × DPOC, step)",
+"freq": "3",
+"ask": "ler VEF1/CVF e a reversibilidade, corrigir a receita"
+},
+{
+"n": "12",
+"name": "<b>Ginecologia e obstetrícia</b> (PCCU com Schiller, Leopold e altura uterina, vaginose, candidíase na gestante, sífilis na gestação, IUE)",
+"freq": "9 no total",
+"ask": "procedimento verbalizado e conduta"
+},
+{
+"n": "13",
+"name": "<b>Dermatologia</b> (hanseníase, tinea capitis/corporis, candidíase cutânea, escabiose, erisipela)",
+"freq": "8 no total",
+"ask": "descrever a lesão, 2 diagnósticos diferenciais, tratamento"
+},
+{
+"n": "14",
+"name": "<b>Gastro</b> (DRGE, H. pylori, pancreatite, colecistite/Murphy, colangite, diverticulite, DII)",
+"freq": "10 no total",
+"ask": "anamnese dirigida, exame padrão, 3 medidas, 3 complicações"
+},
+{
+"n": "15",
+"name": "<b>Cardio</b> (IAM com supra, FA com CHA₂DS₂-VASc, HAS)",
+"freq": "5",
+"ask": "ECG, 2 condutas iniciais com dose, conduta definitiva"
+},
+{
+"n": "16",
+"name": "<b>Eletrólitos</b> (IRA pré-renal com hiperK, hipocalemia com KCl, AG alto)",
+"freq": "3",
+"ask": "ECG, ordem das condutas, prescrição \"em urna\""
+},
+{
+"n": "17",
+"name": "Risco cirúrgico (ASA, Lee) · hipotireoidismo (orientações da levotiroxina)",
+"freq": "2 cada",
+"ask": "escore e o que suspender; o que falar ao paciente"
+}
+],
+"how": [
+"<b>Diagnóstico escrito exato</b> (ex.: \"Sepse de foco pulmonar por PAC\").",
+"<b>Números contados:</b> \"2 objetos\", \"3 condutas\", \"4 exames\", \"3 complicações\". Responder exatamente o número pedido.",
+"<b>Prescrição \"em urna\"</b> (papel de prescrição): fármaco, dose, via, intervalo e diluição.",
+"<b>Procedimento verbalizado:</b> sutura, IOT, Leopold, Schiller, Blumberg, Giordano, Murphy, Lasègue, curativo de 3 lados, toracocentese, aplicação de insulina.",
+"<b>Interpretar um material entregue:</b> ECG, RX, gasometria, espirometria, envelope de exames, caderneta vacinal, curva da OMS.",
+"<b>Corrigir uma prescrição errada:</b> asma em step antigo, escala móvel isolada.",
+"<b>Anamnese com paciente simulado</b> que revela dados aos poucos (CAD: \"quais remédios usa?\" → SGLT2).",
+"<b>Escores:</b> CRB-65, qSOFA/SOFA, Alvarado, Ranson, RCRI/Lee, CHA₂DS₂-VASc, KDIGO, Wells.",
+"<b>Orientações ao paciente</b> (levotiroxina, insulina, DRGE, dúvidas na hanseníase)."
+],
+"areas": [
+{
+"a": "Infecção, ATB e sepse",
+"n": "13",
+"t": "choque séptico (resposta, vasopressina), PAC (CRB-65, amoxicilina), pielonefrite, cistite, ITU de repetição, erisipela, Fournier, leptospirose, espectro de ATB (ertapenem, VRE, Pseudomonas)"
+},
+{
+"a": "Eletrólitos, ácido-base e IRA",
+"n": "8",
+"t": "AG normal × alto, Winter e distúrbio misto, hipocalemia por laxante, lise tumoral, NIA, IRA por ácido úrico, hiponatremia por carbamazepina, hipernatremia"
+},
+{
+"a": "Saúde mental, MFC e comunicação",
+"n": "9",
+"t": "depressão perinatal (SRQ-20), luto × depressão (2 vezes), demanda oculta, SII/dor crônica, idoso polifarmácia (desprescrever), acne com PHQ-9, uso de substâncias (redução de danos)"
+},
+{
+"a": "Cardio",
+"n": "8",
+"t": "<b>HAS diretriz 2025 (2 questões)</b>, IC (3), DAC estável, SCA sem supra"
+},
+{
+"a": "Diabetes",
+"n": "4",
+"t": "EHH, insulinização na APS (NPH bedtime), basal-bolus hospitalar"
+},
+{
+"a": "Transfusão",
+"n": "2",
+"t": "TACO × TRALI, \"1 unidade + reavaliação\""
+},
+{
+"a": "Riscos assistenciais",
+"n": "2",
+"t": "broncoaspiração, idoso hospitalizado"
+},
+{
+"a": "Outros APS",
+"n": "5",
+"t": "insuficiência venosa, enxaqueca, próstata/HBP, EDA na síndrome consumptiva, fasciite plantar"
+}
+],
+"kw": [
+"\"diretriz 2025\"",
+"MAPA/MRPA",
+"meta &lt;130/80",
+"terapia combinada inicial",
+"pré-hipertensão 120–139/80–89",
+"DNA-HPV",
+"mamografia 50–74",
+"decisão compartilhada",
+"SRQ-20",
+"PHQ-9",
+"luto normal não se medica",
+"prevenção quaternária",
+"desprescrição",
+"NPH bedtime 10 UI ou 0,1–0,2 UI/kg com ajuste de 2 UI",
+"basal-bolus com meta 100–180",
+"CRB-65 (corte FR ≥30)",
+"amoxicilina 500 mg 8/8h por 7 dias",
+"Winter 1,5×HCO₃+8±2",
+"\"1 unidade + reavaliação\"",
+"vasopressina com noradrenalina 0,25–0,5",
+"gluconato de cálcio primeiro.\n\n---"
+],
+"erros": [
+{
+"tag": "erro",
+"t": "<b>Dipirona em gotas (criança)</b>",
+"old": "\"0,5 mL/kg\"",
+"new": "<b>Perigoso.</b> 0,5 mL/kg = 250 mg/kg, 10 vezes a dose. O certo é <b>1 gota/kg</b> (≈25 mg/kg; 0,05 mL/kg), solução de 500 mg/mL."
+},
+{
+"tag": "erro",
+"t": "<b>Vacinas aos 15 meses</b>",
+"old": "DTP + VIP/VOP + Hib + Pneumo 10 + Meningo C + SCR + varicela 2ª dose",
+"new": "PNI: <b>DTP 1º reforço + VIP reforço + hepatite A + tetraviral (SCR 2ª dose + varicela 1ª dose)</b>. Pneumo 10 e meningo são reforços aos <b>12 meses</b>. Não há reforço isolado de Hib. A VOP saiu do calendário em 2024 (agora é VIP). <span class=\"flag chk\">conferir</span> se o reforço meningocócico dos 12 meses já é ACWY no calendário vigente."
+},
+{
+"tag": "erro",
+"t": "<b>IMC e estatura na curva</b>",
+"old": "\"&lt; −2 DP = magreza acentuada; P3–P15 = magreza\"; \"+2 a +3 = alta estatura\"",
+"new": "SISVAN/OMS: <b>&lt; −3 magreza acentuada · −3 a −2 magreza · −2 a +1 eutrofia</b>. Em <b>&lt; 5 anos</b>: +1 a +2 = risco de sobrepeso, +2 a +3 = sobrepeso, &gt; +3 = obesidade. <b>Estatura: &lt; −3 muito baixa, −3 a −2 baixa, ≥ −2 adequada.</b>"
+},
+{
+"tag": "erro",
+"t": "<b>Clopidogrel no IAM com ICP primária</b>",
+"old": "300 mg",
+"new": "<b>600 mg</b> na ICP primária (300 mg é na fibrinólise &lt; 75 anos; ≥ 75 anos, 75 mg)."
+},
+{
+"tag": "erro",
+"t": "<b>TB: comprimidos RHZE por peso</b>",
+"old": "&lt; 45 kg: 2 · 45–59: 3 · ≥ 60: 4",
+"new": "MS: <b>20–35 kg: 2 · 36–50: 3 · 51–70: 4 · &gt; 70: 5</b>. Meningoencefálica e osteoarticular: <b>12 meses</b> (não 9). Prova tuberculínica ≥ <b>5 mm</b> já indica ILTB (MS 2019). TDO é recomendado, não \"obrigatório\"."
+},
+{
+"tag": "erro",
+"t": "<b>Hanseníase</b>",
+"old": "PB = rifampicina + dapsona; contato sem cicatriz de BCG = 2 doses",
+"new": "Desde 2021: <b>PQT-U (rifampicina + dapsona + clofazimina) para PB (6 doses) e MB (12 doses)</b>. BCG em contatos: <b>sem cicatriz ou com 1 cicatriz = 1 dose</b>; 2 cicatrizes = não vacinar."
+},
+{
+"tag": "erro",
+"t": "<b>Ferida corto-contusa: objetos</b>",
+"old": "faca de mesa, vidro, lata",
+"new": "Instrumento <b>com gume e peso</b>: machado, facão, foice, enxada. Vidro e lata são cortantes."
+},
+{
+"tag": "erro",
+"t": "<b>Apendicectomia não complicada</b>",
+"old": "cefazolina isolada",
+"new": "Precisa cobrir anaeróbios: <b>cefoxitina</b> ou <b>cefazolina + metronidazol</b>."
+},
+{
+"tag": "erro",
+"t": "<b>Palpação de Mathieu</b>",
+"old": "mão na FID e mão na lombar",
+"new": "Isso é a palpação bimanual clássica. <b>Mathieu:</b> examinador à direita, de costas para a cabeça do paciente, com as duas mãos lado a lado e os dedos em garra sob o rebordo costal."
+},
+{
+"tag": "erro",
+"t": "<b>DRGE</b>",
+"old": "\"EDA = padrão-ouro\"",
+"new": "A EDA é o exame inicial e classifica a esofagite. O <b>padrão-ouro para refluxo é a pHmetria/impedanciometria</b>. Os próprios guias divergem na idade de alarme (40 × 45 anos)."
+}
+],
+"updates": [
+{
+"tag": "desatualizado",
+"t": "<b>HAS</b>",
+"old": "estágio 1 → monoterapia; tabela de risco antiga",
+"new": "<b>Diretriz Brasileira de HA 2025</b> (MD9 + devolutiva Q38/Q45): pré-hipertensão 120–139/80–89; confirmar com MAPA/MRPA; <b>tratamento imediato, preferindo combinação de 2 fármacos</b>; <b>meta &lt; 130/80</b>."
+},
+{
+"tag": "desatualizado",
+"t": "<b>Rastreio de colo</b>",
+"old": "Papanicolaou anual ×2 → a cada 3 anos",
+"new": "<b>DNA-HPV oncogênico</b> como rastreio primário (diretriz 2025, devolutiva Q15). A técnica do especular e do Schiller continua cobrada no OSCE."
+},
+{
+"tag": "desatualizado",
+"t": "<b>Asma</b>",
+"old": "Step 1 = SABA isolado; steps antigos",
+"new": "<b>GINA 2026</b> (MD9): <b>nunca SABA isolado</b>; preferir <b>budesonida-formoterol como resgate e manutenção</b> (via 1)."
+},
+{
+"tag": "desatualizado",
+"t": "<b>Sepse</b>",
+"old": "30 mL/kg \"em 1 hora\"; qSOFA como triagem",
+"new": "<b>Surviving Sepsis 2021</b>: 30 mL/kg <b>nas primeiras 3 h</b>; <b>não usar qSOFA isolado</b> como triagem. O guia de 2025.2 já traz \"3 h\"; os outros, não."
+},
+{
+"tag": "desatualizado",
+"t": "<b>Toracocentese de alívio</b>",
+"old": "2º EIC, linha hemiclavicular",
+"new": "<b>ATLS 10ª ed.: adulto no 4º/5º EIC, logo anterior à linha axilar média.</b> O 2º EIC continua aceito em crianças. Vale citar os dois locais na estação."
+},
+{
+"tag": "desatualizado",
+"t": "<b>Hiperglicemia hospitalar</b>",
+"old": "meta 140–180; suspender todos os orais e o SGLT2",
+"new": "<b>Aula SBD + devolutiva Q11:</b> meta <b>100–180</b> no não crítico (140–180 no crítico e no perioperatório). iSGLT2 <b>pode ser mantido</b> no não crítico com cetonemia (suspender 3–4 dias antes de cirurgia). DPP-4 pode ser usado. Escala de correção com 3 colunas (sensível, usual, resistente)."
+},
+{
+"tag": "diverge",
+"t": "<b>CAD euglicêmica</b>",
+"old": "soro glicosado quando glicemia &lt; 200; K &gt; 3,5",
+"new": "<b>Aula SBD:</b> soro glicosado <b>desde o início</b>, porque a glicemia já está baixa; adiar a insulina se K &lt; 3,3. <span class=\"flag chk\">conferir</span> O consenso ADA 2024 usa K &lt; 3,5 e HCO₃ &lt; 18; a aula usa HCO₃ &lt; 15."
+},
+{
+"tag": "desatualizado",
+"t": "<b>DRC</b>",
+"old": "SGLT2 se TFG ≥ 25",
+"new": "<b>KDIGO 2024: iniciar com TFG ≥ 20.</b>"
+},
+{
+"tag": "desatualizado",
+"t": "<b>Gota</b>",
+"old": "\"NUNCA iniciar alopurinol na crise\"",
+"new": "ACR 2020: <b>pode iniciar durante a crise</b>, com profilaxia anti-inflamatória. Na prova, o mais seguro é dizer \"pode, com colchicina associada\"."
+},
+{
+"tag": "desatualizado",
+"t": "<b>Pancreatite</b>",
+"old": "Ringer 250–500 mL/h",
+"new": "<b>Hidratação moderada</b> (WATERFALL 2022): bolus de 10 mL/kg se hipovolêmico e depois 1,5 mL/kg/h. Gravidade pela <b>Atlanta revisada</b>; Ranson é histórico."
+},
+{
+"tag": "desatualizado",
+"t": "<b>Diverticulite não complicada</b>",
+"old": "ATB oral para todos",
+"new": "AGA 2021: <b>ATB seletivo</b> (não rotineiro em imunocompetente sem sinais sistêmicos)."
+},
+{
+"tag": "desatualizado",
+"t": "<b>Pré-natal</b>",
+"old": "ferro a partir de 20 semanas; curva de Atalah",
+"new": "MS: <b>40 mg de ferro elementar + ácido fólico desde o início da gestação</b>. A Caderneta da Gestante 2022 usa as <b>novas curvas brasileiras (Kac)</b> no lugar de Atalah."
+},
+{
+"tag": "desatualizado",
+"t": "<b>Câncer de próstata</b>",
+"old": "rastrear a partir de 50 anos (45 se risco)",
+"new": "<b>MS/INCA e devolutiva Q26: sem rastreio populacional; decisão compartilhada aos 55–69 anos.</b> A idade de 50 anos é posição da SBU."
+},
+{
+"tag": "diverge",
+"t": "<b>FA</b>",
+"old": "CHA₂DS₂-VASc (sexo feminino pontua)",
+"new": "ESC 2024 usa <b>CHA₂DS₂-VA</b> (sem o sexo). <span class=\"flag chk\">conferir</span> o que a Diretriz Brasileira de FA 2025 (MD9) adotou."
+},
+{
+"tag": "diverge",
+"t": "<b>Kerion</b>",
+"old": "prednisona de rotina",
+"new": "Corticoide no kerion é controverso e não é rotina. O tratamento essencial é o antifúngico sistêmico."
+},
+{
+"tag": "diverge",
+"t": "<b>IRA (aula)</b>",
+"old": "\"Cr ≥ 4 na admissão sem basal = IRA\"",
+"new": "Não é critério diagnóstico KDIGO (Cr ≥ 4 entra no <b>estadiamento</b> 3). O MD9 cita a KDIGO AKI/AKD 2026, que ainda está em consulta pública."
+}
+],
+"check": [
+{
+"tag": "diverge",
+"x": "<b>Q45 × Q38 (MRPA):</b> a Q38 diz que a hipertensão na MRPA é <b>≥ 130/80</b>; a Q45 diz que o corte \"permanece ≥ 135/85\". As duas não podem estar certas. A diretriz brasileira usa ≥ 130/80 na MRPA desde 2020 <span class=\"flag chk\">conferir</span>. No caso da Q45 (138/88), as duas levam ao diagnóstico."
+},
+{
+"tag": "diverge",
+"x": "<b>Q19 (cistite):</b> o gabarito diz que SMX-TMP 3 dias é \"1ª escolha\". Diretrizes recentes (FEBRASGO, IDSA, EAU) preferem <b>nitrofurantoína 5 dias ou fosfomicina 3 g</b> e só usam SMX-TMP se a resistência local for &lt; 20%. <b>Para a prova da faculdade, siga o gabarito; na prática, saiba a outra opção.</b>"
+}
+],
+"aulasIntro": "Estão <b>coerentes com as diretrizes</b>. A aula de DAB já traz a seção \"Aula × Evidência\". Destaques da aula:  ---",
+"aulas": [
+"<b>Limiar de bicarbonato por causa:</b> CAD pH &lt; 6,9 (ADA: &lt; 7,0) · sepse pH ≤ 7,2 + IRA KDIGO 2–3 · intoxicação pH &lt; 7,25 · DRC HCO₃ &lt; 18.",
+"<b>Bicarbonato 8,4%:</b> 1 mL = 1 mEq. Nunca diluir em SF.",
+"<b>IRA:</b> tabela pré-renal × renal com densidade, osmolaridade, Na urinário, FeNa, FeUreia e ureia/creatinina. A <b>prova prática pede 2 prescrições, cada uma valendo metade</b>: hidratação + medida da causa."
+],
+"pt": [
+[
+"HAS",
+"pré-HAS 120–139/80–89; meta &lt; 130/80",
+"ESC 2024: PA \"elevada\" 120–139/70–89; meta sistólica 120–129"
+],
+[
+"H. pylori",
+"tríplice 14 dias (IV Consenso)",
+"Maastricht VI: quádrupla com bismuto preferida"
+],
+[
+"Vacinas",
+"PNI (15 meses: DTP, VIP, hep A, tetraviral)",
+"PNV é outro calendário (ex.: MenB, VASPR aos 12 meses). <b>As respostas de caderneta valem só para o Brasil.</b>"
+],
+[
+"Colo",
+"DNA-HPV a partir de 2025",
+"teste HPV no rastreio organizado"
+],
+[
+"Termos",
+"IOT · jelco · dipirona · UBS · SUS · SINAN · Descarpack · HAS · IAM",
+"EOT · cateter (abbocath) · metamizol · centro de saúde/USF · SNS · SINAVE · contentor de cortoperfurantes · HTA · EAM"
+]
+],
+"plan": [
+"<b>Estações primeiro</b> (cada uma vale um dia Normal): 1) sutura e feridas · 2) puericultura (caderneta, curva, antitérmico) · 3) sepse e hora 1 · 4) IOT · 5) apendicite e Blumberg · 6) pneumotórax · 7) insulina e hiperglicemia hospitalar · 8) receita da IC · 9) PAC com CRB-65 · 10) eletrólitos \"em urna\".",
+"<b>Questões da prova MIAPS:</b> proporção sugerida de 25% infecção/ATB, 20% eletrólitos/AB/IRA, 20% MFC e saúde mental, 15% cardio (com ênfase na HAS 2025), 10% diabetes, 10% transfusão e riscos assistenciais.",
+"Sempre que um tema dos guias cair, o comentário da questão traz o alerta de erro ou desatualização correspondente."
+]
+};
 // ===== Utilidades =====
 const $ = (s, el = document) => el.querySelector(s);
 const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -989,7 +1433,7 @@ function statusOf(p) { if (p == null) return ['sem dados', '']; if (p >= 80) ret
 const KEY = 'caderno-maria-v1';
 let S;
 function blank() {
-  return { v: 1, created: today(), sched: [], topics: {}, reviews: [], attempts: [], manual: [], cards: [], notes: {}, time: {}, sims: [], qimp: [], mnemos: [], sessions: [], lastBackup: null };
+  return { v: 1, created: today(), sched: [], topics: {}, reviews: [], attempts: [], manual: [], cards: [], notes: {}, time: {}, sims: [], qimp: [], mnemos: [], sessions: [], osce: {}, lastBackup: null };
 }
 const SCHED_V = 2; // 2 = temas do manual da faculdade (MD9 2026.2)
 function load() {
@@ -1143,6 +1587,7 @@ const ICONS = {
   sprout: '<path d="M12 21v-8"/><path d="M12 13c0-3.5-2.5-5.5-6.5-5.5 0 3.5 2.5 5.5 6.5 5.5z"/><path d="M12 13c0-2.5 2-4.2 5-4.2 0 2.5-2 4.2-5 4.2z"/><path d="M7.5 21h9"/>',
   leaf: '<path d="M5 19C5 10 10 5 20 4c-.5 10-5.5 15-15 15z"/><path d="M5 19l9-9M10 14.5h4M9 11v3"/>',
   tree: '<circle cx="12" cy="9" r="6"/><path d="M12 21V12M12 15l-3-2.5M12 13.5l3-2.5M8 21h8"/>',
+  stetho: '<path d="M6 3v6a5 5 0 0 0 10 0V3"/><path d="M4.5 3H7.5M14.5 3h3"/><path d="M11 14v2a4 4 0 0 0 8 0v-2.5"/><circle cx="19" cy="11.5" r="2"/>',
   sparkle: '<path d="M12 3l2 6 6 2-6 2-2 6-2-6-6-2 6-2z"/>'
 };
 const ic = (n, cls = '') => `<svg class="i ${cls}" data-n="${n}" viewBox="0 0 24 24" aria-hidden="true">${ICONS[n] || ''}</svg>`;
@@ -1159,6 +1604,7 @@ const AREA_STYLE = {
 const VIEW_META = {
   hoje: [null, null],
   acao: ['Modo ação', 'Uma sessão por vez, ligada aos temas da faculdade.'],
+  osce: ['OSCE e prova', 'O que mais cai no OSCE de 11/12 e na prova de MIAPS de 14/12.'],
   agenda: ['Agenda', 'Temas do manual do 9º semestre e do planejamento de 120 dias.'],
   simulados: ['Simulados', 'Questões no formato de prova. Errou ou marcou "não sei"? Vira flashcard.'],
   flashcards: ['Flashcards', 'Montados sozinhos a partir dos seus erros e dificuldades.'],
@@ -1190,7 +1636,7 @@ function donutSVG(parts) {
 }
 
 // ===== Navegação =====
-const VIEWS = ['hoje', 'acao', 'flashcards', 'agenda', 'simulados', 'desempenho', 'mnemonicos', 'provas', 'backup'];
+const VIEWS = ['hoje', 'acao', 'osce', 'flashcards', 'agenda', 'simulados', 'desempenho', 'mnemonicos', 'provas', 'backup'];
 let viewDate = today();
 function route() {
   const v = VIEWS.includes(location.hash.slice(1)) ? location.hash.slice(1) : 'hoje';
@@ -1202,7 +1648,7 @@ function route() {
   document.querySelectorAll('#tabs a').forEach(a => { if (a.getAttribute('href') === '#' + v) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current'); });
   render(v);
 }
-function render(v) { ({ hoje: rHoje, acao: rAcao, agenda: rAgenda, simulados: rSim, flashcards: rFc, desempenho: rPerf, mnemonicos: rMn, provas: rProvas, backup: rBackup })[v](); applyAna($('#v-' + v)); }
+function render(v) { ({ hoje: rHoje, acao: rAcao, osce: rOsce, agenda: rAgenda, simulados: rSim, flashcards: rFc, desempenho: rPerf, mnemonicos: rMn, provas: rProvas, backup: rBackup })[v](); applyAna($('#v-' + v)); }
 function rerender() { route(); }
 
 // ===== Componentes =====
@@ -1829,11 +2275,14 @@ function facTopics() {
   const push = (id, name, area, sub) => { if (seen.has(id)) return; seen.add(id); out.push({ id, name, area, sub }); };
   Object.entries(FIRST_TOPICS).forEach(([id, [name, area, sub]]) => { if (area !== 'bas') push(id, name, area, sub); });
   FAC_CM.concat(FAC_MIAPS).forEach(([id, name, area, sub]) => push(id, name, area, sub));
-  return out;
+  return out.sort((a, b) => focusRank(a.id) - focusRank(b.id));
 }
 const modOf = t => String(t.sub || '').startsWith('MIAPS') ? 'MIAPS' : 'Clínica Médica';
 // Módulo atual e datas que a Maria passou
 const FOCUS = 'MIAPS';
+// Ordem sugerida pelo tutor (FOCO-MIAPS-ATE-14-12.md): medicina interna, depois APS
+const FOCUS_ORDER = ['mi-sepse', 'mi-pnmhosp', 'mi-atb', 'mi-ituhosp', 'mi-icaguda', 'mi-sca', 'mi-irahosp', 'mi-hidro', 'mi-hiperglic', 'mi-transf', 'mi-riscos', 'mi-consump', 'mi-cronicas', 'mi-mulher', 'mi-saude-crianca', 'mi-idoso', 'mi-mental', 'mi-mccp', 'mi-coord', 'mi-familia', 'mi-prev', 'mi-poli', 'mi-drogas', 'mi-paliat', 'mi-sexual', 'mi-pele-aps', 'mi-nutri', 'mi-demanda', 'mi-sus', 'mi-testes'];
+const focusRank = id => { const i = FOCUS_ORDER.indexOf(id); return i < 0 ? 999 : i; };
 const EXAMS = [['2026-12-11', 'OSCE'], ['2026-12-14', 'Prova de MIAPS']];
 function examsHTML() {
   const up = EXAMS.filter(([d]) => d >= today()); if (!up.length) return '';
@@ -1940,7 +2389,7 @@ function rAcao() {
 function acaoHomeHTML() {
   const cur = currentTopic(), st = topicState(cur);
   return `<div class="card ac-home">
-    ${cardHead('target', 'pink', `Modo ação · Dia ${sessNum()}`, '<a class="link" href="#acao">Abrir ›</a>')}
+    ${cardHead('target', 'pink', `Modo ação · Dia ${sessNum()}`, '<span class="row" style="gap:14px"><a class="link" href="#osce">OSCE e prova ›</a><a class="link" href="#acao">Abrir ›</a></span>')}
     <p class="small" style="margin:0 0 10px">Tema: <b>${esc(topic(cur).name)}</b> <span class="muted">· ${st[1]}</span></p>${examsHTML()}
     <div class="ac-sizes">${Object.entries(SIZES).map(([k, [i, l, tm]]) => `<button type="button" data-act="acGo" data-k="${k}">${ic(i)}<b>${l}</b><small>${tm}</small></button>`).join('')}</div>
   </div>`;
@@ -1968,6 +2417,75 @@ document.addEventListener('submit', e => {
   const st = topicState(t);
   toast(`Dia ${s.n} feito.${lines.length ? ` ${lines.length} flashcard(s) para amanhã.` : ''}${st[0] === 'ok' ? ' Tema visto o suficiente!' : ''}`);
   rAcao();
+});
+
+
+// ===== OSCE e prova MIAPS (análise do tutor, 18/11) =====
+const MATERIAIS = [
+  ['oficial', 'Devolutiva da prova MIAPS 2026.1 (caderno 003, 50 questões)', 'gabarito comentado pelos professores'],
+  ['aula', 'Aula 1: injúria renal aguda (MIAPS)', 'resumo de aula'],
+  ['aula', 'Aula 2: distúrbios ácido-base, parte 1 (MIAPS)', 'resumo de aula'],
+  ['aula', 'Hiperglicemia hospitalar (aula SBD)', 'resumo de aula'],
+  ['nao', 'Guias de OSCE de outro aluno: 2024.1, 2024.2, 2025.1 (manhã e tarde), 2025.2 (tarde e revisão)', '8 arquivos, cerca de 95 estações']
+];
+const MAT_LABEL = { oficial: 'Oficial', aula: 'Aula', nao: 'Não oficial' };
+const TAG_LABEL = { erro: 'Erro', desatualizado: 'Desatualizado', diverge: 'Fontes divergem' };
+function errataHTML(list) {
+  return `<div class="errata">${list.map(e => `<article class="err ${e.tag}"><header><span class="flag ${e.tag}">${TAG_LABEL[e.tag] || ''}</span><h4>${e.t}</h4></header>
+    <p class="old"><small>Guia / aula</small><s>${e.old}</s></p><p class="new"><small>Referência</small>${e.new}</p></article>`).join('')}</div>`;
+}
+function rOsce() {
+  const tr = S.osce || {}, nTr = OSCE.stations.filter(s => tr[s.n]).length;
+  const maxA = Math.max(...OSCE.areas.map(a => +a.n));
+  $('#v-osce').innerHTML = `
+  <div class="card banner ac-head">
+    <div style="min-width:0"><div class="eyebrow">MIAPS · análise de 18/11</div><h2>O que mais cai</h2>
+      <p class="small muted" style="margin:2px 0 0">Ordem de confiança: ${OSCE.hier}</p>${examsHTML()}</div>
+  </div>
+  <div class="dash">
+    <div class="card span12 err-card">
+      ${cardHead('target', 'pink', 'Erros nos guias que podem custar ponto', `<span class="pill bad">${OSCE.erros.length} erros</span>`)}
+      <p class="small muted" style="margin:0 0 14px">Os guias de OSCE são de outro aluno e não são oficiais. Nestes pontos eles estão errados; vale a coluna da referência.</p>
+      ${errataHTML(OSCE.erros)}
+    </div>
+    <div class="card span12">
+      ${cardHead('repeat', 'peach', 'Desatualizado ou com fontes divergentes', `<span class="pill warn">${OSCE.updates.length} pontos</span>`)}
+      ${errataHTML(OSCE.updates)}
+      <h4 class="sub-h">Na devolutiva oficial, vale conferir</h4>
+      <ul class="plain">${OSCE.check.map(c => `<li><span class="flag ${c.tag}">${TAG_LABEL[c.tag] || ''}</span> ${c.x}</li>`).join('')}</ul>
+    </div>
+    <div class="card span7">
+      ${cardHead('check', 'lilac', 'Estações que mais caem no OSCE', `<span class="pill">${nTr}/${OSCE.stations.length} treinadas</span>`)}
+      <p class="small muted" style="margin:0 0 10px">Quantas vezes cada estação apareceu nos 8 OSCEs. Marque quando treinar; cada estação vale um dia Normal no Modo ação.</p>
+      <div class="list st-list">${OSCE.stations.map(s => { const k = +(s.freq.match(/\d+/) || [0])[0]; return `<label class="st ${tr[s.n] ? 'done' : ''}"><input type="checkbox" data-act="osceSt" data-n="${s.n}" ${tr[s.n] ? 'checked' : ''}><span class="st-t"><b>${s.name}</b><small>${s.ask}</small></span><span class="st-f"><b>${k}</b><small>${/no total/.test(s.freq) ? 'no total' : 'de 8'}</small></span></label>`; }).join('')}</div>
+    </div>
+    <div class="span5" style="display:grid;gap:18px;align-content:start">
+      <div class="card">${cardHead('quiz', 'sky', 'Como as estações são cobradas')}<ol class="ac-rules">${OSCE.how.map(h => `<li>${h}</li>`).join('')}</ol></div>
+      <div class="card">${cardHead('calendar', 'mint', 'Treino até 11/12 e 14/12')}<ul class="plain">${OSCE.plan.map(p => `<li>${p}</li>`).join('')}</ul></div>
+    </div>
+    <div class="card span7">
+      ${cardHead('chart', 'mint', 'Prova MIAPS: o que caiu em 2026.1', '<span class="pill">50 questões</span>')}
+      <div class="areas">${OSCE.areas.map(a => `<div class="area"><div class="area-h"><b>${a.a}</b><span>${a.n}</span></div><span class="rule"><i style="width:${100 * a.n / maxA}%"></i></span><small>${a.t}</small></div>`).join('')}</div>
+    </div>
+    <div class="span5" style="display:grid;gap:18px;align-content:start">
+      <div class="card">${cardHead('bulb', 'peach', 'Palavras-chave da banca')}<div class="kw">${OSCE.kw.map(k => `<span>${k}</span>`).join('')}</div></div>
+      <div class="card">${cardHead('book', 'lilac', 'As aulas do MIAPS')}<p class="small" style="margin:0 0 8px">${OSCE.aulasIntro}</p><ul class="plain">${OSCE.aulas.map(a => `<li>${a}</li>`).join('')}</ul></div>
+    </div>
+    <div class="card span12">
+      ${cardHead('save', 'sky', 'Materiais analisados')}
+      <div class="list">${MATERIAIS.map(([k, n, d]) => `<div class="item mat"><span class="flag mat-${k}">${MAT_LABEL[k]}</span><div class="t"><b>${n}</b><span class="small muted">${d}</span></div></div>`).join('')}</div>
+      <p class="small muted" style="margin:12px 0 0">Os arquivos originais ficam na pasta do projeto e não vão para o site.</p>
+      <details class="ac-more" style="margin-top:8px"><summary>Brasil × Portugal nesses temas</summary>
+        <div class="pt-wrap"><table class="pt"><thead><tr><th>Tema</th><th>Brasil</th><th>Portugal</th></tr></thead><tbody>${OSCE.pt.map(r => `<tr>${r.map(c => `<td>${c}</td>`).join('')}</tr>`).join('')}</tbody></table></div>
+      </details>
+    </div>
+  </div>`;
+}
+document.addEventListener('change', e => {
+  if (e.target.dataset.act !== 'osceSt') return;
+  S.osce = S.osce || {}; const n = e.target.dataset.n;
+  if (e.target.checked) S.osce[n] = today(); else delete S.osce[n];
+  save(); rOsce();
 });
 
 // ===== Início =====
