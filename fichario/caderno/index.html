@@ -1834,7 +1834,7 @@ function facTopics() {
 const modOf = t => String(t.sub || '').startsWith('MIAPS') ? 'MIAPS' : 'Clínica Médica';
 // Módulo atual e datas que a Maria passou
 const FOCUS = 'MIAPS';
-const EXAMS = [['2026-12-11', 'Avaliação'], ['2026-12-14', 'Prova de MIAPS']];
+const EXAMS = [['2026-12-11', 'OSCE'], ['2026-12-14', 'Prova de MIAPS']];
 function examsHTML() {
   const up = EXAMS.filter(([d]) => d >= today()); if (!up.length) return '';
   return `<div class="ac-exams">${up.map(([d, l]) => { const n = Math.round((pd(d) - pd(today())) / 864e5); return `<div><b>${n}</b><small>${n === 1 ? 'dia' : 'dias'} · ${esc(l)} · ${fmtShort(d)}</small></div>`; }).join('')}</div>`;
