@@ -544,6 +544,11 @@ a.card:hover .ico svg.i{transform:rotate(4deg)}
 .ac-more summary::-webkit-details-marker{display:none}
 .ac-more summary::before{content:"+ "}.ac-more[open] summary::before{content:"− "}
 @media (max-width:700px){.ac-item{grid-template-columns:minmax(0,1fr) auto!important}.ac-item .pill{grid-column:1;grid-row:2;white-space:normal}.ac-item button{grid-row:1/3;grid-column:2}}
+.ac-exams{display:flex;flex-wrap:wrap;gap:6px 22px;margin:12px 0 4px}
+.ac-exams div{display:flex;align-items:baseline;gap:8px}
+.ac-exams b{font-family:var(--display);font-weight:400;font-size:2rem;line-height:1;color:var(--accent)}
+.ac-exams small{font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;font-weight:700;color:var(--muted)}
+.ac-mods h4 .pill{font-family:var(--body,inherit);font-style:normal;margin-left:6px;vertical-align:middle}
 </style>
 </head><body>
 <div class="app">
@@ -1827,6 +1832,13 @@ function facTopics() {
   return out;
 }
 const modOf = t => String(t.sub || '').startsWith('MIAPS') ? 'MIAPS' : 'Clínica Médica';
+// Módulo atual e datas que a Maria passou
+const FOCUS = 'MIAPS';
+const EXAMS = [['2026-12-11', 'Avaliação'], ['2026-12-14', 'Prova de MIAPS']];
+function examsHTML() {
+  const up = EXAMS.filter(([d]) => d >= today()); if (!up.length) return '';
+  return `<div class="ac-exams">${up.map(([d, l]) => { const n = Math.round((pd(d) - pd(today())) / 864e5); return `<div><b>${n}</b><small>${n === 1 ? 'dia' : 'dias'} · ${esc(l)} · ${fmtShort(d)}</small></div>`; }).join('')}</div>`;
+}
 const sessNum = () => S.sessions.length + 2; // o Dia 1 era o diagnóstico, que saiu do plano
 // Questões de um tema em ordem, para saber o total e as últimas 10
 function topicLog(t) {
@@ -1849,8 +1861,10 @@ function topicState(t) {
 // Tema atual: o da última sessão, se ainda não está firme; senão o próximo tema da faculdade na agenda
 function currentTopic() {
   const last = S.sessions[S.sessions.length - 1];
-  if (!last) return 'cm-has'; // o plano começa no Dia 2, hipertensão
+  if (!last) { const m = facTopics().find(t => modOf(t) === FOCUS); return m ? m.id : 'cm-has'; } // começa pelo módulo atual
   if (last && topicState(last.t)[0] !== 'ok') return last.t;
+  const foc = facTopics().find(t => modOf(t) === FOCUS && topicState(t.id)[0] !== 'ok');
+  if (foc) return foc.id;
   const fac = new Set(facTopics().map(t => t.id));
   const next = S.sched.filter(s => s.kind === 't' && fac.has(s.topic)).sort((a, b) => a.date.localeCompare(b.date)).find(s => topicState(s.topic)[0] !== 'ok');
   return next ? next.topic : (fac.has('cm-has') ? 'cm-has' : facTopics()[0].id);
@@ -1858,7 +1872,7 @@ function currentTopic() {
 let acSize = 'min', acTopic = null;
 function topicSelectHTML(sel) {
   const F = facTopics(), groups = {};
-  F.forEach(t => (groups[`${modOf(t)} · ${t.sub.replace(/^MIAPS · /, '')}`] ||= []).push(t));
+  [...F.filter(t => modOf(t) === FOCUS), ...F.filter(t => modOf(t) !== FOCUS)].forEach(t => (groups[`${modOf(t)} · ${t.sub.replace(/^MIAPS · /, '')}`] ||= []).push(t));
   const facIds = new Set(F.map(t => t.id));
   const other = allTopicIds().filter(id => !facIds.has(id));
   const opt = (id, name) => { const st = topicState(id); return `<option value="${id}" ${id === sel ? 'selected' : ''}>${esc(name)}${st[0] === 'ok' ? ' ✓' : ''}</option>`; };
@@ -1881,12 +1895,12 @@ function blockHTML() {
 }
 function rAcao() {
   const cur = acTopic || currentTopic(), tp = topic(cur), st = topicState(cur), F = facTopics();
-  const mods = ['Clínica Médica', 'MIAPS'];
+  const mods = [FOCUS, ...['Clínica Médica', 'MIAPS'].filter(m => m !== FOCUS)];
   const hist = S.sessions.slice(-8).reverse();
   $('#v-acao').innerHTML = `
   <div class="card banner ac-head">
     <div style="min-width:0"><div class="eyebrow">Próxima sessão</div><h2>Dia ${sessNum()}</h2>
-      <p class="small muted" style="margin:2px 0 0">Tema: <b>${esc(tp.name)}</b> · ${st[1]}</p></div>
+      <p class="small muted" style="margin:2px 0 0">Tema: <b>${esc(tp.name)}</b> · ${st[1]}</p>${examsHTML()}</div>
     <div class="ac-sizes" role="radiogroup" aria-label="Tamanho do dia">${Object.entries(SIZES).map(([k, [i, l, tm]]) => `<button type="button" role="radio" aria-checked="${k === acSize}" data-act="acSize" data-k="${k}">${ic(i)}<b>${l}</b><small>${tm}</small></button>`).join('')}</div>
   </div>
   <div class="dash">
@@ -1911,7 +1925,7 @@ function rAcao() {
     <div class="card span12">
       ${cardHead('book', 'sky', 'Temas da faculdade', `<span class="pill">${F.filter(t => topicState(t.id)[0] === 'ok').length}/${F.length} firmes</span>`)}
       <p class="small muted" style="margin:0 0 10px">Visto o suficiente: 20 questões ou mais e mais da metade das últimas 10 certas. Toque num tema para usá-lo na próxima sessão.</p>
-      <div class="ac-mods">${mods.map(m => { const all = F.filter(t => modOf(t) === m), on = all.filter(t => t.id === cur || topicState(t.id)[2].total), off = all.filter(t => !on.includes(t)); const row = t => { const [c, l, L] = topicState(t.id); return `<button type="button" class="ac-topic ${c} ${t.id === cur ? 'cur' : ''}" data-act="acPick" data-t="${t.id}"><span>${esc(t.name)}</span><small>${l}${L.last10 != null ? ` · últimas: ${L.last10}%` : ''}</small><i style="width:${Math.min(100, L.total * 5)}%"></i></button>`; }; return `<div><h4>${m}</h4><div class="ac-topics">${on.map(row).join('')}</div>${off.length ? `<details class="ac-more"><summary>Ver os outros ${off.length} temas</summary><div class="ac-topics">${off.map(row).join('')}</div></details>` : ''}</div>`; }).join('')}</div>
+      <div class="ac-mods">${mods.map(m => { const all = F.filter(t => modOf(t) === m), on = all.filter(t => t.id === cur || topicState(t.id)[2].total), off = all.filter(t => !on.includes(t)); const row = t => { const [c, l, L] = topicState(t.id); return `<button type="button" class="ac-topic ${c} ${t.id === cur ? 'cur' : ''}" data-act="acPick" data-t="${t.id}"><span>${esc(t.name)}</span><small>${l}${L.last10 != null ? ` · últimas: ${L.last10}%` : ''}</small><i style="width:${Math.min(100, L.total * 5)}%"></i></button>`; }; return `<div><h4>${m}${m === FOCUS ? ' <small class="pill">módulo atual</small>' : ''}</h4><div class="ac-topics">${on.map(row).join('')}</div>${off.length ? `<details class="ac-more"><summary>Ver os outros ${off.length} temas</summary><div class="ac-topics">${off.map(row).join('')}</div></details>` : ''}</div>`; }).join('')}</div>
     </div>
     <div class="card span7">
       ${cardHead('calendar', 'peach', 'Sessões feitas')}
@@ -1927,7 +1941,7 @@ function acaoHomeHTML() {
   const cur = currentTopic(), st = topicState(cur);
   return `<div class="card ac-home">
     ${cardHead('target', 'pink', `Modo ação · Dia ${sessNum()}`, '<a class="link" href="#acao">Abrir ›</a>')}
-    <p class="small" style="margin:0 0 10px">Tema: <b>${esc(topic(cur).name)}</b> <span class="muted">· ${st[1]}</span></p>
+    <p class="small" style="margin:0 0 10px">Tema: <b>${esc(topic(cur).name)}</b> <span class="muted">· ${st[1]}</span></p>${examsHTML()}
     <div class="ac-sizes">${Object.entries(SIZES).map(([k, [i, l, tm]]) => `<button type="button" data-act="acGo" data-k="${k}">${ic(i)}<b>${l}</b><small>${tm}</small></button>`).join('')}</div>
   </div>`;
 }
