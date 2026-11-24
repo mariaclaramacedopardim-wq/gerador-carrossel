@@ -594,6 +594,71 @@ ul.plain li::marker{color:var(--accent)}
 table.pt{width:100%;border-collapse:collapse;font-size:.85rem;min-width:520px}
 table.pt th{text-align:left;font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);padding:6px 8px;border-bottom:1px solid var(--rule)}
 table.pt td{padding:8px;border-bottom:1px solid var(--line);vertical-align:top}
+/* ===== Trilhas de questões ===== */
+nav.tabs a:nth-child(n+9){--tab:var(--t8)}
+button.big{font-size:1rem;padding:12px 22px}
+.run-top{display:flex;justify-content:space-between;align-items:flex-end;gap:12px;flex-wrap:wrap}
+.run-top h2 .muted{font-size:.6em}
+.run-dots{display:flex;gap:4px;flex-wrap:wrap}
+.run-dots i{flex:1 1 14px;max-width:40px;height:4px;background:var(--line)}
+.run-dots i.r-ok{background:var(--ok)}.run-dots i.r-err{background:var(--bad)}.run-dots i.r-ns{background:var(--warn)}
+.run-dots i.cur{background:var(--ink)}
+.run-q .q-text{font-size:1.25rem;line-height:1.35}
+.run-q .opts{grid-template-columns:minmax(0,1fr)}
+.run-q .opt{display:grid;grid-template-columns:auto minmax(0,1fr);gap:10px;align-items:baseline;font-weight:500}
+.run-q .opt b{font-family:var(--display);font-weight:400;font-size:1.2rem;color:var(--accent)}
+.run-q .opt.right b,.run-q .opt.wrong b{color:inherit}
+.run-q .opt:disabled{opacity:.55;cursor:default}.run-q .opt.right:disabled,.run-q .opt.wrong:disabled{opacity:1}
+.run-q .opt.right:disabled:hover{background:var(--ok-soft);color:var(--ok);border-color:var(--ok)}.run-q .opt.wrong:disabled:hover{background:var(--bad-soft);color:var(--bad);border-color:var(--bad)}.run-q .opt:disabled:not(.right):not(.wrong):hover{background:transparent;color:inherit}
+.verdict{font-size:1rem;padding-left:12px;border-left:3px solid var(--muted)}
+.verdict.v-ok{border-color:var(--ok);color:var(--ok)}.verdict.v-err{border-color:var(--bad);color:var(--bad)}.verdict.v-ns{border-color:var(--warn);color:var(--warn)}
+.verdict span{color:var(--muted);font-size:.86rem}
+.explain{display:grid;gap:10px}
+.explain p{margin:0}
+.xnote{font-size:.88rem;display:flex;gap:8px;align-items:baseline;flex-wrap:wrap}
+.refline{font-size:.84rem;color:var(--muted);padding-top:8px;border-top:1px dashed var(--line);margin:0}
+.refline small{display:block;font-size:.58rem;letter-spacing:.14em;text-transform:uppercase;font-weight:700;margin-bottom:2px}
+.why{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.why small{width:100%;font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;font-weight:700;color:var(--muted)}
+.why button{font-size:.82rem;padding:6px 10px}
+.why button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.run-end{display:flex;flex-wrap:wrap;gap:20px 34px;align-items:center}
+.run-end .bignum b .muted{font-size:.45em}
+ol.trail{list-style:none;margin:0;padding:0;display:grid}
+ol.trail li{display:grid;grid-template-columns:auto minmax(0,1fr) auto auto;gap:6px 14px;align-items:center;padding:12px 0;border-bottom:1px solid var(--line)}
+.tr-n{font-family:var(--display);font-size:1.7rem;line-height:1;color:var(--muted);min-width:1.6em}
+ol.trail li.done .tr-n,ol.trail li.next .tr-n{color:var(--accent)}
+ol.trail li.next{box-shadow:inset 3px 0 0 var(--accent);padding-left:10px}
+.tr-t{display:grid;gap:2px;min-width:0}.tr-t b{font-weight:600;font-size:.95rem}.tr-t small{font-size:.8rem;color:var(--muted)}
+.tr-s{display:grid;justify-items:end;line-height:1.1}.tr-s b{font-family:var(--display);font-weight:400;font-size:1.4rem;color:var(--accent)}
+.tr-s small{font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:700}
+ol.trail li button{font-size:.82rem;padding:7px 12px}
+@media (max-width:560px){ol.trail li{grid-template-columns:auto minmax(0,1fr) auto}ol.trail li button{grid-column:2/-1;justify-self:start}}
+.mini-ana{display:flex;gap:28px}
+.mini-ana div{display:grid}.mini-ana b{font-family:var(--display);font-weight:400;font-size:2.4rem;line-height:1;color:var(--accent)}
+.mini-ana small{font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:700}
+.checklist{display:grid;gap:0}
+.checklist label{display:grid;grid-template-columns:auto minmax(0,1fr);gap:12px;padding:10px 0;border-bottom:1px solid var(--line);cursor:pointer;font-size:.92rem}
+.checklist input{width:20px;height:20px;accent-color:var(--accent);margin-top:1px}
+textarea#drillAns{width:100%}
+.ana-head{display:flex;flex-wrap:wrap;gap:20px 34px;align-items:center}
+.area .rule.mk{overflow:visible}
+.area .rule em{position:absolute;top:-4px;width:1px;height:10px;background:var(--ink)}
+ol.recos{margin:0;padding-left:1.2em;display:grid;gap:10px;font-size:.9rem}
+ol.recos li::marker{color:var(--accent);font-family:var(--display)}
+ol.recos li button{padding:0 4px;font-size:.88rem}
+table.whytab{width:100%;border-collapse:collapse;font-size:.9rem}
+table.whytab td{padding:7px 0;border-bottom:1px solid var(--line)}
+table.whytab td.num{text-align:right;padding-left:12px;font-variant-numeric:tabular-nums}
+.cols{display:grid;grid-template-columns:repeat(14,minmax(0,1fr));gap:4px;align-items:end;height:130px}
+.col{display:grid;grid-template-rows:minmax(0,1fr) auto;height:100%;justify-items:center;gap:4px}
+.col .stk{display:flex;flex-direction:column-reverse;width:100%;max-width:22px;height:100%;border-bottom:1px solid var(--rule)}
+.col .okp{background:var(--accent)}.col .errp{background:var(--accent-2);opacity:.45}
+.col small{font-size:.62rem;color:var(--muted)}
+.key{display:inline-block;width:10px;height:10px;vertical-align:-1px;margin:0 2px 0 8px}.key.okk{background:var(--accent)}.key.errk{background:var(--accent-2);opacity:.45}
+ol.rev-list{margin:0;padding-left:1.2em;display:grid;gap:12px}
+ol.rev-list li::marker{color:var(--accent)}
+ol.rev-list p{margin:0}ol.rev-list .t{font-weight:600;font-size:.92rem}
 </style>
 </head><body>
 <div class="app">
@@ -601,6 +666,7 @@ table.pt td{padding:8px;border-bottom:1px solid var(--line);vertical-align:top}
     <div class="logo"><span class="mark" id="logoMark"></span><div><b>Caderno da Maria</b><span>Medicina · 9º semestre</span></div></div>
     <nav class="tabs" id="tabs" aria-label="Seções">
       <a href="#hoje" data-ic="home">Início</a>
+      <a href="#trilhas" data-ic="path">Trilhas</a>
       <a href="#acao" data-ic="target">Modo ação</a>
       <a href="#osce" data-ic="stetho">OSCE e prova</a>
       <a href="#flashcards" data-ic="cards">Flashcards</a>
@@ -622,6 +688,7 @@ table.pt td{padding:8px;border-bottom:1px solid var(--line);vertical-align:top}
         <span class="datepill" id="todayPill"></span>
       </div>
       <section class="view" id="v-hoje"></section>
+      <section class="view" id="v-trilhas" hidden></section>
       <section class="view" id="v-acao" hidden></section>
       <section class="view" id="v-osce" hidden></section>
       <section class="view" id="v-agenda" hidden></section>
@@ -1433,7 +1500,7 @@ function statusOf(p) { if (p == null) return ['sem dados', '']; if (p >= 80) ret
 const KEY = 'caderno-maria-v1';
 let S;
 function blank() {
-  return { v: 1, created: today(), sched: [], topics: {}, reviews: [], attempts: [], manual: [], cards: [], notes: {}, time: {}, sims: [], qimp: [], mnemos: [], sessions: [], osce: {}, lastBackup: null };
+  return { v: 1, created: today(), sched: [], topics: {}, reviews: [], attempts: [], manual: [], cards: [], notes: {}, time: {}, sims: [], qimp: [], mnemos: [], sessions: [], osce: {}, trail: {}, drills: {}, runs: [], lastBackup: null };
 }
 const SCHED_V = 2; // 2 = temas do manual da faculdade (MD9 2026.2)
 function load() {
@@ -1459,6 +1526,7 @@ function save() { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e
 
 const PLAN_MAP = Object.fromEntries(SEQ.map((p, i) => [p[0], { name: p[1], area: p[2], sub: p[3], kind: p[4], ref: p[5], ord: i }]));
 function topic(id) {
+  if (id === 'osce') return { name: 'Estações de OSCE', area: 'cir', sub: 'OSCE', kind: 'x' };
   if (S.topics[id]) return S.topics[id];
   if (FIRST_TOPICS[id]) { const [name, area, sub, ref] = FIRST_TOPICS[id]; return { name, area, sub, ref, kind: 't' }; }
   if (PLAN_MAP[id]) return PLAN_MAP[id];
@@ -1518,7 +1586,7 @@ function perfByTopic() {
   S.sched.forEach(s => add(s.topic, s.total, s.hits, s.doneAt || s.date));
   S.reviews.forEach(r => r.done && add(r.topic, r.total, r.hits, r.doneAt || r.date));
   S.manual.forEach(m => add(m.t, m.total, m.hits, m.d));
-  S.sessions.forEach(x => x.h != null && add(x.t, x.q, x.h, x.date));
+  S.sessions.forEach(x => x.h != null && !x.auto && add(x.t, x.q, x.h, x.date));
   return P;
 }
 function weakTopics() {
@@ -1587,6 +1655,7 @@ const ICONS = {
   sprout: '<path d="M12 21v-8"/><path d="M12 13c0-3.5-2.5-5.5-6.5-5.5 0 3.5 2.5 5.5 6.5 5.5z"/><path d="M12 13c0-2.5 2-4.2 5-4.2 0 2.5-2 4.2-5 4.2z"/><path d="M7.5 21h9"/>',
   leaf: '<path d="M5 19C5 10 10 5 20 4c-.5 10-5.5 15-15 15z"/><path d="M5 19l9-9M10 14.5h4M9 11v3"/>',
   tree: '<circle cx="12" cy="9" r="6"/><path d="M12 21V12M12 15l-3-2.5M12 13.5l3-2.5M8 21h8"/>',
+  path: '<path d="M5 20c3 0 3-4 7-4s4-4 7-4" stroke-dasharray="2 2.6"/><circle cx="5" cy="20" r="1.6" fill="currentColor" stroke="none"/><path d="M19 12V3.5l-4 1.8 4 1.8"/>',
   stetho: '<path d="M6 3v6a5 5 0 0 0 10 0V3"/><path d="M4.5 3H7.5M14.5 3h3"/><path d="M11 14v2a4 4 0 0 0 8 0v-2.5"/><circle cx="19" cy="11.5" r="2"/>',
   sparkle: '<path d="M12 3l2 6 6 2-6 2-2 6-2-6-6-2 6-2z"/>'
 };
@@ -1603,6 +1672,7 @@ const AREA_STYLE = {
 };
 const VIEW_META = {
   hoje: [null, null],
+  trilhas: ['Trilhas', 'Questões comentadas, corrigidas na hora.'],
   acao: ['Modo ação', 'Uma sessão por vez, ligada aos temas da faculdade.'],
   osce: ['OSCE e prova', 'O que mais cai no OSCE de 11/12 e na prova de MIAPS de 14/12.'],
   agenda: ['Agenda', 'Temas do manual do 9º semestre e do planejamento de 120 dias.'],
@@ -1636,7 +1706,7 @@ function donutSVG(parts) {
 }
 
 // ===== Navegação =====
-const VIEWS = ['hoje', 'acao', 'osce', 'flashcards', 'agenda', 'simulados', 'desempenho', 'mnemonicos', 'provas', 'backup'];
+const VIEWS = ['hoje', 'trilhas', 'acao', 'osce', 'flashcards', 'agenda', 'simulados', 'desempenho', 'mnemonicos', 'provas', 'backup'];
 let viewDate = today();
 function route() {
   const v = VIEWS.includes(location.hash.slice(1)) ? location.hash.slice(1) : 'hoje';
@@ -1648,7 +1718,7 @@ function route() {
   document.querySelectorAll('#tabs a').forEach(a => { if (a.getAttribute('href') === '#' + v) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current'); });
   render(v);
 }
-function render(v) { ({ hoje: rHoje, acao: rAcao, osce: rOsce, agenda: rAgenda, simulados: rSim, flashcards: rFc, desempenho: rPerf, mnemonicos: rMn, provas: rProvas, backup: rBackup })[v](); applyAna($('#v-' + v)); }
+function render(v) { ({ hoje: rHoje, trilhas: rTrilhas, acao: rAcao, osce: rOsce, agenda: rAgenda, simulados: rSim, flashcards: rFc, desempenho: rPerf, mnemonicos: rMn, provas: rProvas, backup: rBackup })[v](); applyAna($('#v-' + v)); }
 function rerender() { route(); }
 
 // ===== Componentes =====
@@ -1723,6 +1793,7 @@ function rHoje() {
       <p class="small muted" style="margin:2px 0 0">${note ? esc(note) : (d < PHASE2_START ? '3 assuntos por dia até segunda' : (isWeekend(d) ? 'Fim de semana: 2 assuntos' : 'Dia útil: 1 assunto'))}</p></div>
     <a class="daynum" href="#acao" aria-label="Próxima sessão: dia ${sessNum()} do plano" style="text-decoration:none;color:inherit"><b>${String(sessNum()).padStart(2, '0')}</b><small>próxima sessão</small></a><div class="row"><button data-act="day" data-n="-1" aria-label="Dia anterior">‹</button>${isToday ? '' : '<button data-act="day" data-n="0">Hoje</button>'}<button data-act="day" data-n="1" aria-label="Próximo dia">›</button></div>
   </div>
+  ${trilhaHomeHTML()}
   ${acaoHomeHTML()}
   <div class="grid3" style="grid-template-columns:repeat(auto-fit,minmax(min(100%,150px),1fr))">
     ${quick.map(([h, i, t, l], k) => `<a class="card" href="#${h}" style="text-decoration:none;color:inherit;display:flex;align-items:center;gap:10px;padding:14px"><span class="ico t-${t}">${ic(i)}</span><b>${l}</b><small class="qsub">${qsub[k]}</small></a>`).join('')}
@@ -1991,7 +2062,7 @@ function rPerf() {
   const weak = rows.filter(([, p]) => pct(p.hits, p.total) < 70).slice(0, 6);
   const areaKeys = Object.keys(AREAS).filter(a => a !== 'geral' || byArea.geral);
   const parts = areaKeys.filter(a => byArea[a]).map(a => ({ a, v: byArea[a].total, color: AREA_STYLE[a][1] }));
-  $('#v-desempenho').innerHTML = `
+  $('#v-desempenho').innerHTML = analiseHTML() + `
   <div class="hero">
     ${ringSVG(g ?? 0, 132, 12, 'var(--bar-pink)', 'var(--hero-track)', g == null ? '—' : g + '%', 'da meta: 80%', 'var(--hero-ink)', 'var(--hero-sub)')}
     <div>
@@ -2293,7 +2364,7 @@ const sessNum = () => S.sessions.length + 2; // o Dia 1 era o diagnóstico, que 
 function topicLog(t) {
   const ev = [];
   S.attempts.forEach((a, i) => a.t === t && ev.push([a.d || '', i, 1, a.r === 'ok' ? 1 : 0]));
-  S.sessions.forEach((s, i) => s.t === t && s.q && ev.push([s.date, 1e6 + i, s.q, s.h]));
+  S.sessions.forEach((s, i) => s.t === t && s.q && !s.auto && ev.push([s.date, 1e6 + i, s.q, s.h]));
   S.manual.forEach((m, i) => m.t === t && m.total && ev.push([m.d, 2e6 + i, m.total, m.hits]));
   ev.sort((a, b) => a[0].localeCompare(b[0]) || a[1] - b[1]);
   let total = 0, hits = 0; ev.forEach(e => { total += e[2]; hits += e[3] || 0; });
@@ -2364,7 +2435,7 @@ function rAcao() {
         ${acSize === 'bom' ? `<div class="row"><label class="inline" for="acRQ">Revisão espaçada</label><input id="acRQ" type="number" min="0" value="10" style="width:90px"><label class="inline" for="acRH">Acertos</label><input id="acRH" type="number" min="0" placeholder="—" style="width:90px"></div>` : ''}
         <label class="small" for="acE"><b>Uma linha por erro</b> <span class="muted">(vira flashcard)</span></label>
         <textarea id="acE" rows="4" placeholder="Eu pensei X, o certo é Y porque Z"></textarea>
-        <div class="row"><button class="primary">Sessão feita</button><span class="small muted">Errar conta. Feito vale mais que perfeito.</span></div>
+        <div class="row"><button type="button" class="primary" data-act="acRun">Fazer ${SIZES[acSize][4]} questões aqui</button><button>Registrar as que fiz fora</button></div><p class="small muted" style="margin:-4px 0 0">Feitas aqui, a sessão se registra sozinha. Errar conta.</p>
       </form>
     </div>
     <div class="span5" style="display:grid;gap:18px;align-content:start">
@@ -2487,6 +2558,498 @@ document.addEventListener('change', e => {
   if (e.target.checked) S.osce[n] = today(); else delete S.osce[n];
   save(); rOsce();
 });
+
+// ===== Banco MIAPS (prova de 14/12 e OSCE de 11/12) =====
+// Campos: id, t (tema), ar (área da prova), q, o, a, c (comentário), ref (referência do MD9), x (aviso: [tag, texto]), f (flashcard)
+const MIAPS_Q = [
+// ---------- Infecção, ATB e sepse ----------
+{id:'mq-sep1',t:'mi-sepse',ar:'inf',q:'Homem de 67 anos internado por pielonefrite evolui com PA 82/48 mmHg, FC 118, lactato 4,6 mmol/L e confusão. Já colheu hemoculturas. O que fazer na primeira hora, além do antibiótico de amplo espectro?',o:['Aguardar o resultado das culturas para escolher o antibiótico','Cristaloide 30 mL/kg, iniciado já, e noradrenalina se a PAM seguir < 65 mmHg','Albumina 20% como expansor inicial','Dobutamina para melhorar a perfusão','Hidrocortisona antes de qualquer volume'],a:1,c:'Hipotensão com lactato ≥ 4: cristaloide 30 mL/kg nas primeiras 3 h (começa na 1ª hora), antibiótico na 1ª hora e vasopressor se a PAM continuar abaixo de 65 mmHg. Dobutamina só se houver disfunção miocárdica com hipoperfusão persistente.',ref:'Surviving Sepsis Campaign 2021',x:['desatualizado','Guias antigos falam em 30 mL/kg "em 1 hora". A SSC 2021 diz nas primeiras 3 horas.'],f:['Choque séptico: volume inicial e quando começar a noradrenalina','Cristaloide 30 mL/kg nas primeiras 3 h; noradrenalina se PAM < 65 mmHg (pode começar durante o volume).']},
+{id:'mq-sep2',t:'mi-sepse',ar:'inf',q:'Paciente em choque séptico com noradrenalina em 0,5 mcg/kg/min mantém PAM de 58 mmHg após volume adequado. Próximo passo recomendado:',o:['Trocar noradrenalina por dopamina','Associar vasopressina','Suspender a noradrenalina e repetir 30 mL/kg','Iniciar bicarbonato','Associar furosemida'],a:1,c:'A SSC 2021 sugere associar vasopressina quando a noradrenalina chega a 0,25–0,5 mcg/kg/min sem PAM adequada. Hidrocortisona 200 mg/dia é sugerida se a noradrenalina ≥ 0,25 por ≥ 4 h. Dopamina não é recomendada.',ref:'Surviving Sepsis Campaign 2021; devolutiva MIAPS 2026.1 (Q39)',f:['Quando associar vasopressina no choque séptico?','Noradrenalina 0,25–0,5 mcg/kg/min sem atingir PAM ≥ 65.']},
+{id:'mq-sep3',t:'mi-sepse',ar:'inf',q:'Quatro horas após o início do tratamento de choque séptico: lactato caiu de 5,2 para 1,8, enchimento capilar 2 s, PAM 72 com noradrenalina 0,12 mcg/kg/min, diurese 0,8 mL/kg/h. Conduta:',o:['Novo bolus de 30 mL/kg','Associar vasopressina','Manter monitorização e reavaliar, sem nova intervenção imediata','Associar dobutamina','Transfundir até Hb 10'],a:2,c:'Perfusão melhorando (lactato normalizando, TEC normal, diurese adequada) e PAM no alvo com dose moderada de nora: não há indicação de nova intervenção. Mais volume sem resposta clara aumenta o risco de congestão.',ref:'Surviving Sepsis Campaign 2021; devolutiva MIAPS 2026.1 (Q1)'},
+{id:'mq-sep4',t:'mi-sepse',ar:'inf',q:'Para guiar a reanimação de um paciente séptico em enfermaria sem acesso a lactato seriado, a SSC 2021 sugere usar:',o:['Pressão venosa central','Tempo de enchimento capilar','Saturação venosa central','Débito urinário isolado','Hemoglobina'],a:1,c:'A SSC 2021 sugere guiar a reanimação pela queda do lactato quando elevado e acrescenta o tempo de enchimento capilar como adjuvante. PVC isolada não é recomendada para guiar volume.',ref:'Surviving Sepsis Campaign 2021'},
+{id:'mq-sep5',t:'mi-sepse',ar:'inf',q:'Qual a meta inicial de PAM no choque séptico?',o:['≥ 55 mmHg','≥ 65 mmHg','≥ 75 mmHg','≥ 85 mmHg','PAS ≥ 120 mmHg'],a:1,c:'Meta inicial de PAM ≥ 65 mmHg. Metas mais altas não reduziram mortalidade e aumentam arritmias.',ref:'Surviving Sepsis Campaign 2021'},
+{id:'mq-sep6',t:'mi-sepse',ar:'inf',q:'Em quanto tempo o antibiótico deve ser iniciado quando há choque ou alta probabilidade de sepse?',o:['Em até 1 hora','Em até 3 horas para todos','Após o resultado da hemocultura','Em até 6 horas','Só após a TC para definir o foco'],a:0,c:'Choque séptico ou sepse provável: antibiótico em até 1 h. Se a sepse é possível sem choque, a SSC permite investigar por até 3 h antes de decidir. Hemoculturas antes, mas sem atrasar o antibiótico.',ref:'Surviving Sepsis Campaign 2021'},
+{id:'mq-sep7',t:'mi-sepse',ar:'inf',q:'Qual fluido a SSC 2021 sugere como primeira escolha na reanimação da sepse?',o:['Soro fisiológico 0,9% obrigatoriamente','Cristaloide balanceado (Ringer lactato)','Hidroxietilamido','Gelatina','Soro glicosado 5%'],a:1,c:'Sugere cristaloides balanceados em vez de soro fisiológico. Amidos e gelatinas não devem ser usados. Albumina pode ser associada quando já se deu muito cristaloide.',ref:'Surviving Sepsis Campaign 2021'},
+{id:'mq-sep8',t:'mi-sepse',ar:'inf',q:'No choque séptico com acidose metabólica por hipoperfusão, quando a SSC sugere bicarbonato?',o:['Sempre que pH < 7,35','pH ≤ 7,2 com IRA KDIGO 2 ou 3','HCO₃ < 22','Nunca, em nenhuma situação','Lactato > 4'],a:1,c:'Não usar bicarbonato para melhorar a hemodinâmica. Exceção: pH ≤ 7,2 com IRA estágio 2–3. A aula de DAB do MIAPS usa o mesmo limiar.',ref:'Surviving Sepsis Campaign 2021; aula de DAB (MIAPS)'},
+{id:'mq-pn1',t:'mi-pnmhosp',ar:'inf',q:'Homem de 61 anos, hipertenso, na UBS com febre, tosse produtiva e crepitações em base direita. Lúcido, FR 24, PA 130/80. Não há RX disponível hoje. Melhor conduta:',o:['Encaminhar à UPA para fazer RX antes de tratar','CRB-65 = 0; amoxicilina 500 mg 8/8 h por 7 dias e reavaliar em 48–72 h','CRB-65 = 1; internar','Levofloxacino por 14 dias','Azitromicina + ceftriaxona IM'],a:1,c:'PAC é diagnóstico clínico na APS; RX complementa, mas não deve atrasar o antibiótico. CRB-65: confusão, FR ≥ 30, PAS < 90 ou PAD ≤ 60, idade ≥ 65. FR 24 e 61 anos não pontuam. Escore 0: tratamento ambulatorial com amoxicilina.',ref:'Recomendações SBPT para PAC 2018; devolutiva MIAPS 2026.1 (Q32)',f:['CRB-65: itens e cortes','Confusão; FR ≥ 30; PAS < 90 ou PAD ≤ 60; idade ≥ 65. 0–1 casa, 2 considerar internar, 3–4 internar.']},
+{id:'mq-pn2',t:'mi-pnmhosp',ar:'inf',q:'Paciente com PAC internado em enfermaria, sem fatores de risco para Pseudomonas ou MRSA. Esquema empírico adequado:',o:['Clindamicina isolada','Ceftriaxona + azitromicina (ou quinolona respiratória isolada)','Vancomicina + meropenem','Amoxicilina oral isolada','Oxacilina'],a:1,c:'PAC internada fora da UTI: betalactâmico + macrolídeo, ou quinolona respiratória em monoterapia. Cobre pneumococo e atípicos (como Legionella). Clindamicina isolada não está indicada.',ref:'Recomendações SBPT para PAC 2018; devolutiva MIAPS 2026.1 (Q9)'},
+{id:'mq-pn3',t:'mi-pnmhosp',ar:'inf',q:'Pneumonia que surge 5 dias após a internação em paciente que recebeu antibiótico IV nos últimos 90 dias. Qual germe obrigatoriamente precisa ser coberto no esquema empírico?',o:['Mycoplasma pneumoniae','Pseudomonas aeruginosa','Legionella apenas','Streptococcus pyogenes','Chlamydophila'],a:1,c:'Pneumonia hospitalar (≥ 48 h de internação) com fator de risco para multirresistência: cobrir Pseudomonas (ex.: cefepima, piperacilina-tazobactam ou carbapenêmico) e considerar MRSA conforme o risco local. Atípicos são lembrados na PAC.',ref:'Harrison 2023; devolutiva MIAPS 2026.1 (Q42)'},
+{id:'mq-pn4',t:'mi-pnmhosp',ar:'inf',q:'Sobre as pneumonias, assinale a correta:',o:['Ceftarolina (cefalosporina de 5ª geração) cobre Pseudomonas','Na pneumonia broncoaspirativa com abscesso ou empiema, os anaeróbios devem ser considerados','Febre e tosse produtiva são obrigatórias para o diagnóstico','O CURB-65 inclui a saturação de O₂','Atípicos não causam PAC'],a:1,c:'Anaeróbios entram quando há aspiração com abscesso, empiema ou má higiene oral. Ceftarolina cobre MRSA, mas não Pseudomonas. Idosos podem abrir só com confusão. O CURB-65 não tem saturação.',ref:'Harrison 2023; devolutiva MIAPS 2026.1 (Q9 e Q42)'},
+{id:'mq-pn5',t:'mi-pnmhosp',ar:'inf',q:'PAC internada em melhora: afebril há 48 h, FR 18, PA estável, tolerando dieta. Conduta sobre o antibiótico:',o:['Manter IV até completar 14 dias','Trocar para via oral e planejar curso total de cerca de 5–7 dias','Escalonar para carbapenêmico','Suspender sem completar o tratamento','Repetir RX antes de qualquer mudança'],a:1,c:'Estabilidade clínica permite transição para via oral e alta. A duração mínima típica da PAC é 5 dias, com 48–72 h de estabilidade; 7 dias é comum. RX não precisa melhorar para trocar a via (a imagem demora semanas).',ref:'Recomendações SBPT para PAC 2018'},
+{id:'mq-atb1',t:'mi-atb',ar:'inf',q:'ITU por enterobactéria produtora de ESBL, paciente estável. Qual antibiótico cobre o germe?',o:['Cefalexina','Clindamicina','Oxacilina','Ertapenem','Ceftriaxona'],a:3,c:'Enterobactéria ESBL degrada cefalosporinas: carbapenêmico (ertapenem, se não há Pseudomonas) é a escolha. Cefalexina, clindamicina e oxacilina não cobrem gram-negativos resistentes.',ref:'Washington Manual; devolutiva MIAPS 2026.1 (Q7)'},
+{id:'mq-atb2',t:'mi-atb',ar:'inf',q:'Osteomielite com cultura de fragmento ósseo mostrando Enterococcus resistente à vancomicina (VRE). Qual antibiótico tem ação?',o:['Cefepima','Polimixina B','Meropenem','Linezolida','Ceftriaxona'],a:3,c:'VRE: linezolida ou daptomicina. Cefalosporinas não cobrem enterococo; polimixina é para gram-negativos; meropenem não cobre VRE.',ref:'Washington Manual; devolutiva MIAPS 2026.1 (Q47)'},
+{id:'mq-atb3',t:'mi-atb',ar:'inf',q:'Paciente em uso de piperacilina-tazobactam por pneumonia hospitalar. Cultura de aspirado traqueal: E. coli sensível a ceftriaxona. Paciente melhorando. Conduta:',o:['Manter piperacilina-tazobactam até o fim','Descalonar para ceftriaxona','Escalonar para meropenem','Associar vancomicina','Suspender todo antibiótico hoje'],a:1,c:'Descalonar é trocar pelo antibiótico de menor espectro que cobre o germe isolado quando o paciente está melhorando. Reduz resistência, efeitos adversos e custo.',ref:'Washington Manual de Terapêutica Clínica',f:['O que é descalonar o antibiótico?','Trocar para o de menor espectro que cobre o germe isolado, com o paciente estável.']},
+{id:'mq-atb4',t:'mi-atb',ar:'inf',q:'Qual antibiótico NÃO cobre Pseudomonas aeruginosa?',o:['Cefepima','Piperacilina-tazobactam','Meropenem','Ceftriaxona','Ceftazidima'],a:3,c:'Ceftriaxona (3ª geração) não cobre Pseudomonas. Ceftazidima é a cefalosporina de 3ª geração antipseudomonas. Ertapenem também não cobre Pseudomonas, ao contrário de meropenem e imipenem.',ref:'Washington Manual de Terapêutica Clínica',f:['Antibióticos que NÃO cobrem Pseudomonas (pegadinhas)','Ceftriaxona, cefotaxima, ertapenem, ceftarolina.']},
+{id:'mq-atb5',t:'mi-atb',ar:'inf',q:'Paciente internado há 10 dias em uso de ceftriaxona apresenta febre e cultura de cateter com Staphylococcus aureus resistente à oxacilina. Antibiótico adequado:',o:['Cefazolina','Vancomicina','Oxacilina em dose dobrada','Amoxicilina-clavulanato','Ertapenem'],a:1,c:'MRSA: vancomicina (alternativas: linezolida, daptomicina se não for pulmonar). Retirar o cateter faz parte do tratamento.',ref:'Washington Manual de Terapêutica Clínica'},
+{id:'mq-itu1',t:'mi-ituhosp',ar:'inf',q:'Mulher de 54 anos, diabética, com febre de 39,5 °C, dor lombar à direita, Giordano positivo, vômitos, FC 112 e PA 98/60. EAS com leucocitúria e nitrito positivo. Conduta:',o:['Nitrofurantoína VO e retorno em 3 dias','Internar, hidratar, colher urocultura e iniciar ceftriaxona 1 g IV 24/24 h','Fosfomicina dose única','SMX-TMP VO por 3 dias','Apenas analgesia e aguardar urocultura'],a:1,c:'Pielonefrite com sinais sistêmicos, vômitos e diabetes: tratamento hospitalar com hidratação e antibiótico parenteral (ceftriaxona), ajustando pela cultura. Nitrofurantoína e fosfomicina não atingem o parênquima renal.',ref:'Riella (2018); devolutiva MIAPS 2026.1 (Q12)'},
+{id:'mq-itu2',t:'mi-ituhosp',ar:'inf',q:'Mulher de 28 anos, não gestante, com disúria e polaciúria há 2 dias, sem febre, que não melhorou com cefalexina. Pela devolutiva da faculdade, a primeira escolha é:',o:['Ciprofloxacino por 14 dias','SMX-TMP 800/160 mg 12/12 h por 3 dias','Ceftriaxona IM','Amoxicilina por 10 dias','Repetir cefalexina em dose dobrada'],a:1,c:'O gabarito da faculdade considera SMX-TMP 3 dias a primeira escolha para cistite não complicada, com cefalosporina de 1ª geração como opção fraca para E. coli.',ref:'Riella, Princípios de Nefrologia (bibliografia MD9); devolutiva MIAPS 2026.1 (Q19)',x:['diverge','Diretrizes recentes (FEBRASGO, IDSA, EAU) preferem nitrofurantoína 5 dias ou fosfomicina 3 g dose única e só usam SMX-TMP se a resistência local for < 20%. Na prova da faculdade, siga o gabarito.']},
+{id:'mq-itu3',t:'mi-ituhosp',ar:'inf',q:'Mulher com 3 cistites confirmadas por urocultura no último ano, sempre após relação sexual. Estratégia adequada:',o:['Antibiótico contínuo diário por 2 anos','Nitrofurantoína 100 mg dose única após a relação','Urocultura mensal','Cistoscopia obrigatória','Ciprofloxacino profilático semanal'],a:1,c:'Cistite de repetição: ≥ 2 episódios em 6 meses ou ≥ 3 em 1 ano. Associada ao coito, a profilaxia pós-coital tem eficácia semelhante à contínua com menos antibiótico.',ref:'Riella (2018); devolutiva MIAPS 2026.1 (Q46)'},
+{id:'mq-itu4',t:'mi-ituhosp',ar:'inf',q:'Idoso com sonda vesical de demora há 3 semanas, afebril, sem sintomas, urocultura com 10⁵ UFC/mL de Klebsiella. Conduta:',o:['Tratar com carbapenêmico por 7 dias','Não tratar bacteriúria assintomática; reavaliar a necessidade da sonda','Trocar a sonda e tratar por 14 dias','Iniciar profilaxia contínua','Solicitar TC de abdome'],a:1,c:'Bacteriúria assintomática não se trata, exceto em gestantes e antes de procedimento urológico com sangramento de mucosa. Em sondado, a principal medida é retirar a sonda assim que possível.',ref:'Washington Manual; Harrison 2023'},
+{id:'mq-itu5',t:'mi-ituhosp',ar:'inf',q:'ITU associada a cateter vesical em paciente internado, com febre e sem outro foco. Medida correta junto ao antibiótico:',o:['Manter a mesma sonda para não traumatizar a uretra','Trocar ou retirar a sonda e colher a urocultura da sonda nova','Colher urocultura da bolsa coletora','Irrigação vesical com antibiótico','Esperar a cultura para começar'],a:1,c:'Se a sonda está há mais de 2 semanas e ainda é necessária, troca-se antes de colher a cultura (da sonda nova, não da bolsa). Se não for mais necessária, retira-se.',ref:'Washington Manual; Harrison 2023'},
+{id:'mq-pele1',t:'mi-pele-aps',ar:'inf',q:'Mulher de 50 anos com placa eritematosa bem delimitada, elevada e dolorosa na perna, febre baixa, sem sinais de toxemia. Diagnóstico e conduta:',o:['Celulite por MRSA; vancomicina IV','Erisipela; antibiótico oral com cobertura para estreptococo (ex.: cefalexina) e reavaliação','Fasciíte necrosante; cirurgia','Erisipela; aciclovir','Dermatite de contato; corticoide tópico'],a:1,c:'Erisipela: infecção superficial, bordas bem definidas, geralmente estreptocócica. Sem sinais de gravidade: tratamento ambulatorial oral (cefalexina, amoxicilina ou penicilina) e porta de entrada (tinea interdigital).',ref:'Duncan, Medicina Ambulatorial (2022); devolutiva MIAPS 2026.1 (Q43)'},
+{id:'mq-pele2',t:'mi-pele-aps',ar:'inf',q:'Diabético com dor perineal desproporcional ao exame, necrose de pele, crepitação, febre e hipotensão. TC com gás em planos fasciais. Conduta:',o:['Antibiótico oral e retorno em 48 h','Desbridamento cirúrgico de urgência + antibiótico amplo (ex.: piperacilina-tazobactam + vancomicina + clindamicina) e suporte intensivo','Compressas mornas','Apenas drenagem de abscesso na UBS','Oxigênio hiperbárico isolado'],a:1,c:'Gangrena de Fournier é fasciíte necrosante polimicrobiana. O tratamento é cirúrgico urgente; antibiótico de amplo espectro cobrindo gram-positivos, gram-negativos e anaeróbios. Clindamicina reduz a produção de toxinas.',ref:'Harrison 2023; devolutiva MIAPS 2026.1 (Q36)',f:['Sinais de alerta de fasciíte necrosante','Dor desproporcional, progressão rápida, necrose, crepitação, bolhas, toxemia. Cirurgia urgente.']},
+{id:'mq-pele3',t:'mi-pele-aps',ar:'inf',q:'Criança de 4 anos com poucas lesões de crostas melicéricas ao redor do nariz, sem febre. Conduta na APS:',o:['Cefalexina oral por 14 dias','Mupirocina tópica 3×/dia por 5–7 dias e higiene','Aciclovir oral','Corticoide tópico','Encaminhar ao dermatologista'],a:1,c:'Impetigo localizado: antibiótico tópico (mupirocina ou ácido fusídico). Antibiótico oral se lesões extensas, falha do tópico, surto familiar ou sinais sistêmicos.',ref:'Duncan, Medicina Ambulatorial (2022); devolutiva MIAPS 2026.1 (Q13)'},
+{id:'mq-pele4',t:'mi-pele-aps',ar:'inf',q:'Homem de 35 anos com febre, mialgia intensa em panturrilhas e sufusão conjuntival, 10 dias após limpar a casa alagada por enchente. Na UBS, sem sinais de gravidade. Conduta:',o:['Aguardar a sorologia para tratar','Iniciar doxiciclina (ou amoxicilina), notificar e orientar sinais de alarme com reavaliação em 24–48 h','Prescrever só sintomáticos','Encaminhar todos para UTI','Prescrever AAS para a mialgia'],a:1,c:'Caso suspeito de leptospirose: tratar sem esperar a confirmação, notificar (compulsória) e orientar alarme (icterícia, oligúria, sangramento, dispneia). AAS e AINE devem ser evitados pelo risco de sangramento.',ref:'MS, Guia de bolso de doenças infecciosas; devolutiva MIAPS 2026.1 (Q24)'},
+// ---------- Eletrólitos, ácido-base e IRA ----------
+{id:'mq-ira1',t:'mi-irahosp',ar:'eab',q:'Creatinina basal 1,0 mg/dL sobe para 2,6 mg/dL em 3 dias. Estágio KDIGO:',o:['Estágio 1','Estágio 2','Estágio 3','Não é IRA','Estágio 3 com indicação de diálise'],a:1,c:'KDIGO: estágio 1 = 1,5–1,9× basal ou ↑ ≥ 0,3 mg/dL em 48 h; estágio 2 = 2,0–2,9×; estágio 3 = ≥ 3× ou Cr ≥ 4 ou diálise. 2,6 é 2,6× o basal.',ref:'KDIGO AKI (2012; MD9 cita AKI/AKD 2026 em consulta pública); devolutiva MIAPS 2026.1 (Q33)',f:['Estágios KDIGO pela creatinina','1: 1,5–1,9× ou +0,3 em 48 h · 2: 2–2,9× · 3: ≥ 3×, Cr ≥ 4 ou diálise.']},
+{id:'mq-ira2',t:'mi-irahosp',ar:'eab',q:'Qual critério pela diurese define IRA estágio 1 (KDIGO)?',o:['< 0,5 mL/kg/h por 6–12 h','< 0,3 mL/kg/h por 24 h','Anúria por 6 h','< 1 mL/kg/h por 2 h','< 400 mL/dia'],a:0,c:'Estágio 1: < 0,5 mL/kg/h por 6–12 h. Estágio 2: < 0,5 por ≥ 12 h. Estágio 3: < 0,3 por ≥ 24 h ou anúria ≥ 12 h.',ref:'KDIGO AKI 2012'},
+{id:'mq-ira3',t:'mi-irahosp',ar:'eab',q:'Paciente com vômitos há 3 dias, hipotensão postural, ureia 120 e creatinina 2,0 mg/dL. Na urina: Na 10 mEq/L, FeNa 0,5%, densidade 1,030. Classificação e conduta:',o:['IRA renal (NTA); restrição hídrica','IRA pré-renal; reposição volêmica','IRA pós-renal; sonda vesical','Nefrite intersticial; corticoide','Glomerulonefrite; biópsia'],a:1,c:'Pré-renal: túbulo íntegro conserva sódio (Na urinário < 20, FeNa < 1%, urina concentrada, ureia/Cr > 40). Trata-se a causa com volume. NTA: Na urinário > 40, FeNa > 2%, cilindros granulosos.',ref:'Riella; aula de IRA (MIAPS)',f:['FeNa e Na urinário: pré-renal × NTA','Pré-renal: FeNa < 1%, Na u < 20, densidade > 1,020. NTA: FeNa > 2%, Na u > 40, cilindros granulosos.']},
+{id:'mq-ira4',t:'mi-irahosp',ar:'eab',q:'Paciente em uso de diurético tem IRA. Para diferenciar pré-renal de NTA, qual índice é mais confiável?',o:['FeNa','Fração de excreção de ureia (FeUreia)','Densidade urinária','Volume urinário','Sódio sérico'],a:1,c:'Diurético aumenta a natriurese e falseia a FeNa. A FeUreia < 35% sugere pré-renal mesmo com diurético.',ref:'Riella; aula de IRA (MIAPS)'},
+{id:'mq-ira5',t:'mi-irahosp',ar:'eab',q:'Creatinina subiu de 0,9 para 2,1 mg/dL após 7 dias de oxacilina. Paciente com febre, rash e eosinofilia; USG renal normal. Medida inicial prioritária:',o:['Hemodiálise imediata','Suspender o antibiótico suspeito','Furosemida em altas doses','Biópsia renal antes de qualquer conduta','Manter o antibiótico e hidratar'],a:1,c:'Nefrite intersticial aguda medicamentosa (betalactâmicos, AINE, IBP): retirar o agente é a medida essencial. Corticoide pode ser considerado se não houver melhora.',ref:'Riella; devolutiva MIAPS 2026.1 (Q27)'},
+{id:'mq-ira6',t:'mi-irahosp',ar:'eab',q:'Qual situação é indicação de diálise de urgência na IRA?',o:['Ureia de 90 mg/dL assintomática','Creatinina de 3,5 mg/dL isolada','Hipercalemia refratária ao tratamento clínico','Oligúria de 6 horas responsiva a volume','Acidose com pH 7,32'],a:2,c:'Indicações de urgência (AEIOU): Acidose grave refratária, distúrbio Eletrolítico (hipercalemia) refratário, Intoxicação dialisável, Overload (congestão refratária a diurético), Uremia sintomática (pericardite, encefalopatia, sangramento).',ref:'KDIGO AKI 2012; Riella',f:['Indicações de diálise de urgência (AEIOU)','Acidose refratária, hipercalemia refratária, intoxicação, hipervolemia refratária, uremia sintomática.']},
+{id:'mq-ira7',t:'mi-irahosp',ar:'eab',q:'Após quimioterapia para linfoma, paciente apresenta K 6,8 com ondas T apiculadas, fósforo e ácido úrico altos e cálcio baixo. Primeira medida:',o:['Alopurinol','Gluconato de cálcio IV','Hemodiálise antes de qualquer outra coisa','Reposição de cálcio para corrigir a hipocalcemia','Bicarbonato em todos'],a:1,c:'Síndrome de lise tumoral com hipercalemia e alteração no ECG: estabilizar a membrana com gluconato de cálcio primeiro; depois insulina + glicose, β2, diurético se houver diurese, hidratação e tratar o ácido úrico (rasburicase).',ref:'Harrison 2023; devolutiva MIAPS 2026.1 (Q30)'},
+{id:'mq-ele1',t:'mi-hidro',ar:'eab',q:'K⁺ = 7,1 mEq/L com QRS alargado. Ordem correta da conduta:',o:['Furosemida → resina → gluconato de cálcio','Gluconato de cálcio → insulina regular + glicose (± β2) → retirar K do corpo (diurético, resina, diálise)','Bicarbonato → diálise → cálcio','Insulina isolada','Aguardar novo potássio'],a:1,c:'1) Estabilizar a membrana: gluconato de cálcio 10% 10 mL IV em 2–5 min (repete se o ECG não melhora). 2) Desviar K para a célula: insulina regular 10 UI + glicose 50 g, salbutamol. 3) Retirar: diurético de alça, resina, diálise.',ref:'Riella; Washington Manual',f:['Hipercalemia com ECG alterado: 3 passos','Cálcio (membrana) → insulina+glicose/β2 (para dentro) → diurético/resina/diálise (para fora).']},
+{id:'mq-ele2',t:'mi-hidro',ar:'eab',q:'Paciente com K 2,6 mEq/L e fraqueza. Qual o principal cuidado na reposição de KCl IV em veia periférica?',o:['Fazer em bolus para corrigir rápido','Respeitar concentração e velocidade (cerca de até 10 mEq/h e ~40 mEq/L em periférica), corrigir o magnésio','Diluir em soro glicosado para acelerar','Associar insulina','Nunca repor por via oral'],a:1,c:'KCl nunca em bolus. Em veia periférica, até ~10 mEq/h; central, até 20 mEq/h com monitor. Diluir em SF (glicose estimula insulina e piora a hipocalemia). Hipomagnesemia impede a correção do K.',ref:'Riella; Washington Manual'},
+{id:'mq-ele3',t:'mi-hidro',ar:'eab',q:'Mulher magra com diarreia crônica, K 2,9, pH 7,30, HCO₃ 16, Cl alto, PA normal, K urinário baixo. Nega uso de medicamentos. Hipótese mais provável:',o:['Vômitos ocultos','Abuso de laxantes','Síndrome de Gitelman','Hiperaldosteronismo primário','Uso escondido de diurético'],a:1,c:'Acidose hiperclorêmica + hipocalemia com K urinário baixo = perda intestinal (laxantes, diarreia). Vômitos e diurético dão alcalose; hiperaldosteronismo dá HAS; Gitelman dá alcalose.',ref:'Riella; devolutiva MIAPS 2026.1 (Q29)'},
+{id:'mq-ele4',t:'mi-hidro',ar:'eab',q:'Paciente euvolêmico com Na 124 mEq/L, osmolaridade sérica baixa e urina concentrada. Usa losartana, carbamazepina e omeprazol. Causa mais provável:',o:['Losartana','Carbamazepina (SIADH)','Omeprazol','Hipovolemia por diurético','Pseudo-hiponatremia'],a:1,c:'Hiponatremia hipotônica euvolêmica com urina concentrada sugere SIADH, e a carbamazepina é causa clássica. Tiazídico dá hiponatremia, mas a questão descreve euvolemia. Losartana mexe com potássio.',ref:'Riella; devolutiva MIAPS 2026.1 (Q44)'},
+{id:'mq-ele5',t:'mi-hidro',ar:'eab',q:'Na correção de hiponatremia crônica, qual o limite de elevação do sódio para evitar desmielinização osmótica?',o:['Até 20 mEq/L em 24 h','Até 8–10 mEq/L em 24 h (≈ 8 em alto risco)','Até 2 mEq/L em 24 h','Sem limite se assintomática','Corrigir até 140 em 6 h'],a:1,c:'Limite de 10–12 mEq/L em 24 h; em alto risco (alcoolismo, desnutrição, hipocalemia, cirrose), cerca de 8. Sintomas graves: salina 3% em bolus para subir 4–6 mEq/L rápido, respeitando o teto do dia.',ref:'Riella',f:['Velocidade máxima de correção do sódio na hiponatremia crônica','≈ 8–10 mEq/L em 24 h (alto risco: 8). Risco: desmielinização osmótica.']},
+{id:'mq-ele6',t:'mi-hidro',ar:'eab',q:'Paciente com hipernatremia e sinais de hipervolemia (edema, congestão). Solução preferida para repor água livre:',o:['SF 0,9%','Ringer lactato','Soro glicosado 5%','Salina 3%','Bicarbonato de sódio'],a:2,c:'Hipernatremia é déficit de água livre. Com hipervolemia, a escolha é SG 5% (água livre, sem sódio), podendo associar diurético. SF 0,22% tem 34 mEq/L de Na (não 77, que é o do 0,45%).',ref:'Riella; devolutiva MIAPS 2026.1 (Q50)'},
+{id:'mq-ele7',t:'mi-hidro',ar:'eab',q:'Hipocalcemia sintomática (tetania, Trousseau positivo) com QT longo. Conduta inicial:',o:['Carbonato de cálcio oral','Gluconato de cálcio 10% IV lento, corrigir magnésio','Calcitriol isolado','Furosemida','Bicarbonato'],a:1,c:'Sintomática: gluconato de cálcio IV lento. Checar e corrigir magnésio (a hipomagnesemia impede a correção). Depois cálcio oral e vitamina D conforme a causa.',ref:'Riella; Harrison 2023'},
+{id:'mq-ele8',t:'mi-hidro',ar:'eab',q:'Paciente com câncer de pulmão, cálcio de 14,5 mg/dL, desidratado e sonolento. Primeira medida:',o:['Furosemida antes de hidratar','Hidratação vigorosa com SF 0,9%, depois bisfosfonato (± calcitonina)','Restrição hídrica','Gluconato de cálcio','Tiazídico'],a:1,c:'Hipercalcemia grave: volume com SF (o paciente está desidratado pela poliúria), calcitonina para efeito rápido e bisfosfonato (ácido zoledrônico) para efeito sustentado. Furosemida só se houver hipervolemia. Tiazídico piora.',ref:'Harrison 2023'},
+{id:'mq-ab1',t:'mi-hidro',ar:'eab',q:'Gasometria: pH 7,22, PaCO₂ 22, HCO₃ 12, Na 140, Cl 104. Paciente etilista em choque com lactato alto. Interpretação:',o:['Acidose metabólica com AG normal compensada','Acidose metabólica com AG alto e alcalose respiratória associada','Acidose respiratória','Alcalose metabólica','Acidose metabólica pura bem compensada'],a:1,c:'AG = 140 − (104 + 12) = 24 (alto). Winter: PaCO₂ esperada = 1,5×12 + 8 = 26 ± 2 (24–28). PaCO₂ 22 está abaixo: há alcalose respiratória associada (sepse, dor, abstinência).',ref:'Riella; aula de DAB (MIAPS); devolutiva MIAPS 2026.1 (Q28)',f:['Fórmula de Winter','PaCO₂ esperada = 1,5 × HCO₃ + 8 ± 2. Abaixo: alcalose resp. associada; acima: acidose resp. associada.']},
+{id:'mq-ab2',t:'mi-hidro',ar:'eab',q:'Paciente com diarreia aquosa intensa e desidratação: pH 7,28, HCO₃ 14, Na 138, Cl 114. Classificação e conduta inicial:',o:['AG alto; bicarbonato imediato','AG normal (hiperclorêmica); reposição volêmica','Alcalose metabólica; SF','Acidose respiratória; ventilação','AG alto; hemodiálise'],a:1,c:'AG = 138 − (114 + 14) = 10 (normal): acidose hiperclorêmica por perda intestinal de HCO₃. Primeiro corrigir a volemia. Bicarbonato fica para casos graves ou persistentes.',ref:'Riella; devolutiva MIAPS 2026.1 (Q10)'},
+{id:'mq-ab3',t:'mi-hidro',ar:'eab',q:'Paciente com vômitos incoercíveis: pH 7,52, HCO₃ 36, K 3,0, Cl urinário 8 mEq/L. Tratamento:',o:['Acetazolamida','SF 0,9% com reposição de KCl','Ácido clorídrico IV de rotina','Bicarbonato','Espironolactona'],a:1,c:'Alcalose metabólica cloro-responsiva (Cl urinário < 20): corrige com SF e KCl. Cloro urinário alto sugere causa cloro-resistente (diurético ativo, hiperaldosteronismo).',ref:'Riella'},
+{id:'mq-ab4',t:'mi-hidro',ar:'eab',q:'Quais causas são típicas de acidose metabólica com ânion gap ELEVADO?',o:['Diarreia e acidose tubular renal','Cetoacidose, acidose láctica, IRA/uremia, intoxicação por metanol ou salicilato','Vômitos e diurético','Uso de SF em grande volume','Hiperaldosteronismo'],a:1,c:'AG alto: ácidos não medidos (MUDPILES/GOLDMARK): cetoacidose, lactato, uremia, metanol, etilenoglicol, salicilato. AG normal: diarreia, ATR, SF em excesso, ureterossigmoidostomia.',ref:'Riella; aula de DAB (MIAPS)'},
+{id:'mq-ab5',t:'mi-hidro',ar:'eab',q:'Ao prescrever bicarbonato de sódio 8,4%, qual afirmação é correta?',o:['1 mL = 0,5 mEq; diluir em SF','1 mL = 1 mEq; não diluir em SF (diluir em água destilada ou SG)','Pode ser feito junto com o gluconato de cálcio no mesmo acesso','Indicado em toda acidose láctica','1 mL = 10 mEq'],a:1,c:'Bicarbonato 8,4% tem 1 mEq/mL. É hipertônico; na aula do MIAPS, nunca diluir em SF (fica ainda mais hipertônico). Não misturar com cálcio (precipita).',ref:'Riella, Princípios de Nefrologia e DHE (MD9); aula de DAB do MIAPS'},
+{id:'mq-ab6',t:'mi-hidro',ar:'eab',q:'DPOC em exacerbação: pH 7,28, PaCO₂ 65, HCO₃ 30. Interpretação:',o:['Acidose metabólica','Acidose respiratória aguda sobre crônica','Alcalose metabólica primária','Distúrbio normal para DPOC','Acidose respiratória pura aguda sem compensação'],a:1,c:'pH baixo com PaCO₂ alta = acidose respiratória. HCO₃ 30 acima do esperado para aguda (≈ 26,5 para +25 de CO₂) e abaixo do esperado para crônica (≈ 32,5): agudização de retenção crônica.',ref:'Riella'},
+// ---------- Cardio (HAS 2025, IC, DAC) ----------
+{id:'mq-has1',t:'mi-cronicas',ar:'card',q:'Pela Diretriz Brasileira de HA 2025, PA de consultório de 128/84 mmHg em duas ocasiões se classifica como:',o:['Normal','Pré-hipertensão','HAS estágio 1','HAS estágio 2','PA ótima'],a:1,c:'Diretriz 2025: PA normal < 120/80; pré-hipertensão 120–139 e/ou 80–89; HAS ≥ 140 e/ou ≥ 90 no consultório. A pré-hipertensão pede mudança de estilo de vida e, em risco alto, pode pedir medicação.',ref:'Diretriz Brasileira de HA 2025 (SBC); devolutiva MIAPS 2026.1 (Q38)',x:['diverge','Na ESC 2024 (Portugal), 120–139/70–89 se chama "PA elevada" e a meta é PAS 120–129.'],f:['Pré-hipertensão na diretriz 2025','PAS 120–139 e/ou PAD 80–89 no consultório.']},
+{id:'mq-has2',t:'mi-cronicas',ar:'card',q:'Homem de 50 anos, MRPA com média de 138/88 mmHg confirma HAS estágio 1, sem LOA, risco CV baixo. Conduta pela diretriz 2025:',o:['Mudança de estilo de vida por 3 meses antes de medicar','Iniciar tratamento medicamentoso já, de preferência com combinação de 2 fármacos, junto com as medidas não medicamentosas','Repetir a MRPA em 1 ano','Monoterapia com betabloqueador','Encaminhar ao cardiologista'],a:1,c:'A principal mudança de 2025: acabou a espera de 3 meses no estágio 1. Medicação imediata para todos, preferindo combinação dupla (ex.: IECA/BRA + BCC ou tiazídico). Monoterapia fica para ≥ 85 anos, frágeis ou risco de hipotensão.',ref:'Diretriz Brasileira de HA 2025 (SBC); devolutiva MIAPS 2026.1 (Q45)',x:['desatualizado','Guias antigos: estágio 1 de baixo risco → 3–6 meses só de estilo de vida, depois monoterapia.']},
+{id:'mq-has3',t:'mi-cronicas',ar:'card',q:'Qual a meta pressórica geral para hipertensos na Diretriz Brasileira de HA 2025?',o:['< 140/90 mmHg para todos','< 130/80 mmHg (se não tolerar, o menor valor tolerado)','< 120/70 mmHg','< 150/90 em todos os idosos','Depende só do risco cardiovascular'],a:1,c:'Meta < 130/80 para todos, confirmada de preferência com MRPA ou MAPA. Em idosos frágeis a meta é individualizada.',ref:'Diretriz Brasileira de HA 2025 (SBC); devolutiva MIAPS 2026.1 (Q38)'},
+{id:'mq-has4',t:'mi-cronicas',ar:'card',q:'Diabético de 55 anos tem PA de consultório 132/84 mmHg, mas a MRPA mostra média 134/86. Como interpretar?',o:['Normotenso','Hipertensão do avental branco','Hipertensão mascarada','Pré-hipertensão sem relevância','Pseudo-hipertensão'],a:2,c:'Consultório abaixo do limiar de HAS e medida fora do consultório elevada = hipertensão mascarada. Paciente de alto risco: tratar, rastrear LOA e seguir com meta < 130/80.',ref:'Diretriz Brasileira de HA 2025 (SBC); devolutiva MIAPS 2026.1 (Q38)',x:['diverge','Na própria devolutiva, a Q38 usa ≥ 130/80 como corte da MRPA e a Q45 usa ≥ 135/85. Confira na diretriz; com 134/86 os dois cortes dão HAS.']},
+{id:'mq-has5',t:'mi-cronicas',ar:'card',q:'Hipertenso em uso de losartana 100 mg + anlodipino 10 mg + hidroclorotiazida 25 mg, aderente, com MAPA confirmando PA não controlada. Quarto fármaco preferencial:',o:['Enalapril','Espironolactona','Atenolol','Clonidina','Hidralazina'],a:1,c:'HAS resistente (3 fármacos em dose otimizada, incluindo diurético): o 4º é espironolactona. Confirmar adesão e afastar pseudo-resistência e causas secundárias.',ref:'Diretriz Brasileira de HA 2025 (SBC)'},
+{id:'mq-ic1',t:'mi-icaguda',ar:'card',q:'IC descompensada com extremidades frias, sonolência, PA 82/50, estertores e turgência jugular. Perfil e conduta:',o:['Quente e úmido; diurético e vasodilatador','Frio e úmido; inotrópico (ex.: dobutamina) e, com PA melhor, diurético','Frio e seco; volume','Quente e seco; ajustar via oral','Frio e úmido; nitroprussiato isolado'],a:1,c:'Perfil C (frio e úmido): baixo débito com congestão. Precisa de inotrópico (± vasopressor se hipotenso) para depois tolerar diurético. Vasodilatador isolado com PA baixa piora.',ref:'Diretriz Brasileira de IC 2018 + Atualização 2021'},
+{id:'mq-ic2',t:'mi-icaguda',ar:'card',q:'Paciente com IC descompensada perfil B internado. Em relação ao betabloqueador que já usava em dose estável:',o:['Suspender sempre na internação','Manter, se não houver choque ou baixo débito; reduzir a dose se necessário','Dobrar a dose','Trocar por amiodarona','Suspender e nunca mais reintroduzir'],a:1,c:'No perfil quente e úmido, manter o betabloqueador (suspender aumenta mortalidade). Suspender ou reduzir só em baixo débito, choque ou bradiarritmia.',ref:'Diretriz Brasileira de IC 2018 + Atualização 2021'},
+{id:'mq-ic3',t:'mi-icaguda',ar:'card',q:'Paciente na APS com dispneia progressiva, ortopneia, edema e B3. ECO: FE 32%. Quais medicamentos formam os "4 pilares" a iniciar e titular?',o:['Furosemida, digoxina, amiodarona e AAS','IECA/BRA ou sacubitril-valsartana + betabloqueador (carvedilol, bisoprolol ou succinato de metoprolol) + espironolactona + iSGLT2','Anlodipino, hidralazina, nitrato e furosemida','Atenolol, diltiazem, espironolactona e varfarina','Apenas diurético até melhorar'],a:1,c:'ICFEr: os 4 pilares reduzem mortalidade. Diurético de alça só para congestão. Seguimento em 7–14 dias com função renal e potássio após cada ajuste.',ref:'Diretriz Brasileira de IC 2018 + Atualização 2021; devolutiva MIAPS 2026.1 (Q18, Q37)'},
+{id:'mq-ic4',t:'mi-icaguda',ar:'card',q:'Tabagista com DPOC, ortopneia, turgência jugular, edema, BNP 780 pg/mL, albumina normal e ECO com FE 38%. Causa principal da congestão:',o:['Exacerbação de DPOC','IC com FE reduzida','Síndrome nefrótica','Cor pulmonale isolado','Cirrose'],a:1,c:'Ortopneia, congestão sistêmica, BNP alto e FE 38% fecham ICFEr. A DPOC pode coexistir, mas não explica tudo. Albumina normal afasta nefrótica.',ref:'Diretriz Brasileira de IC; devolutiva MIAPS 2026.1 (Q23)'},
+{id:'mq-sca1',t:'mi-sca',ar:'card',q:'Dor torácica em repouso há 2 h, infra de ST em V4–V6 e troponina elevada. Conduta:',o:['Trombolítico imediato','Dupla antiagregação + anticoagulação e estratificação invasiva precoce','Alta com AAS','Teste ergométrico hoje','Apenas nitrato e observação'],a:1,c:'SCA sem supra (IAMSSST): AAS + inibidor de P2Y12, anticoagulante (enoxaparina ou fondaparinux) e cateterismo conforme o risco. Trombolítico só no IAM com supra.',ref:'Diretriz de Dor Torácica na Emergência 2025 (SBC); devolutiva MIAPS 2026.1 (Q16)'},
+{id:'mq-sca2',t:'mi-sca',ar:'card',q:'Paciente de alta após IAM tratado com angioplastia e stent farmacológico. Qual combinação deve estar na receita, salvo contraindicação?',o:['AAS isolado','AAS + inibidor de P2Y12 por cerca de 12 meses, estatina de alta intensidade, betabloqueador e IECA/BRA','Varfarina + AAS por 3 meses','Clopidogrel isolado por 1 mês','Nitrato de longa ação e digoxina'],a:1,c:'Pós-SCA: dupla antiagregação (em geral 12 meses), estatina de alta potência (meta de LDL < 55 mg/dL no muito alto risco), betabloqueador, IECA/BRA (sobretudo se FE baixa, DM ou HAS) e reabilitação.',ref:'Diretriz de Síndrome Coronariana Crônica 2025; Diretriz de Dor Torácica 2025 (SBC)'},
+{id:'mq-sca3',t:'mi-sca',ar:'card',q:'Angina estável aos esforços com isquemia moderada na cintilografia, sem sintomas em repouso. Primeiro passo:',o:['Cateterismo de urgência','Tratamento clínico otimizado (antianginoso + AAS + estatina)','Revascularização cirúrgica imediata','Trombolítico','Apenas mudança de estilo de vida'],a:1,c:'DAC estável sem critérios de alto risco: tratamento clínico otimizado primeiro. Revascularização se sintomas refratários ou anatomia de alto risco.',ref:'Diretriz de Síndrome Coronariana Crônica 2025 (SBC); devolutiva MIAPS 2026.1 (Q2)'},
+{id:'mq-sca4',t:'mi-sca',ar:'card',q:'IAM com supra de ST tratado com angioplastia primária. Dose de ataque de clopidogrel:',o:['75 mg','150 mg','300 mg','600 mg','Não se usa clopidogrel'],a:3,c:'ICP primária: clopidogrel 600 mg de ataque (ou ticagrelor/prasugrel). 300 mg é na fibrinólise em < 75 anos; ≥ 75 anos com fibrinólise, 75 mg sem ataque.',ref:'Diretriz de Dor Torácica na Emergência 2025 (SBC)',x:['erro','Guias de OSCE trazem 300 mg na ICP primária. Isso é a dose da fibrinólise.']},
+// ---------- Diabetes ----------
+{id:'mq-dm1',t:'mi-hiperglic',ar:'dm',q:'Paciente não crítico, internado para tratar pneumonia, diabético, comendo bem, glicemias de 220–280. Esquema recomendado:',o:['Só escala móvel de insulina regular','Basal-bolus (basal + prandial + correção), meta 100–180 mg/dL','Insulina IV contínua na enfermaria','Manter glibenclamida e metformina','Suspender toda insulina e dieta zero'],a:1,c:'Não crítico que se alimenta: basal-bolus é o padrão. Escala móvel isolada é reativa e piora o controle. Insulina IV fica para UTI, CAD, EHH. Meta 100–180 no não crítico pela SBD.',ref:'SBD 2024/2025, hiperglicemia hospitalar (MD9); aula SBD; devolutiva MIAPS 2026.1 (Q11)',x:['desatualizado','Guias antigos usam meta de 140–180 para o não crítico. A SBD atual e a aula do MIAPS usam 100–180 (140–180 no crítico).'],f:['Meta glicêmica: não crítico × crítico','Não crítico 100–180; crítico e perioperatório 140–180 (SBD).']},
+{id:'mq-dm2',t:'mi-hiperglic',ar:'dm',q:'Como calcular a dose total de insulina no basal-bolus para paciente internado sensível (idoso, IRA) sem uso prévio de insulina?',o:['1,0 UI/kg/dia','0,2–0,3 UI/kg/dia, metade basal e metade prandial','2 UI/kg/dia','Sempre 40 UI/dia','0,5 UI/kg só de prandial'],a:1,c:'Dose total: 0,2–0,3 UI/kg em sensíveis (idosos, DRC/IRA, baixo peso); 0,4–0,5 nos demais; mais em resistentes. 50% basal, 50% dividido nas refeições, mais correção em 3 colunas (sensível, usual, resistente).',ref:'SBD 2024/2025, hiperglicemia hospitalar (MD9); aula SBD do MIAPS'},
+{id:'mq-dm3',t:'mi-hiperglic',ar:'dm',q:'Pela aula SBD do MIAPS, sobre os antidiabéticos orais no paciente internado não crítico:',o:['Todos devem ser suspensos sempre, sem exceção','iSGLT2 pode ser mantido no não crítico com monitorização de cetonemia e suspenso 3–4 dias antes de cirurgia; DPP-4 pode ser usado','Sulfonilureia é a melhor escolha','Metformina é obrigatória mesmo com contraste','iSGLT2 deve ser iniciado em todo internado'],a:1,c:'A aula e a SBD atual flexibilizam: iSGLT2 pode ser mantido em não crítico estável (risco de cetoacidose euglicêmica), DPP-4 é seguro. Sulfonilureia deve ser suspensa (hipoglicemia); metformina suspensa com instabilidade, contraste ou disfunção renal.',ref:'SBD 2024/2025, hiperglicemia hospitalar (MD9); aula SBD; devolutiva MIAPS 2026.1 (Q11)',x:['diverge','A devolutiva Q11 diz que os orais "em geral" são suspensos. A aula SBD permite manter iSGLT2 e DPP-4. Na prova, a ideia central é: sulfonilureia e metformina suspensas, basal-bolus no lugar.']},
+{id:'mq-dm4',t:'mi-cronicas',ar:'dm',q:'Diabética de 62 anos na UBS com HbA1c 10,8% em uso de metformina e glibenclamida em dose máxima, com poliúria. Conduta:',o:['Aumentar a metformina acima de 2.550 mg','Iniciar NPH ao deitar (10 UI ou 0,1–0,2 UI/kg), ajustando 2 UI a cada 3 dias a 1 semana pela glicemia de jejum, mantendo a metformina','Basal-bolus com 4 aplicações já no início','Trocar tudo por iDPP-4','Aguardar mais 6 meses'],a:1,c:'Falha de 2 orais: insulinização basal noturna (NPH bedtime), mantendo metformina. A glibenclamida pode ser mantida no início e suspensa se houver hipoglicemia ou com doses maiores de insulina.',ref:'Diretriz SBD 2025 (MD9); devolutiva MIAPS 2026.1 (Q6)',f:['Início de insulina na APS (DM2)','NPH ao deitar 10 UI ou 0,1–0,2 UI/kg; ajustar 2 UI pela glicemia de jejum; manter metformina.']},
+{id:'mq-dm5',t:'mi-hiperglic',ar:'dm',q:'Idoso confuso, glicemia 850 mg/dL, pH 7,38, HCO₃ 22, cetonemia negativa, osmolaridade calculada 340. Conduta inicial:',o:['Bicarbonato IV','Hidratação vigorosa com SF, depois insulina IV contínua com K adequado','Antibiótico empírico de largo espectro para todos','Insulina IV em bolus antes do volume','Restrição hídrica'],a:1,c:'Estado hiperglicêmico hiperosmolar: o principal é volume (déficit de 8–12 L). Insulina após iniciar volume e com K ≥ 3,3. Sem acidose, bicarbonato não está indicado; antibiótico só se houver foco.',ref:'Diretriz SBD 2025 (MD9); devolutiva MIAPS 2026.1 (Q3)'},
+{id:'mq-dm6',t:'mi-hiperglic',ar:'dm',q:'Diabético em uso de dapagliflozina com náuseas, dor abdominal, glicemia 210, pH 7,15, HCO₃ 12, cetonemia alta. Conduta pela aula SBD:',o:['Não é CAD porque a glicemia é < 250','CAD euglicêmica: volume, soro glicosado desde o início junto com insulina IV, reposição de K, suspender o iSGLT2','Só hidratação oral','Insulina sem glicose','Manter o iSGLT2'],a:1,c:'CAD euglicêmica (associada a iSGLT2): glicemia pode ser < 250. Como a glicemia já está baixa, soro glicosado desde o início para manter a insulina até fechar a cetose. Adiar insulina se K < 3,3.',ref:'SBD 2024/2025, hiperglicemia hospitalar (MD9); aula SBD do MIAPS',x:['diverge','Guias antigos: glicosado só quando a glicemia cai para 200. Na CAD euglicêmica isso não serve. O consenso ADA 2024 usa K < 3,5 como limiar para adiar insulina.']},
+{id:'mq-dm7',t:'mi-hiperglic',ar:'dm',q:'Paciente internado em basal-bolus apresenta glicemia capilar de 58 mg/dL, consciente e conseguindo engolir. Conduta:',o:['Glicose 50% IV em bolus obrigatoriamente','15 g de carboidrato VO (ex.: 150 mL de suco), repetir a glicemia em 15 min e revisar o esquema de insulina','Suspender toda insulina até a alta','Glucagon IM','Apenas observar'],a:1,c:'Hipoglicemia (< 70) em paciente consciente: regra dos 15 (15 g de carboidrato de absorção rápida, glicemia em 15 min, repetir se < 70). Inconsciente ou sem via oral: glicose 50% IV. Toda hipoglicemia pede revisão da prescrição.',ref:'SBD 2024/2025, hiperglicemia hospitalar (MD9); aula SBD do MIAPS',f:['Hipoglicemia no internado consciente','Regra dos 15: 15 g de carboidrato, glicemia em 15 min, repetir se < 70; revisar a insulina.']},
+{id:'mq-dm8',t:'mi-hiperglic',ar:'dm',q:'Paciente diabético internado em jejum para exame. Em uso de basal-bolus (glargina 20 UI + lispro nas refeições). Como ajustar no dia do jejum?',o:['Suspender toda a insulina','Manter a basal (com redução de cerca de 20%) e suspender a prandial, mantendo correção','Manter tudo igual','Dobrar a basal','Trocar por escala móvel isolada'],a:1,c:'Em jejum, a insulina prandial é suspensa, a basal é mantida (em geral com redução de ~20–25%) e a correção continua. Suspender a basal causa hiperglicemia e risco de cetose; escala isolada não é recomendada.',ref:'SBD 2024/2025, hiperglicemia hospitalar (MD9); aula SBD do MIAPS'},
+{id:'mq-dm9',t:'mi-cronicas',ar:'dm',q:'Pela Diretriz SBD, qual a meta de HbA1c para a maioria dos adultos com DM2 e qual a meta para idosos frágeis?',o:['< 6% para todos','< 7% na maioria; menos rígida (ex.: < 8%) em idosos frágeis ou com hipoglicemias','< 9% para todos','< 5,7% na maioria','Não existe meta em idosos'],a:1,c:'Meta geral < 7%, individualizada. Em idosos frágeis, com multimorbidade ou risco de hipoglicemia, metas menos estritas (< 8,0–8,5%). A devolutiva usa < 8% no idoso frágil.',ref:'Diretriz SBD 2025 (MD9); devolutiva MIAPS 2026.1 (Q8)'},
+{id:'mq-dm10',t:'mi-cronicas',ar:'dm',q:'DM2 com doença cardiovascular aterosclerótica estabelecida e TFG 55. Após a metformina, qual classe tem benefício cardiovascular comprovado?',o:['Sulfonilureia','iSGLT2 ou agonista do GLP-1','Acarbose','Insulina NPH como primeira opção','Pioglitazona como escolha principal'],a:1,c:'Com DCV aterosclerótica, IC ou DRC: iSGLT2 ou aGLP-1 com benefício comprovado, independentemente da HbA1c. Na DRC, iSGLT2 se TFG ≥ 20 (KDIGO 2024).',ref:'Diretriz SBD 2025 (MD9); KDIGO 2024'},
+// ---------- Transfusão e riscos assistenciais ----------
+{id:'mq-tr1',t:'mi-transf',ar:'tr',q:'Paciente com IC, Hb 6,6 g/dL, dispneia e taquicardia. Conduta transfusional:',o:['Não transfundir por causa da IC','Transfundir 2 concentrados rápidos','Transfundir 1 unidade lentamente, monitorar e reavaliar antes da próxima','Transfundir até Hb 12','Plasma fresco congelado'],a:2,c:'Anemia grave sintomática em cardiopata: transfundir. Pelo Patient Blood Management, "1 unidade e reavaliar", devagar, pelo risco de TACO.',ref:'Harrison 2023; devolutiva MIAPS 2026.1 (Q48)',f:['Princípio do Patient Blood Management','1 unidade por vez + reavaliação clínica antes da próxima.']},
+{id:'mq-tr2',t:'mi-transf',ar:'tr',q:'Durante transfusão em paciente cardiopata surgem dispneia, hipertensão, turgência jugular e B3. BNP alto e ECO com pressões de enchimento elevadas. Diagnóstico:',o:['TRALI','TACO (sobrecarga circulatória)','Reação hemolítica aguda','Reação alérgica leve','Contaminação bacteriana'],a:1,c:'TACO: edema pulmonar cardiogênico por volume, com hipertensão, turgência e BNP alto; trata com diurético. TRALI: edema não cardiogênico, costuma ter hipotensão e febre, BNP normal, até 6 h.',ref:'Harrison 2023; devolutiva MIAPS 2026.1 (Q22)',f:['TACO × TRALI','TACO: hipertensão, turgência, BNP ↑, melhora com diurético. TRALI: hipotensão, febre, BNP normal, edema não cardiogênico.']},
+{id:'mq-tr3',t:'mi-transf',ar:'tr',q:'Em paciente estável, internado, sem doença coronariana aguda, qual o gatilho habitual de Hb para transfundir concentrado de hemácias?',o:['< 10 g/dL','< 7 g/dL','< 9 g/dL sempre','< 5 g/dL','Sempre que houver anemia'],a:1,c:'Estratégia restritiva: Hb < 7 na maioria dos internados estáveis; < 8 em cirurgia ortopédica/cardíaca ou doença CV prévia. Sintomas e sangramento ativo mudam a decisão.',ref:'Harrison 2023'},
+{id:'mq-tr4',t:'mi-transf',ar:'tr',q:'Minutos após o início da transfusão: febre, calafrios, dor lombar, hipotensão e urina escura. Primeira conduta:',o:['Reduzir a velocidade e continuar','Parar a transfusão, manter acesso com SF, checar identificação e bolsa, colher exames e comunicar o banco de sangue','Dar antitérmico e continuar','Iniciar anti-histamínico e continuar','Trocar a bolsa por outra do mesmo tipo'],a:1,c:'Reação hemolítica aguda (geralmente erro ABO): interromper, manter veia com SF, hidratar para diurese, conferir identificação, enviar bolsa e amostras (Coombs, hemólise) e notificar.',ref:'Harrison 2023'},
+{id:'mq-ri1',t:'mi-riscos',ar:'tr',q:'Idoso pós-AVC, internado, tosse durante as refeições e engasgos com líquidos. Melhor conduta sobre o risco de broncoaspiração:',o:['Dieta zero indefinidamente','Avaliação fonoaudiológica, ajuste de consistência, cabeceira elevada e higiene oral','Antibiótico profilático','Sonda nasogástrica em todos','Liberar a dieta e observar'],a:1,c:'Risco de broncoaspiração: considerar cognição, disfagia, mastigação e posição. Medidas: fono, consistência adaptada, cabeceira 30–45°, higiene oral, supervisão na refeição.',ref:'Washington Manual; Goldman-Cecil 2022; devolutiva MIAPS 2026.1 (Q31)'},
+{id:'mq-ri2',t:'mi-riscos',ar:'tr',q:'Qual escala é usada para estratificar risco de lesão por pressão no paciente internado?',o:['Morse','Braden','Padua','Glasgow','CHA₂DS₂-VASc'],a:1,c:'Braden (percepção sensorial, umidade, atividade, mobilidade, nutrição, fricção): quanto menor, maior o risco (≤ 18 risco). Morse é queda; Padua é TEV clínico.',ref:'Washington Manual; Goldman-Cecil 2022',f:['Escalas de risco assistencial','Braden: lesão por pressão · Morse: queda · Padua: TEV clínico · Caprini: TEV cirúrgico.']},
+{id:'mq-ri3',t:'mi-riscos',ar:'tr',q:'Paciente clínico internado por pneumonia, acamado, 72 anos, Padua 5, sem sangramento e plaquetas normais. Conduta para TEV:',o:['Nada, por ser paciente clínico','Profilaxia farmacológica (ex.: enoxaparina 40 mg SC 1×/dia ou heparina não fracionada 5.000 UI SC 8/8 ou 12/12 h)','Anticoagulação plena','Filtro de veia cava','Só meia elástica'],a:1,c:'Padua ≥ 4 = alto risco: profilaxia farmacológica se não houver alto risco de sangramento. Com risco de sangramento, profilaxia mecânica (compressão pneumática).',ref:'Goldman-Cecil 2022; Washington Manual'},
+{id:'mq-ri4',t:'mi-riscos',ar:'tr',q:'Idoso internado em cuidados paliativos com demência avançada. Sobre os riscos assistenciais:',o:['Não precisam ser avaliados em paliativo','Devem ser avaliados e minimizados como em qualquer internado, com abordagem multiprofissional e metas alinhadas ao plano de cuidado','Só se avaliam na admissão','Só a enfermagem avalia','Apenas o risco de queda importa'],a:1,c:'Todo idoso internado tem riscos assistenciais avaliados de forma sistemática (queda, broncoaspiração, lesão por pressão, TEV, delirium), inclusive em paliativo, com as medidas ajustadas ao objetivo do cuidado.',ref:'Washington Manual; Goldman-Cecil 2022; devolutiva MIAPS 2026.1 (Q49)'},
+{id:'mq-ri5',t:'mi-consump',ar:'tr',q:'Homem de 68 anos, perda de 8% do peso em 4 meses, dispepsia e saciedade precoce. Risco cardiológico alto pela avaliação da cardiologia. Conduta:',o:['Não fazer EDA pelo risco cardiológico','EDA o mais breve possível, com cuidados guiados pelo risco CV, e orientar sinais de alarme','Prescrever IBP e reavaliar em 6 meses','Iniciar mirtazapina para o apetite','Apenas suplemento nutricional'],a:1,c:'Dispepsia com síndrome consumptiva é sinal de alarme: EDA prioritária. O risco CV orienta os cuidados do exame, não o contraindica. Conversar sobre hipóteses facilita comunicar más notícias depois.',ref:'Harrison 2023; devolutiva MIAPS 2026.1 (Q34)',f:['Perda de peso involuntária significativa','> 5% em 6–12 meses. Investigar câncer, doença GI, endócrina, infecção, depressão, medicamentos.']},
+{id:'mq-ri6',t:'mi-consump',ar:'tr',q:'Qual definição de perda de peso involuntária clinicamente significativa?',o:['> 2% em 1 ano','> 5% em 6 a 12 meses','> 20% em 1 mês','Qualquer perda','IMC < 25'],a:1,c:'Perda > 5% do peso em 6–12 meses sem intenção merece investigação. Causas principais: neoplasia, doenças GI, endócrinas (DM, hipertireoidismo), infecções (TB, HIV), depressão e medicamentos.',ref:'Harrison 2023'},
+];
+
+// ---------- MFC, APS e saúde mental ----------
+MIAPS_Q.push(
+{id:'mq-sm1',t:'mi-mental',ar:'mfc',q:'Senhor de 74 anos perdeu a esposa há 5 semanas. Chora ao falar dela, sente saudade, mas se alimenta, cuida da higiene, não tem ideação de morte e diz que "o tempo vai ajudar". A filha pede um remédio. Conduta:',o:['Iniciar sertralina 50 mg','Prescrever clonazepam para dormir','Acolher, validar o luto, psicoeducar a família e manter acompanhamento longitudinal, sem medicação','Encaminhar ao CAPS','Solicitar avaliação psiquiátrica urgente'],a:2,c:'Luto normal não é doença e não tem indicação de medicação. O papel do MFC: acolher o enlutado, acolher a família, psicoeducar e acompanhar sinais de luto complicado ou depressão (perda funcional, anedonia persistente, ideação suicida).',ref:'Gusso & Lopes, Tratado de MFC (2018); devolutiva MIAPS 2026.1 (Q17)',f:['Luto normal × depressão','Luto: tristeza ligada à perda, autoestima preservada, oscilação, funcionalidade mantida. Depressão: anedonia global, culpa desproporcional, ideação suicida, prejuízo funcional.']},
+{id:'mq-sm2',t:'mi-mental',ar:'mfc',q:'Gestante de 16 semanas, gestação não planejada, sem apoio do parceiro, isolada, com respostas monossilábicas e sem contato visual na consulta (que também tratou sífilis e suspeita de TB). Melhor conduta em saúde mental:',o:['Deixar para o pós-parto, quando o risco aparece','Aplicar já um instrumento de rastreio (SRQ-20) e abordar o sofrimento nesta consulta','Iniciar antidepressivo sem avaliação','Encaminhar ao psiquiatra sem conversar','Aguardar uma consulta futura com mais tempo'],a:1,c:'Depressão perinatal começa no pré-natal. O SRQ-20 é o rastreio de sofrimento psíquico recomendado pelo MS e está no e-SUS. Não rastrear compromete a adesão ao pré-natal e aos tratamentos.',ref:'Gusso & Lopes, Tratado de MFC (2018); devolutiva MIAPS 2026.1 (Q5)'},
+{id:'mq-sm3',t:'mi-mental',ar:'mfc',q:'Adolescente de 16 anos com acne papulopustulosa moderada e PHQ-9 de 14 pontos. Além de tratar a acne com retinoide tópico + peróxido de benzoíla (± doxiciclina por tempo limitado), o que é essencial?',o:['Nada além da acne','Avaliar risco de suicídio, escuta qualificada, acompanhamento longitudinal e considerar psicoterapia/ISRS se critérios','Isotretinoína imediata','Encaminhar ao dermatologista','Benzodiazepínico'],a:1,c:'PHQ-9 de 14 sugere depressão moderada. A acne afeta autoestima. Avaliar ideação suicida sempre. Antibiótico oral nunca isolado (associar tópico).',ref:'Duncan, Medicina Ambulatorial (2022); devolutiva MIAPS 2026.1 (Q40)'},
+{id:'mq-sm4',t:'mi-mental',ar:'mfc',q:'Na APS, qual princípio orienta o cuidado de uma pessoa com uso problemático de crack que ainda não quer parar?',o:['Exigir abstinência como condição para o atendimento','Acolhimento sem julgamento, entrevista motivacional e redução de danos, com cuidado longitudinal','Internação compulsória imediata','Encaminhar sempre ao CAPS AD e dar alta da UBS','Prescrever benzodiazepínico'],a:1,c:'Na APS: acolher, escuta qualificada, abordagem motivacional respeitando o estágio de mudança, redução de danos e vínculo. CAPS AD compartilha o cuidado, não substitui a UBS.',ref:'Duncan, Medicina Ambulatorial (2022); devolutiva MIAPS 2026.1 (Q41)'},
+{id:'mq-sm5',t:'mi-mental',ar:'mfc',q:'Na Rede de Atenção Psicossocial, qual serviço é a referência para pessoa com transtorno mental grave e persistente em crise, no território, para municípios de médio porte?',o:['UBS isoladamente','CAPS (I, II ou III conforme o porte)','Hospital psiquiátrico como primeira escolha','Ambulatório de especialidades','UPA'],a:1,c:'O CAPS é ponto estratégico da RAPS para transtornos graves e persistentes. A APS é a porta de entrada e coordena o cuidado. O hospital psiquiátrico deixou de ser a referência (Lei 10.216/2001).',ref:'Gusso & Lopes, Tratado de MFC (2018)'},
+{id:'mq-sm6',t:'mi-mental',ar:'mfc',q:'Mulher de 38 anos com dor abdominal recorrente há 8 meses aliviada pela evacuação, alternância do hábito intestinal, exames normais, sem sinais de alarme, muito ansiosa. Conduta na APS:',o:['Colonoscopia obrigatória','Diagnóstico clínico de SII, validar a dor, medidas não farmacológicas e, se ansiedade/impacto funcional, considerar ISRS','Dizer que "é nervoso"','Encaminhar ao gastro para confirmar','Exames repetidos a cada 3 meses'],a:1,c:'SII é diagnóstico clínico sem sinais de alarme (perda de peso, anemia, sangramento, início > 50 anos, história familiar de CCR, sintomas noturnos). ISRS modula a dor central e o eixo intestino-cérebro. Evitar medicalização e exames repetidos.',ref:'Duncan, Medicina Ambulatorial (2022); devolutiva MIAPS 2026.1 (Q14)'},
+{id:'mq-mc1',t:'mi-mccp',ar:'mfc',q:'Mulher vem "só renovar o omeprazol", evita contato visual, conta insônia, parou de ir à igreja e diz "não é nada, doutor". Como o MCCP orienta a abordagem?',o:['Renovar a receita e encerrar','Explorar a experiência da doença (sentimentos, ideias, funcionamento, expectativas), nomear o que observa sem forçar e abrir espaço para a demanda oculta','Pedir EDA','Encaminhar ao psicólogo sem conversar','Prescrever hipnótico'],a:1,c:'O 1º componente do MCCP explora a doença e a experiência da doença (SIFE: sentimentos, ideias, funcionamento, expectativas). A demanda oculta aparece quando o médico nomeia o que vê e deixa a porta aberta.',ref:'Stewart, Medicina Centrada na Pessoa (2017); devolutiva MIAPS 2026.1 (Q15)',f:['Os 4 componentes do MCCP','1) Explorar a saúde, a doença e a experiência da doença · 2) Entender a pessoa como um todo · 3) Elaborar um plano conjunto · 4) Intensificar a relação médico-pessoa.']},
+{id:'mq-mc2',t:'mi-mccp',ar:'mfc',q:'Idosa lúcida, com capacidade de decisão, recusa insulina porque os filhos acham que "insulina cega". HbA1c 11,8% com dois orais em dose máxima. Melhor atitude:',o:['Prescrever mesmo assim e convencer os filhos depois','Respeitar a autonomia, explorar medos e crenças da família, desmistificar e construir um plano conjunto, com adaptações (caneta, aplicação assistida)','Desistir da insulina','Pedir avaliação de capacidade civil','Encaminhar ao endocrinologista'],a:1,c:'Integra dimensão clínica (insulina indicada), ética (autonomia de pessoa capaz) e familiar (medo é porta de entrada, não obstáculo). O plano conjunto é o 3º componente do MCCP.',ref:'Stewart, Medicina Centrada na Pessoa (2017); devolutiva MIAPS 2026.1 (Q21)'},
+{id:'mq-mc3',t:'mi-coord',ar:'mfc',q:'No registro clínico orientado por problemas (SOAP), onde entra a impressão do médico sobre o problema (hipótese, avaliação de controle)?',o:['S','O','A','P','Na lista de medicamentos'],a:2,c:'S: subjetivo (o que a pessoa traz). O: objetivo (exame e exames). A: avaliação (problemas e hipóteses). P: plano (diagnóstico, terapêutico, educação, seguimento).',ref:'Gusso & Lopes, Tratado de MFC (2018)'},
+{id:'mq-mc4',t:'mi-familia',ar:'mfc',q:'Qual instrumento representa as relações da família com a comunidade e serviços (escola, igreja, UBS, trabalho)?',o:['Genograma','Ecomapa','APGAR familiar','FIRO','Ciclo de vida familiar'],a:1,c:'Ecomapa: a família no centro e os vínculos externos, com linhas que indicam força e conflito. Genograma: estrutura familiar em ao menos 3 gerações, doenças e relações.',ref:'Gusso & Lopes, Tratado de MFC (2018); McWhinney, Manual de MFC (2010)'},
+{id:'mq-pr1',t:'mi-prev',ar:'mfc',q:'Mulher de 48 anos, último preventivo normal há 5 anos, mãe com câncer de mama. Pela diretriz brasileira vigente, qual conduta de rastreamento?',o:['Mamografia anual obrigatória e Papanicolaou anual','Teste de DNA-HPV oncogênico para o colo; mamografia por decisão compartilhada (rastreio ativo é de 50 a 74 anos)','Nenhum rastreio','Só Papanicolaou','Ressonância de mama anual'],a:1,c:'O DNA-HPV substituiu a citologia como rastreio primário (diretriz 2025). Mamografia: rastreio ativo bienal de 50–74 anos; aos 40–49, acesso garantido sob demanda com decisão compartilhada.',ref:'Duncan, Medicina Ambulatorial (2022); diretriz brasileira de rastreamento do colo 2025; devolutiva MIAPS 2026.1 (Q15)',x:['desatualizado','Guias antigos: Papanicolaou 25–64 anos, 2 anuais e depois a cada 3 anos. Desde 2025 o rastreio primário é o DNA-HPV.']},
+{id:'mq-pr2',t:'mi-prev',ar:'mfc',q:'Homem de 56 anos pede "exame de próstata". Assintomático. Conduta na APS:',o:['Pedir PSA e toque anuais para todos acima de 50','Decisão compartilhada: explicar benefícios pequenos e riscos (falso-positivo, sobrediagnóstico, biópsia, incontinência), e pedir PSA só se ele optar','Negar qualquer exame','Encaminhar ao urologista','Pedir USG de próstata'],a:1,c:'MS/INCA não recomenda rastreio populacional. Entre 55 e 69 anos, decisão compartilhada. A posição de 50 anos é da SBU.',ref:'Duncan, Medicina Ambulatorial (2022); devolutiva MIAPS 2026.1 (Q26)',x:['diverge','SBU recomenda iniciar aos 50 (45 se risco). MS/INCA e a faculdade: sem rastreio populacional, decisão compartilhada.']},
+{id:'mq-pr3',t:'mi-prev',ar:'mfc',q:'Médico pede check-up anual com TC de abdome, marcadores tumorais e eletroforese para paciente assintomático de 40 anos. Que conceito é violado?',o:['Prevenção primária','Prevenção quaternária','Prevenção secundária','Promoção da saúde','Vigilância epidemiológica'],a:1,c:'Prevenção quaternária: evitar intervenções desnecessárias e o excesso de medicalização (sobrediagnóstico, cascata de exames). A quinquenária protege o próprio profissional (burnout) e o cuidado.',ref:'Duncan, Medicina Ambulatorial (2022); Gusso & Lopes (2018)',f:['Prevenção quaternária','Evitar dano por excesso de intervenção médica (sobrediagnóstico, sobretratamento).']},
+{id:'mq-po1',t:'mi-poli',ar:'mfc',q:'Idoso frágil de 84 anos com perda de apetite, hipotensão postural e hipoglicemias. Usa 11 medicamentos, entre eles glibenclamida, anlodipino, enalapril e hidroclorotiazida. HbA1c 6,4%. Primeira conduta:',o:['Iniciar mirtazapina para o apetite','Desprescrever: retirar a sulfonilureia e reduzir anti-hipertensivos, com metas individualizadas (PA < 140/90, HbA1c < 8%)','Acrescentar suplemento e manter tudo','Pedir TC de crânio','Encaminhar à geriatria sem mudar nada'],a:1,c:'Em idoso frágil, metas são mais frouxas. A prioridade é desprescrever o que causa dano (hipoglicemia, hipotensão). Mirtazapina só com transtorno depressivo caracterizado.',ref:'Duncan, Medicina Ambulatorial (2022); devolutiva MIAPS 2026.1 (Q8)'},
+{id:'mq-po2',t:'mi-poli',ar:'mfc',q:'Qual medicamento está nos Critérios de Beers como potencialmente inapropriado para idosos, por risco de queda e sedação?',o:['Losartana','Diazepam','Metformina','Sinvastatina','Paracetamol'],a:1,c:'Benzodiazepínicos de meia-vida longa (diazepam) aumentam quedas, fraturas e delirium. Outros clássicos: glibenclamida, anti-histamínicos de 1ª geração, amitriptilina.',ref:'Duncan, Medicina Ambulatorial (2022)'},
+{id:'mq-dr1',t:'mi-drogas',ar:'mfc',q:'Tabagista de 20 cigarros/dia, fuma 5 min após acordar, quer parar. Tratamento de primeira linha disponível no SUS:',o:['Só aconselhamento, sem fármaco','Terapia de reposição de nicotina (adesivo + goma/pastilha) e/ou bupropiona, com abordagem cognitivo-comportamental','Benzodiazepínico','Cigarro eletrônico','Naltrexona'],a:1,c:'Dependência alta (Fagerström alto: fumar nos primeiros 5 min pontua 3). PNCT: abordagem cognitivo-comportamental + TRN (adesivo de liberação lenta + forma rápida) e/ou bupropiona.',ref:'Duncan, Medicina Ambulatorial (2022)'},
+{id:'mq-dr2',t:'mi-drogas',ar:'mfc',q:'Instrumento de rastreio de uso problemático de álcool recomendado na APS:',o:['PHQ-9','AUDIT (ou AUDIT-C)','MEEM','SRQ-20','Fagerström'],a:1,c:'AUDIT (10 itens) ou AUDIT-C (3 itens). PHQ-9 é para depressão, MEEM para cognição, SRQ-20 para sofrimento psíquico e Fagerström para dependência de nicotina.',ref:'Duncan, Medicina Ambulatorial (2022)'},
+{id:'mq-pa1',t:'mi-paliat',ar:'mfc',q:'Paciente com câncer avançado em cuidado domiciliar pela ESF tem dor 8/10 apesar de paracetamol e codeína em dose plena. Próximo passo:',o:['Aumentar a codeína acima do teto','Opioide forte (ex.: morfina) em horário fixo com resgate, laxante profilático e antiemético se necessário','Associar outro opioide fraco','Encaminhar para internação','Só medidas não farmacológicas'],a:1,c:'Escada da OMS: falha do degrau 2 → opioide forte em horário fixo, resgate de cerca de 10–15% da dose diária e laxante desde o início (constipação não tem tolerância).',ref:'Gusso & Lopes, Tratado de MFC (2018)'},
+{id:'mq-mu1',t:'mi-mulher',ar:'mfc',q:'Gestante na primeira consulta de pré-natal, 8 semanas. Qual suplementação o MS recomenda?',o:['Ácido fólico só até 12 semanas e ferro só a partir de 20 semanas','Ácido fólico 0,4 mg e ferro elementar 40 mg desde o início da gestação','Nenhuma suplementação se ela come bem','Vitamina A em dose alta','Cálcio para todas em dose de 2 g'],a:1,c:'MS: ácido fólico 0,4 mg/dia e 40 mg de ferro elementar/dia desde o diagnóstico da gestação (ferro até o 3º mês pós-parto).',ref:'Duncan, Medicina Ambulatorial (2022); Caderneta da Gestante (MS 2022)',x:['desatualizado','Guias antigos: ferro só a partir de 20 semanas.']},
+{id:'mq-mu2',t:'mi-mulher',ar:'mfc',q:'Gestante com VDRL 1:16 e teste rápido treponêmico positivo, sem história de tratamento. Conduta:',o:['Aguardar o parto','Penicilina benzatina 2,4 milhões UI IM por semana, 3 doses (sífilis latente tardia/indeterminada), tratar parceria e notificar','Ceftriaxona oral','Uma dose de penicilina e nada mais','Azitromicina'],a:1,c:'Sífilis na gestação de duração indeterminada: 3 doses semanais de 7,2 milhões UI no total. Só penicilina trata o feto. Tratar parceria, notificar e seguir com VDRL mensal.',ref:'Duncan, Medicina Ambulatorial (2022)'},
+{id:'mq-cr1',t:'mi-saude-crianca',ar:'mfc',q:'Criança de 15 meses na consulta de puericultura com caderneta em dia até os 12 meses. Quais vacinas o PNI prevê aos 15 meses?',o:['Pneumo 10 e meningo C de reforço','DTP (1º reforço), VIP (reforço), hepatite A e tetraviral (SCR + varicela)','BCG e hepatite B','Febre amarela e HPV','VOP e Hib'],a:1,c:'Aos 15 meses: DTP 1º reforço, VIP reforço, hepatite A e tetraviral. Pneumo 10 e meningocócica são reforços aos 12 meses (com a 1ª SCR). A VOP saiu do calendário em 2024.',ref:'Duncan, Medicina Ambulatorial (2022); Calendário PNI vigente',x:['erro','Os guias de OSCE listam Pneumo 10, meningo C, Hib e VOP aos 15 meses. Está errado. Confira se o reforço meningocócico dos 12 meses já é ACWY no calendário atual.']},
+{id:'mq-cr2',t:'mi-saude-crianca',ar:'mfc',q:'Criança de 3 anos com IMC/idade entre o escore-z +2 e +3 na curva da OMS. Classificação (SISVAN, < 5 anos):',o:['Eutrofia','Risco de sobrepeso','Sobrepeso','Obesidade','Obesidade grave'],a:2,c:'< 5 anos: +1 a +2 risco de sobrepeso; +2 a +3 sobrepeso; > +3 obesidade. Magreza: −3 a −2; magreza acentuada < −3. Nos ≥ 5 anos, +1 a +2 já é sobrepeso.',ref:'Duncan, Medicina Ambulatorial (2022); SISVAN/OMS',x:['erro','Os guias de OSCE trocam os cortes (ex.: "< −2 = magreza acentuada"). Use os do SISVAN.']},
+{id:'mq-cr3',t:'mi-saude-crianca',ar:'mfc',q:'Criança de 12 kg com febre. Dose de dipirona em gotas (500 mg/mL) por dose:',o:['6 mL (0,5 mL/kg)','12 gotas (1 gota/kg)','60 gotas','1 gota no total','30 gotas'],a:1,c:'Dipirona 500 mg/mL: 1 gota/kg (~25 mg/kg) até 6/6 h. 0,5 mL/kg seria 250 mg/kg, dez vezes a dose. Paracetamol 200 mg/mL: 1 gota/kg (~10 mg/kg).',ref:'Duncan, Medicina Ambulatorial (2022)',x:['erro','Um guia de OSCE diz 0,5 mL/kg. É dose 10 vezes maior que a correta e perigosa.'],f:['Dipirona gotas (500 mg/mL) na criança','1 gota/kg por dose, até 6/6 h (≈ 25 mg/kg).']},
+{id:'mq-cr4',t:'mi-saude-crianca',ar:'mfc',q:'Até que idade o aleitamento materno exclusivo é recomendado, e até quando o aleitamento deve continuar?',o:['4 meses; 1 ano','6 meses; 2 anos ou mais','6 meses; 1 ano','1 ano; 2 anos','3 meses; 6 meses'],a:1,c:'OMS e MS: exclusivo até 6 meses e continuado com alimentação complementar até 2 anos ou mais.',ref:'Duncan, Medicina Ambulatorial (2022)'},
+{id:'mq-id1',t:'mi-idoso',ar:'mfc',q:'Quais são as "grandes síndromes geriátricas" (os "Is") citadas no manual do MIAPS?',o:['Insuficiência cardíaca, renal e hepática','Insuficiência cognitiva, imobilidade, instabilidade postural e quedas, incontinência e iatrogenia','Infecção, inflamação e isquemia','Insônia, inapetência e irritabilidade','Hipertensão, diabetes e dislipidemia'],a:1,c:'São as síndromes listadas nos objetivos do MIAPS. Avaliá-las faz parte da Avaliação Geriátrica Ampla, multidimensional (funcional, cognitiva, humor, mobilidade, nutrição, social, medicamentos).',ref:'Manual MD9 2026.2 (objetivos do MIAPS); Duncan, Medicina Ambulatorial (2022)'},
+{id:'mq-ap1',t:'mi-demanda',ar:'mfc',q:'Mulher de 30 anos com 5 crises de enxaqueca por mês com impacto funcional; usou ibuprofeno 200 mg 18 h após o início de uma crise forte. Conduta:',o:['Encaminhar ao neurologista para iniciar profilaxia','Para a crise atual, triptano; nas próximas, AINE em dose plena e precoce com metoclopramida; iniciar profilaxia na APS (ex.: propranolol, amitriptilina ou topiramato conforme o perfil)','Tomografia de crânio','Opioide para as crises','Só orientar diário de cefaleia'],a:1,c:'≥ 4 crises/mês com impacto: profilaxia, e o MFC pode iniciar. Escolha pelo perfil: propranolol (ansiedade/HAS), amitriptilina (insônia/depressão), topiramato (sobrepeso). AINE em dose eficaz (400–600 mg de ibuprofeno) e cedo.',ref:'Duncan, Medicina Ambulatorial (2022); devolutiva MIAPS 2026.1 (Q20)'},
+{id:'mq-ap2',t:'mi-demanda',ar:'mfc',q:'Mulher com varizes, peso e edema vespertino nas pernas, sem sinais de TVP, pulsos presentes. Tratamento principal na APS:',o:['Doppler venoso obrigatório antes de qualquer conduta','Medidas comportamentais e meia de compressão 20–30 mmHg; flebotônicos são adjuvantes','Diosmina isolada','Anticoagulação','Cirurgia de urgência'],a:1,c:'Insuficiência venosa crônica: elevação dos membros, caminhada, perda de peso e compressão elástica (checar pulsos/ITB antes). Diosmina-hesperidina alivia sintomas, mas não substitui a compressão.',ref:'Duncan, Medicina Ambulatorial (2022); devolutiva MIAPS 2026.1 (Q4)'}
+);
+
+// ===== Estações de OSCE com checklist (correção pelo que você disse ou escreveu) =====
+// st: número da estação na aba OSCE e prova
+const OSCE_DRILLS = [
+{id:'os-sut',st:'1',name:'Ferida e sutura',ref:'Manual do Residente de Cirurgia (Faintuch 2023); Atualização em Cirurgia Geral, Emergência e Trauma (2022)',
+ caso:'Homem de 32 anos com ferimento de 4 cm no antebraço por facão há 2 horas, bordas irregulares e contusas, sem sinais de lesão de tendão. Vacinação antitetânica: última dose há 12 anos. O examinador pede: 1) classifique a ferida e cite 2 objetos que a causam; 2) verbalize a técnica do ponto simples; 3) conduta para tétano.',
+ itens:['Classificou como ferida corto-contusa (instrumento com gume e peso)','Citou 2 objetos com gume e peso: machado, facão, foice ou enxada (não vidro ou lata)','Lavagem abundante com SF e antissepsia, campo estéril, paramentação','Anestesia local com lidocaína (sem vasoconstritor em extremidades)','Avaliou tendão, vaso e nervo antes de suturar','Ponto simples: agulha a 90° com a pele, mesma distância e profundidade dos dois lados, nó sem estrangular, eversão das bordas','Fio adequado (ex.: náilon 4-0 em antebraço) e retirada em 7–10 dias','Tétano: dose de reforço (dT) porque a última dose tem > 10 anos (ferida de alto risco: > 5 anos)','Curativo e orientações de sinais de infecção'],
+ x:['erro','Os guias de OSCE citam vidro e lata como objetos corto-contusos. São cortantes.']},
+{id:'os-puer',st:'2',name:'Puericultura aos 15 meses',ref:'Duncan, Medicina Ambulatorial (2022); Calendário PNI; SISVAN/OMS',
+ caso:'Criança de 15 meses, 10 kg, caderneta com vacinas em dia até os 12 meses. IMC/idade no escore-z +1,5 e estatura/idade em −1. A mãe conta febre de 38,8 °C desde ontem e pergunta o que dar. Pede-se: vacinas de hoje, classificação nas curvas e prescrição do antitérmico.',
+ itens:['Vacinas dos 15 meses: DTP (1º reforço), VIP (reforço), hepatite A e tetraviral','Não citou Pneumo 10/meningo como 15 meses (são aos 12) nem VOP','IMC +1,5 em < 5 anos = risco de sobrepeso','Estatura −1 = estatura adequada para a idade (≥ −2)','Dipirona gotas 500 mg/mL: 10 gotas (1 gota/kg) até 6/6 h, ou paracetamol 200 mg/mL 10 gotas','Disse qual NÃO dar: AAS (Reye) e evitar ibuprofeno se suspeita de dengue','Orientou sinais de alarme e vacinação: febre não contraindica se não for doença moderada/grave'],
+ x:['erro','Guia diz dipirona 0,5 mL/kg (10 vezes a dose) e cortes de curva trocados.']},
+{id:'os-sepse',st:'3',name:'Sepse e hora 1',ref:'Surviving Sepsis Campaign 2021',
+ caso:'Mulher de 70 anos, 60 kg, febre, disúria, confusão, PA 80/45, FC 120, FR 26, lactato 4,8. Pede-se: diagnóstico escrito, condutas da 1ª hora e prescrição.',
+ itens:['Diagnóstico exato: choque séptico de foco urinário (sepse de foco urinário com hipotensão e lactato > 4)','Colher lactato e hemoculturas (2 pares) antes do antibiótico, sem atrasá-lo','Antibiótico de amplo espectro em até 1 h (ex.: ceftriaxona 2 g IV 24/24 h, ajustando a fatores de risco)','Cristaloide 30 mL/kg = 1.800 mL nas primeiras 3 h (Ringer lactato de preferência)','Noradrenalina se PAM < 65 apesar do volume (pode por veia periférica no início)','Meta de PAM ≥ 65 e reavaliar perfusão (lactato, enchimento capilar, diurese)','Controle do foco (sondagem, imagem se obstrução) e vaga de UTI'],
+ x:['desatualizado','Guias antigos: 30 mL/kg em 1 hora e qSOFA como triagem isolada.']},
+{id:'os-iot',st:'4',name:'IOT em sequência rápida',ref:'Manual do Residente de Cirurgia (Faintuch 2023); Washington Manual',
+ caso:'Homem de 80 kg com rebaixamento (Glasgow 7) após trauma. Pede-se: material (SALOMA), sequência rápida com drogas e doses e como confirmar a posição do tubo.',
+ itens:['SALOMA: Sucção, Aparelhos (laringoscópio testado), Laringoscópio/lâminas, Oxigênio (pré-oxigenar 3–5 min), Monitor, Acesso venoso','Tubo 7,5–8,0 com cuff testado, fio-guia, bougie e plano B (dispositivo supraglótico, cricotireoidostomia)','Pré-oxigenação com O₂ a 100% sem ventilar com pressão positiva','Indução: etomidato 0,3 mg/kg (≈ 24 mg) ou cetamina 1–2 mg/kg','Bloqueio: succinilcolina 1–1,5 mg/kg (≈ 100 mg) ou rocurônio 1,2 mg/kg','Confirmação: capnografia (padrão-ouro), ausculta de 5 pontos, expansão, RX para altura do tubo','Fixar o tubo e iniciar ventilação e sedação contínua']},
+{id:'os-ins',st:'7',name:'Insulina: técnica e receita',ref:'Diretriz SBD 2025; SBD 2024/2025, hiperglicemia hospitalar',
+ caso:'Mulher de 60 anos, 70 kg, DM2 com HbA1c 10% em metformina e glibenclamida em dose máxima. Pede-se: receita de insulina para iniciar na APS e verbalizar a técnica de aplicação e descarte.',
+ itens:['Receita: insulina NPH 100 UI/mL, 10 UI (ou 0,1–0,2 UI/kg = 7–14 UI) SC às 22 h','Ajuste: aumentar 2 UI a cada 3 dias até glicemia de jejum na meta (ex.: 80–130 mg/dL)','Manter metformina; glibenclamida pode ser mantida no início','Técnica: higiene das mãos, homogeneizar NPH rolando (não agitar), prega se necessário, ângulo 90° (45° se magra), esperar 10 s antes de retirar a agulha','Rodízio dos locais (abdome, coxa, braço, glúteo)','Armazenar em geladeira (fora do congelador); em uso pode ficar em temperatura ambiente por até 4 semanas','Descarte de agulhas em recipiente rígido levado à UBS','Orientar hipoglicemia: regra dos 15 (15 g de carboidrato, reavaliar em 15 min)'],
+ x:['diverge','Na internação o padrão é basal-bolus com meta 100–180; escala móvel isolada está errada (cai em "corrigir a prescrição").']},
+{id:'os-pac',st:'9',name:'PAC com CRB-65',ref:'Recomendações SBPT para PAC 2018',
+ caso:'Homem de 58 anos com febre, tosse produtiva e dor ventilatória. Lúcido, FR 22, PA 128/78, SpO₂ 95%. RX com consolidação em lobo inferior direito. Pede-se: descrever o RX, pontuar o escore e prescrever.',
+ itens:['RX: opacidade/consolidação homogênea em lobo inferior direito com broncograma aéreo','CRB-65: confusão 0, FR ≥ 30 0, PAS < 90 ou PAD ≤ 60 0, idade ≥ 65 0 = 0','Conduta: tratamento ambulatorial','Prescrição: amoxicilina 500 mg VO 8/8 h por 7 dias','Sintomáticos (dipirona) e hidratação','Reavaliar em 48–72 h e orientar sinais de alarme']},
+{id:'os-k',st:'16',name:'Hipercalemia "em urna"',ref:'Riella; Washington Manual',
+ caso:'Homem de 66 anos, DRC, usando enalapril e espironolactona, K 7,0 mEq/L, ECG com T apiculada e QRS alargado. Pede-se: ordem das condutas e prescrição com dose, via e diluição.',
+ itens:['Monitorização cardíaca contínua','1º: gluconato de cálcio 10% 10 mL IV em 2–5 min (repetir se ECG não melhorar)','2º: insulina regular 10 UI + glicose 50 g (ex.: 100 mL de SG 50%) IV, com glicemia capilar seriada','± Salbutamol nebulização 10–20 mg','3º: retirar K: furosemida (se diurese), resina de troca; diálise se refratária','Suspender enalapril e espironolactona','Bicarbonato só se acidose metabólica importante']},
+{id:'os-ic',st:'8',name:'Receita da IC (4 pilares)',ref:'Diretriz Brasileira de IC 2018 + Atualização 2021',
+ caso:'Homem de 62 anos, ICFEr (FE 30%), compensado, PA 118/72, FC 84, K 4,5, creatinina 1,2. Pede-se: receita com os 4 pilares, dose, via e intervalo.',
+ itens:['Sacubitril-valsartana 24/26 mg VO 12/12 h (ou enalapril 2,5–5 mg 12/12 h / losartana)','Carvedilol 3,125 mg VO 12/12 h (ou bisoprolol 1,25 mg 1×/dia; succinato de metoprolol)','Espironolactona 25 mg VO 1×/dia','Dapagliflozina 10 mg (ou empagliflozina 10 mg) VO 1×/dia','Furosemida só se congestão, na menor dose','Plano de titulação a cada 2 semanas e controle de K e creatinina','Orientações: peso diário, restrição de sal moderada, vacinas, sinais de descompensação']}
+];
+
+
+// ===== Trilhas de questões: banco MIAPS, correção, histórico e análise =====
+// gira as alternativas de cada questão para a certa não ficar sempre na mesma letra
+MIAPS_Q.forEach((q, i) => { const k = (i * 3 + 1) % 5; q.o = q.o.slice(k).concat(q.o.slice(0, k)); q.a = (q.a - k + 5) % 5; });
+QUESTIONS.push(...MIAPS_Q);
+// avisos nas questões antigas do caderno que a diretriz nova mudou
+{ const X = { has3: ['desatualizado', 'Na Diretriz de HA 2025, o início preferido é a combinação de 2 fármacos dessas classes; monoterapia fica para ≥ 85 anos, frágeis ou risco de hipotensão.'], pn1: ['diverge', 'Na APS se usa o CRB-65 (sem ureia), como na devolutiva do MIAPS. A conduta com escore 0 é a mesma: amoxicilina ambulatorial.'] }; QUESTIONS.forEach(q => { if (X[q.id]) q.x = X[q.id]; }); }
+// Áreas da prova MIAPS e o peso de cada uma (devolutiva oficial 2026.1)
+const BLUE = [
+  ['inf', 'Infecção, ATB e sepse', 25],
+  ['eab', 'Eletrólitos, ácido-base e IRA', 20],
+  ['mfc', 'MFC, APS e saúde mental', 20],
+  ['card', 'Cardio (HAS 2025, IC, DAC)', 15],
+  ['dm', 'Diabetes e hiperglicemia', 10],
+  ['tr', 'Transfusão e riscos assistenciais', 10]
+];
+const BLUE_MAP = Object.fromEntries(BLUE.map(b => [b[0], b]));
+const TOPIC_AR = { 'mi-sepse': 'inf', 'cm-pnm': 'inf', 'mi-prev': 'mfc', 'mi-sus': 'mfc', 'mi-testes': 'mfc', 'cm-has': 'card', 'cm-ic': 'card' };
+const qArea = q => q.ar || TOPIC_AR[q.t] || null;
+const QMAP = () => Object.fromEntries(bank().map(q => [q.id, q]));
+const miapsPool = () => bank().filter(q => qArea(q));
+const WHY = { nao: 'Não sabia o conteúdo', conf: 'Confundi com outra coisa', leit: 'Li rápido / detalhe do enunciado' };
+
+// Trilha da prova: etapas de até 10 questões, na ordem do peso
+const STAGES = [
+  { id: 'p1', name: 'Sepse e pneumonias', topics: ['mi-sepse', 'mi-pnmhosp', 'cm-pnm'] },
+  { id: 'p2', name: 'Sódio, potássio, cálcio e ácido-base', topics: ['mi-hidro'] },
+  { id: 'p3', name: 'Antibióticos, ITU e pele', topics: ['mi-atb', 'mi-ituhosp', 'mi-pele-aps'] },
+  { id: 'p4', name: 'Saúde mental, MCCP e família', topics: ['mi-mental', 'mi-mccp', 'mi-coord', 'mi-familia', 'mi-drogas'] },
+  { id: 'p5', name: 'HAS 2025, IC e DAC', area: 'card' },
+  { id: 'p6', name: 'Injúria renal aguda', topics: ['mi-irahosp'] },
+  { id: 'p7', name: 'Diabetes na APS e no hospital', area: 'dm' },
+  { id: 'p8', name: 'Transfusão, riscos e síndrome consumptiva', area: 'tr' },
+  { id: 'p9', name: 'Prevenção, mulher, criança e idoso', topics: ['mi-prev', 'mi-poli', 'mi-mulher', 'mi-saude-crianca', 'mi-idoso', 'mi-paliat', 'mi-demanda'] },
+  { id: 'p10', name: 'Simulado na proporção da prova', mix: 20 }
+];
+function stagePool(s) {
+  if (s.mix) return miapsPool();
+  if (s.area) return miapsPool().filter(q => qArea(q) === s.area);
+  const set = new Set(s.topics); return bank().filter(q => set.has(q.t));
+}
+const stageN = s => s.mix || Math.min(10, stagePool(s).length);
+const stageArea = s => s.area || (s.mix ? null : qArea(stagePool(s)[0] || {}));
+// Escolha: primeiro as nunca feitas, depois as erradas, por último as acertadas
+function pickFrom(pool, n) {
+  return pool.map(q => { const r = lastResult(q.id); const w = r == null ? 3 : r === 'ok' ? 0.6 : 2.4; return { q, w: w * (0.6 + Math.random()) }; })
+    .sort((a, b) => b.w - a.w).slice(0, n).map(x => x.q);
+}
+function pickMix(n) {
+  const out = [];
+  BLUE.forEach(([k, , w]) => { const pool = miapsPool().filter(q => qArea(q) === k); out.push(...pickFrom(pool, Math.max(1, Math.round(n * w / 100)))); });
+  return shuffle(out).slice(0, n);
+}
+const stageDone = id => (S.trail || {})[id];
+const nextStage = () => STAGES.find(s => !stageDone(s.id)) || STAGES.slice().sort((a, b) => (stageDone(a.id).ok / stageDone(a.id).n) - (stageDone(b.id).ok / stageDone(b.id).n))[0];
+const wrongIds = () => { const last = {}; S.attempts.forEach(a => { if (a.qid) last[a.qid] = a.r; }); const Q = QMAP(); return Object.keys(last).filter(id => last[id] !== 'ok' && Q[id]); };
+
+// ----- Execução de uma trilha -----
+let RUN = null, runTimer = null;
+function startRun(qs, label, src) {
+  if (!qs.length) return toast('Não há questões para isso ainda.');
+  // embaralha as alternativas a cada vez, para não decorar a posição da certa
+  qs = qs.map(q => { const ord = shuffle(q.o.map((_, i) => i)); return Object.assign({}, q, { o: ord.map(i => q.o[i]), a: ord.indexOf(q.a) }); });
+  RUN = { qs, i: 0, res: [], label, src, start: Date.now(), qStart: Date.now(), newCards: 0 };
+  location.hash = '#trilhas'; if (route.last === 'trilhas') rerender();
+  window.scrollTo(0, 0);
+}
+function startStage(id) { const s = STAGES.find(x => x.id === id); const qs = s.mix ? pickMix(s.mix) : pickFrom(stagePool(s), stageN(s)); startRun(qs, `Etapa ${STAGES.indexOf(s) + 1} · ${s.name}`, { kind: 'stage', id }); }
+function runAnswer(pick) {
+  const q = RUN.qs[RUN.i]; if (RUN.res[RUN.i]) return;
+  const r = pick === null ? 'ns' : pick === q.a ? 'ok' : 'err';
+  const ms = Date.now() - RUN.qStart;
+  RUN.res[RUN.i] = { pick, r, ms };
+  S.attempts.push({ qid: q.id, t: q.t, d: today(), r, pick, ms, src: RUN.src.kind });
+  if (r !== 'ok' && cardFromQuestion(q)) RUN.newCards++;
+  save(); rTrilhas();
+}
+function runWhy(k) {
+  const q = RUN.qs[RUN.i], res = RUN.res[RUN.i]; if (!res) return;
+  res.why = k;
+  for (let i = S.attempts.length - 1; i >= 0; i--) if (S.attempts[i].qid === q.id) { S.attempts[i].why = k; break; }
+  save(); rTrilhas();
+}
+function finishRun() {
+  const done = RUN.res.filter(Boolean), n = done.length, ok = done.filter(r => r.r === 'ok').length;
+  if (!RUN.saved && n) {
+    RUN.saved = true;
+    S.runs = S.runs || []; S.runs.push({ d: today(), label: RUN.label, kind: RUN.src.kind, n, ok, ms: done.reduce((s, r) => s + r.ms, 0) });
+    if (RUN.src.kind === 'stage') { S.trail = S.trail || {}; S.trail[RUN.src.id] = { d: today(), n, ok }; }
+    if (RUN.src.kind === 'acao') {
+      const t = RUN.src.t; S.sessions.push({ id: uid(), n: sessNum(), date: today(), size: RUN.src.size, t, q: n, h: ok, e: n - ok, auto: true });
+    }
+    save();
+  }
+}
+function runHTML() {
+  if (RUN.i >= RUN.qs.length) return runEndHTML();
+  const q = RUN.qs[RUN.i], r = RUN.res[RUN.i], L = 'ABCDE', ar = BLUE_MAP[qArea(q)], rf = q.ref || topic(q.t).ref;
+  return `
+  <div class="run-top"><div style="min-width:0"><div class="eyebrow">${esc(RUN.label)}</div><h2>Questão ${RUN.i + 1} <span class="muted">de ${RUN.qs.length}</span></h2></div>
+    <button class="ghost" data-act="runQuit">Parar e ver o resultado</button></div>
+  <div class="run-dots" aria-hidden="true">${RUN.qs.map((_, i) => { const x = RUN.res[i]; return `<i class="${x ? 'r-' + x.r : ''} ${i === RUN.i ? 'cur' : ''}"></i>`; }).join('')}</div>
+  <article class="card q-card run-q">
+    <div class="q-meta">${esc(topic(q.t).name)}${ar ? ' · ' + esc(ar[1]) : ''}</div>
+    <div class="q-text">${esc(q.q)}</div>
+    <div class="opts">${q.o.map((o, i) => { let cls = ''; if (r) { if (i === q.a) cls = 'right'; else if (r.pick === i) cls = 'wrong'; }
+      return `<button class="opt ${cls}" data-act="runPick" data-i="${i}" ${r ? 'disabled' : ''}><b>${L[i]}</b> ${esc(o)}</button>`; }).join('')}</div>
+    ${r ? `<div class="verdict v-${r.r}"><b>${r.r === 'ok' ? 'Certo.' : r.r === 'ns' ? 'Não sabia. Tudo bem.' : `Errado. A certa é a ${L[q.a]}.`}</b>${r.r !== 'ok' ? ' <span>Virou flashcard.</span>' : ''}</div>
+      <div class="explain"><p>${esc(q.c)}</p>
+        ${q.x ? `<p class="xnote"><span class="flag ${q.x[0]}">${TAG_LABEL[q.x[0]] || ''}</span> ${esc(q.x[1])}</p>` : ''}
+        ${rf ? `<p class="refline"><small>Referência</small>${esc(rf)}</p>` : ''}</div>
+      ${r.r === 'err' ? `<div class="why"><small>Por que errei?</small>${Object.entries(WHY).map(([k, l]) => `<button type="button" data-act="runWhy" data-k="${k}" aria-pressed="${r.why === k}">${l}</button>`).join('')}</div>` : ''}
+      <div class="row"><button class="primary" data-act="runNext">${RUN.i + 1 < RUN.qs.length ? 'Próxima questão' : 'Ver resultado'}</button></div>`
+    : `<div class="row"><button data-act="runPick" data-i="ns">Não sei</button></div>`}
+  </article>`;
+}
+function runEndHTML() {
+  finishRun();
+  const res = RUN.res, qs = RUN.qs.filter((_, i) => res[i]), n = qs.length, ok = res.filter(r => r && r.r === 'ok').length;
+  const byA = {};
+  qs.forEach((q, i) => { const k = qArea(q) || 'outro'; const b = byA[k] || (byA[k] = { n: 0, ok: 0 }); b.n++; if (res[i].r === 'ok') b.ok++; });
+  const sec = n ? Math.round(res.filter(Boolean).reduce((s, r) => s + r.ms, 0) / n / 1000) : 0;
+  const wrong = qs.map((q, i) => [q, res[i]]).filter(([, r]) => r.r !== 'ok');
+  const nx = RUN.src.kind === 'stage' ? STAGES.find(s => !stageDone(s.id)) : null;
+  const p = pct(ok, n) ?? 0;
+  return `
+  <div class="card banner run-end">
+    <div class="bignum"><b>${ok}<span class="muted">/${n}</span></b><span class="rule"><i style="width:${p}%"></i><em style="left:70%"></em></span><small>${p}% de acerto · ${sec}s por questão</small></div>
+    <div style="min-width:0"><div class="eyebrow">${esc(RUN.label)}</div><h2>${n ? 'Feito. Conta como dia feito.' : 'Nenhuma questão respondida.'}</h2>
+      <p class="small muted" style="margin:4px 0 0">${n - ok ? `${n - ok} erro(s) viraram flashcard e entram na trilha "Meus erros".` : 'Nenhum erro desta vez.'}${RUN.src.kind === 'acao' ? ' A sessão do Modo ação foi registrada sozinha.' : ''}</p></div>
+  </div>
+  <div class="dash">
+    <div class="card span5">${cardHead('chart', 'pink', 'Por área da prova')}
+      <div class="areas">${Object.entries(byA).map(([k, b]) => `<div class="area"><div class="area-h"><b>${esc(BLUE_MAP[k]?.[1] || 'Outros temas')}</b><span>${b.ok}/${b.n}</span></div><span class="rule"><i style="width:${pct(b.ok, b.n)}%"></i></span></div>`).join('')}</div></div>
+    <div class="card span7">${cardHead('repeat', 'peach', 'Para reler agora')}
+      ${wrong.length ? `<ol class="rev-list">${wrong.map(([q, r]) => `<li><p class="t">${esc(q.q)}</p><p class="small"><b>Certa:</b> ${esc(q.o[q.a])}.${r.pick != null ? ` <span class="muted">Você marcou: ${esc(q.o[r.pick])}.</span>` : ''}</p><p class="small muted">${esc(q.c)}</p></li>`).join('')}</ol>` : '<p class="empty">Gabaritou. Nada para reler.</p>'}</div>
+  </div>
+  <div class="row">${nx ? `<button class="primary" data-act="stageGo" data-id="${nx.id}">Próxima etapa: ${esc(nx.name)}</button>` : ''}
+    ${wrong.length ? '<button data-act="runRedo">Refazer só as que errei</button>' : ''}
+    <button class="${nx ? '' : 'primary'}" data-act="runClose">Voltar às trilhas</button><a class="btn" href="#desempenho">Ver a análise</a></div>`;
+}
+
+// ----- Estações de OSCE com checklist -----
+let DRILL = null;
+function drillHTML() {
+  const d = OSCE_DRILLS.find(x => x.id === DRILL.id), st = DRILL;
+  return `
+  <div class="run-top"><div style="min-width:0"><div class="eyebrow">Estação de OSCE · ${esc(d.name)}</div><h2>${st.shown ? 'Corrija pelo checklist' : 'Responda como na estação'}</h2></div><button class="ghost" data-act="drillQuit">Sair</button></div>
+  <article class="card q-card">
+    <div class="q-text">${esc(d.caso)}</div>
+    ${st.shown ? '' : `<label class="small" for="drillAns"><b>Sua resposta</b> <span class="muted">(escreva ou fale em voz alta, com dose, via e intervalo)</span></label>
+    <textarea id="drillAns" rows="7" placeholder="Diagnóstico, condutas, prescrição...">${esc(st.ans || '')}</textarea>
+    <div class="row"><button class="primary" data-act="drillShow">Ver o checklist do avaliador</button></div>`}
+    ${st.shown ? `${st.ans ? `<details class="ac-more"><summary>O que você respondeu</summary><p class="small" style="white-space:pre-wrap">${esc(st.ans)}</p></details>` : ''}
+    <p class="small muted" style="margin:0">Marque só o que você disse ou escreveu.</p>
+    <div class="checklist">${d.itens.map((it, i) => `<label><input type="checkbox" data-act="drillChk" data-i="${i}" ${st.got[i] ? 'checked' : ''}><span>${esc(it)}</span></label>`).join('')}</div>
+    ${d.x ? `<p class="xnote"><span class="flag ${d.x[0]}">${TAG_LABEL[d.x[0]] || ''}</span> ${esc(d.x[1])}</p>` : ''}
+    <p class="refline"><small>Referência</small>${esc(d.ref)}</p>
+    <div class="row"><button class="primary" data-act="drillSave">Salvar nota: ${st.got.filter(Boolean).length} de ${d.itens.length}</button></div>` : ''}
+  </article>`;
+}
+const drillLast = id => { const h = (S.drills || {})[id]; return h && h.length ? h[h.length - 1] : null; };
+
+// ----- Tela Trilhas -----
+function rTrilhas() {
+  const v = $('#v-trilhas');
+  if (RUN) { v.innerHTML = runHTML(); return; }
+  if (DRILL) { v.innerHTML = drillHTML(); return; }
+  const nx = nextStage(), nxi = STAGES.indexOf(nx), wr = wrongIds();
+  const doneSt = STAGES.filter(s => stageDone(s.id)).length;
+  const tq = S.attempts.filter(a => a.qid && QMAP()[a.qid] && qArea(QMAP()[a.qid])).length;
+  const topicsWithQ = [...new Set(miapsPool().map(q => q.t))];
+  v.innerHTML = `
+  <div class="card banner ac-head">
+    <div style="min-width:0"><div class="eyebrow">Próximo passo</div><h2>Etapa ${nxi + 1}: ${esc(nx.name)}</h2>
+      <p class="small muted" style="margin:2px 0 0">${stageN(nx)} questões comentadas, corrigidas na hora. ${doneSt}/${STAGES.length} etapas feitas · ${tq} questões MIAPS respondidas.</p>${examsHTML()}</div>
+    <div class="row"><button class="primary big" data-act="stageGo" data-id="${nx.id}">Começar etapa ${nxi + 1}</button></div>
+  </div>
+  <div class="dash">
+    <div class="card span7">
+      ${cardHead('target', 'pink', 'Trilha da prova de MIAPS · 14/12', `<span class="pill">${doneSt}/${STAGES.length}</span>`)}
+      <p class="small muted" style="margin:0 0 6px">Na ordem do peso de cada área na prova de 2026.1. Pode pular etapas e refazer quantas vezes quiser.</p>
+      <ol class="trail">${STAGES.map((s, i) => { const d = stageDone(s.id), a = stageArea(s); const pc = d ? pct(d.ok, d.n) : null;
+        return `<li class="${d ? 'done' : ''} ${s === nx ? 'next' : ''}"><span class="tr-n">${String(i + 1).padStart(2, '0')}</span>
+        <span class="tr-t"><b>${esc(s.name)}</b><small>${s.mix ? `${s.mix} questões de todas as áreas, com o peso da prova` : `${stageN(s)} questões${a ? ' · ' + esc(BLUE_MAP[a][1]) : ''}`}</small></span>
+        <span class="tr-s">${d ? `<b>${pc}%</b><small>${d.ok}/${d.n} · ${fmtShort(d.d)}</small>` : '<small>não feita</small>'}</span>
+        <button class="${s === nx ? 'primary' : ''}" data-act="stageGo" data-id="${s.id}">${d ? 'Refazer' : 'Fazer'}</button></li>`; }).join('')}</ol>
+    </div>
+    <div class="span5" style="display:grid;gap:18px;align-content:start">
+      <div class="card">
+        ${cardHead('repeat', 'peach', 'Meus erros', `<span class="pill ${wr.length ? 'bad' : ''}">${wr.length}</span>`)}
+        <p class="small" style="margin:0 0 10px">${wr.length ? `${wr.length} questão(ões) que você errou ou marcou "não sei" na última tentativa. Acertou, sai da lista.` : 'Quando errar uma questão, ela aparece aqui para refazer.'}</p>
+        <button data-act="errGo" ${wr.length ? '' : 'disabled'}>Refazer ${Math.min(10, wr.length) || ''} questões erradas</button>
+      </div>
+      <form class="card stack" data-form="temaGo" style="gap:10px">
+        ${cardHead('book', 'sky', 'Treino por tema')}
+        <select id="tgT" aria-label="Tema">${BLUE.map(([k, n]) => `<optgroup label="${esc(n)}">${topicsWithQ.filter(t => miapsPool().some(q => q.t === t && qArea(q) === k)).map(t => `<option value="${t}">${esc(topic(t).name)} (${miapsPool().filter(q => q.t === t).length})</option>`).join('')}</optgroup>`).join('')}</select>
+        <div class="row"><select id="tgN" aria-label="Quantas">${[5, 10, 15].map(n => `<option value="${n}">${n} questões</option>`).join('')}</select><button class="primary">Começar</button></div>
+      </form>
+      <div class="card">${cardHead('chart', 'mint', 'Análise', '<a class="link" href="#desempenho">Abrir ›</a>')}${miniAnaHTML()}</div>
+    </div>
+    <div class="card span12">
+      ${cardHead('stetho', 'lilac', 'Trilha do OSCE · 11/12', `<span class="pill">${OSCE_DRILLS.filter(d => drillLast(d.id)).length}/${OSCE_DRILLS.length}</span>`)}
+      <p class="small muted" style="margin:0 0 6px">Caso no formato da estação. Você responde, abre o checklist do avaliador e marca o que acertou. Na ordem do que mais caiu.</p>
+      <ol class="trail osce">${OSCE_DRILLS.map((d, i) => { const l = drillLast(d.id);
+        return `<li class="${l ? 'done' : ''}"><span class="tr-n">${String(i + 1).padStart(2, '0')}</span><span class="tr-t"><b>${esc(d.name)}</b><small>${d.itens.length} itens no checklist</small></span>
+        <span class="tr-s">${l ? `<b>${pct(l.got, l.tot)}%</b><small>${l.got}/${l.tot} · ${fmtShort(l.d)}</small>` : '<small>não treinada</small>'}</span><button data-act="drillGo" data-id="${d.id}">${l ? 'Treinar de novo' : 'Treinar'}</button></li>`; }).join('')}</ol>
+    </div>
+  </div>`;
+}
+
+// ----- Análise -----
+function attemptsMiaps() { const Q = QMAP(); return S.attempts.filter(a => a.qid && Q[a.qid] && qArea(Q[a.qid])).map(a => Object.assign({ ar: qArea(Q[a.qid]) }, a)); }
+function areaStats() {
+  const A = attemptsMiaps(), out = {};
+  BLUE.forEach(([k, n, w]) => {
+    const xs = A.filter(a => a.ar === k), last = xs.slice(-20), prev = xs.slice(-20, -10), rec = xs.slice(-10);
+    const seen = new Set(xs.map(a => a.qid)).size, total = miapsPool().filter(q => qArea(q) === k).length;
+    out[k] = { k, n, w, tot: xs.length, acc: last.length ? pct(last.filter(a => a.r === 'ok').length, last.length) : null,
+      trend: prev.length >= 5 && rec.length >= 5 ? pct(rec.filter(a => a.r === 'ok').length, rec.length) - pct(prev.filter(a => a.r === 'ok').length, prev.length) : null, seen, total };
+  });
+  return out;
+}
+function readiness(st) {
+  const have = Object.values(st).filter(s => s.acc != null);
+  if (!have.length) return null;
+  const wsum = have.reduce((s, x) => s + x.w, 0);
+  return { est: Math.round(have.reduce((s, x) => s + x.acc * x.w, 0) / wsum), cover: have.length, wcover: wsum };
+}
+function miniAnaHTML() {
+  const st = areaStats(), R = readiness(st);
+  if (!R) return '<p class="empty">Faça a primeira etapa e a análise aparece aqui.</p>';
+  const weak = Object.values(st).filter(s => s.acc != null).sort((a, b) => a.acc - b.acc)[0];
+  return `<div class="mini-ana"><div><b>${R.est}%</b><small>acerto estimado na prova</small></div><div><b>${R.cover}/6</b><small>áreas com dados</small></div></div>
+    <p class="small" style="margin:10px 0 0">Ponto mais fraco agora: <b>${esc(weak.n)}</b> (${weak.acc}%).</p>`;
+}
+function dayCols() {
+  const A = attemptsMiaps(), days = [];
+  for (let i = 13; i >= 0; i--) { const d = addDays(today(), -i), xs = A.filter(a => a.d === d); days.push({ d, n: xs.length, ok: xs.filter(a => a.r === 'ok').length }); }
+  const mx = Math.max(10, ...days.map(x => x.n));
+  return `<div class="cols" role="img" aria-label="Questões por dia nos últimos 14 dias">${days.map(x => `<div class="col" title="${fmtShort(x.d)}: ${x.n} questões, ${x.ok} certas"><span class="stk"><i class="okp" style="height:${100 * x.ok / mx}%"></i><i class="errp" style="height:${100 * (x.n - x.ok) / mx}%"></i></span><small>${pd(x.d).getDate()}</small></div>`).join('')}</div>
+    <p class="small muted" style="margin:6px 0 0"><span class="key okk"></span> certas <span class="key errk"></span> erradas ou "não sei"</p>`;
+}
+function recos(st) {
+  const out = [], R = Object.values(st);
+  const none = R.filter(s => !s.tot).sort((a, b) => b.w - a.w)[0];
+  if (none) { const s = STAGES.find(x => stageArea(x) === none.k); out.push([`Você ainda não fez questões de <b>${esc(none.n)}</b>, que vale ${none.w}% da prova.`, s && `<button class="ghost" data-act="stageGo" data-id="${s.id}">Fazer agora</button>`]); }
+  const gap = R.filter(s => s.acc != null && s.acc < 70).sort((a, b) => b.w * (100 - b.acc) - a.w * (100 - a.acc))[0];
+  if (gap) { const s = STAGES.find(x => stageArea(x) === gap.k); out.push([`Maior ganho possível: <b>${esc(gap.n)}</b> (${gap.acc}% de acerto, peso ${gap.w}%).`, s && `<button class="ghost" data-act="stageGo" data-id="${s.id}">Treinar</button>`]); }
+  const wr = wrongIds().length; if (wr) out.push([`${wr} questão(ões) erradas esperando para refazer.`, '<button class="ghost" data-act="errGo">Refazer</button>']);
+  const os = OSCE_DRILLS.find(d => !drillLast(d.id)); if (os) out.push([`Estação de OSCE ainda não treinada: <b>${esc(os.name)}</b>.`, `<button class="ghost" data-act="drillGo" data-id="${os.id}">Treinar</button>`]);
+  return out.slice(0, 4);
+}
+function analiseHTML() {
+  const st = areaStats(), R = readiness(st), A = attemptsMiaps();
+  const why = {}; A.filter(a => a.r === 'err').forEach(a => { const k = a.why || 'sem'; why[k] = (why[k] || 0) + 1; });
+  const nerr = A.filter(a => a.r === 'err').length, nns = A.filter(a => a.r === 'ns').length;
+  const withMs = A.filter(a => a.ms), sec = withMs.length ? Math.round(withMs.reduce((s, a) => s + Math.min(a.ms, 600000), 0) / withMs.length / 1000) : null;
+  const cnt = {}; A.forEach(a => { if (a.r !== 'ok') cnt[a.qid] = (cnt[a.qid] || 0) + 1; });
+  const Q = QMAP(), hard = Object.entries(cnt).filter(([, n]) => n >= 2).sort((a, b) => b[1] - a[1]).slice(0, 5);
+  const rc = recos(st);
+  return `
+  <div class="card banner ana-head">
+    <div class="bignum"><b>${R ? R.est + '%' : '—'}</b><span class="rule"><i style="width:${R ? R.est : 0}%"></i><em style="left:70%"></em></span><small>acerto estimado · prova de 14/12</small></div>
+    <div style="min-width:0"><div class="eyebrow">Análise das trilhas</div><h2>${R ? (R.est >= 70 ? 'No caminho para passar com folga' : R.est >= 55 ? 'Perto. O ganho está nas áreas fracas' : 'Ainda no começo. Errar agora é o que ensina') : 'Faça a primeira etapa da trilha'}</h2>
+      <p class="small muted" style="margin:4px 0 0">${R ? `Média do acerto das últimas 20 questões de cada área, com o peso da prova. Baseada em ${R.cover} de 6 áreas (${R.wcover}% da prova)${R.cover < 6 ? '; as outras ainda não têm questões feitas' : ''}.` : 'A estimativa usa o peso de cada área na prova oficial de 2026.1.'} ${A.length} questões MIAPS respondidas${sec ? ` · ${sec}s por questão em média` : ''}.</p></div>
+  </div>
+  <div class="dash">
+    <div class="card span7">${cardHead('target', 'pink', 'Por área da prova', '<span class="small muted">linha = 70%</span>')}
+      <div class="areas">${BLUE.map(([k]) => { const s = st[k]; return `<div class="area"><div class="area-h"><b>${esc(s.n)} <small class="muted">· ${s.w}% da prova</small></b><span>${s.acc == null ? '—' : s.acc + '%'}</span></div>
+        <span class="rule mk"><i style="width:${s.acc || 0}%"></i><em style="left:70%"></em></span>
+        <small>${s.tot ? `${s.tot} respondidas · ${s.seen} de ${s.total} questões do banco vistas${s.trend != null ? ` · ${s.trend > 0 ? 'subindo ' + s.trend + ' pontos' : s.trend < 0 ? 'caindo ' + (-s.trend) + ' pontos' : 'estável'} nas últimas 10` : ''}` : 'sem questões feitas'}</small></div>`; }).join('')}</div></div>
+    <div class="span5" style="display:grid;gap:18px;align-content:start">
+      <div class="card">${cardHead('bulb', 'peach', 'O que fazer agora')}
+        ${rc.length ? `<ol class="recos">${rc.map(([t, b]) => `<li><span>${t}</span>${b || ''}</li>`).join('')}</ol>` : '<p class="empty">Tudo em dia.</p>'}</div>
+      <div class="card">${cardHead('flame', 'pink', 'Por que você erra', `<span class="pill">${nerr} erros · ${nns} não sei</span>`)}
+        ${nerr ? `<table class="whytab"><tbody>${[...Object.keys(WHY), 'sem'].filter(k => why[k]).map(k => `<tr><td>${k === 'sem' ? '<span class="muted">sem motivo marcado</span>' : WHY[k]}</td><td class="num">${why[k]}</td><td class="num">${pct(why[k], nerr)}%</td></tr>`).join('')}</tbody></table>
+        <p class="small muted" style="margin:8px 0 0">${(why.leit || 0) > (why.nao || 0) ? 'Muitos erros de leitura: sublinhe o que a questão pede (a correta, a incorreta, a primeira conduta).' : (why.conf || 0) >= (why.nao || 0) && why.conf ? 'Muita confusão entre condutas parecidas: os flashcards dos erros ajudam a separar.' : 'A maioria é conteúdo novo. É o esperado no começo de cada tema.'}</p>` : '<p class="empty">Nenhum erro ainda.</p>'}</div>
+    </div>
+    <div class="card span7">${cardHead('calendar', 'lilac', 'Últimos 14 dias')}${dayCols()}</div>
+    <div class="card span5">${cardHead('repeat', 'sky', 'Errou 2 vezes ou mais')}
+      ${hard.length ? `<ol class="rev-list">${hard.map(([id, n]) => `<li><p class="t">${esc(Q[id].q.slice(0, 140))}${Q[id].q.length > 140 ? '…' : ''}</p><p class="small"><b>${n}×</b> · certa: ${esc(Q[id].o[Q[id].a])}</p></li>`).join('')}</ol><button data-act="hardGo">Refazer estas</button>` : '<p class="empty">Nenhuma questão errada duas vezes.</p>'}</div>
+    <div class="card span12">${cardHead('stetho', 'mint', 'Estações de OSCE', '<a class="link" href="#trilhas">Treinar ›</a>')}
+      <div class="tablewrap"><table><thead><tr><th>Estação</th><th class="num">Última nota</th><th class="num">Treinos</th><th>Itens que você mais esquece</th></tr></thead><tbody>
+      ${OSCE_DRILLS.map(d => { const h = (S.drills || {})[d.id] || [], l = h[h.length - 1]; const miss = {}; h.forEach(x => (x.miss || []).forEach(i => miss[i] = (miss[i] || 0) + 1)); const top = Object.entries(miss).sort((a, b) => b[1] - a[1]).slice(0, 2).map(([i]) => d.itens[i]);
+        return `<tr><td>${esc(d.name)}</td><td class="num">${l ? pct(l.got, l.tot) + '%' : '—'}</td><td class="num">${h.length}</td><td class="small">${top.length ? top.map(t => esc(t.length > 80 ? t.slice(0, 80) + '…' : t)).join('<br>') : '<span class="muted">—</span>'}</td></tr>`; }).join('')}
+      </tbody></table></div></div>
+  </div>
+  <h3 class="sub-h" style="margin-top:34px">Visão geral do caderno</h3>`;
+}
+
+// ----- Eventos -----
+document.addEventListener('click', e => {
+  const b = e.target.closest('[data-act]'); if (!b) return;
+  const a = b.dataset.act;
+  if (a === 'stageGo') return startStage(b.dataset.id);
+  if (a === 'runPick') return runAnswer(b.dataset.i === 'ns' ? null : +b.dataset.i);
+  if (a === 'runWhy') return runWhy(b.dataset.k);
+  if (a === 'runNext') { RUN.i++; RUN.qStart = Date.now(); rTrilhas(); return window.scrollTo(0, 0); }
+  if (a === 'runQuit') { RUN.qs = RUN.qs.slice(0, RUN.res.filter(Boolean).length); RUN.i = RUN.qs.length; return rTrilhas(); }
+  if (a === 'runClose') { RUN = null; return rTrilhas(); }
+  if (a === 'runRedo') { const qs = RUN.qs.filter((_, i) => RUN.res[i] && RUN.res[i].r !== 'ok'); return startRun(qs, 'Refazendo os erros', { kind: 'erros' }); }
+  if (a === 'errGo') { const Q = QMAP(); return startRun(shuffle(wrongIds().map(id => Q[id])).slice(0, 10), 'Meus erros', { kind: 'erros' }); }
+  if (a === 'hardGo') { const Q = QMAP(), cnt = {}; S.attempts.forEach(x => { if (x.r !== 'ok' && Q[x.qid]) cnt[x.qid] = (cnt[x.qid] || 0) + 1; }); return startRun(Object.keys(cnt).filter(id => cnt[id] >= 2).map(id => Q[id]).slice(0, 10), 'Questões difíceis', { kind: 'erros' }); }
+  if (a === 'drillGo') { DRILL = { id: b.dataset.id, shown: false, got: [], ans: '' }; location.hash = '#trilhas'; rTrilhas(); return window.scrollTo(0, 0); }
+  if (a === 'drillShow') { DRILL.ans = $('#drillAns').value; DRILL.shown = true; return rTrilhas(); }
+  if (a === 'drillQuit') { DRILL = null; return rTrilhas(); }
+  if (a === 'drillSave') {
+    const d = OSCE_DRILLS.find(x => x.id === DRILL.id), got = d.itens.filter((_, i) => DRILL.got[i]).length;
+    S.drills = S.drills || {}; (S.drills[d.id] = S.drills[d.id] || []).push({ d: today(), got, tot: d.itens.length, miss: d.itens.map((_, i) => i).filter(i => !DRILL.got[i]) });
+    S.osce = S.osce || {}; S.osce[d.st] = today();
+    d.itens.forEach((it, i) => { if (!DRILL.got[i]) S.cards.push({ id: uid(), f: `OSCE · ${d.name}: o que faltou dizer?`, b: it, t: 'osce', due: addDays(today(), 1), ivl: 0, ease: 2.5, reps: 0, lapses: 0, created: today() }); });
+    save(); toast(`Estação salva: ${got} de ${d.itens.length}.${got < d.itens.length ? ` ${d.itens.length - got} item(ns) viraram flashcard.` : ''}`);
+    DRILL = null; return rTrilhas();
+  }
+  if (a === 'acRun') { const t = $('#acT').value; const n = SIZES[acSize][4]; const pool = bank().filter(q => q.t === t); if (!pool.length) return toast('Este tema ainda não tem questões no banco. Registre as que fez fora.'); return startRun(pickFrom(pool, Math.min(n, pool.length)), `Modo ação · ${topic(t).name}`, { kind: 'acao', t, size: acSize }); }
+});
+document.addEventListener('change', e => {
+  if (e.target.dataset.act !== 'drillChk' || !DRILL) return;
+  DRILL.got[+e.target.dataset.i] = e.target.checked;
+  const d = OSCE_DRILLS.find(x => x.id === DRILL.id), btn = document.querySelector('[data-act="drillSave"]');
+  if (btn) btn.textContent = `Salvar nota: ${DRILL.got.filter(Boolean).length} de ${d.itens.length}`;
+});
+document.addEventListener('submit', e => {
+  if (e.target.dataset.form !== 'temaGo') return; e.preventDefault();
+  const t = $('#tgT').value, n = +$('#tgN').value;
+  startRun(pickFrom(bank().filter(q => q.t === t), n), topic(t).name, { kind: 'tema', t });
+});
+function trilhaHomeHTML() {
+  const nx = nextStage(), i = STAGES.indexOf(nx), wr = wrongIds().length, R = readiness(areaStats());
+  return `<div class="card tr-home">
+    ${cardHead('path', 'pink', 'Trilhas de questões', '<a class="link" href="#trilhas">Abrir ›</a>')}
+    <p class="small" style="margin:0 0 10px">Próxima: <b>Etapa ${i + 1} · ${esc(nx.name)}</b> <span class="muted">(${stageN(nx)} questões)</span>${R ? ` · acerto estimado <b>${R.est}%</b>` : ''}</p>
+    <div class="row"><button class="primary" data-act="stageGo" data-id="${nx.id}">Começar etapa ${i + 1}</button>${wr ? `<button data-act="errGo">Refazer ${Math.min(10, wr)} erros</button>` : ''}</div>
+  </div>`;
+}
 
 // ===== Início =====
 load();
