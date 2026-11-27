@@ -594,6 +594,28 @@ ul.plain li::marker{color:var(--accent)}
 table.pt{width:100%;border-collapse:collapse;font-size:.85rem;min-width:520px}
 table.pt th{text-align:left;font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);padding:6px 8px;border-bottom:1px solid var(--rule)}
 table.pt td{padding:8px;border-bottom:1px solid var(--line);vertical-align:top}
+/* ===== Resumos ===== */
+.flag.ptbr{color:var(--muted);border-style:dotted}
+.flag.ok{color:var(--muted);border-color:var(--line)}
+.key-call{margin:0 0 26px;padding:22px 24px!important;border:0;border-left:4px solid var(--accent);background:var(--paper);display:grid;gap:8px;justify-items:start}
+.key-call h3{margin:0;font-family:var(--display);font-weight:400;font-size:1.7rem;line-height:1.1}
+.key-call p{margin:0;font-size:.95rem;max-width:80ch}
+.rs-filter{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 22px}
+.rs-filter button{display:inline-flex;align-items:center;gap:6px;padding:6px 10px;border:1px solid var(--line);border-radius:2px;background:var(--sheet);color:var(--ink);font:inherit;font-size:.82rem;cursor:pointer}
+.rs-filter button[aria-pressed="true"]{border-color:var(--accent);box-shadow:inset 0 0 0 1px var(--accent)}
+.rs-h{display:grid;gap:6px;justify-items:start}
+.rs-h .flag{margin-right:6px}
+.rs-h h3{margin:4px 0 0;font-family:var(--display);font-weight:400;font-size:1.9rem;line-height:1.1}
+.rs-h p{margin:0}
+.rs-conf .sub-h{margin-top:16px}
+ul.conf{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:0 28px}
+ul.conf li{display:grid;grid-template-columns:auto minmax(0,1fr);gap:10px;align-items:start;padding:10px 0;border-top:1px solid var(--line);font-size:.9rem}
+ul.conf li .flag{min-width:92px;text-align:center;margin-top:2px}
+ul.conf li.erro span:last-child{padding-left:10px;border-left:2px solid var(--accent)}
+ul.conf li.kcl{background:var(--paper);padding:10px;margin:0 -10px;border-top:2px solid var(--accent)}
+@media (max-width:700px){ul.conf li{grid-template-columns:minmax(0,1fr)}ul.conf li .flag{justify-self:start;min-width:0}}
+.rs-ess{margin-top:8px}.rs-ess ul{margin-top:6px}
+
 /* ===== Trilhas de questões ===== */
 nav.tabs a:nth-child(n+9){--tab:var(--t8)}
 button.big{font-size:1rem;padding:12px 22px}
@@ -669,6 +691,7 @@ ol.rev-list p{margin:0}ol.rev-list .t{font-weight:600;font-size:.92rem}
       <a href="#trilhas" data-ic="path">Trilhas</a>
       <a href="#acao" data-ic="target">Modo ação</a>
       <a href="#osce" data-ic="stetho">OSCE e prova</a>
+      <a href="#resumos" data-ic="notes">Resumos</a>
       <a href="#flashcards" data-ic="cards">Flashcards</a>
       <a href="#agenda" data-ic="calendar">Agenda</a>
       <a href="#simulados" data-ic="quiz">Simulados</a>
@@ -691,6 +714,7 @@ ol.rev-list p{margin:0}ol.rev-list .t{font-weight:600;font-size:.92rem}
       <section class="view" id="v-trilhas" hidden></section>
       <section class="view" id="v-acao" hidden></section>
       <section class="view" id="v-osce" hidden></section>
+      <section class="view" id="v-resumos" hidden></section>
       <section class="view" id="v-agenda" hidden></section>
       <section class="view" id="v-simulados" hidden></section>
       <section class="view" id="v-flashcards" hidden></section>
@@ -1476,6 +1500,427 @@ const OSCE = {
 "Sempre que um tema dos guias cair, o comentário da questão traz o alerta de erro ou desatualização correspondente."
 ]
 };
+// Gerado de tutor-medicina/faculdade/resumos-md9/ (resumos de aula da Maria)
+const RESUMOS = [
+{
+"id": "2026-11-27_disturbios-do-potassio",
+"date": "2026-11-27",
+"title": "Distúrbios do potássio (hiper e hipocalemia)",
+"aula": "Distúrbios do potássio (MIAPS, medicina interna)",
+"tema": "MIAPS · item 9 do FOCO (distúrbios hidroeletrolíticos) · prova: bloco eletrólitos/ácido-base/IRA (~20%) · OSCE: estação \"eletrólitos em urna\"",
+"essTitle": "O essencial da aula",
+"ess": [
+"98% do K é intracelular; o K sérico é a \"ponta do iceberg\". Shift só ganha tempo; quem elimina é o rim (90%) e o intestino (10%).",
+"<b>Hipercalemia:</b> gravidade = valor + ECG. ECG alterado = grave, qualquer que seja o K. Descartar pseudo (hemólise, garrote). Primeira pergunta: \"tem diurese?\"",
+"Tratamento em 3 passos, prescritos juntos: <b>estabilizar</b> (gluconato de cálcio 10% 10 mL EV em 2–3 min, só com ECG alterado; não baixa o K) → <b>deslocar</b> (insulina regular 10 UI + glicose 50%; β2-agonista; bicarbonato só se acidose) → <b>eliminar</b> (furosemida se diurese, resina, diálise). ECG e K de novo em 20–30 min.",
+"ECG da hiperK: T apiculada → PR longo/P achatada → QRS largo → sinusoidal/FV. A sequência pode pular etapas.",
+"Fármacos: IECA/BRA, AINE, espironolactona/eplerenona, amilorida/triantereno, trimetoprima, betabloqueador, digoxina, succinilcolina, tacrolimo.",
+"<b>Hipocalemia:</b> perguntar diarreia, vômito, diurético. K urinário só se não houver causa. Grave (&lt; 2,5), sintomática ou cardiopata: EV + VO juntas.",
+"KCl EV: SF (nunca SG), sempre em BIC, como dose única, K 45–60 min após, no braço oposto. Não sobe → dosar Mg (MgSO₄ 2 g em 100 mL SF em 1 h).",
+"Bartter (alça, Ca urinário ↑), Gitelman (tiazídico, Ca urinário ↓, Mg ↓↓), Liddle (HAS, renina e aldo ↓).",
+"Contas: KCl 10% = 1,34 mEq/mL (13,4/amp) · KCl 19,1% = 2,56 mEq/mL (25,6/amp)."
+],
+"confIntro": "O resumo já traz quadros \"Aula × Diretrizes\". Abaixo, o que vale para a prova e o OSCE do MD9.",
+"conf": [
+{
+"tag": "diverge",
+"x": "<b>KCl em veia periférica:</b> o professor aceita até 100 mEq/L (\"FDA\"). Unifesp, USP e HCRP usam <b>40–50 mEq/L</b> e até 10 mEq/h. <b>Na estação, use ≤ 40–60 mEq/L e ≤ 10 mEq/h</b> e diga as duas contas (concentração e velocidade). É o ponto com mais chance de custar nota.",
+"key": true
+},
+{
+"tag": "erro",
+"x": "<b>Exemplo do professor a 200 mL/h:</b> 26,8 mEq em 520 mL a 200 mL/h dá 10,3 mEq/h, acima do teto. Use 150 mL/h.",
+"key": false
+},
+{
+"tag": "erro",
+"x": "<b>\"FDA\" como fonte do limite:</b> o número vem de protocolos de segurança (ISMP) e das bolsas prontas americanas.",
+"key": false
+},
+{
+"tag": "erro",
+"x": "<b>Mecanismo no slide:</b> espironolactona/eplerenona bloqueiam o <b>receptor mineralocorticoide</b>; amilorida/triantereno bloqueiam o <b>ENaC</b>. Não são \"canais de K\".",
+"key": false
+},
+{
+"tag": "diverge",
+"x": "<b>Cálcio:</b> aula 10–20 mL por dose, teto de 10 ampolas. UKKA 2023 e ERC 2021: 30 mL de gluconato 10%. Não há teto de 10 ampolas em diretriz: o limite é o ECG.",
+"key": false
+},
+{
+"tag": "diverge",
+"x": "<b>Solução polarizante:</b> aula 10 UI + G50% 100 mL. Padrão SESDF/UKKA: 10 UI + 25 g (G50% 50 mL), com glicemia capilar por 6 h.",
+"key": false
+},
+{
+"tag": "erro",
+"x": "<b>HipoK e PA \"por vaso mole\":</b> o mecanismo é retenção de Na e vasoconstrição. Poliúria no adulto é &gt; 3 L/dia, não &gt; 4 L.",
+"key": false
+},
+{
+"tag": "erro",
+"x": "<b>Pseudo-hipocalemia \"por osmose\":</b> é captação ativa pelos leucócitos (Na/K-ATPase).",
+"key": false
+},
+{
+"tag": "erro",
+"x": "<b>\"Ampola de 10 g\" de MgSO₄:</b> não existe para reposição. 10 g é dose de ataque na eclâmpsia (ampolas a 50%).",
+"key": false
+},
+{
+"tag": "conferir",
+"x": "<b>Lokelma (ciclossilicato de zircônio):</b> 10 g 8/8 h por até 48 h (bula BR). Resina + sorbitol: risco de necrose intestinal.",
+"key": false
+},
+{
+"tag": "ptbr",
+"x": "Em Portugal: <b>hipercaliemia / hipocaliemia</b> (no Brasil: hipercalemia / hipocalemia). \"BIC\" é BR; em PT, <b>bomba infusora / seringa perfusora</b>. Sorcal e Lokelma são nomes de bula BR; confirme o nome comercial em PT antes de usar fora da prova.",
+"key": false
+}
+],
+"repeat": false
+},
+{
+"id": "2026-11-27_disturbios-do-sodio",
+"date": "2026-11-27",
+"title": "Distúrbios do sódio (hipo e hipernatremia)",
+"aula": "Distúrbios do sódio (MIAPS, medicina interna)",
+"tema": "MIAPS · item 9 do FOCO (distúrbios hidroeletrolíticos) · prova: bloco eletrólitos/ácido-base/IRA (~20%) · OSCE: prescrição de NaCl 3%",
+"essTitle": "O essencial da aula",
+"ess": [
+"Distúrbio de sódio é distúrbio de <b>água</b>. Sede = teto; ADH = piso.",
+"Sintoma é neurológico <b>difuso</b>; déficit focal não é do sódio. O paciente vale mais que o número (velocidade + sintoma).",
+"<b>Sintoma neurológico grave → NaCl 3% em bólus</b> (100–150 mL ou 2 mL/kg em 10–20 min, até 3×). Meta: subir 4–6 mEq/L, não normalizar. Na após cada bólus.",
+"Grave (&lt; 120) sem sintoma: NaCl 3% lento em BIC (0,5–1 mL/kg/h).",
+"Teto em 24 h: 8–10 (alto risco 8). SDO 2–6 dias depois. Resgate: suspender 3%, SG 5% 6 mL/kg em 2 h + DDAVP.",
+"Paciente estável: osmolalidade plasmática → osmolalidade urinária → <b>volemia</b> → Na urinário. Na corrigido pela glicose (1,6 por 100; 2,4 acima de 400).",
+"Hipovolêmica: SF em alíquotas (4 mL/kg). Hipervolêmica: restrição hídrica + de sal + furosemida. SIADH: restrição 1 L, suspender droga; 2ª linha ureia, sal + alça.",
+"Montar NaCl 3%: <b>890 mL SF 0,9% + 110 mL NaCl 20%</b> (ou 445 + 55).",
+"<b>Hipernatremia:</b> quase sempre falta de água. Choque → SF 0,9% primeiro; depois 0,45% → 0,22% → água livre. Déficit = ACT × (Na/140 − 1). Teto 10–12 mEq/L em 24 h."
+],
+"confIntro": "",
+"conf": [
+{
+"tag": "diverge",
+"x": "<b>Classificação:</b> aula usa grave &lt; 120. A diretriz europeia (ESE 2014) usa profunda &lt; 125, e <b>vômito já é sintoma grave</b>. Na prova, decida pelo sintoma, não pelo número.",
+"key": false
+},
+{
+"tag": "diverge",
+"x": "<b>Teto de correção:</b> os slides trazem 8–10 e 10–12. EUA: 10–12 é o máximo, 8 em alto risco. Para prova: <b>não passar de 10 (8 se alto risco)</b>.",
+"key": false
+},
+{
+"tag": "erro",
+"x": "<b>\"SALSA, 2018\":</b> o estudo é de 2021 (Baek, JAMA Intern Med).",
+"key": false
+},
+{
+"tag": "erro",
+"x": "<b>Hipotireoidismo e insuficiência adrenal como causas de SIADH:</b> são diagnósticos a <b>excluir</b> (TSH e cortisol normais) para fechar SIADH. Tiazídico também não é SIADH.",
+"key": false
+},
+{
+"tag": "diverge",
+"x": "<b>SIADH × cerebral perdedora de sal:</b> ácido úrico baixo nas duas. O que separa é a volemia e a FE de urato depois de corrigir o Na.",
+"key": false
+},
+{
+"tag": "diverge",
+"x": "<b>Hipernatremia hipervolêmica:</b> o professor prescreve <b>hidroclorotiazida</b> (sem congestão); Adrogué &amp; Madias 2000 usa <b>furosemida + água livre</b>. As duas versões do resumo divergem entre si nesse ponto. Na prova, justifique: suspender o sal + água livre é o essencial; diurético é complemento.",
+"key": false
+},
+{
+"tag": "desatualizado",
+"x": "<b>Diabetes insípido central (caso de TCE):</b> o resumo lembra que falta a <b>desmopressina</b>. Água livre sozinha não dá conta.",
+"key": false
+},
+{
+"tag": "diverge",
+"x": "<b>Furosemida:</b> a \"diretriz americana\" de 1–1,5 mg/kg não foi localizada. HFA/ESC 2019: dose EV = 1–2× a oral habitual (virgem: 20–40 mg).",
+"key": false
+},
+{
+"tag": "conferir",
+"x": "<b>Empagliflozina e tolvaptana na SIADH:</b> off-label/divergentes (Europa contra tolvaptana). Na prova, restrição hídrica é a resposta.",
+"key": false
+},
+{
+"tag": "ptbr",
+"x": "Em Portugal: <b>hiponatrémia / natrémia</b>, \"soro hipertónico\". \"SVO\", \"UPA\" e \"BIC\" são termos do Brasil. \"Potomania de cerveja\" igual.",
+"key": false
+}
+],
+"repeat": false
+},
+{
+"id": "2026-11-27_revisao-casos-sodio-abdome",
+"date": "2026-11-27",
+"title": "Revisão de casos: sódio e abdome agudo (isquemia mesentérica)",
+"aula": "Discussão de casos (MIAPS)",
+"tema": "MIAPS · itens 9 e 10 do FOCO (Na, ácido-base) · abdome agudo vascular",
+"essTitle": "Os casos",
+"ess": [
+"Idosa 82 a, vômitos, Na 161, PA 90/50 → falta de água, hipovolêmica → SF 0,9% se choque, depois 0,45%/0,22%. Déficit 22,5 × (161/140 − 1) ≈ 3,4 L; repor ~1,5 L + perdas no 1º dia.",
+"TCE, diurese 6–7 L/dia, Na 158 → DI central, euvolêmico → água livre <b>+ desmopressina</b>. Não precisa de osmolalidade (toda hipernatremia é hiperosmolar).",
+"UTI, SF + bicarbonato prolongados, edema, Na 154 → hipervolêmica iatrogênica → suspender sal + água livre ± diurético (sem diurético se noradrenalina).",
+"Na 112 + convulsão (potomania) → <b>NaCl 3%</b>; risco de hipercorreção quando o ADH suprimido libera água.",
+"ICC, Na 126 sem sintoma → restrição hídrica + furosemida.",
+"Assintomático: colher urina <b>antes</b> do SF.",
+"Mulher 39 a, dor abdominal desproporcional ao exame, ACO + FA, pH 7,21, AG 24, lactato alto sem choque → <b>isquemia mesentérica aguda</b> → angio-TC."
+],
+"confIntro": "",
+"conf": [
+{
+"tag": "ok",
+"x": "Contas conferem: ACT mulher idosa 0,45; AG = 138 − (104 + 10) = 24; Winter 1,5 × 10 + 8 = 23 ± 2 (compensada).",
+"key": false
+},
+{
+"tag": "diverge",
+"x": "<b>Caso 3, diurético:</b> professor tiazídico; Adrogué 2000 furosemida + água livre (mesma divergência do resumo de sódio).",
+"key": false
+},
+{
+"tag": "diverge",
+"x": "<b>Caso 7, mecanismo:</b> FA explica <b>embolia arterial</b> (o mais comum); anticoncepcional explica <b>trombose venosa mesentérica</b>. São mecanismos diferentes; o resumo traz a tabela.",
+"key": false
+},
+{
+"tag": "desatualizado",
+"x": "<b>Lactato normal não exclui isquemia</b> (sobe tarde); D-dímero normal a torna improvável (ESVS 2017, WSES 2022).",
+"key": false
+},
+{
+"tag": "conferir",
+"x": "Conduta da isquemia: ressuscitação, heparina, antibiótico e revascularização/laparotomia, sem atrasar a angio-TC.",
+"key": false
+},
+{
+"tag": "ptbr",
+"x": "\"SVO\", \"IML\" e \"CRM\" são do Brasil. Em Portugal: <b>INMLCF</b> (medicina legal) e <b>Ordem dos Médicos</b>. \"PS\" (pronto-socorro) = <b>urgência</b> em PT.",
+"key": false
+}
+],
+"repeat": false
+},
+{
+"id": "2026-11-27_cetoacidose-e-ehh",
+"date": "2026-11-27",
+"title": "Cetoacidose diabética e estado hiperglicêmico hiperosmolar",
+"aula": "CAD e EHH (MIAPS, medicina interna)",
+"tema": "MIAPS · item 11 do FOCO (hiperglicemia hospitalar e insulina) · OSCE: estação de insulina/CAD (ver ANALISE, linha da CAD euglicêmica)",
+"essTitle": "O essencial da aula",
+"ess": [
+"CAD = deficiência absoluta de insulina, aguda, abdominal. EHH = relativa, arrastada, neurológica, mais letal.",
+"Diagnóstico CAD (ADA 2024): glicemia ≥ 200 <b>ou diabetes prévio</b> + β-OHB ≥ 3 (ou cetonúria ≥ 2+) + pH &lt; 7,30 e/ou HCO₃ &lt; 18. EHH: glicose ≥ 600, osm efetiva &gt; 300 (ou total &gt; 320), sem acidose importante.",
+"<b>Gravidade pelo pH/HCO₃ e estado mental</b>, nunca pela glicemia nem pelas cruzes.",
+"iSGLT2 → CAD euglicêmica: SG desde o início + insulina plena.",
+"Ordem: <b>volume → potássio → insulina → SG quando 250 → resolução → transição SC</b>.",
+"Potássio (SBD): &lt; 3,3 não abre a bomba; 3,3–5,2 abre e repõe; &gt; 5,2 não repõe, K 2/2 h.",
+"Insulina regular 100 UI em 100 mL SF (1 UI/mL), 0,1 UI/kg/h, sem bólus no adulto, desprezar 20 mL no equipo.",
+"Glicemia 250: SG 5% + reduzir a insulina, <b>sem desligar a bomba</b>. O objetivo é fechar a cetose, não normalizar a glicemia.",
+"Transição: <b>SC primeiro, bomba depois</b> (1–2 h de sobreposição). Dose: UI das últimas 6 h × 4 × 80%.",
+"Leucocitose &lt; 25 mil sem foco não pede antibiótico. Amilase/lipase sobem sem pancreatite. Na corrigido antes de pensar em salina."
+],
+"confIntro": "",
+"conf": [
+{
+"tag": "diverge",
+"x": "<b>Cortes de potássio:</b> SBD 3,3 / 5,2 (mais cobrado na prova brasileira); ADA 2024 3,5 / 5,0. ❌ O professor disse que a ADA passou a 3,5 / <b>5,5</b>: o 5,5 é do Reino Unido (JBDS).",
+"key": false
+},
+{
+"tag": "erro",
+"x": "<b>\"A ADA mudou o corte de grave para pH 7,1\":</b> a ADA 2024 manteve grave = pH &lt; 7,00. O 7,1 é da classificação pediátrica (ISPAD 2022).",
+"key": false
+},
+{
+"tag": "erro",
+"x": "<b>\"A ADA manteve o ânion gap na resolução\":</b> a ADA 2024 tirou o gap do diagnóstico e da resolução. Muitas provas ainda cobram o critério de 2009.",
+"key": false
+},
+{
+"tag": "diverge",
+"x": "<b>Troca para NaCl 0,45%:</b> SBD com Na corrigido ≥ 150 (confere com a aula). O \"135 no resto do mundo\" é da ADA 2009; a ADA 2024 só usa 0,45% se a osmolalidade não cair.",
+"key": false
+},
+{
+"tag": "diverge",
+"x": "<b>Bicarbonato:</b> ADA se pH &lt; 7,0; SBD e ISPAD se pH &lt; 6,9.",
+"key": false
+},
+{
+"tag": "erro",
+"x": "<b>Cetonúria persistindo \"2 a 4 semanas\":</b> persiste horas a poucos dias. Guarde só \"a fita continua positiva após a resolução\".",
+"key": false
+},
+{
+"tag": "erro",
+"x": "<b>K \"normal ou baixo\" na admissão:</b> a maioria chega com K normal ou alto; baixo é 5–10%.",
+"key": false
+},
+{
+"tag": "diverge",
+"x": "<b>CAD euglicêmica:</b> o professor começa com insulina reduzida; ADA e SBD usam <b>dose plena + SG</b> (a ANALISE já registra a versão da aula SBD: SG desde o início).",
+"key": false
+},
+{
+"tag": "conferir",
+"x": "<b>Análogo ultrarrápido EV</b> (SBD Posicionamento 01/2024, desabastecimento) pode substituir a regular. Na prova, <b>regular EV contínua</b> segue a resposta padrão.",
+"key": false
+},
+{
+"tag": "ptbr",
+"x": "Em Portugal: <b>estado hiperosmolar hiperglicémico</b>, \"glicémia\", \"insulina de ação rápida\". NPH e \"regular\" existem nos dois países; o esquema \"SUS NPH + regular\" é do Brasil.",
+"key": false
+}
+],
+"repeat": false
+},
+{
+"id": "2026-11-27_mapa-mental-ira",
+"date": "2026-11-27",
+"title": "Mapa mental: injúria renal aguda",
+"aula": "Injúria Renal Aguda (MIAPS, Aula 1)",
+"tema": "MIAPS · item 8 do FOCO (IRA, KDIGO, diálise de urgência) · prova: bloco eletrólitos/ácido-base/IRA (~20%)",
+"essTitle": "O essencial",
+"ess": [
+"KDIGO: Cr ↑ ≥ 0,3 em 48 h ou ≥ 1,5× em 7 dias, ou diurese &lt; 0,5 mL/kg/h por 6 h. Estágios 1 (1,5–1,9×), 2 (2–2,9×), 3 (≥ 3×, Cr ≥ 4, diurese &lt; 0,3 por 24 h ou anúria 12 h).",
+"Pré-renal 60–70% (rim concentra: Na urinário &lt; 10–20, FeNa &lt; 1%, FeUreia &lt; 35%, ureia/Cr &gt; 40). Renal 15–30% (NTA, rim perde). Pós-renal 5–10% (só explica a Cr se bilateral).",
+"NTA: isquêmica 50%, tóxica 50% (exógena: AINE, aminoglicosídeo, contraste; endógena: mioglobina, hemoglobina, ácido úrico, proteína do mieloma).",
+"Rabdomiólise: estatina é a causa cobrada; suspender + hidratar. Lise tumoral: hidratar + rasburicase; alopurinol previne.",
+"Prevenção: hidratar com cristaloide antes/durante/depois do contraste; NAC não é superior.",
+"Diálise: hipervolemia, hipercalemia, acidose refratárias e síndrome urêmica.",
+"IRA com K baixo: leptospirose, anfotericina B, aminoglicosídeo."
+],
+"confIntro": "",
+"conf": [
+{
+"tag": "ok",
+"x": "Estadiamento, tabela pré-renal × renal e prevenção conferem com KDIGO 2012 e com os slides da aula (já analisados na ANALISE, seção 3d).",
+"key": false
+},
+{
+"tag": "desatualizado",
+"x": "<b>Indicações de diálise:</b> o mapa lista 4. O mnemônico usual é <b>AEIOU</b>: acrescente <b>intoxicação dialisável</b> (lítio, metanol, etilenoglicol, salicilato) e complicações urêmicas como <b>pericardite</b>.",
+"key": false
+},
+{
+"tag": "diverge",
+"x": "<b>Rabdomiólise \"CPK &gt; 1000\":</b> o critério usual é CK &gt; 5× o limite superior (em geral &gt; 1.000 U/L). Risco de IRA sobe com CK &gt; 5.000.",
+"key": false
+},
+{
+"tag": "diverge",
+"x": "<b>Sexo feminino como fator não modificável:</b> aparece em escores de risco (contraste, cirurgia cardíaca), mas o KDIGO não o coloca entre os principais. Use como a aula pede, sem generalizar.",
+"key": false
+},
+{
+"tag": "conferir",
+"x": "O mapa avisa que trechos vieram de áudio pouco audível e marca \"(compl.)\". Na dúvida, siga os slides.",
+"key": false
+},
+{
+"tag": "ptbr",
+"x": "Em Portugal: <b>lesão renal aguda (LRA)</b> é o termo corrente; \"EAS\" (Brasil) = <b>urina tipo II / sumária de urina</b> (Portugal). \"Ureia\" igual; \"creatinina\" igual.",
+"key": false
+}
+],
+"repeat": false
+},
+{
+"id": "2026-11-27_riscos-assistenciais",
+"date": "2026-11-27",
+"title": "Riscos assistenciais: TEV, broncoaspiração, queda e lesão por pressão",
+"aula": "Riscos assistenciais (MD9, aula da professora, campo Adventista)",
+"tema": "MIAPS · item 13 do FOCO · prova: bloco transfusão e riscos (~10%)",
+"essTitle": "O essencial da aula",
+"ess": [
+"Quatro riscos: TEV, broncoaspiração, queda, LPP. Todo internado ≥ 18 anos entra em todos os protocolos na admissão.",
+"ECOG: quanto maior, mais imóvel (liga os 4 riscos). ECOG 4 sai do Morse.",
+"<b>Wells = \"já é?\"</b> (diagnóstico: TVP ≤ 1 D-dímero, ≥ 2 Doppler; TEP ≤ 4 D-dímero, &gt; 4 angio-TC). <b>Pádua = \"vai ser?\"</b> (profilaxia se ≥ 4).",
+"Profilaxia: enoxaparina 40 mg SC 1×/dia; ClCr &lt; 30 ou baixo peso 20 mg (ou HNF 5.000 12/12 h). Contraindicada → compressão pneumática intermitente. Meia elástica não no clínico.",
+"TVP: enoxaparina 1 mg/kg 12/12 h → oral 3–6 meses. Filtro de VCI só com TVP proximal + contraindicação à anticoagulação.",
+"Broncoaspiração: sem escore; cabeceira 30–45° 24 h (≥ 60° para comer), higiene oral 3×/dia, fono em 24 h, cuff 25–30 cmH₂O, dieta 30–40 min após VNI.",
+"Morse ≥ 45 = alto risco. Braden: quanto menor, pior (≤ 18 já é risco)."
+],
+"confIntro": "",
+"conf": [
+{
+"tag": "erro",
+"x": "<b>Wells TEP \"alta ≥ 7\"</b> (infográfico que circulou): no escore original e na SBPT, alta é <b>&gt; 6</b>. O resumo já corrige.",
+"key": false
+},
+{
+"tag": "diverge",
+"x": "<b>Enoxaparina no obeso:</b> aula 60 mg/dia se IMC &gt; 30. Protocolo EBSERH 2023: ajusta só a partir de IMC ≥ 40 (40 mg 12/12 h; 60 mg se IMC ≥ 50). Para a prova, diga \"ajustar no obeso\" e cite o critério do serviço.",
+"key": false
+},
+{
+"tag": "diverge",
+"x": "<b>Teto de 100 mg na enoxaparina terapêutica:</b> fala da professora. Bula e SBACV 2024 usam peso real, com anti-Xa nos extremos.",
+"key": false
+},
+{
+"tag": "diverge",
+"x": "<b>Clorexidina oral 0,12%:</b> Anvisa 2017 recomenda no ventilado; SHEA/IDSA 2022 não recomenda mais de rotina e prioriza escovação.",
+"key": false
+},
+{
+"tag": "diverge",
+"x": "<b>Mudança de decúbito 2/2 h:</b> prática clássica. Anvisa NT 05/2023 e NPIAP: intervalo individualizado.",
+"key": false
+},
+{
+"tag": "diverge",
+"x": "<b>ECOG 4 fora do Morse:</b> regra local do hospital. O protocolo nacional (MS/Anvisa/Fiocruz 2013) avalia todos.",
+"key": false
+},
+{
+"tag": "conferir",
+"x": "Para OSCE: a prova é por caso, sem pedir pontuação exata. Treine o raciocínio \"qual risco, qual medida, e o que fazer quando já aconteceu\".",
+"key": false
+},
+{
+"tag": "ptbr",
+"x": "Em Portugal: <b>úlcera por pressão</b> é o termo mais usado (o Brasil adotou \"lesão por pressão\"); <b>fonoaudiologia = terapia da fala</b>; \"SBACV/SBPT/Anvisa/EBSERH\" são referências só do Brasil (em PT: DGS e normas da SPACV/SPP).",
+"key": false
+}
+],
+"repeat": false
+},
+{
+"id": "2026-11-27_dab-parte-1",
+"date": "2026-11-27",
+"title": "Distúrbios ácido-base, parte 1 (MIAPS, Aula 2)",
+"aula": "DAB parte 1 (MIAPS)",
+"tema": "MIAPS · item 10 do FOCO (gasometria passo a passo)",
+"essTitle": "Observação",
+"ess": [
+"Este é o mesmo material que já estava em ../materiais-complementares/AULA_2_-_DAB_parte_1_miaps.pdf e já foi conferido na ANALISE-OSCE-E-PROVA-MIAPS.md (seção 3d). Não há conteúdo novo para resumir."
+],
+"confIntro": "",
+"conf": [
+{
+"tag": "ok",
+"x": "Coerente com as diretrizes; a própria aula traz \"Aula × Evidência\".",
+"key": false
+},
+{
+"tag": "diverge",
+"x": "<b>Bicarbonato por causa:</b> CAD pH &lt; 6,9 (ADA: &lt; 7,0) · sepse pH ≤ 7,2 + IRA KDIGO 2–3 · intoxicação pH &lt; 7,25 · DRC HCO₃ &lt; 18.",
+"key": false
+},
+{
+"tag": "ptbr",
+"x": "Em Portugal: <b>gasimetria</b> (Brasil: gasometria); \"acidémia/alcalémia\".",
+"key": false
+}
+],
+"repeat": true
+}
+];
 // ===== Utilidades =====
 const $ = (s, el = document) => el.querySelector(s);
 const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -1657,6 +2102,7 @@ const ICONS = {
   tree: '<circle cx="12" cy="9" r="6"/><path d="M12 21V12M12 15l-3-2.5M12 13.5l3-2.5M8 21h8"/>',
   path: '<path d="M5 20c3 0 3-4 7-4s4-4 7-4" stroke-dasharray="2 2.6"/><circle cx="5" cy="20" r="1.6" fill="currentColor" stroke="none"/><path d="M19 12V3.5l-4 1.8 4 1.8"/>',
   stetho: '<path d="M6 3v6a5 5 0 0 0 10 0V3"/><path d="M4.5 3H7.5M14.5 3h3"/><path d="M11 14v2a4 4 0 0 0 8 0v-2.5"/><circle cx="19" cy="11.5" r="2"/>',
+  notes: '<path d="M5 3h10l4 4v14H5z"/><path d="M15 3v4h4"/><path d="M8.5 11h7M8.5 14.5h7M8.5 18h4"/><path d="M8 7.5h3"/>',
   sparkle: '<path d="M12 3l2 6 6 2-6 2-2 6-2-6-6-2 6-2z"/>'
 };
 const ic = (n, cls = '') => `<svg class="i ${cls}" data-n="${n}" viewBox="0 0 24 24" aria-hidden="true">${ICONS[n] || ''}</svg>`;
@@ -1675,6 +2121,7 @@ const VIEW_META = {
   trilhas: ['Trilhas', 'Questões comentadas, corrigidas na hora.'],
   acao: ['Modo ação', 'Uma sessão por vez, ligada aos temas da faculdade.'],
   osce: ['OSCE e prova', 'O que mais cai no OSCE de 11/12 e na prova de MIAPS de 14/12.'],
+  resumos: ['Resumos de aula', 'Seus resumos do MD9, com a conferência de cada um com a referência.'],
   agenda: ['Agenda', 'Temas do manual do 9º semestre e do planejamento de 120 dias.'],
   simulados: ['Simulados', 'Questões no formato de prova. Errou ou marcou "não sei"? Vira flashcard.'],
   flashcards: ['Flashcards', 'Montados sozinhos a partir dos seus erros e dificuldades.'],
@@ -1706,7 +2153,7 @@ function donutSVG(parts) {
 }
 
 // ===== Navegação =====
-const VIEWS = ['hoje', 'trilhas', 'acao', 'osce', 'flashcards', 'agenda', 'simulados', 'desempenho', 'mnemonicos', 'provas', 'backup'];
+const VIEWS = ['hoje', 'trilhas', 'acao', 'osce', 'resumos', 'flashcards', 'agenda', 'simulados', 'desempenho', 'mnemonicos', 'provas', 'backup'];
 let viewDate = today();
 function route() {
   const v = VIEWS.includes(location.hash.slice(1)) ? location.hash.slice(1) : 'hoje';
@@ -1718,7 +2165,7 @@ function route() {
   document.querySelectorAll('#tabs a').forEach(a => { if (a.getAttribute('href') === '#' + v) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current'); });
   render(v);
 }
-function render(v) { ({ hoje: rHoje, trilhas: rTrilhas, acao: rAcao, osce: rOsce, agenda: rAgenda, simulados: rSim, flashcards: rFc, desempenho: rPerf, mnemonicos: rMn, provas: rProvas, backup: rBackup })[v](); applyAna($('#v-' + v)); }
+function render(v) { ({ hoje: rHoje, trilhas: rTrilhas, acao: rAcao, osce: rOsce, resumos: rResumos, agenda: rAgenda, simulados: rSim, flashcards: rFc, desempenho: rPerf, mnemonicos: rMn, provas: rProvas, backup: rBackup })[v](); applyAna($('#v-' + v)); }
 function rerender() { route(); }
 
 // ===== Componentes =====
@@ -2558,6 +3005,33 @@ document.addEventListener('change', e => {
   if (e.target.checked) S.osce[n] = today(); else delete S.osce[n];
   save(); rOsce();
 });
+
+
+// ===== Resumos de aula (pasta oficial de resumos MD9) =====
+const RTAG = { erro: 'Erro', desatualizado: 'Desatualizado', diverge: 'Fontes divergem', conferir: 'Conferir', ptbr: 'Brasil × Portugal', ok: 'Confere' };
+let rsFilter = '';
+function rResumos() {
+  const key = RESUMOS.flatMap(r => r.conf.filter(c => c.key).map(c => ({ ...c, r })))[0];
+  const counts = {}; RESUMOS.forEach(r => r.conf.forEach(c => { counts[c.tag] = (counts[c.tag] || 0) + 1; }));
+  const show = c => !rsFilter || c.tag === rsFilter;
+  const dates = [...new Set(RESUMOS.map(r => r.date))].sort();
+  $('#v-resumos').innerHTML = `
+  <div class="card banner ac-head">
+    <div style="min-width:0"><div class="eyebrow">Resumos de aula · ${dates.map(fmtShort).join(', ')}</div><h2>${RESUMOS.length} resumos</h2>
+      <p class="small muted" style="margin:2px 0 0">Ordem de confiança: Manual MD9 e as diretrizes que ele cita, depois as devolutivas oficiais, depois <b>estes resumos</b>, por último os guias de alunos.</p></div>
+  </div>
+  ${key ? `<div class="card key-call"><span class="flag erro">Atenção no OSCE</span><h3>${key.x.split(':</b>')[0].replace('<b>', '')}</h3><p>${(t => t.charAt(0).toUpperCase() + t.slice(1))(key.x.split(':</b>').slice(1).join(':</b>').trim())}</p><small class="muted">Do resumo “${key.r.title}”</small></div>` : ''}
+  <div class="rs-filter" role="group" aria-label="Filtrar a conferência"><button type="button" data-act="rsF" data-k="" aria-pressed="${!rsFilter}">Tudo</button>${['erro', 'desatualizado', 'diverge', 'conferir', 'ptbr'].filter(k => counts[k]).map(k => `<button type="button" data-act="rsF" data-k="${k}" aria-pressed="${rsFilter === k}"><span class="flag ${k}">${RTAG[k]}</span> ${counts[k]}</button>`).join('')}</div>
+  <div class="dash">${RESUMOS.map(r => { const items = r.conf.filter(show); if (rsFilter && !items.length) return ''; return `
+    <article class="card span12 rs" id="rs-${r.id}">
+      <header class="rs-h"><span class="flag mat-aula">Resumo de aula</span>${r.repeat ? '<span class="flag diverge">Repetido</span>' : ''}<h3>${r.title}</h3><p class="small muted">${r.aula}${r.tema ? ` · ${r.tema}` : ''}</p></header>
+      <div class="rs-conf"><h4 class="sub-h">Conferência com a referência</h4>${r.confIntro && !rsFilter ? `<p class="small muted" style="margin:0 0 6px">${r.confIntro}</p>` : ''}
+        <ul class="conf">${items.map(c => `<li class="${c.tag} ${c.key ? 'kcl' : ''}"><span class="flag ${c.tag === 'conferir' ? 'chk' : c.tag}">${RTAG[c.tag] || ''}</span><span>${c.x}</span></li>`).join('')}</ul></div>
+      ${r.repeat ? '<p class="small muted" style="margin:10px 0 0">É o mesmo material da aula de ácido-base que já está na aba OSCE e prova. Não há conteúdo novo.</p>'
+        : `<details class="ac-more rs-ess"><summary>${r.essTitle || 'O essencial'} (${r.ess.length})</summary><ul class="plain">${r.ess.map(e => `<li>${e}</li>`).join('')}</ul></details>`}
+    </article>`; }).join('')}</div>`;
+}
+document.addEventListener('click', e => { const b = e.target.closest('[data-act="rsF"]'); if (!b) return; rsFilter = b.dataset.k; rResumos(); });
 
 // ===== Banco MIAPS (prova de 14/12 e OSCE de 11/12) =====
 // Campos: id, t (tema), ar (área da prova), q, o, a, c (comentário), ref (referência do MD9), x (aviso: [tag, texto]), f (flashcard)
